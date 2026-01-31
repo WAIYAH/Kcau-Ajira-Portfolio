@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About — KCA Ajira Club</title>
+  <meta name="description" content="About KCA Ajira Club — our mission, vision, team, partners and how we empower students for the digital economy.">
+  <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-800">
+  <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-blue-600 text-white p-2 z-50">Skip to main content</a>
+
+  <!-- Header / Navigation (same as index) -->
+  <header class="sticky top-0 z-40 bg-white shadow-md">
+      <nav class="container mx-auto px-4 py-3" aria-label="Main navigation">
+          <div class="flex justify-between items-center">
+              <div class="flex items-center space-x-3">
+                  <div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center">
+                      <i class="fas fa-rocket text-white"></i>
+                  </div>
+                  <div>
+                      <h1 class="text-xl font-bold text-blue-700">
+                          <a href="/" class="hover:text-blue-800 transition-colors">
+                              KCA <span class="text-orange-500">Ajira</span> Club
+                          </a>
+                      </h1>
+                      <p class="text-xs text-gray-500">Digital Economy Launchpad</p>
+                  </div>
+              </div>
+
+              <div class="hidden md:flex space-x-8">
+                  <a href="index.html#home" class="text-gray-700 hover:text-blue-600 font-medium transition-colors">Home</a>
+                  <a href="about.html" class="text-gray-700 hover:text-blue-600 font-medium transition-colors nav-active">About</a>
+                  <a href="index.html#programs" class="text-gray-700 hover:text-blue-600 font-medium transition-colors">Programs</a>
+                  <a href="index.html#skills" class="text-gray-700 hover:text-blue-600 font-medium transition-colors">Skills</a>
+                  <a href="index.html#testimonials" class="text-gray-700 hover:text-blue-600 font-medium transition-colors">Success Stories</a>
+                  <a href="index.html#contact" class="text-gray-700 hover:text-blue-600 font-medium transition-colors">Contact</a>
+              </div>
+
+              <div class="hidden md:block">
+                  <button onclick="openJoinModal()" class="btn-primary text-white font-semibold py-2 px-6 rounded-lg">
+                      Join Now <i class="ml-2 fas fa-arrow-right"></i>
+                  </button>
+              </div>
+
+              <button id="mobile-menu-button" class="md:hidden text-gray-700" aria-label="Open mobile menu">
+                  <i class="fas fa-bars text-2xl"></i>
+              </button>
+          </div>
+
+          <div id="mobile-menu" class="hidden md:hidden mt-4 pb-4 border-t pt-4">
+              <div class="flex flex-col space-y-4">
+                  <a href="index.html#home" class="text-gray-700 hover:text-blue-600 font-medium py-2 border-b">Home</a>
+                  <a href="about.html" class="text-gray-700 hover:text-blue-600 font-medium py-2 border-b">About</a>
+                  <a href="index.html#programs" class="text-gray-700 hover:text-blue-600 font-medium py-2 border-b">Programs</a>
+                  <a href="index.html#skills" class="text-gray-700 hover:text-blue-600 font-medium py-2 border-b">Skills</a>
+                  <a href="index.html#testimonials" class="text-gray-700 hover:text-blue-600 font-medium py-2 border-b">Success Stories</a>
+                  <a href="index.html#contact" class="text-gray-700 hover:text-blue-600 font-medium py-2 border-b">Contact</a>
+                  <button onclick="openJoinModal()" class="btn-primary text-white font-semibold py-3 px-4 rounded-lg mt-2">
+                      Join Ajira Club
+                  </button>
+              </div>
+          </div>
+      </nav>
+  </header>
+
+  <!-- Main About Content -->
+  <main id="main-content">
+      <section class="hero-gradient text-white py-20 md:py-28">
+          <div class="container mx-auto px-4 text-center">
+              <h2 class="text-4xl md:text-5xl font-bold mb-4">About <span class="text-orange-300">KCA Ajira Club</span></h2>
+              <p class="max-w-3xl mx-auto text-lg md:text-xl text-blue-100">We empower KCA University students with practical digital skills, mentorship and pathways to freelancing, remote work and entrepreneurship.</p>
+          </div>
+      </section>
+
+      <section class="py-16 bg-white">
+          <div class="container mx-auto px-4">
+              <div class="grid md:grid-cols-2 gap-12 items-center">
+                  <div>
+                      <h3 class="text-2xl font-bold text-gray-800 mb-4">Our Mission</h3>
+                      <p class="text-gray-600 mb-6">To equip students with in-demand digital skills and connect them to global opportunities, enabling financial independence and career readiness.</p>
+
+                      <h3 class="text-2xl font-bold text-gray-800 mb-4">Our Vision</h3>
+                      <p class="text-gray-600 mb-6">To be Kenya's leading student digital empowerment community, driving inclusive participation in the digital economy.</p>
+
+                      <h3 class="text-2xl font-bold text-gray-800 mb-4">What We Do</h3>
+                      <ul class="list-inside ml-4 text-gray-600 space-y-2">
+                          <li>Weekly hands-on Skill Labs (web, design, marketing, data, AI tools)</li>
+                          <li>Freelance Launchpad to build profiles & win clients</li>
+                          <li>Mentorship and alumni support for real projects</li>
+                          <li>Portfolio & interview preparation</li>
+                          <li>Industry partnerships & job linkages</li>
+                      </ul>
+
+                      <div class="mt-8">
+                          <button onclick="openJoinModal()" class="btn-secondary text-white font-semibold py-3 px-6 rounded-lg mr-4">Join a Session</button>
+                          <a href="index.html#programs" class="inline-block bg-gray-100 text-blue-700 py-3 px-6 rounded-lg">View Programs</a>
+                      </div>
+                  </div>
+
+                  <div>
+                      <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+                          <div class="h-64 bg-gradient-to-r from-blue-500 to-teal-400 flex items-center justify-center">
+                              <i class="fas fa-users text-white text-6xl"></i>
+                          </div>
+                          <div class="p-6">
+                              <h4 class="text-xl font-bold text-gray-800 mb-3">Impact at a glance</h4>
+                              <div class="grid grid-cols-2 gap-4 text-center">
+                                  <div>
+                                      <p class="text-3xl font-bold text-blue-700">1,200+</p>
+                                      <p class="text-gray-600 text-sm">Members</p>
+                                  </div>
+                                  <div>
+                                      <p class="text-3xl font-bold text-orange-500">KES 2M+</p>
+                                      <p class="text-gray-600 text-sm">Earned by Members</p>
+                                  </div>
+                                  <div>
+                                      <p class="text-3xl font-bold text-teal-600">40+</p>
+                                      <p class="text-gray-600 text-sm">Partners</p>
+                                  </div>
+                                  <div>
+                                      <p class="text-3xl font-bold text-purple-600">85%</p>
+                                      <p class="text-gray-600 text-sm">Skill Application</p>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </section>
+
+      <section class="py-16 bg-gray-50">
+          <div class="container mx-auto px-4">
+              <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center">Meet the Team</h3>
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                  <div class="team-card bg-white rounded-xl p-6 text-center shadow">
+                      <div class="w-24 h-24 bg-gray-100 rounded-full mx-auto flex items-center justify-center text-blue-600 text-3xl mb-4">AA</div>
+                      <h4 class="font-bold">Alice Achieng</h4>
+                      <p class="text-sm text-gray-500">President & Program Lead</p>
+                      <p class="text-gray-600 mt-3 text-sm">Alice coordinates partnerships, delivers workshops and oversees mentorship programs.</p>
+                  </div>
+
+                  <div class="team-card bg-white rounded-xl p-6 text-center shadow">
+                      <div class="w-24 h-24 bg-gray-100 rounded-full mx-auto flex items-center justify-center text-orange-500 text-3xl mb-4">BM</div>
+                      <h4 class="font-bold">Brian Mwangi</h4>
+                      <p class="text-sm text-gray-500">Head of Skills & Curriculum</p>
+                      <p class="text-gray-600 mt-3 text-sm">Brian designs the skill labs and curates practical project-based learning tracks.</p>
+                  </div>
+
+                  <div class="team-card bg-white rounded-xl p-6 text-center shadow">
+                      <div class="w-24 h-24 bg-gray-100 rounded-full mx-auto flex items-center justify-center text-teal-600 text-3xl mb-4">CN</div>
+                      <h4 class="font-bold">Catherine Njeri</h4>
+                      <p class="text-sm text-gray-500">Mentorship & Community</p>
+                      <p class="text-gray-600 mt-3 text-sm">Catherine manages mentor matches, alumni relations and member support services.</p>
+                  </div>
+              </div>
+          </div>
+      </section>
+
+      <section class="py-16 bg-white">
+          <div class="container mx-auto px-4">
+              <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center">Partners & Supporters</h3>
+              <div class="grid grid-cols-2 md:grid-cols-4 gap-6 items-center">
+                  <div class="flex items-center justify-center p-4 bg-gray-50 rounded">
+                      <i class="fas fa-university text-4xl text-blue-700"></i>
+                  </div>
+                  <div class="flex items-center justify-center p-4 bg-gray-50 rounded">
+                      <i class="fas fa-flag text-4xl text-green-700"></i>
+                  </div>
+                  <div class="flex items-center justify-center p-4 bg-gray-50 rounded">
+                      <i class="fas fa-briefcase text-4xl text-orange-500"></i>
+                  </div>
+                  <div class="flex items-center justify-center p-4 bg-gray-50 rounded">
+                      <i class="fas fa-globe text-4xl text-purple-700"></i>
+                  </div>
+              </div>
+          </div>
+      </section>
+
+      <section class="py-12 bg-gray-50">
+          <div class="container mx-auto px-4 text-center">
+              <h4 class="text-xl font-bold text-gray-800 mb-3">Ready to join the next cohort?</h4>
+              <p class="text-gray-600 mb-6">Sign up for a free intro session and start building your digital career today.</p>
+              <button onclick="openJoinModal()" class="btn-primary text-white font-semibold py-3 px-6 rounded-lg">Join Now</button>
+          </div>
+      </section>
+  </main>
+
+  <!-- Footer (copied from index for consistency) -->
+  <footer class="bg-gray-900 text-gray-300 py-12">
+      <div class="container mx-auto px-4">
+          <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+              <div>
+                  <h3 class="text-white text-xl font-bold mb-6">KCA Ajira Club</h3>
+                  <p class="mb-6">Empowering KCA University students with digital skills for the future of work. Bridging the gap between academia and the digital economy.</p>
+                  <div class="flex space-x-4">
+                      <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter text-xl"></i></a>
+                      <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-linkedin text-xl"></i></a>
+                      <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram text-xl"></i></a>
+                      <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-youtube text-xl"></i></a>
+                  </div>
+              </div>
+
+              <div>
+                  <h4 class="text-white text-lg font-semibold mb-6">Quick Links</h4>
+                  <ul class="space-y-3">
+                      <li><a href="index.html#home" class="hover:text-white transition-colors">Home</a></li>
+                      <li><a href="about.html" class="hover:text-white transition-colors">About Us</a></li>
+                      <li><a href="index.html#programs" class="hover:text-white transition-colors">Programs</a></li>
+                      <li><a href="index.html#skills" class="hover:text-white transition-colors">Skills</a></li>
+                      <li><a href="index.html#testimonials" class="hover:text-white transition-colors">Success Stories</a></li>
+                  </ul>
+              </div>
+
+              <div>
+                  <h4 class="text-white text-lg font-semibold mb-6">Resources</h4>
+                  <ul class="space-y-3">
+                      <li><a href="#" class="hover:text-white transition-colors">Learning Materials</a></li>
+                      <li><a href="#" class="hover:text-white transition-colors">Freelancing Guides</a></li>
+                      <li><a href="#" class="hover:text-white transition-colors">Portfolio Templates</a></li>
+                      <li><a href="#" class="hover:text-white transition-colors">Job Board</a></li>
+                  </ul>
+              </div>
+
+              <div>
+                  <h4 class="text-white text-lg font-semibold mb-6">Partners</h4>
+                  <div class="space-y-4">
+                      <div class="flex items-center">
+                          <div class="w-10 h-10 bg-blue-800 rounded flex items-center justify-center mr-3"><i class="fas fa-university"></i></div>
+                          <span>KCA University</span>
+                      </div>
+                      <div class="flex items-center">
+                          <div class="w-10 h-10 bg-green-800 rounded flex items-center justify-center mr-3"><i class="fas fa-flag"></i></div>
+                          <span>Ajira Digital Program</span>
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+          <div class="border-t border-gray-800 mt-12 pt-8 text-center">
+              <p class="mb-4">&copy; <span id="current-year">2026</span> KCA Ajira Club. All rights reserved.</p>
+              <p class="text-sm text-gray-500">Part of Kenya's journey towards a knowledge-based economy (Vision 2030) | Contributing to UN SDGs 4, 8, and 9</p>
+          </div>
+      </div>
+  </footer>
+
+  <!-- Modals + scripts reused from site -->
+  <div id="join-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
+      <div class="bg-white rounded-xl max-w-md w-full p-6">
+          <div class="flex justify-between items-center mb-6">
+              <h3 class="text-2xl font-bold text-gray-800">Join Ajira Club</h3>
+              <button onclick="closeJoinModal()" class="text-gray-500 hover:text-gray-700"><i class="fas fa-times text-xl"></i></button>
+          </div>
+          <p class="text-gray-600 mb-6">Ready to start your digital journey? Enter your details to join our next session.</p>
+          <div id="modal-content"><div class="text-center py-8"><i class="fas fa-spinner fa-spin text-blue-600 text-3xl"></i><p class="mt-4 text-gray-600">Loading form...</p></div></div>
+      </div>
+  </div>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
