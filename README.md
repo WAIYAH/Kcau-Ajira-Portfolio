@@ -1,127 +1,145 @@
 # KCA Ajira Club — Portfolio Website
 
-A multi-page, responsive portfolio website for **KCA Ajira Club** — KCA University's student-led digital economy initiative. The site showcases the club's mission, programs, skills training, success stories, resource library, and membership flows.
+> KCA University's student-led digital economy club. This is our official portfolio website.
 
-> **Live Site:** [kcaajiraclub.ke](https://kcaajiraclub.ke) · **Repo:** [WAIYAH/Kcau-Ajira-Portfolio](https://github.com/WAIYAH/Kcau-Ajira-Portfolio)
+**Repo:** [WAIYAH/Kcau-Ajira-Portfolio](https://github.com/WAIYAH/Kcau-Ajira-Portfolio)
 
 ---
 
-## 🚀 Project Overview
+## What This Is
 
-Built with semantic HTML and **Tailwind CSS (CDN)**, this site is fully static — no build step required. It features a consistent design system across all pages, accessible navigation, interactive modals, and a growing resource library for digital professionals.
+A fully static, multi-page website for **KCA Ajira Club**. No build tools or frameworks needed — just HTML, CSS, and vanilla JavaScript. Open `index.html` in a browser and it works.
 
-## ✨ Key Features
+The site covers everything about the club: who we are, what we do, our programs, skills we teach, member success stories, upcoming events, and how to join.
 
-- **Multi-page site** with 14+ linked pages sharing a consistent header, footer, and design system
-- **Semantic & accessible HTML** — skip links, ARIA labels, breadcrumb navigation
-- **Tailwind CSS via CDN** — utility-first styling with a shared config (`css/tailwind-config.js`)
-- **Custom CSS** — `hero-gradient`, `btn-primary`, `btn-secondary`, `nav-active` classes
-- **Interactive UI** — mobile menu, join modal, program modals, form handling, toast notifications
-- **SEO optimized** — Open Graph / Twitter meta tags, structured data (JSON-LD), canonical URLs
-- **Resource library** — Learning materials, freelancing guides, portfolio templates, job board, AI tools directory
-- **Legal pages** — Privacy policy, terms of service, code of conduct
+---
 
-## 📁 Project Structure
+## Features
+
+- **Futuristic landing page** — auto-advancing hero slider, glassmorphism effects, scroll-triggered animations, floating particles
+- **Live countdown timers** on upcoming events
+- **Animated stat counters** that count up when scrolled into view
+- **15 pages** — 6 main pages, 5 resource pages, 3 legal pages, plus a 404 page
+- **Responsive** across mobile, tablet, and desktop
+- **Accessible** — skip links, ARIA labels, semantic HTML
+- **SEO ready** — Open Graph tags, sitemap.xml, robots.txt, JSON-LD structured data
+- **Interactive** — join modal, program detail modals, form handling, toast notifications
+
+---
+
+## Tech Stack
+
+| Tech | What For |
+|---|---|
+| HTML5 | Page structure |
+| Tailwind CSS (CDN) | Styling |
+| Custom CSS | Animations, glassmorphism, hero slider, gradients |
+| Vanilla JS (ES Modules) | Slider, countdown, scroll animations, modals, forms |
+| Font Awesome 6.4 | Icons |
+| Google Fonts | Poppins + Inter |
+
+---
+
+## Project Structure
 
 ```
 Kcau-Ajira-Portfolio/
 │
-├── index.html                  # Home — hero, stats, about, programs, skills, testimonials, contact
-├── about.html                  # About the club — mission, vision, team
-├── programs.html               # Detailed program offerings
-├── skills.html                 # Digital skills taught (hard & soft)
-├── success-stories.html        # Member testimonials & achievements
-├── contact.html                # Contact form & information
+├── index.html                      # Landing page (hero slider, stats, events, etc.)
+├── about.html                      # About — constitution, leadership, mission
+├── programs.html                   # Club programs
+├── skills.html                     # Digital skills we teach
+├── success-stories.html            # Member testimonials
+├── contact.html                    # Contact info & form
+├── 404.html                        # Custom 404 page
 │
-├── Resources/                  # Resource pages
-│   ├── learning-materials.html     # Curated courses & tutorials by track
-│   ├── freelancing-guides.html     # Step-by-step freelancing roadmap
-│   ├── portfolio-templates.html    # Free portfolio templates gallery
-│   ├── job-board.html              # Curated job & internship listings
-│   └── ai-tools-directory.html     # AI tools for writing, coding, design & productivity
+├── Resources/
+│   ├── learning-materials.html
+│   ├── freelancing-guides.html
+│   ├── portfolio-templates.html
+│   ├── job-board.html
+│   └── ai-tools-directory.html
 │
-├── legal/                      # Legal & policy pages
+├── legal/
 │   ├── privacy-policy.html
 │   ├── terms-of-service.html
 │   └── code-of-conduct.html
 │
 ├── css/
-│   ├── style.css               # Custom styles (gradients, buttons, cards, animations)
-│   └── tailwind-config.js      # Tailwind CDN config (fonts, colors, extensions)
+│   ├── style.css                   # Base styles (buttons, cards, gradients)
+│   └── tailwind-config.js          # Tailwind CDN config
+│
+├── index.css                       # Landing page styles (slider, glass, glow, countdown)
 │
 ├── js/
-│   ├── main.js                 # App init, mobile menu, toasts, structured data, year
-│   ├── modals.js               # Join modal & program detail modals
-│   └── form-handler.js         # Form validation & submission handling
+│   ├── main.js                     # App init, mobile menu, toasts, structured data
+│   ├── hero-slider.js              # Auto-advancing hero carousel
+│   ├── countdown.js                # Live countdown timers for events
+│   ├── animations.js               # Scroll reveals, counter animations, particles
+│   ├── modals.js                   # Join & program modals
+│   └── form-handler.js             # Form submission handling
 │
-├── img/                        # Images & media
-│   ├── KCAU AJIRA CLUB.jpg        # Hero / main club image
-│   ├── KCAU AJIRA CLUB LOGO 2.png # Club logo
-│   ├── about-image.jpg            # About page image
-│   ├── Thursday Meeting Invitation.png
-│   ├── Wed_ Sat Trainings.png
-│   └── Ajira Calendar of events.mp4
+├── img/                            # Club images & media
 │
-├── WEBSITE_DOCUMENTATION.md    # Detailed site documentation
-└── README.md                   # This file
+├── .gitignore
+├── .editorconfig
+├── LICENSE                         # MIT License
+├── robots.txt
+├── sitemap.xml
+├── README.md
+└── WEBSITE_DOCUMENTATION.md
 ```
-
-## 🛠️ Tech Stack
-
-| Technology | Purpose |
-|---|---|
-| **HTML5** | Semantic page structure |
-| **Tailwind CSS (CDN)** | Utility-first styling |
-| **Custom CSS** | Gradients, animations, brand classes |
-| **Vanilla JavaScript (ES Modules)** | Interactivity, modals, forms |
-| **Font Awesome 6.4** | Icons |
-| **Google Fonts** | Poppins + Inter typography |
-
-## ⚡ Run / Preview
-
-No build step required — just open in a browser:
-
-1. **Direct:** Open `index.html` in any modern browser
-2. **Local server** (recommended):
-   ```bash
-   # Python 3
-   python -m http.server 8000
-
-   # Node.js (if you have npx)
-   npx serve .
-   ```
-   Then visit `http://localhost:8000`
-
-## 📄 Pages Overview
-
-| Page | Description |
-|---|---|
-| **Home** (`index.html`) | Hero banner, stats, about preview, programs, skills, testimonials, contact form |
-| **About** (`about.html`) | Club mission & vision, team, Kenya Vision 2030 alignment |
-| **Programs** (`programs.html`) | Weekly Skill Labs, Freelance Launchpad, Digital Mentorship |
-| **Skills** (`skills.html`) | Hard skills (marketing, dev, AI, content, data) & soft skills |
-| **Success Stories** (`success-stories.html`) | Member testimonials & career outcomes |
-| **Contact** (`contact.html`) | Contact form, location, meeting times, social links |
-| **Learning Materials** | Curated courses across Web Dev, Data & AI, Digital Marketing tracks |
-| **Freelancing Guides** | 6-step roadmap, platform guides (Upwork, Fiverr, LinkedIn), Kenya payments & tax |
-| **Portfolio Templates** | Free templates for developers, designers, and writers |
-| **Job Board** | Filtered job listings — remote, internships, freelance, full-time |
-| **AI Tools Directory** | 12+ AI tools for writing, coding, design, and productivity |
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/your-feature`)
-3. Commit your changes (`git commit -m "Add your feature"`)
-4. Push to the branch (`git push origin feature/your-feature`)
-5. Open a Pull Request
-
-## 📜 License
-
-© 2026 KCA Ajira Club. All rights reserved.
-
-Part of Kenya's journey towards a knowledge-based economy (Vision 2030) | Contributing to UN SDGs 4, 8, and 9.
 
 ---
 
-**Built with ❤️ by KCA Ajira Club**
+## How to Run
+
+No install. No build. Just open it.
+
+**Option 1 — Direct:**
+Open `index.html` in your browser.
+
+**Option 2 — Local server** (better for testing):
+```bash
+# Python
+python -m http.server 8000
+
+# or Node.js
+npx serve .
+```
+Then go to `http://localhost:8000`
+
+---
+
+## Pages
+
+| Page | What It Shows |
+|---|---|
+| **Home** | Hero slider, stats, about, programs, upcoming events with countdown, skills, testimonials, contact form |
+| **About** | Club constitution, 6 leadership members, mission & vision, Ajira Kenya 5 pillars |
+| **Programs** | Weekly Skill Labs, Freelance Launchpad, Digital Mentorship |
+| **Skills** | Technical skills (marketing, dev, AI, data) + soft skills |
+| **Success Stories** | Member testimonials and career outcomes |
+| **Contact** | Contact form, location, meeting schedule, social links |
+| **Resources** (5 pages) | Learning materials, freelancing guides, portfolio templates, job board, AI tools |
+| **Legal** (3 pages) | Privacy policy, terms of service, code of conduct |
+| **404** | Custom error page |
+
+---
+
+## Contributing
+
+1. Fork the repo
+2. Create a branch (`git checkout -b feature/your-feature`)
+3. Commit your changes
+4. Push and open a Pull Request
+
+---
+
+## License
+
+MIT — see [LICENSE](LICENSE) for details.
+
+---
+
+**Built with ❤️ by KCA Ajira Club** · KCA University, Nairobi, Kenya
