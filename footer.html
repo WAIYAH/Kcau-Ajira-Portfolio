@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary Meta Tags -->
+    <title>KCA Ajira Club - Digital Economy Launchpad for Students</title>
+    <meta name="description" content="KCA University Ajira Club - Empowering students with digital skills for freelancing, remote work, and the digital economy. Join Kenya's premier student digital empowerment community.">
+    <meta name="keywords" content="Ajira Club, KCA University, digital skills, freelancing Kenya, remote work, digital economy, student empowerment, tech skills">
+    <meta name="author" content="KCA Ajira Club">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://kcaajiraclub.ke/">
+    <meta property="og:title" content="KCA Ajira Club - Your Digital Economy Launchpad">
+    <meta property="og:description" content="Empowering KCA students with digital skills for the future of work. Join the premier student digital empowerment community in Kenya.">
+    <meta property="og:image" content="https://kcaajiraclub.ke/img/og-image.jpg">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://kcaajiraclub.ke/">
+    <meta property="twitter:title" content="KCA Ajira Club - Your Digital Economy Launchpad">
+    <meta property="twitter:description" content="Empowering KCA students with digital skills for the future of work.">
+    <meta property="twitter:image" content="https://kcaajiraclub.ke/img/twitter-image.jpg">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://kcaajiraclub.ke/">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
+    <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+    
+    <!-- Tailwind CSS -->
+    <script src="css/tailwind-config.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Custom CSS (moved to css/style.css) -->
+    <link rel="stylesheet" href="css/style.css">
+    
+    <!-- Structured data moved to js/main.js -->
+</head>
+<body class="bg-gray-50 text-gray-800">
+    <!-- Skip to main content for accessibility -->
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-blue-600 text-white p-2 z-50">Skip to main content</a>
+    
+    <!-- Header / Navigation -->
+    <header class="sticky top-0 z-40 bg-white shadow-md">
+        <nav class="container mx-auto px-4 py-3" aria-label="Main navigation">
+            <div class="flex justify-between items-center">
+                <!-- Logo Section -->
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center">
+                        <i class="fas fa-rocket text-white"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-xl font-bold text-blue-700">
+                            <a href="index.html" class="hover:text-blue-800 transition-colors">
+                                KCA <span class="text-orange-500">Ajira</span> Club
+                            </a>
+                        </h1>
+                        <p class="text-xs text-gray-500">Digital Economy Launchpad</p>
+                    </div>
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html" class="text-gray-700 hover:text-blue-600 font-medium transition-colors nav-active">Home</a>
+                    <a href="about.html" class="text-gray-700 hover:text-blue-600 font-medium transition-colors">About</a>
+                    <a href="programs.html" class="text-gray-700 hover:text-blue-600 font-medium transition-colors">Programs</a>
+                    <a href="skills.html" class="text-gray-700 hover:text-blue-600 font-medium transition-colors">Skills</a>
+                    <a href="success-stories.html" class="text-gray-700 hover:text-blue-600 font-medium transition-colors">Success Stories</a>
+                    <a href="contact.html" class="text-gray-700 hover:text-blue-600 font-medium transition-colors">Contact</a>
+                </div>
+                
+                <!-- Call to Action Button -->
+                <div class="hidden md:block">
+                    <button onclick="openJoinModal()" class="btn-primary text-white font-semibold py-2 px-6 rounded-lg">
+                        Join Now <i class="ml-2 fas fa-arrow-right"></i>
+                    </button>
+                </div>
+                
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-button" class="md:hidden text-gray-700" aria-label="Open mobile menu">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+            
+            <!-- Mobile Navigation (Hidden by default) -->
+            <div id="mobile-menu" class="hidden md:hidden mt-4 pb-4 border-t pt-4">
+                <div class="flex flex-col space-y-4">
+                    <a href="index.html" class="text-gray-700 hover:text-blue-600 font-medium py-2 border-b">Home</a>
+                    <a href="about.html" class="text-gray-700 hover:text-blue-600 font-medium py-2 border-b">About</a>
+                    <a href="programs.html" class="text-gray-700 hover:text-blue-600 font-medium py-2 border-b">Programs</a>
+                    <a href="skills.html" class="text-gray-700 hover:text-blue-600 font-medium py-2 border-b">Skills</a>
+                    <a href="success-stories.html" class="text-gray-700 hover:text-blue-600 font-medium py-2 border-b">Success Stories</a>
+                    <a href="contact.html" class="text-gray-700 hover:text-blue-600 font-medium py-2 border-b">Contact</a>
+                    <button onclick="openJoinModal()" class="btn-primary text-white font-semibold py-3 px-4 rounded-lg mt-2">
+                        Join Ajira Club
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+
+    
+    <!-- Page Header -->
+    <header class="page-header">
+        <div class="page-header__content">
+            <h1>Skills We Teach</h1>
+            <p>Master the technical competencies that land jobs in Kenya and globally</p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Category Tabs -->
+        <section class="category-tabs" id="categoryTabs">
+            <button class="tab-button active" onclick="filterSkills('all')">All Skills</button>
+            <button class="tab-button" onclick="filterSkills('web')">Web Development</button>
+            <button class="tab-button" onclick="filterSkills('mobile')">Mobile Development</button>
+            <button class="tab-button" onclick="filterSkills('ai')">AI/ML</button>
+            <button class="tab-button" onclick="filterSkills('cloud')">Cloud & DevOps</button>
+            <button class="tab-button" onclick="filterSkills('design')">Design</button>
+        </section>
+
+        <!-- Skills Grid -->
+        <section class="skills-grid" id="skillsGrid">
+            <!-- Skills will be populated here by JavaScript -->
+        </section>
+    </main>
+
+    <!-- Learning Paths Section -->
+    <section class="learning-paths">
+        <div class="container">
+            <h2>Recommended Learning Paths</h2>
+            <p style="text-align: center; color: var(--gray); margin-bottom: 2rem; font-size: 1.05rem;">
+                Follow these curated pathways to develop expertise in your desired tech career
+            </p>
+            <div class="paths-grid">
+                <!-- Frontend Developer Path -->
+                <div class="learning-path">
+                    <div class="path-title">
+                        <i class="fas fa-palette"></i>
+                        Frontend Developer Path
+                    </div>
+                    <div class="path-steps">
+                        <div class="path-step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <div class="step-skill">HTML/CSS</div>
+                                <div class="step-description">Semantic markup & responsive design</div>
+                            </div>
+                        </div>
+                        <div class="path-step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <div class="step-skill">JavaScript</div>
+                                <div class="step-description">ES6+, DOM manipulation, async programming</div>
+                            </div>
+                        </div>
+                        <div class="path-step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <div class="step-skill">React</div>
+                                <div class="step-description">Components, hooks, state management</div>
+                            </div>
+                        </div>
+                        <div class="path-step">
+                            <div class="step-number">4</div>
+                            <div class="step-content">
+                                <div class="step-skill">TypeScript</div>
+                                <div class="step-description">Type safety & advanced patterns</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="path-duration">
+                        ⏱️ <strong>Total Time:</strong> 16-20 weeks
+                    </div>
+                </div>
+
+                <!-- Backend Developer Path -->
+                <div class="learning-path">
+                    <div class="path-title">
+                        <i class="fas fa-server"></i>
+                        Backend Developer Path
+                    </div>
+                    <div class="path-steps">
+                        <div class="path-step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <div class="step-skill">Python or Node.js</div>
+                                <div class="step-description">Core programming fundamentals</div>
+                            </div>
+                        </div>
+                        <div class="path-step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <div class="step-skill">Databases (SQL & NoSQL)</div>
+                                <div class="step-description">PostgreSQL, MongoDB, data modeling</div>
+                            </div>
+                        </div>
+                        <div class="path-step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <div class="step-skill">APIs & REST</div>
+                                <div class="step-description">Express, FastAPI, GraphQL basics</div>
+                            </div>
+                        </div>
+                        <div class="path-step">
+                            <div class="step-number">4</div>
+                            <div class="step-content">
+                                <div class="step-skill">Cloud & DevOps</div>
+                                <div class="step-description">AWS, Docker, deployment, CI/CD</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="path-duration">
+                        ⏱️ <strong>Total Time:</strong> 16-20 weeks
+                    </div>
+                </div>
+
+                <!-- AI/ML Specialist Path -->
+                <div class="learning-path">
+                    <div class="path-title">
+                        <i class="fas fa-brain"></i>
+                        AI/ML Specialist Path
+                    </div>
+                    <div class="path-steps">
+                        <div class="path-step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <div class="step-skill">Python for Data</div>
+                                <div class="step-description">NumPy, Pandas, data manipulation</div>
+                            </div>
+                        </div>
+                        <div class="path-step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <div class="step-skill">Statistics & Math</div>
+                                <div class="step-description">Probability, linear algebra, calculus</div>
+                            </div>
+                        </div>
+                        <div class="path-step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <div class="step-skill">Machine Learning</div>
+                                <div class="step-description">Scikit-learn, supervised/unsupervised learning</div>
+                            </div>
+                        </div>
+                        <div class="path-step">
+                            <div class="step-number">4</div>
+                            <div class="step-content">
+                                <div class="step-skill">Deep Learning</div>
+                                <div class="step-description">TensorFlow, PyTorch, neural networks</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="path-duration">
+                        ⏱️ <strong>Total Time:</strong> 20-24 weeks
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- In-Demand Skills Section -->
+    <section class="in-demand-section container">
+        <h2>Most Sought-After Skills in Kenya</h2>
+        <p style="text-align: center; color: var(--gray); margin-bottom: 2rem; font-size: 1.05rem;">
+            Based on job market analysis from LinkedIn, Andela, and local tech companies
+        </p>
+        <div class="in-demand-container">
+            <div class="skill-bar">
+                <div class="skill-bar-header">
+                    <span class="skill-bar-name">Python</span>
+                    <span class="skill-bar-percentage" id="python-pct">85%</span>
+                </div>
+                <div class="skill-bar-container">
+                    <div class="skill-bar-fill" style="width: 0%;" id="python-bar"></div>
+                </div>
+            </div>
+
+            <div class="skill-bar">
+                <div class="skill-bar-header">
+                    <span class="skill-bar-name">JavaScript</span>
+                    <span class="skill-bar-percentage" id="js-pct">81%</span>
+                </div>
+                <div class="skill-bar-container">
+                    <div class="skill-bar-fill" style="width: 0%;" id="js-bar"></div>
+                </div>
+            </div>
+
+            <div class="skill-bar">
+                <div class="skill-bar-header">
+                    <span class="skill-bar-name">SQL & Databases</span>
+                    <span class="skill-bar-percentage" id="sql-pct">78%</span>
+                </div>
+                <div class="skill-bar-container">
+                    <div class="skill-bar-fill" style="width: 0%;" id="sql-bar"></div>
+                </div>
+            </div>
+
+            <div class="skill-bar">
+                <div class="skill-bar-header">
+                    <span class="skill-bar-name">React</span>
+                    <span class="skill-bar-percentage" id="react-pct">72%</span>
+                </div>
+                <div class="skill-bar-container">
+                    <div class="skill-bar-fill" style="width: 0%;" id="react-bar"></div>
+                </div>
+            </div>
+
+            <div class="skill-bar">
+                <div class="skill-bar-header">
+                    <span class="skill-bar-name">Cloud Services (AWS/Azure)</span>
+                    <span class="skill-bar-percentage" id="cloud-pct">68%</span>
+                </div>
+                <div class="skill-bar-container">
+                    <div class="skill-bar-fill" style="width: 0%;" id="cloud-bar"></div>
+                </div>
+            </div>
+
+            <div class="skill-bar">
+                <div class="skill-bar-header">
+                    <span class="skill-bar-name">Mobile Development</span>
+                    <span class="skill-bar-percentage" id="mobile-pct">65%</span>
+                </div>
+                <div class="skill-bar-container">
+                    <div class="skill-bar-fill" style="width: 0%;" id="mobile-bar"></div>
+                </div>
+            </div>
+
+            <div class="skill-bar">
+                <div class="skill-bar-header">
+                    <span class="skill-bar-name">Machine Learning</span>
+                    <span class="skill-bar-percentage" id="ml-pct">62%</span>
+                </div>
+                <div class="skill-bar-container">
+                    <div class="skill-bar-fill" style="width: 0%;" id="ml-bar"></div>
+                </div>
+            </div>
+
+            <div class="skill-bar">
+                <div class="skill-bar-header">
+                    <span class="skill-bar-name">DevOps & Docker</span>
+                    <span class="skill-bar-percentage" id="devops-pct">58%</span>
+                </div>
+                <div class="skill-bar-container">
+                    <div class="skill-bar-fill" style="width: 0%;" id="devops-bar"></div>
+                </div>
+            </div>
+
+            <div class="in-demand-note">
+                <strong>💡 Pro Tip:</strong> Combine 2-3 skills from this list with strong problem-solving and communication abilities to dramatically increase your job prospects. Most companies hire for skill combinations, not single skills.
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="cta-section__content">
+            <h2>Ready to Master These Skills?</h2>
+            <p>Find the program that matches your learning goals and start your journey today</p>
+            <div class="cta-buttons">
+                <a href="programs.html" class="btn btn--outline">
+                    <i class="fas fa-graduation-cap"></i> Browse Programs
+                </a>
+                <a href="#contact" class="btn btn--secondary">
+                    <i class="fas fa-comments"></i> Chat with a Mentor
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Skills data
+        const skills = [
+            {
+                id: 1,
+                name: "HTML/CSS",
+                category: "web",
+                icon: "🏗️",
+                level: "beginner",
+                programs: 5,
+                description: "Foundation of web development"
+            },
+            {
+                id: 2,
+                name: "JavaScript",
+                category: "web",
+                icon: "⚡",
+                level: "intermediate",
+                programs: 8,
+                description: "Interactive web experiences"
+            },
+            {
+                id: 3,
+                name: "React",
+                category: "web",
+                icon: "⚛️",
+                level: "intermediate",
+                programs: 6,
+                description: "Modern UI library"
+            },
+            {
+                id: 4,
+                name: "Node.js",
+                category: "web",
+                icon: "🟢",
+                level: "intermediate",
+                programs: 5,
+                description: "Server-side JavaScript"
+            },
+            {
+                id: 5,
+                name: "Python",
+                category: "ai",
+                icon: "🐍",
+                level: "beginner",
+                programs: 7,
+                description: "Versatile programming language"
+            },
+            {
+                id: 6,
+                name: "Machine Learning",
+                category: "ai",
+                icon: "🤖",
+                level: "advanced",
+                programs: 3,
+                description: "AI & predictive models"
+            },
+            {
+                id: 7,
+                name: "React Native",
+                category: "mobile",
+                icon: "📱",
+                level: "intermediate",
+                programs: 4,
+                description: "Cross-platform mobile apps"
+            },
+            {
+                id: 8,
+                name: "Swift/Kotlin",
+                category: "mobile",
+                icon: "🎯",
+                level: "advanced",
+                programs: 2,
+                description: "Native mobile development"
+            },
+            {
+                id: 9,
+                name: "AWS",
+                category: "cloud",
+                icon: "☁️",
+                level: "intermediate",
+                programs: 4,
+                description: "Cloud infrastructure"
+            },
+            {
+                id: 10,
+                name: "Docker & Kubernetes",
+                category: "cloud",
+                icon: "🐳",
+                level: "advanced",
+                programs: 3,
+                description: "Container orchestration"
+            },
+            {
+                id: 11,
+                name: "UI/UX Design",
+                category: "design",
+                icon: "🎨",
+                level: "beginner",
+                programs: 3,
+                description: "User experience design"
+            },
+            {
+                id: 12,
+                name: "Figma",
+                category: "design",
+                icon: "📐",
+                level: "beginner",
+                programs: 4,
+                description: "Design tool mastery"
+            }
+        ];
+
+        let currentFilter = 'all';
+
+        // Initialize skills grid
+        function initializeSkills() {
+            displaySkills(skills);
+            animateSkillBars();
+        }
+
+        // Display skills based on category
+        function displaySkills(filteredSkills) {
+            const grid = document.getElementById('skillsGrid');
+            grid.innerHTML = filteredSkills.map(skill => `
+                <div class="skill-card">
+                    <div class="skill-icon">${skill.icon}</div>
+                    <div class="skill-name">${skill.name}</div>
+                    <span class="skill-level skill-level--${skill.level}">${skill.level}</span>
+                    <div class="skill-meta">
+                        <div class="skill-meta-item">
+                            <i class="fas fa-book"></i>
+                            <span>${skill.programs} programs</span>
+                        </div>
+                    </div>
+                    <p style="color: var(--gray); font-size: 0.9rem; margin-bottom: 1rem;">
+                        ${skill.description}
+                    </p>
+                    <a href="programs.html" class="skill-cta">Learn More</a>
+                </div>
+            `).join('');
+        }
+
+        // Filter skills by category
+        function filterSkills(category) {
+            currentFilter = category;
+            
+            // Update active button
+            document.querySelectorAll('.tab-button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Filter and display
+            const filtered = category === 'all' 
+                ? skills 
+                : skills.filter(skill => skill.category === category);
+            
+            displaySkills(filtered);
+        }
+
+        // Animate skill bars on scroll
+        function animateSkillBars() {
+            const bars = [
+                { id: 'python-bar', value: 85 },
+                { id: 'js-bar', value: 81 },
+                { id: 'sql-bar', value: 78 },
+                { id: 'react-bar', value: 72 },
+                { id: 'cloud-bar', value: 68 },
+                { id: 'mobile-bar', value: 65 },
+                { id: 'ml-bar', value: 62 },
+                { id: 'devops-bar', value: 58 }
+            ];
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        bars.forEach(bar => {
+                            const element = document.getElementById(bar.id);
+                            setTimeout(() => {
+                                element.style.width = bar.value + '%';
+                            }, 100);
+                        });
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            const container = document.querySelector('.in-demand-container');
+            if (container) {
+                observer.observe(container);
+            }
+        }
+
+        // Toggle mobile menu
+        function toggleMenu() {
+            console.log('Mobile menu toggled');
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', initializeSkills);
+    </script>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-300 py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <!-- Column 1: About -->
+                <div>
+                    <h3 class="text-white text-xl font-bold mb-6">KCA Ajira Club</h3>
+                    <p class="mb-6">
+                        Empowering KCA University students with digital skills for the future of work. Bridging the gap between academia and the digital economy.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i class="fab fa-twitter text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i class="fab fa-linkedin text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i class="fab fa-instagram text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i class="fab fa-youtube text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Column 2: Quick Links -->
+                <div>
+                    <h4 class="text-white text-lg font-semibold mb-6">Quick Links</h4>
+                    <ul class="space-y-3">
+                        <li><a href="index.html" class="hover:text-white transition-colors">Home</a></li>
+                        <li><a href="about.html" class="hover:text-white transition-colors">About Us</a></li>
+                        <li><a href="programs.html" class="hover:text-white transition-colors">Programs</a></li>
+                        <li><a href="skills.html" class="hover:text-white transition-colors">Skills</a></li>
+                        <li><a href="success-stories.html" class="hover:text-white transition-colors">Success Stories</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Column 3: Resources -->
+                <div>
+                    <h4 class="text-white text-lg font-semibold mb-6">Resources</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="hover:text-white transition-colors">Learning Materials</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Freelancing Guides</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Portfolio Templates</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Job Board</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">AI Tools Directory</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Column 4: Partners -->
+                <div>
+                    <h4 class="text-white text-lg font-semibold mb-6">Partners</h4>
+                    <div class="space-y-4">
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 bg-blue-800 rounded flex items-center justify-center mr-3">
+                                <i class="fas fa-university"></i>
+                            </div>
+                            <span>KCA University</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 bg-green-800 rounded flex items-center justify-center mr-3">
+                                <i class="fas fa-flag"></i>
+                            </div>
+                            <span>Ajira Digital Program</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 bg-purple-800 rounded flex items-center justify-center mr-3">
+                                <i class="fas fa-globe"></i>
+                            </div>
+                            <span>UN SDG Alliance</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-12 pt-8 text-center">
+                <p class="mb-4">
+                    &copy; <span id="current-year"></span> KCA Ajira Club. All rights reserved.
+                </p>
+                <p class="text-sm text-gray-500">
+                    Part of Kenya's journey towards a knowledge-based economy (Vision 2030) | Contributing to UN SDGs 4, 8, and 9
+                </p>
+                <div class="mt-6 flex flex-wrap justify-center gap-4 text-sm">
+                    <a href="legal/privacy-policy.html" class="hover:text-white">Privacy Policy</a>
+                    <span class="text-gray-600">|</span>
+                    <a href="legal/terms-of-service.html" class="hover:text-white">Terms of Service</a>
+                    <span class="text-gray-600">|</span>
+                    <a href="legal/code-of-conduct.html" class="hover:text-white">Code of Conduct</a>
+                    <span class="text-gray-600">|</span>
+                    <a href="mailto:ajiraclub@kca.ac.ke" class="hover:text-white">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Join Modal -->
+    <div id="join-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-xl max-w-md w-full p-6">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-bold text-gray-800">Join Ajira Club</h3>
+                <button onclick="closeJoinModal()" class="text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            <p class="text-gray-600 mb-6">
+                Ready to start your digital journey? Enter your details to join our next session.
+            </p>
+            <div id="modal-content">
+                <!-- Content will be loaded here by JavaScript -->
+                <div class="text-center py-8">
+                    <i class="fas fa-spinner fa-spin text-blue-600 text-3xl"></i>
+                    <p class="mt-4 text-gray-600">Loading form...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Program Detail Modal -->
+    <div id="program-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-xl max-w-2xl w-full p-6 max-h-[90vh] overflow-y-auto">
+            <div class="flex justify-between items-center mb-6">
+                <h3 id="program-modal-title" class="text-2xl font-bold text-gray-800">Program Details</h3>
+                <button onclick="closeProgramModal()" class="text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            <div id="program-modal-content">
+                <!-- Content will be loaded here by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Toast -->
+    <div id="success-toast" class="fixed top-4 right-4 bg-green-600 text-white px-6 py-4 rounded-lg shadow-lg z-50 hidden transform transition-transform duration-300 translate-x-full">
+        <div class="flex items-center">
+            <i class="fas fa-check-circle text-xl mr-3"></i>
+            <div>
+                <p class="font-semibold" id="toast-title">Success!</p>
+                <p id="toast-message">Your action was completed successfully.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript modules -->
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>

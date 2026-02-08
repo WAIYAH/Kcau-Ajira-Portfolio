@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary Meta Tags -->
+    <title>Success Stories - KCA Ajira Club</title>
+    <meta name="description" content="Real KCAU Ajira Club alumni success stories. See how our members landed jobs at Google, Andela, Microsoft, and launched their own startups.">
+    <meta name="keywords" content="success stories, alumni, job placement, career, testimonials, startups, Kenya, KCAU Ajira">
+    <meta name="author" content="KCA Ajira Club">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://kcaajiraclub.ke/success-stories">
+    <meta property="og:title" content="Success Stories - KCA Ajira Club">
+    <meta property="og:description" content="Real students. Real careers. Real impact. Discover how Ajira Club members are transforming their futures.">
+    <meta property="og:image" content="https://kcaajiraclub.ke/img/og-stories.jpg">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://kcaajiraclub.ke/success-stories">
+    <meta property="twitter:title" content="Success Stories - KCA Ajira Club">
+    <meta property="twitter:description" content="Real students. Real careers. Real impact.">
+    <meta property="twitter:image" content="https://kcaajiraclub.ke/img/twitter-stories.jpg">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://kcaajiraclub.ke/success-stories">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
+    <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+    
+    <!-- Tailwind CSS -->
+    <script src="css/tailwind-config.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-gray-50 text-gray-800">
+    <!-- Skip to main content for accessibility -->
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-blue-600 text-white p-2 z-50">Skip to main content</a>
+    
+    <!-- Header / Navigation -->
+    <header class="sticky top-0 z-40 bg-white shadow-md">
+        <nav class="container mx-auto px-4 py-3" aria-label="Main navigation">
+            <div class="flex justify-between items-center">
+                <!-- Logo Section -->
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center">
+                        <i class="fas fa-rocket text-white"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-xl font-bold text-blue-700">
+                            <a href="index.html" class="hover:text-blue-800 transition-colors">
+                                KCA <span class="text-orange-500">Ajira</span> Club
+                            </a>
+                        </h1>
+                        <p class="text-xs text-gray-500">Digital Economy Launchpad</p>
+                    </div>
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html" class="text-gray-700 hover:text-blue-600 font-medium transition-colors">Home</a>
+                    <a href="about.html" class="text-gray-700 hover:text-blue-600 font-medium transition-colors">About</a>
+                    <a href="programs.html" class="text-gray-700 hover:text-blue-600 font-medium transition-colors">Programs</a>
+                    <a href="skills.html" class="text-gray-700 hover:text-blue-600 font-medium transition-colors">Skills</a>
+                    <a href="success-stories.html" class="text-gray-700 hover:text-blue-600 font-medium transition-colors nav-active">Success Stories</a>
+                    <a href="contact.html" class="text-gray-700 hover:text-blue-600 font-medium transition-colors">Contact</a>
+                </div>
+                
+                <!-- Call to Action Button -->
+                <div class="hidden md:block">
+                    <button onclick="openJoinModal()" class="btn-primary text-white font-semibold py-2 px-6 rounded-lg">
+                        Join Now <i class="ml-2 fas fa-arrow-right"></i>
+                    </button>
+                </div>
+                
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-button" class="md:hidden text-gray-700" aria-label="Open mobile menu">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+            
+            <!-- Mobile Navigation (Hidden by default) -->
+            <div id="mobile-menu" class="hidden md:hidden mt-4 pb-4 border-t pt-4">
+                <div class="flex flex-col space-y-4">
+                    <a href="index.html" class="text-gray-700 hover:text-blue-600 font-medium py-2 border-b">Home</a>
+                    <a href="about.html" class="text-gray-700 hover:text-blue-600 font-medium py-2 border-b">About</a>
+                    <a href="programs.html" class="text-gray-700 hover:text-blue-600 font-medium py-2 border-b">Programs</a>
+                    <a href="skills.html" class="text-gray-700 hover:text-blue-600 font-medium py-2 border-b">Skills</a>
+                    <a href="success-stories.html" class="text-gray-700 hover:text-blue-600 font-medium py-2 border-b nav-active">Success Stories</a>
+                    <a href="contact.html" class="text-gray-700 hover:text-blue-600 font-medium py-2 border-b">Contact</a>
+                    <button onclick="openJoinModal()" class="btn-primary text-white font-semibold py-3 px-4 rounded-lg mt-2">
+                        Join Ajira Club
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content">
+        <!-- Hero Section -->
+        <section class="hero-gradient text-white py-16 md:py-20">
+            <div class="container mx-auto px-4 text-center">
+                <span class="inline-block bg-white/20 text-white text-sm font-semibold px-4 py-1.5 rounded-full mb-6">
+                    <i class="fas fa-trophy mr-2"></i>Real Impact, Real Careers
+                </span>
+                <h2 class="text-3xl md:text-5xl font-bold mb-6">Success Stories</h2>
+                <p class="text-lg md:text-xl text-blue-100 max-w-2xl mx-auto">
+                    Real students. Real careers. Real impact. Discover how our members landed jobs at top companies and launched their own startups.
+                </p>
+            </div>
+        </section>
+
+        <!-- Filter Section -->
+        <section class="py-10">
+            <div class="container mx-auto px-4">
+                <div class="bg-white rounded-xl shadow-md p-6 md:p-8 -mt-10 relative z-10">
+                    <!-- Outcome Filter -->
+                    <div class="mb-6">
+                        <label class="block text-sm font-bold text-blue-700 uppercase tracking-wide mb-3">
+                            <i class="fas fa-filter mr-2"></i>Filter by Outcome
+                        </label>
+                        <div class="flex flex-wrap gap-3" id="outcomeFilter">
+                            <button class="px-4 py-2 rounded-full text-sm font-semibold border-2 transition-all duration-300 bg-blue-600 text-white border-blue-600" onclick="filterStories('outcome', 'all')">All Outcomes</button>
+                            <button class="px-4 py-2 rounded-full text-sm font-semibold border-2 transition-all duration-300 bg-white text-gray-600 border-gray-200 hover:border-blue-600 hover:text-blue-600" onclick="filterStories('outcome', 'job')"><i class="fas fa-briefcase mr-1"></i> Got a Job</button>
+                            <button class="px-4 py-2 rounded-full text-sm font-semibold border-2 transition-all duration-300 bg-white text-gray-600 border-gray-200 hover:border-blue-600 hover:text-blue-600" onclick="filterStories('outcome', 'startup')"><i class="fas fa-rocket mr-1"></i> Started Company</button>
+                            <button class="px-4 py-2 rounded-full text-sm font-semibold border-2 transition-all duration-300 bg-white text-gray-600 border-gray-200 hover:border-blue-600 hover:text-blue-600" onclick="filterStories('outcome', 'internship')"><i class="fas fa-graduation-cap mr-1"></i> Internship</button>
+                            <button class="px-4 py-2 rounded-full text-sm font-semibold border-2 transition-all duration-300 bg-white text-gray-600 border-gray-200 hover:border-blue-600 hover:text-blue-600" onclick="filterStories('outcome', 'promotion')"><i class="fas fa-chart-line mr-1"></i> Promotion/Raise</button>
+                        </div>
+                    </div>
+                    <!-- Company Filter -->
+                    <div>
+                        <label class="block text-sm font-bold text-blue-700 uppercase tracking-wide mb-3">
+                            <i class="fas fa-building mr-2"></i>Filter by Company
+                        </label>
+                        <div class="flex flex-wrap gap-3" id="companyFilter">
+                            <button class="px-4 py-2 rounded-full text-sm font-semibold border-2 transition-all duration-300 bg-blue-600 text-white border-blue-600" onclick="filterStories('company', 'all')">All Companies</button>
+                            <button class="px-4 py-2 rounded-full text-sm font-semibold border-2 transition-all duration-300 bg-white text-gray-600 border-gray-200 hover:border-blue-600 hover:text-blue-600" onclick="filterStories('company', 'google')">Google</button>
+                            <button class="px-4 py-2 rounded-full text-sm font-semibold border-2 transition-all duration-300 bg-white text-gray-600 border-gray-200 hover:border-blue-600 hover:text-blue-600" onclick="filterStories('company', 'microsoft')">Microsoft</button>
+                            <button class="px-4 py-2 rounded-full text-sm font-semibold border-2 transition-all duration-300 bg-white text-gray-600 border-gray-200 hover:border-blue-600 hover:text-blue-600" onclick="filterStories('company', 'andela')">Andela</button>
+                            <button class="px-4 py-2 rounded-full text-sm font-semibold border-2 transition-all duration-300 bg-white text-gray-600 border-gray-200 hover:border-blue-600 hover:text-blue-600" onclick="filterStories('company', 'stripe')">Stripe</button>
+                            <button class="px-4 py-2 rounded-full text-sm font-semibold border-2 transition-all duration-300 bg-white text-gray-600 border-gray-200 hover:border-blue-600 hover:text-blue-600" onclick="filterStories('company', 'safaricom')">Safaricom</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Story -->
+        <section class="py-8">
+            <div class="container mx-auto px-4">
+                <div id="featuredStory" class="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100">
+                    <!-- Populated by JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Stories Grid -->
+        <section class="py-12">
+            <div class="container mx-auto px-4">
+                <h3 class="text-2xl font-bold text-gray-800 mb-8">
+                    <i class="fas fa-users text-blue-600 mr-2"></i>More Success Stories
+                </h3>
+                <div id="storiesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Stories populated by JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Section -->
+        <section class="hero-gradient py-16">
+            <div class="container mx-auto px-4">
+                <h3 class="text-2xl md:text-3xl font-bold text-white text-center mb-12">Our Impact in Numbers</h3>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                    <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center">
+                        <div class="text-3xl md:text-4xl font-bold text-orange-400 mb-2">150+</div>
+                        <div class="text-blue-100 text-sm md:text-base">Jobs Placed (2023-2024)</div>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center">
+                        <div class="text-3xl md:text-4xl font-bold text-orange-400 mb-2">15+</div>
+                        <div class="text-blue-100 text-sm md:text-base">Startups Founded</div>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center">
+                        <div class="text-3xl md:text-4xl font-bold text-orange-400 mb-2">50+</div>
+                        <div class="text-blue-100 text-sm md:text-base">Internships Secured</div>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center">
+                        <div class="text-3xl md:text-4xl font-bold text-orange-400 mb-2">92%</div>
+                        <div class="text-blue-100 text-sm md:text-base">Satisfaction Rate</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="py-16 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="bg-gray-50 border-2 border-dashed border-blue-300 rounded-2xl p-8 md:p-12 text-center max-w-3xl mx-auto">
+                    <div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-star text-orange-500 text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl md:text-3xl font-bold text-gray-800 mb-4">Share Your Success Story</h3>
+                    <p class="text-gray-600 mb-8 max-w-xl mx-auto">
+                        We'd love to hear about your journey with KCA Ajira Club. Your story could inspire the next cohort of tech leaders.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <a href="mailto:hello@kcauajira.club" class="btn-primary text-white font-semibold py-3 px-8 rounded-lg inline-flex items-center justify-center">
+                            <i class="fas fa-envelope mr-2"></i> Submit Your Story
+                        </a>
+                        <a href="programs.html" class="btn-secondary text-white font-semibold py-3 px-8 rounded-lg inline-flex items-center justify-center">
+                            <i class="fas fa-graduation-cap mr-2"></i> Start Your Journey
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Story Detail Modal -->
+    <div id="storyModal" class="fixed inset-0 bg-black bg-opacity-60 z-50 hidden items-center justify-center p-4 overflow-y-auto">
+        <div class="bg-white rounded-xl max-w-3xl w-full mx-auto my-8 overflow-hidden shadow-2xl">
+            <!-- Modal Header -->
+            <div class="hero-gradient p-6 md:p-8 relative">
+                <button onclick="closeStoryModal()" class="absolute top-4 right-4 text-white hover:text-orange-300 text-2xl transition-colors">
+                    <i class="fas fa-times"></i>
+                </button>
+                <div class="w-20 h-20 bg-white/20 rounded-xl flex items-center justify-center text-4xl mb-4" id="modalImage"></div>
+                <h3 class="text-xl md:text-2xl font-bold text-white" id="modalTitle"></h3>
+                <p class="text-blue-200 mt-1" id="modalAuthor"></p>
+            </div>
+            <!-- Modal Body -->
+            <div class="p-6 md:p-8">
+                <div class="mb-6">
+                    <h4 class="text-lg font-bold text-gray-800 mb-3"><i class="fas fa-book-open text-blue-600 mr-2"></i>The Journey</h4>
+                    <p class="text-gray-600 leading-relaxed" id="modalStory"></p>
+                </div>
+                <div class="mb-6">
+                    <h4 class="text-lg font-bold text-gray-800 mb-3"><i class="fas fa-briefcase text-blue-600 mr-2"></i>Career Details</h4>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 bg-gray-50 rounded-lg p-4">
+                        <div>
+                            <span class="text-xs font-bold text-gray-400 uppercase">Company</span>
+                            <p class="text-gray-700 font-semibold" id="modalCompany"></p>
+                        </div>
+                        <div>
+                            <span class="text-xs font-bold text-gray-400 uppercase">Role</span>
+                            <p class="text-gray-700 font-semibold" id="modalRole"></p>
+                        </div>
+                        <div>
+                            <span class="text-xs font-bold text-gray-400 uppercase">Programs Completed</span>
+                            <p class="text-gray-700 font-semibold" id="modalPrograms"></p>
+                        </div>
+                        <div>
+                            <span class="text-xs font-bold text-gray-400 uppercase">Timeline</span>
+                            <p class="text-gray-700 font-semibold" id="modalTimeline"></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-6">
+                    <h4 class="text-lg font-bold text-gray-800 mb-3"><i class="fas fa-lightbulb text-orange-500 mr-2"></i>Key Lessons Learned</h4>
+                    <p class="text-gray-600 leading-relaxed" id="modalLessons"></p>
+                </div>
+                <div class="mb-6">
+                    <h4 class="text-lg font-bold text-gray-800 mb-3"><i class="fas fa-comment-dots text-teal-500 mr-2"></i>Advice for Others</h4>
+                    <p class="text-gray-600 leading-relaxed" id="modalAdvice"></p>
+                </div>
+            </div>
+            <!-- Modal Footer -->
+            <div class="border-t border-gray-200 p-6 flex justify-center">
+                <button onclick="closeStoryModal()" class="btn-primary text-white font-semibold py-2.5 px-8 rounded-lg">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-300 py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <!-- Column 1: About -->
+                <div>
+                    <h3 class="text-white text-xl font-bold mb-6">KCA Ajira Club</h3>
+                    <p class="mb-6">
+                        Empowering KCA University students with digital skills for the future of work. Bridging the gap between academia and the digital economy.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i class="fab fa-twitter text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i class="fab fa-linkedin text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i class="fab fa-instagram text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i class="fab fa-youtube text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Column 2: Quick Links -->
+                <div>
+                    <h4 class="text-white text-lg font-semibold mb-6">Quick Links</h4>
+                    <ul class="space-y-3">
+                        <li><a href="index.html" class="hover:text-white transition-colors">Home</a></li>
+                        <li><a href="about.html" class="hover:text-white transition-colors">About Us</a></li>
+                        <li><a href="programs.html" class="hover:text-white transition-colors">Programs</a></li>
+                        <li><a href="skills.html" class="hover:text-white transition-colors">Skills</a></li>
+                        <li><a href="success-stories.html" class="hover:text-white transition-colors">Success Stories</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Column 3: Resources -->
+                <div>
+                    <h4 class="text-white text-lg font-semibold mb-6">Resources</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="hover:text-white transition-colors">Learning Materials</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Freelancing Guides</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Portfolio Templates</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Job Board</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">AI Tools Directory</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Column 4: Partners -->
+                <div>
+                    <h4 class="text-white text-lg font-semibold mb-6">Partners</h4>
+                    <div class="space-y-4">
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 bg-blue-800 rounded flex items-center justify-center mr-3">
+                                <i class="fas fa-university"></i>
+                            </div>
+                            <span>KCA University</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 bg-green-800 rounded flex items-center justify-center mr-3">
+                                <i class="fas fa-flag"></i>
+                            </div>
+                            <span>Ajira Digital Program</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 bg-purple-800 rounded flex items-center justify-center mr-3">
+                                <i class="fas fa-globe"></i>
+                            </div>
+                            <span>UN SDG Alliance</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-12 pt-8 text-center">
+                <p class="mb-4">
+                    &copy; <span id="current-year"></span> KCA Ajira Club. All rights reserved.
+                </p>
+                <p class="text-sm text-gray-500">
+                    Part of Kenya's journey towards a knowledge-based economy (Vision 2030) | Contributing to UN SDGs 4, 8, and 9
+                </p>
+                <div class="mt-6 flex flex-wrap justify-center gap-4 text-sm">
+                    <a href="legal/privacy-policy.html" class="hover:text-white">Privacy Policy</a>
+                    <span class="text-gray-600">|</span>
+                    <a href="legal/terms-of-service.html" class="hover:text-white">Terms of Service</a>
+                    <span class="text-gray-600">|</span>
+                    <a href="legal/code-of-conduct.html" class="hover:text-white">Code of Conduct</a>
+                    <span class="text-gray-600">|</span>
+                    <a href="mailto:ajiraclub@kca.ac.ke" class="hover:text-white">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Join Modal -->
+    <div id="join-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-xl max-w-md w-full p-6">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-bold text-gray-800">Join Ajira Club</h3>
+                <button onclick="closeJoinModal()" class="text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            <p class="text-gray-600 mb-6">
+                Ready to start your digital journey? Enter your details to join our next session.
+            </p>
+            <div id="modal-content">
+                <div class="text-center py-8">
+                    <i class="fas fa-spinner fa-spin text-blue-600 text-3xl"></i>
+                    <p class="mt-4 text-gray-600">Loading form...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Toast -->
+    <div id="success-toast" class="fixed top-4 right-4 bg-green-600 text-white px-6 py-4 rounded-lg shadow-lg z-50 hidden transform transition-transform duration-300 translate-x-full">
+        <div class="flex items-center">
+            <i class="fas fa-check-circle text-xl mr-3"></i>
+            <div>
+                <p class="font-semibold" id="toast-title">Success!</p>
+                <p id="toast-message">Your action was completed successfully.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Page-specific JavaScript for stories -->
+    <script>
+        // Stories data
+        const stories = [
+            {
+                id: 1,
+                title: "How I Landed a Dev Job at Google",
+                author: "Jane Doe",
+                icon: "\u{1F469}\u200D\u{1F4BB}",
+                outcome: "job",
+                company: "google",
+                role: "Junior Software Engineer",
+                programs: "Web Dev Bootcamp, JavaScript Masterclass, Interview Prep",
+                timeline: "Joined Feb 2023, Hired Oct 2024",
+                featured: true,
+                story: "I started my journey at KCAU Ajira Club with zero professional experience. The bootcamp was intense but transformative. Within 6 months, I had completed 3 major projects and felt confident applying to big tech companies. Google\u2019s interview process was challenging, but the interview prep sessions at KCAU gave me the edge I needed. Today, I\u2019m a Junior Software Engineer in their Nairobi office, working on production systems that impact millions.",
+                lessons: "Consistency beats intensity. Show up every day, complete your projects seriously, and build a portfolio that tells your story. The connections you make at KCAU are invaluable\u2014my mentors opened doors I didn\u2019t know existed.",
+                advice: "Don\u2019t compare your beginning to someone else\u2019s middle. Everyone moves at their own pace. Focus on getting 1% better every day, contribute to open source, and when you feel ready, apply. The worst they can say is no, but what if they say yes?"
+            },
+            {
+                id: 2,
+                title: "From Bootcamp to CTO at My Own Startup",
+                author: "Peter Kipchoge",
+                icon: "\u{1F680}",
+                outcome: "startup",
+                company: "stripe",
+                role: "Co-Founder & CTO",
+                programs: "Full-Stack Bootcamp, Startup Accelerator, Blockchain Basics",
+                timeline: "Joined Apr 2023, Founded Startup Jun 2024",
+                featured: false,
+                story: "I didn\u2019t come to KCAU to start a company\u2014I came to get a job. But after the Startup Accelerator program, I realized I had a problem worth solving. During the bootcamp, I met my co-founder Sarah who had complementary business skills. We went through the Startup Accelerator together, pitched to investors, and launched TechFlow, an AI-powered business automation tool. We raised our first $100K seed round in just 3 months.",
+                lessons: "Your network is your net worth. Surround yourself with ambitious people who push you. KCAU wasn\u2019t just about learning code\u2014it was about finding your tribe and building something meaningful together.",
+                advice: "If you have an idea, stop waiting. Validate it with real customers immediately. The Startup Accelerator taught us that idea validation is more important than a perfect product. Start messy, iterate fast, and stay close to your users."
+            },
+            {
+                id: 3,
+                title: "Mobile Dev at Andela: A Dream Come True",
+                author: "Angela Njeri",
+                icon: "\u{1F4F1}",
+                outcome: "job",
+                company: "andela",
+                role: "Senior Mobile Developer",
+                programs: "React Native Bootcamp, Mobile Excellence Program",
+                timeline: "Joined Aug 2023, Hired Feb 2024",
+                featured: false,
+                story: "Mobile development was my passion from day one, but I needed structure and mentorship to level up. KCAU\u2019s React Native bootcamp gave me both. The instructors were real practitioners from Andela and other top companies. I completed challenging projects, built a solid portfolio, and got noticed. Andela was recruiting at KCAU, and after a technical interview, they offered me a role. Now I\u2019m mentoring junior devs and working on apps used by millions across Africa.",
+                lessons: "Your portfolio matters more than your degree. Build real projects, deploy them, and showcase them publicly. That\u2019s what got me the interview at Andela. Also, the power of asking questions\u2014don\u2019t be shy to reach out to mentors for guidance.",
+                advice: "Choose a specialization and go deep. Rather than knowing a little bit of everything, become excellent in one area. For me, it was React Native. That deep expertise made me valuable to employers who needed specialized skills."
+            },
+            {
+                id: 4,
+                title: "Getting My First Internship as a First-Year Student",
+                author: "David Ochieng",
+                icon: "\u{1F4DA}",
+                outcome: "internship",
+                company: "safaricom",
+                role: "Web Development Intern",
+                programs: "Web Dev Bootcamp, Interview Prep",
+                timeline: "Joined Jun 2024, Internship Started Sep 2024",
+                featured: false,
+                story: "As a first-year student, I thought internships were for seniors. But KCAU showed me it was possible. The bootcamp accelerated my learning so much that within 4 months, I was ready to apply. Safaricom\u2019s internship program was competitive, but my KCAU projects stood out. I got the internship and now, between studies and work, I\u2019m gaining real-world experience. This head start will be invaluable for my career.",
+                lessons: "Start early. Don\u2019t wait for the \u2018perfect time.\u2019 Your first internship is about learning, not just earning. Every project at KCAU matters\u2014treat it like it\u2019s for a real company.",
+                advice: "Build in public. Share your projects on GitHub, write blog posts about what you\u2019re learning, and engage with the tech community online. This visibility alone can attract internship and job opportunities. Also, network relentlessly\u2014many opportunities come through people you meet."
+            },
+            {
+                id: 5,
+                title: "Career Change: From HR to Data Scientist",
+                author: "Carol Kiprop",
+                icon: "\u{1F4CA}",
+                outcome: "job",
+                company: "microsoft",
+                role: "Data Science Analyst",
+                programs: "Python for Data Science, Machine Learning, SQL Masterclass",
+                timeline: "Joined Oct 2023, Hired Jun 2024",
+                featured: false,
+                story: "After 8 years in HR, I felt stagnant. I wanted a career shift into tech, but I was terrified I was too old and didn\u2019t have the background. KCAU\u2019s Python for Data Science program was a game-changer. The instructors patiently explained complex concepts, and the diverse cohort\u2014with people from all backgrounds\u2014made me feel I belonged. I completed the ML program, built projects, and Microsoft took a chance on me. I\u2019m now a Data Science Analyst, and my HR background is actually an advantage when I consult with HR teams.",
+                lessons: "Age and background don\u2019t matter in tech\u2014skill and attitude do. I was one of the oldest in my cohort, but I was also one of the most committed. Your \u2018outsider\u2019 perspective can be your superpower. Tech needs diverse minds.",
+                advice: "Don\u2019t let imposter syndrome stop you. Everyone feels it, even at big companies. Take action despite the fear. Also, stay curious. The tech landscape changes fast; commit to lifelong learning. KCAU\u2019s community helped me stay motivated when things got tough."
+            },
+            {
+                id: 6,
+                title: "Got a 45% Salary Increase After Completing the Program",
+                author: "Michael Omondi",
+                icon: "\u{1F4BC}",
+                outcome: "promotion",
+                company: "google",
+                role: "Senior Developer (Promotion)",
+                programs: "Advanced JavaScript, System Design, Tech Leadership",
+                timeline: "Joined Feb 2023, Promotion Sep 2024",
+                featured: false,
+                story: "I was already employed as a mid-level developer, but I was plateau-ing. KCAU\u2019s Advanced programs helped me level up my skills. I took System Design and Tech Leadership programs, which prepared me for senior roles. Within a year, I applied for a senior position at my company and got it\u2014with a 45% salary increase. KCAU validated what I had learned on the job and gave me the framework to articulate my value.",
+                lessons: "Continuous learning pays off. Literally. Companies value employees who invest in themselves. The skills I gained at KCAU directly translated to a promotion and higher pay. Mentorship is key\u2014KCAU\u2019s mentors helped me understand what senior engineers do differently.",
+                advice: "If you\u2019re already working, take advanced programs that push you beyond your current role. Understand that every job role requires more than just coding skills\u2014communication, design thinking, and leadership matter. Focus on those soft skills alongside technical growth."
+            }
+        ];
+
+        let currentOutcomeFilter = 'all';
+        let currentCompanyFilter = 'all';
+
+        // Active chip classes
+        const activeChipClass = 'bg-blue-600 text-white border-blue-600';
+        const inactiveChipClass = 'bg-white text-gray-600 border-gray-200 hover:border-blue-600 hover:text-blue-600';
+
+        // Initialize page
+        function initializePage() {
+            displayFeaturedStory();
+            displayStories();
+        }
+
+        // Display featured story
+        function displayFeaturedStory() {
+            const featured = stories.find(s => s.featured);
+            if (!featured) return;
+
+            const html = `
+                <div class="grid grid-cols-1 md:grid-cols-2">
+                    <div class="hero-gradient flex items-center justify-center p-8 min-h-[300px] md:min-h-[400px]">
+                        <span class="text-7xl">${featured.icon}</span>
+                    </div>
+                    <div class="p-6 md:p-8 flex flex-col justify-center">
+                        <span class="inline-block w-fit bg-orange-100 text-orange-700 text-xs font-bold uppercase tracking-wide px-3 py-1 rounded mb-4">
+                            <i class="fas fa-star mr-1"></i> Featured Story
+                        </span>
+                        <h3 class="text-xl md:text-2xl font-bold text-gray-800 mb-2">${featured.title}</h3>
+                        <p class="text-blue-600 font-semibold mb-4">by ${featured.author}</p>
+                        <p class="text-gray-600 leading-relaxed mb-6">${featured.story.substring(0, 280)}...</p>
+                        <div class="grid grid-cols-2 gap-3 bg-gray-50 rounded-lg p-4 mb-6">
+                            <div>
+                                <span class="text-xs font-bold text-gray-400 uppercase">Company</span>
+                                <p class="text-sm font-semibold text-gray-700">${featured.company.charAt(0).toUpperCase() + featured.company.slice(1)}</p>
+                            </div>
+                            <div>
+                                <span class="text-xs font-bold text-gray-400 uppercase">Role</span>
+                                <p class="text-sm font-semibold text-gray-700">${featured.role}</p>
+                            </div>
+                            <div>
+                                <span class="text-xs font-bold text-gray-400 uppercase">Programs</span>
+                                <p class="text-sm font-semibold text-gray-700">${featured.programs}</p>
+                            </div>
+                            <div>
+                                <span class="text-xs font-bold text-gray-400 uppercase">Timeline</span>
+                                <p class="text-sm font-semibold text-gray-700">${featured.timeline}</p>
+                            </div>
+                        </div>
+                        <a href="#" class="btn-secondary text-white font-semibold py-2.5 px-6 rounded-lg inline-flex items-center w-fit transition-all" onclick="openStoryModal(${featured.id}); return false;">
+                            Read Full Story <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+            `;
+            document.getElementById('featuredStory').innerHTML = html;
+        }
+
+        // Display stories grid
+        function displayStories() {
+            const filtered = stories.filter(story => {
+                const outcomeMatch = currentOutcomeFilter === 'all' || story.outcome === currentOutcomeFilter;
+                const companyMatch = currentCompanyFilter === 'all' || story.company === currentCompanyFilter;
+                return outcomeMatch && companyMatch && !story.featured;
+            });
+
+            const grid = document.getElementById('storiesGrid');
+
+            if (filtered.length === 0) {
+                grid.innerHTML = `
+                    <div class="col-span-full text-center py-12">
+                        <i class="fas fa-search text-gray-300 text-5xl mb-4 block"></i>
+                        <p class="text-gray-500 text-lg">No stories match your current filters.</p>
+                        <button onclick="resetFilters();" class="mt-4 text-blue-600 hover:text-blue-800 font-semibold">
+                            <i class="fas fa-undo mr-1"></i> Reset Filters
+                        </button>
+                    </div>
+                `;
+                return;
+            }
+
+            grid.innerHTML = filtered.map(story => {
+                const badgeColors = {
+                    job: 'bg-green-100 text-green-700',
+                    startup: 'bg-red-100 text-red-700',
+                    internship: 'bg-blue-100 text-blue-700',
+                    promotion: 'bg-purple-100 text-purple-700'
+                };
+                const badgeColor = badgeColors[story.outcome] || 'bg-gray-100 text-gray-700';
+                const outcomeLabel = story.outcome.charAt(0).toUpperCase() + story.outcome.slice(1);
+                
+                return `
+                    <div class="skill-card bg-white rounded-xl shadow-md overflow-hidden border border-gray-100 flex flex-col">
+                        <div class="hero-gradient flex items-center justify-center h-48">
+                            <span class="text-5xl">${story.icon}</span>
+                        </div>
+                        <div class="p-6 flex flex-col flex-grow">
+                            <span class="inline-block w-fit ${badgeColor} text-xs font-bold uppercase tracking-wide px-3 py-1 rounded mb-3">${outcomeLabel}</span>
+                            <h4 class="text-lg font-bold text-gray-800 mb-1">${story.title}</h4>
+                            <p class="text-blue-600 font-semibold text-sm mb-3">${story.author}</p>
+                            <div class="flex flex-wrap gap-3 text-xs text-gray-500 mb-3">
+                                <span class="flex items-center gap-1"><i class="fas fa-building"></i> ${story.company.charAt(0).toUpperCase() + story.company.slice(1)}</span>
+                                <span class="flex items-center gap-1"><i class="fas fa-briefcase"></i> ${story.role}</span>
+                            </div>
+                            <p class="text-gray-600 text-sm leading-relaxed mb-4 flex-grow">${story.story.substring(0, 150)}...</p>
+                            <a href="#" class="text-blue-600 hover:text-blue-800 font-semibold text-sm inline-flex items-center gap-2 transition-all hover:gap-3" onclick="openStoryModal(${story.id}); return false;">
+                                Read Story <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Filter stories
+        function filterStories(filterType, value) {
+            if (filterType === 'outcome') {
+                currentOutcomeFilter = value;
+                document.querySelectorAll('#outcomeFilter button').forEach(btn => {
+                    btn.className = 'px-4 py-2 rounded-full text-sm font-semibold border-2 transition-all duration-300 ' + inactiveChipClass;
+                });
+            } else if (filterType === 'company') {
+                currentCompanyFilter = value;
+                document.querySelectorAll('#companyFilter button').forEach(btn => {
+                    btn.className = 'px-4 py-2 rounded-full text-sm font-semibold border-2 transition-all duration-300 ' + inactiveChipClass;
+                });
+            }
+            // Make clicked button active
+            if (event && event.target) {
+                const btn = event.target.closest('button');
+                if (btn) btn.className = 'px-4 py-2 rounded-full text-sm font-semibold border-2 transition-all duration-300 ' + activeChipClass;
+            }
+            displayStories();
+        }
+
+        // Reset all filters
+        function resetFilters() {
+            currentOutcomeFilter = 'all';
+            currentCompanyFilter = 'all';
+            document.querySelectorAll('#outcomeFilter button, #companyFilter button').forEach(btn => {
+                btn.className = 'px-4 py-2 rounded-full text-sm font-semibold border-2 transition-all duration-300 ' + inactiveChipClass;
+            });
+            // Set "All" buttons active
+            document.querySelector('#outcomeFilter button:first-child').className = 'px-4 py-2 rounded-full text-sm font-semibold border-2 transition-all duration-300 ' + activeChipClass;
+            document.querySelector('#companyFilter button:first-child').className = 'px-4 py-2 rounded-full text-sm font-semibold border-2 transition-all duration-300 ' + activeChipClass;
+            displayStories();
+        }
+
+        // Open story modal
+        function openStoryModal(storyId) {
+            const story = stories.find(s => s.id === storyId);
+            if (!story) return;
+
+            document.getElementById('modalImage').textContent = story.icon;
+            document.getElementById('modalTitle').textContent = story.title;
+            document.getElementById('modalAuthor').textContent = 'by ' + story.author;
+            document.getElementById('modalStory').textContent = story.story;
+            document.getElementById('modalCompany').textContent = story.company.charAt(0).toUpperCase() + story.company.slice(1);
+            document.getElementById('modalRole').textContent = story.role;
+            document.getElementById('modalPrograms').textContent = story.programs;
+            document.getElementById('modalTimeline').textContent = story.timeline;
+            document.getElementById('modalLessons').textContent = story.lessons;
+            document.getElementById('modalAdvice').textContent = story.advice;
+
+            const modal = document.getElementById('storyModal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Close story modal
+        function closeStoryModal() {
+            const modal = document.getElementById('storyModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            document.body.style.overflow = '';
+        }
+
+        // Close modal on Escape
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') closeStoryModal();
+        });
+
+        // Close modal when clicking outside
+        document.getElementById('storyModal').addEventListener('click', function(event) {
+            if (event.target === this) closeStoryModal();
+        });
+
+        // Initialize on DOM ready
+        document.addEventListener('DOMContentLoaded', initializePage);
+    </script>
+
+    <!-- JavaScript modules -->
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>

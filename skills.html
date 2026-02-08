@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Primary Meta Tags -->
+    <title>Skills | KCA Ajira Club</title>
+    <meta name="description" content="Discover in-demand digital skills taught at KCA Ajira Club. Learn web development, data, AI tools, design, and freelancing skills.">
+    <meta name="keywords" content="KCA Ajira skills, digital skills Kenya, web development, data analysis, AI tools, UX design">
+    <meta name="author" content="KCA Ajira Club">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Skills | KCA Ajira Club">
+    <meta property="og:description" content="Master skills that help you earn in the digital economy.">
+    <meta property="og:image" content="https://kcaajiraclub.ke/img/og-image.jpg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" content="Skills | KCA Ajira Club">
+    <meta property="twitter:description" content="Master skills that help you earn in the digital economy.">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://kcaajiraclub.ke/skills.html">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
+    <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+
+    <!-- Tailwind CSS -->
+    <script src="css/tailwind-config.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-gray-50 text-gray-800">
+    <!-- Skip to main content for accessibility -->
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-blue-600 text-white p-2 z-50">Skip to main content</a>
+
+    <!-- Header / Navigation -->
+    <header class="sticky top-0 z-40 bg-white shadow-md">
+        <nav class="container mx-auto px-4 py-3" aria-label="Main navigation">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center">
+                        <i class="fas fa-rocket text-white"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-xl font-bold text-blue-700">
+                            <a href="index.html" class="hover:text-blue-800 transition-colors">
+                                KCA <span class="text-orange-500">Ajira</span> Club
+                            </a>
+                        </h1>
+                        <p class="text-xs text-gray-500">Digital Economy Launchpad</p>
+                    </div>
+                </div>
+
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html" class="text-gray-700 hover:text-blue-600 font-medium transition-colors">Home</a>
+                    <a href="about.html" class="text-gray-700 hover:text-blue-600 font-medium transition-colors">About</a>
+                    <a href="programs.html" class="text-gray-700 hover:text-blue-600 font-medium transition-colors">Programs</a>
+                    <a href="skills.html" class="text-gray-700 hover:text-blue-600 font-medium transition-colors nav-active">Skills</a>
+                    <a href="success-stories.html" class="text-gray-700 hover:text-blue-600 font-medium transition-colors">Success Stories</a>
+                    <a href="contact.html" class="text-gray-700 hover:text-blue-600 font-medium transition-colors">Contact</a>
+                </div>
+
+                <div class="hidden md:block">
+                    <button onclick="openJoinModal()" class="btn-primary text-white font-semibold py-2 px-6 rounded-lg">
+                        Join Now <i class="ml-2 fas fa-arrow-right"></i>
+                    </button>
+                </div>
+
+                <button id="mobile-menu-button" class="md:hidden text-gray-700" aria-label="Open mobile menu">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+
+            <div id="mobile-menu" class="hidden md:hidden mt-4 pb-4 border-t pt-4">
+                <div class="flex flex-col space-y-4">
+                    <a href="index.html" class="text-gray-700 hover:text-blue-600 font-medium py-2 border-b">Home</a>
+                    <a href="about.html" class="text-gray-700 hover:text-blue-600 font-medium py-2 border-b">About</a>
+                    <a href="programs.html" class="text-gray-700 hover:text-blue-600 font-medium py-2 border-b">Programs</a>
+                    <a href="skills.html" class="text-gray-700 hover:text-blue-600 font-medium py-2 border-b">Skills</a>
+                    <a href="success-stories.html" class="text-gray-700 hover:text-blue-600 font-medium py-2 border-b">Success Stories</a>
+                    <a href="contact.html" class="text-gray-700 hover:text-blue-600 font-medium py-2 border-b">Contact</a>
+                    <button onclick="openJoinModal()" class="btn-primary text-white font-semibold py-3 px-4 rounded-lg mt-2">Join Ajira Club</button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main id="main-content">
+        <!-- Hero Section -->
+        <section class="hero-gradient text-white py-16 md:py-20">
+            <div class="container mx-auto px-4 text-center">
+                <p class="text-orange-300 font-semibold mb-2"><i class="fas fa-layer-group mr-2"></i> Skills & Pathways</p>
+                <h2 class="text-4xl md:text-5xl font-bold mb-6">Skills We Teach</h2>
+                <p class="text-blue-100 text-lg max-w-3xl mx-auto">Master the technical competencies that land jobs in Kenya and globally.</p>
+            </div>
+        </section>
+
+        <!-- Category Tabs -->
+        <section class="py-10 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="flex flex-wrap justify-center gap-3" id="skill-tabs">
+                    <button class="px-4 py-2 rounded-full bg-blue-600 text-white text-sm font-medium" data-filter="all">All Skills</button>
+                    <button class="px-4 py-2 rounded-full bg-gray-100 text-gray-700 text-sm font-medium" data-filter="web">Web Development</button>
+                    <button class="px-4 py-2 rounded-full bg-gray-100 text-gray-700 text-sm font-medium" data-filter="mobile">Mobile Development</button>
+                    <button class="px-4 py-2 rounded-full bg-gray-100 text-gray-700 text-sm font-medium" data-filter="data">Data & AI</button>
+                    <button class="px-4 py-2 rounded-full bg-gray-100 text-gray-700 text-sm font-medium" data-filter="cloud">Cloud & DevOps</button>
+                    <button class="px-4 py-2 rounded-full bg-gray-100 text-gray-700 text-sm font-medium" data-filter="design">Design</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Grid -->
+        <section class="py-12 bg-gray-50">
+            <div class="container mx-auto px-4">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="skills-grid">
+                    <div class="skill-card bg-white border border-gray-200 rounded-xl p-6 text-center" data-category="web">
+                        <div class="text-4xl mb-3">🏗️</div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">HTML/CSS</h3>
+                        <span class="inline-block bg-green-100 text-green-700 text-xs font-semibold px-3 py-1 rounded-full">Beginner</span>
+                        <p class="text-gray-600 mt-3">Foundation of web development and responsive design.</p>
+                    </div>
+                    <div class="skill-card bg-white border border-gray-200 rounded-xl p-6 text-center" data-category="web">
+                        <div class="text-4xl mb-3">⚡</div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">JavaScript</h3>
+                        <span class="inline-block bg-yellow-100 text-yellow-700 text-xs font-semibold px-3 py-1 rounded-full">Intermediate</span>
+                        <p class="text-gray-600 mt-3">Interactive web experiences and app logic.</p>
+                    </div>
+                    <div class="skill-card bg-white border border-gray-200 rounded-xl p-6 text-center" data-category="web">
+                        <div class="text-4xl mb-3">⚛️</div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">React</h3>
+                        <span class="inline-block bg-yellow-100 text-yellow-700 text-xs font-semibold px-3 py-1 rounded-full">Intermediate</span>
+                        <p class="text-gray-600 mt-3">Modern UI development with components and hooks.</p>
+                    </div>
+                    <div class="skill-card bg-white border border-gray-200 rounded-xl p-6 text-center" data-category="data">
+                        <div class="text-4xl mb-3">🐍</div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Python</h3>
+                        <span class="inline-block bg-green-100 text-green-700 text-xs font-semibold px-3 py-1 rounded-full">Beginner</span>
+                        <p class="text-gray-600 mt-3">Versatile language for data and automation.</p>
+                    </div>
+                    <div class="skill-card bg-white border border-gray-200 rounded-xl p-6 text-center" data-category="data">
+                        <div class="text-4xl mb-3">🤖</div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Machine Learning</h3>
+                        <span class="inline-block bg-red-100 text-red-700 text-xs font-semibold px-3 py-1 rounded-full">Advanced</span>
+                        <p class="text-gray-600 mt-3">AI models and data-driven predictions.</p>
+                    </div>
+                    <div class="skill-card bg-white border border-gray-200 rounded-xl p-6 text-center" data-category="mobile">
+                        <div class="text-4xl mb-3">📱</div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">React Native</h3>
+                        <span class="inline-block bg-yellow-100 text-yellow-700 text-xs font-semibold px-3 py-1 rounded-full">Intermediate</span>
+                        <p class="text-gray-600 mt-3">Build Android & iOS apps with one codebase.</p>
+                    </div>
+                    <div class="skill-card bg-white border border-gray-200 rounded-xl p-6 text-center" data-category="cloud">
+                        <div class="text-4xl mb-3">☁️</div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">AWS</h3>
+                        <span class="inline-block bg-yellow-100 text-yellow-700 text-xs font-semibold px-3 py-1 rounded-full">Intermediate</span>
+                        <p class="text-gray-600 mt-3">Cloud computing and deployment skills.</p>
+                    </div>
+                    <div class="skill-card bg-white border border-gray-200 rounded-xl p-6 text-center" data-category="cloud">
+                        <div class="text-4xl mb-3">🐳</div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Docker</h3>
+                        <span class="inline-block bg-red-100 text-red-700 text-xs font-semibold px-3 py-1 rounded-full">Advanced</span>
+                        <p class="text-gray-600 mt-3">Containerization and scalable deployment.</p>
+                    </div>
+                    <div class="skill-card bg-white border border-gray-200 rounded-xl p-6 text-center" data-category="design">
+                        <div class="text-4xl mb-3">🎨</div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">UI/UX Design</h3>
+                        <span class="inline-block bg-green-100 text-green-700 text-xs font-semibold px-3 py-1 rounded-full">Beginner</span>
+                        <p class="text-gray-600 mt-3">Design user-centered digital experiences.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Learning Paths -->
+        <section class="py-12 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-10">
+                    <h3 class="text-3xl font-bold text-gray-800 mb-4">Recommended Learning Paths</h3>
+                    <p class="text-gray-600 max-w-2xl mx-auto">Choose a pathway and build skills in a structured sequence.</p>
+                </div>
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    <div class="border border-gray-200 rounded-xl p-6 bg-gray-50">
+                        <h4 class="text-xl font-semibold text-blue-700 mb-4"><i class="fas fa-palette mr-2 text-orange-500"></i> Frontend Developer</h4>
+                        <ol class="space-y-3 text-gray-700">
+                            <li>1. HTML/CSS</li>
+                            <li>2. JavaScript</li>
+                            <li>3. React</li>
+                            <li>4. TypeScript</li>
+                        </ol>
+                        <p class="text-sm text-gray-500 mt-4">Estimated: 16-20 weeks</p>
+                    </div>
+                    <div class="border border-gray-200 rounded-xl p-6 bg-gray-50">
+                        <h4 class="text-xl font-semibold text-blue-700 mb-4"><i class="fas fa-server mr-2 text-orange-500"></i> Backend Developer</h4>
+                        <ol class="space-y-3 text-gray-700">
+                            <li>1. Python / Node.js</li>
+                            <li>2. Databases (SQL)</li>
+                            <li>3. APIs & REST</li>
+                            <li>4. Cloud & DevOps</li>
+                        </ol>
+                        <p class="text-sm text-gray-500 mt-4">Estimated: 16-20 weeks</p>
+                    </div>
+                    <div class="border border-gray-200 rounded-xl p-6 bg-gray-50">
+                        <h4 class="text-xl font-semibold text-blue-700 mb-4"><i class="fas fa-brain mr-2 text-orange-500"></i> AI/ML Specialist</h4>
+                        <ol class="space-y-3 text-gray-700">
+                            <li>1. Python for Data</li>
+                            <li>2. Statistics & Math</li>
+                            <li>3. Machine Learning</li>
+                            <li>4. Deep Learning</li>
+                        </ol>
+                        <p class="text-sm text-gray-500 mt-4">Estimated: 20-24 weeks</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- In-Demand Skills -->
+        <section class="py-12 bg-gray-50">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-10">
+                    <h3 class="text-3xl font-bold text-gray-800 mb-4">Most Sought-After Skills in Kenya</h3>
+                    <p class="text-gray-600 max-w-2xl mx-auto">Based on job market analysis from LinkedIn and leading Kenyan tech companies.</p>
+                </div>
+                <div class="max-w-3xl mx-auto space-y-5">
+                    <div>
+                        <div class="flex justify-between text-sm font-semibold text-gray-700 mb-1"><span>Python</span><span>85%</span></div>
+                        <div class="w-full bg-gray-200 rounded-full h-3"><div class="h-3 rounded-full bg-blue-600" data-bar="85"></div></div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between text-sm font-semibold text-gray-700 mb-1"><span>JavaScript</span><span>81%</span></div>
+                        <div class="w-full bg-gray-200 rounded-full h-3"><div class="h-3 rounded-full bg-orange-500" data-bar="81"></div></div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between text-sm font-semibold text-gray-700 mb-1"><span>SQL & Databases</span><span>78%</span></div>
+                        <div class="w-full bg-gray-200 rounded-full h-3"><div class="h-3 rounded-full bg-blue-600" data-bar="78"></div></div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between text-sm font-semibold text-gray-700 mb-1"><span>React</span><span>72%</span></div>
+                        <div class="w-full bg-gray-200 rounded-full h-3"><div class="h-3 rounded-full bg-orange-500" data-bar="72"></div></div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between text-sm font-semibold text-gray-700 mb-1"><span>Cloud (AWS/Azure)</span><span>68%</span></div>
+                        <div class="w-full bg-gray-200 rounded-full h-3"><div class="h-3 rounded-full bg-blue-600" data-bar="68"></div></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="py-12 bg-white">
+            <div class="container mx-auto px-4 text-center">
+                <h3 class="text-3xl font-bold text-gray-800 mb-4">Ready to Master These Skills?</h3>
+                <p class="text-gray-600 max-w-2xl mx-auto mb-8">Choose a program that matches your learning goals and start your journey today.</p>
+                <div class="flex flex-col sm:flex-row justify-center gap-4">
+                    <a href="programs.html" class="btn-primary text-white font-semibold py-3 px-8 rounded-lg">Browse Programs</a>
+                    <a href="contact.html" class="bg-gray-900 text-white font-semibold py-3 px-8 rounded-lg hover:bg-gray-800 transition-colors">Chat with a Mentor</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-300 py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-white text-xl font-bold mb-6">KCA Ajira Club</h3>
+                    <p class="mb-6">Empowering KCA University students with digital skills for the future of work.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter text-xl"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-linkedin text-xl"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram text-xl"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-youtube text-xl"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-white text-lg font-semibold mb-6">Quick Links</h4>
+                    <ul class="space-y-3">
+                        <li><a href="index.html" class="hover:text-white transition-colors">Home</a></li>
+                        <li><a href="about.html" class="hover:text-white transition-colors">About Us</a></li>
+                        <li><a href="programs.html" class="hover:text-white transition-colors">Programs</a></li>
+                        <li><a href="skills.html" class="hover:text-white transition-colors">Skills</a></li>
+                        <li><a href="success-stories.html" class="hover:text-white transition-colors">Success Stories</a></li>
+                        <li><a href="contact.html" class="hover:text-white transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white text-lg font-semibold mb-6">Resources</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="hover:text-white transition-colors">Learning Materials</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Freelancing Guides</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Portfolio Templates</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Job Board</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">AI Tools Directory</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white text-lg font-semibold mb-6">Partners</h4>
+                    <div class="space-y-4">
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 bg-blue-800 rounded flex items-center justify-center mr-3"><i class="fas fa-university"></i></div>
+                            <span>KCA University</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 bg-green-800 rounded flex items-center justify-center mr-3"><i class="fas fa-flag"></i></div>
+                            <span>Ajira Digital Program</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 bg-purple-800 rounded flex items-center justify-center mr-3"><i class="fas fa-globe"></i></div>
+                            <span>UN SDG Alliance</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-12 pt-8 text-center">
+                <p class="mb-4">&copy; <span id="current-year"></span> KCA Ajira Club. All rights reserved.</p>
+                <p class="text-sm text-gray-500">Part of Kenya's journey towards a knowledge-based economy (Vision 2030) | Contributing to UN SDGs 4, 8, and 9</p>
+                <div class="mt-6 flex flex-wrap justify-center gap-4 text-sm">
+                    <a href="legal/privacy-policy.html" class="hover:text-white">Privacy Policy</a>
+                    <span class="text-gray-600">|</span>
+                    <a href="legal/terms-of-service.html" class="hover:text-white">Terms of Service</a>
+                    <span class="text-gray-600">|</span>
+                    <a href="legal/code-of-conduct.html" class="hover:text-white">Code of Conduct</a>
+                    <span class="text-gray-600">|</span>
+                    <a href="mailto:ajiraclub@kca.ac.ke" class="hover:text-white">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Join Modal -->
+    <div id="join-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-xl max-w-md w-full p-6">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-bold text-gray-800">Join Ajira Club</h3>
+                <button onclick="closeJoinModal()" class="text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            <p class="text-gray-600 mb-6">Ready to start your digital journey? Enter your details to join our next session.</p>
+            <div id="modal-content">
+                <div class="text-center py-8">
+                    <i class="fas fa-spinner fa-spin text-blue-600 text-3xl"></i>
+                    <p class="mt-4 text-gray-600">Loading form...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Toast -->
+    <div id="success-toast" class="fixed top-4 right-4 bg-green-600 text-white px-6 py-4 rounded-lg shadow-lg z-50 hidden transform transition-transform duration-300 translate-x-full">
+        <div class="flex items-center">
+            <i class="fas fa-check-circle text-xl mr-3"></i>
+            <div>
+                <p class="font-semibold" id="toast-title">Success!</p>
+                <p id="toast-message">Your action was completed successfully.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const skillTabs = document.getElementById('skill-tabs');
+        const skillCards = Array.from(document.querySelectorAll('#skills-grid [data-category]'));
+
+        skillTabs.addEventListener('click', (event) => {
+            if (!event.target.matches('button[data-filter]')) return;
+            const filter = event.target.dataset.filter;
+            skillTabs.querySelectorAll('button').forEach(btn => {
+                btn.classList.remove('bg-blue-600', 'text-white');
+                btn.classList.add('bg-gray-100', 'text-gray-700');
+            });
+            event.target.classList.add('bg-blue-600', 'text-white');
+            event.target.classList.remove('bg-gray-100', 'text-gray-700');
+
+            skillCards.forEach(card => {
+                const match = filter === 'all' || card.dataset.category === filter;
+                card.classList.toggle('hidden', !match);
+            });
+        });
+
+        document.querySelectorAll('[data-bar]').forEach(bar => {
+            const value = bar.getAttribute('data-bar');
+            bar.style.width = '0%';
+            setTimeout(() => {
+                bar.style.width = `${value}%`;
+            }, 200);
+        });
+    </script>
+
+    <!-- JavaScript modules -->
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>

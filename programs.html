@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary Meta Tags -->
+    <title>Programs | KCA Ajira Club</title>
+    <meta name="description" content="Explore KCA Ajira Club programs: digital skills labs, freelancing launchpad, mentorship tracks, and career-ready pathways for students.">
+    <meta name="keywords" content="Ajira Club programs, KCA University, digital skills, freelancing Kenya, mentorship, bootcamps">
+    <meta name="author" content="KCA Ajira Club">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Programs | KCA Ajira Club">
+    <meta property="og:description" content="Hands-on programs designed to turn learning into earning in the digital economy.">
+    <meta property="og:image" content="https://kcaajiraclub.ke/img/og-image.jpg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" content="Programs | KCA Ajira Club">
+    <meta property="twitter:description" content="Hands-on programs designed to turn learning into earning in the digital economy.">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://kcaajiraclub.ke/programs.html">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
+    <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+
+    <!-- Tailwind CSS -->
+    <script src="css/tailwind-config.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-gray-50 text-gray-800">
+    <!-- Skip to main content for accessibility -->
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-blue-600 text-white p-2 z-50">Skip to main content</a>
+
+    <!-- Header / Navigation -->
+    <header class="sticky top-0 z-40 bg-white shadow-md">
+        <nav class="container mx-auto px-4 py-3" aria-label="Main navigation">
+            <div class="flex justify-between items-center">
+                <!-- Logo Section -->
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center">
+                        <i class="fas fa-rocket text-white"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-xl font-bold text-blue-700">
+                            <a href="index.html" class="hover:text-blue-800 transition-colors">
+                                KCA <span class="text-orange-500">Ajira</span> Club
+                            </a>
+                        </h1>
+                        <p class="text-xs text-gray-500">Digital Economy Launchpad</p>
+                    </div>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html" class="text-gray-700 hover:text-blue-600 font-medium transition-colors">Home</a>
+                    <a href="about.html" class="text-gray-700 hover:text-blue-600 font-medium transition-colors">About</a>
+                    <a href="programs.html" class="text-gray-700 hover:text-blue-600 font-medium transition-colors nav-active">Programs</a>
+                    <a href="skills.html" class="text-gray-700 hover:text-blue-600 font-medium transition-colors">Skills</a>
+                    <a href="success-stories.html" class="text-gray-700 hover:text-blue-600 font-medium transition-colors">Success Stories</a>
+                    <a href="contact.html" class="text-gray-700 hover:text-blue-600 font-medium transition-colors">Contact</a>
+                </div>
+
+                <!-- Call to Action Button -->
+                <div class="hidden md:block">
+                    <button onclick="openJoinModal()" class="btn-primary text-white font-semibold py-2 px-6 rounded-lg">
+                        Join Now <i class="ml-2 fas fa-arrow-right"></i>
+                    </button>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-button" class="md:hidden text-gray-700" aria-label="Open mobile menu">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+
+            <!-- Mobile Navigation (Hidden by default) -->
+            <div id="mobile-menu" class="hidden md:hidden mt-4 pb-4 border-t pt-4">
+                <div class="flex flex-col space-y-4">
+                    <a href="index.html" class="text-gray-700 hover:text-blue-600 font-medium py-2 border-b">Home</a>
+                    <a href="about.html" class="text-gray-700 hover:text-blue-600 font-medium py-2 border-b">About</a>
+                    <a href="programs.html" class="text-gray-700 hover:text-blue-600 font-medium py-2 border-b">Programs</a>
+                    <a href="skills.html" class="text-gray-700 hover:text-blue-600 font-medium py-2 border-b">Skills</a>
+                    <a href="success-stories.html" class="text-gray-700 hover:text-blue-600 font-medium py-2 border-b">Success Stories</a>
+                    <a href="contact.html" class="text-gray-700 hover:text-blue-600 font-medium py-2 border-b">Contact</a>
+                    <button onclick="openJoinModal()" class="btn-primary text-white font-semibold py-3 px-4 rounded-lg mt-2">
+                        Join Ajira Club
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content">
+        <!-- Hero Section -->
+        <section class="hero-gradient text-white py-16 md:py-20">
+            <div class="container mx-auto px-4 text-center">
+                <p class="text-orange-300 font-semibold mb-2"><i class="fas fa-bolt mr-2"></i> Program Pathways</p>
+                <h2 class="text-4xl md:text-5xl font-bold mb-6">Explore Our Programs</h2>
+                <p class="text-blue-100 text-lg max-w-3xl mx-auto mb-8">
+                    Hands-on, industry-aligned programs designed to transform students into confident digital professionals.
+                </p>
+                <div class="flex flex-col sm:flex-row justify-center gap-4">
+                    <a href="#program-list" class="bg-white text-blue-700 font-semibold py-3 px-8 rounded-lg text-lg hover:bg-gray-100 transition-colors">
+                        Browse Programs <i class="ml-2 fas fa-arrow-down"></i>
+                    </a>
+                    <button onclick="openJoinModal()" class="btn-secondary text-white font-semibold py-3 px-8 rounded-lg text-lg">
+                        Join Next Session <i class="ml-2 fas fa-calendar-alt"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Filter Section -->
+        <section class="py-10 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                    <div class="flex items-center gap-3">
+                        <span class="text-gray-700 font-semibold">Filter:</span>
+                        <div class="flex flex-wrap gap-2" id="program-filters">
+                            <button class="px-4 py-2 rounded-full bg-blue-600 text-white text-sm font-medium" data-filter="all">All</button>
+                            <button class="px-4 py-2 rounded-full bg-gray-100 text-gray-700 text-sm font-medium" data-filter="labs">Skill Labs</button>
+                            <button class="px-4 py-2 rounded-full bg-gray-100 text-gray-700 text-sm font-medium" data-filter="freelance">Freelancing</button>
+                            <button class="px-4 py-2 rounded-full bg-gray-100 text-gray-700 text-sm font-medium" data-filter="mentorship">Mentorship</button>
+                            <button class="px-4 py-2 rounded-full bg-gray-100 text-gray-700 text-sm font-medium" data-filter="tech">Tech Tracks</button>
+                        </div>
+                    </div>
+                    <div class="relative">
+                        <input id="program-search" type="text" placeholder="Search programs..." class="w-full md:w-72 px-4 py-2 pl-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <i class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Programs Grid -->
+        <section id="program-list" class="py-12 bg-gray-50">
+            <div class="container mx-auto px-4">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="program-cards">
+                    <article class="skill-card bg-white border border-gray-200 rounded-xl p-6" data-category="labs">
+                        <div class="bg-blue-100 w-14 h-14 rounded-lg flex items-center justify-center mb-6">
+                            <i class="fas fa-laptop-code text-blue-600 text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">Weekly Skill Labs</h3>
+                        <p class="text-gray-600 mb-4">Hands-on sessions covering digital marketing, web development, data analysis, and AI tools.</p>
+                        <div class="text-sm text-gray-600 space-y-2 mb-6">
+                            <p><i class="fas fa-clock text-green-500 mr-2"></i> Every Wednesday, 5-7 PM</p>
+                            <p><i class="fas fa-map-marker-alt text-green-500 mr-2"></i> Tech Lab 3, KCA University</p>
+                        </div>
+                        <button onclick="openProgramModal('skill-labs')" class="w-full btn-primary text-white font-semibold py-3 rounded-lg">
+                            View Details
+                        </button>
+                    </article>
+
+                    <article class="skill-card bg-white border border-gray-200 rounded-xl p-6" data-category="freelance">
+                        <div class="bg-orange-100 w-14 h-14 rounded-lg flex items-center justify-center mb-6">
+                            <i class="fas fa-hand-holding-usd text-orange-600 text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">Freelance Launchpad</h3>
+                        <p class="text-gray-600 mb-4">Start freelancing on Upwork, Fiverr, and LinkedIn with real portfolio support.</p>
+                        <div class="text-sm text-gray-600 space-y-2 mb-6">
+                            <p><i class="fas fa-check text-green-500 mr-2"></i> Profile optimization & pitching</p>
+                            <p><i class="fas fa-check text-green-500 mr-2"></i> Client management & proposals</p>
+                        </div>
+                        <button onclick="openProgramModal('freelance-launchpad')" class="w-full btn-primary text-white font-semibold py-3 rounded-lg">
+                            View Details
+                        </button>
+                    </article>
+
+                    <article class="skill-card bg-white border border-gray-200 rounded-xl p-6" data-category="mentorship">
+                        <div class="bg-teal-100 w-14 h-14 rounded-lg flex items-center justify-center mb-6">
+                            <i class="fas fa-user-tie text-teal-600 text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">Digital Mentorship</h3>
+                        <p class="text-gray-600 mb-4">1-on-1 mentorship pairing with industry professionals and successful alumni.</p>
+                        <div class="text-sm text-gray-600 space-y-2 mb-6">
+                            <p><i class="fas fa-check text-green-500 mr-2"></i> Career guidance</p>
+                            <p><i class="fas fa-check text-green-500 mr-2"></i> Personalized growth plans</p>
+                        </div>
+                        <button onclick="openProgramModal('digital-mentorship')" class="w-full btn-primary text-white font-semibold py-3 rounded-lg">
+                            View Details
+                        </button>
+                    </article>
+
+                    <article class="skill-card bg-white border border-gray-200 rounded-xl p-6" data-category="tech">
+                        <div class="bg-purple-100 w-14 h-14 rounded-lg flex items-center justify-center mb-6">
+                            <i class="fas fa-code text-purple-600 text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">Web Development Track</h3>
+                        <p class="text-gray-600 mb-4">Front-end to full-stack training with real-world project delivery.</p>
+                        <div class="text-sm text-gray-600 space-y-2 mb-6">
+                            <p><i class="fas fa-check text-green-500 mr-2"></i> HTML, CSS, JavaScript, React</p>
+                            <p><i class="fas fa-check text-green-500 mr-2"></i> Portfolio-ready projects</p>
+                        </div>
+                        <a href="contact.html" class="w-full inline-block text-center btn-primary text-white font-semibold py-3 rounded-lg">Get Details</a>
+                    </article>
+
+                    <article class="skill-card bg-white border border-gray-200 rounded-xl p-6" data-category="tech">
+                        <div class="bg-green-100 w-14 h-14 rounded-lg flex items-center justify-center mb-6">
+                            <i class="fas fa-chart-line text-green-600 text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">Data & AI Track</h3>
+                        <p class="text-gray-600 mb-4">Data analysis, Python, and AI tools for modern digital roles.</p>
+                        <div class="text-sm text-gray-600 space-y-2 mb-6">
+                            <p><i class="fas fa-check text-green-500 mr-2"></i> Python & Data Analysis</p>
+                            <p><i class="fas fa-check text-green-500 mr-2"></i> AI tooling for productivity</p>
+                        </div>
+                        <a href="contact.html" class="w-full inline-block text-center btn-primary text-white font-semibold py-3 rounded-lg">Get Details</a>
+                    </article>
+
+                    <article class="skill-card bg-white border border-gray-200 rounded-xl p-6" data-category="tech">
+                        <div class="bg-yellow-100 w-14 h-14 rounded-lg flex items-center justify-center mb-6">
+                            <i class="fas fa-palette text-yellow-600 text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">Design & Creativity Track</h3>
+                        <p class="text-gray-600 mb-4">UX/UI design, branding, and creative tools for digital creators.</p>
+                        <div class="text-sm text-gray-600 space-y-2 mb-6">
+                            <p><i class="fas fa-check text-green-500 mr-2"></i> Figma & Design Systems</p>
+                            <p><i class="fas fa-check text-green-500 mr-2"></i> User research & prototyping</p>
+                        </div>
+                        <a href="contact.html" class="w-full inline-block text-center btn-primary text-white font-semibold py-3 rounded-lg">Get Details</a>
+                    </article>
+                </div>
+
+                <div id="program-empty" class="hidden text-center mt-10 text-gray-600">
+                    <i class="fas fa-search text-3xl mb-3"></i>
+                    <p>No programs match your search. Try another keyword or filter.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Enrollment Steps -->
+        <section class="py-12 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-10">
+                    <h3 class="text-3xl font-bold text-gray-800 mb-4">How Enrollment Works</h3>
+                    <p class="text-gray-600 max-w-2xl mx-auto">A simple, student-first flow to help you move from interest to impact.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="bg-gray-50 border border-gray-200 rounded-xl p-6 text-center">
+                        <div class="text-blue-600 text-3xl mb-3"><i class="fas fa-user-plus"></i></div>
+                        <h4 class="text-xl font-semibold mb-2">1. Apply</h4>
+                        <p class="text-gray-600">Pick a program and submit your interest form.</p>
+                    </div>
+                    <div class="bg-gray-50 border border-gray-200 rounded-xl p-6 text-center">
+                        <div class="text-orange-500 text-3xl mb-3"><i class="fas fa-envelope-open-text"></i></div>
+                        <h4 class="text-xl font-semibold mb-2">2. Get Matched</h4>
+                        <p class="text-gray-600">We place you in the right cohort based on your level.</p>
+                    </div>
+                    <div class="bg-gray-50 border border-gray-200 rounded-xl p-6 text-center">
+                        <div class="text-green-600 text-3xl mb-3"><i class="fas fa-rocket"></i></div>
+                        <h4 class="text-xl font-semibold mb-2">3. Start Learning</h4>
+                        <p class="text-gray-600">Attend sessions, complete projects, and grow your portfolio.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="py-12 bg-gray-50">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-10">
+                    <h3 class="text-3xl font-bold text-gray-800 mb-4">Frequently Asked Questions</h3>
+                    <p class="text-gray-600 max-w-2xl mx-auto">Answers to common questions about our programs.</p>
+                </div>
+                <div class="max-w-3xl mx-auto space-y-4">
+                    <details class="bg-white border border-gray-200 rounded-lg p-5">
+                        <summary class="font-semibold cursor-pointer">Do I need prior experience?</summary>
+                        <p class="text-gray-600 mt-3">No. We offer beginner-friendly pathways and hands-on guidance for every level.</p>
+                    </details>
+                    <details class="bg-white border border-gray-200 rounded-lg p-5">
+                        <summary class="font-semibold cursor-pointer">How long are the programs?</summary>
+                        <p class="text-gray-600 mt-3">Most programs run between 4-12 weeks depending on the track and cohort.</p>
+                    </details>
+                    <details class="bg-white border border-gray-200 rounded-lg p-5">
+                        <summary class="font-semibold cursor-pointer">Are programs free?</summary>
+                        <p class="text-gray-600 mt-3">Yes, core programs are free for members. Premium tracks may have small fees.</p>
+                    </details>
+                    <details class="bg-white border border-gray-200 rounded-lg p-5">
+                        <summary class="font-semibold cursor-pointer">Will I get a certificate?</summary>
+                        <p class="text-gray-600 mt-3">Yes. Completion certificates are provided for structured cohorts.</p>
+                    </details>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="py-12 bg-white">
+            <div class="container mx-auto px-4 text-center">
+                <h3 class="text-3xl font-bold text-gray-800 mb-4">Ready to Start Learning?</h3>
+                <p class="text-gray-600 max-w-2xl mx-auto mb-8">Choose a program and take the first step toward your digital career.</p>
+                <div class="flex flex-col sm:flex-row justify-center gap-4">
+                    <button onclick="openJoinModal()" class="btn-primary text-white font-semibold py-3 px-8 rounded-lg">
+                        Join Ajira Club
+                    </button>
+                    <a href="contact.html" class="bg-gray-900 text-white font-semibold py-3 px-8 rounded-lg hover:bg-gray-800 transition-colors">
+                        Talk to a Mentor
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-300 py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-white text-xl font-bold mb-6">KCA Ajira Club</h3>
+                    <p class="mb-6">Empowering KCA University students with digital skills for the future of work.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter text-xl"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-linkedin text-xl"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram text-xl"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-youtube text-xl"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-white text-lg font-semibold mb-6">Quick Links</h4>
+                    <ul class="space-y-3">
+                        <li><a href="index.html" class="hover:text-white transition-colors">Home</a></li>
+                        <li><a href="about.html" class="hover:text-white transition-colors">About Us</a></li>
+                        <li><a href="programs.html" class="hover:text-white transition-colors">Programs</a></li>
+                        <li><a href="skills.html" class="hover:text-white transition-colors">Skills</a></li>
+                        <li><a href="success-stories.html" class="hover:text-white transition-colors">Success Stories</a></li>
+                        <li><a href="contact.html" class="hover:text-white transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white text-lg font-semibold mb-6">Resources</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="hover:text-white transition-colors">Learning Materials</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Freelancing Guides</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Portfolio Templates</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Job Board</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">AI Tools Directory</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white text-lg font-semibold mb-6">Partners</h4>
+                    <div class="space-y-4">
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 bg-blue-800 rounded flex items-center justify-center mr-3"><i class="fas fa-university"></i></div>
+                            <span>KCA University</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 bg-green-800 rounded flex items-center justify-center mr-3"><i class="fas fa-flag"></i></div>
+                            <span>Ajira Digital Program</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 bg-purple-800 rounded flex items-center justify-center mr-3"><i class="fas fa-globe"></i></div>
+                            <span>UN SDG Alliance</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-12 pt-8 text-center">
+                <p class="mb-4">&copy; <span id="current-year"></span> KCA Ajira Club. All rights reserved.</p>
+                <p class="text-sm text-gray-500">Part of Kenya's journey towards a knowledge-based economy (Vision 2030) | Contributing to UN SDGs 4, 8, and 9</p>
+                <div class="mt-6 flex flex-wrap justify-center gap-4 text-sm">
+                    <a href="legal/privacy-policy.html" class="hover:text-white">Privacy Policy</a>
+                    <span class="text-gray-600">|</span>
+                    <a href="legal/terms-of-service.html" class="hover:text-white">Terms of Service</a>
+                    <span class="text-gray-600">|</span>
+                    <a href="legal/code-of-conduct.html" class="hover:text-white">Code of Conduct</a>
+                    <span class="text-gray-600">|</span>
+                    <a href="mailto:ajiraclub@kca.ac.ke" class="hover:text-white">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Join Modal -->
+    <div id="join-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-xl max-w-md w-full p-6">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-bold text-gray-800">Join Ajira Club</h3>
+                <button onclick="closeJoinModal()" class="text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            <p class="text-gray-600 mb-6">Ready to start your digital journey? Enter your details to join our next session.</p>
+            <div id="modal-content">
+                <div class="text-center py-8">
+                    <i class="fas fa-spinner fa-spin text-blue-600 text-3xl"></i>
+                    <p class="mt-4 text-gray-600">Loading form...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Program Detail Modal -->
+    <div id="program-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-xl max-w-2xl w-full p-6 max-h-[90vh] overflow-y-auto">
+            <div class="flex justify-between items-center mb-6">
+                <h3 id="program-modal-title" class="text-2xl font-bold text-gray-800">Program Details</h3>
+                <button onclick="closeProgramModal()" class="text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            <div id="program-modal-content"></div>
+        </div>
+    </div>
+
+    <!-- Success Toast -->
+    <div id="success-toast" class="fixed top-4 right-4 bg-green-600 text-white px-6 py-4 rounded-lg shadow-lg z-50 hidden transform transition-transform duration-300 translate-x-full">
+        <div class="flex items-center">
+            <i class="fas fa-check-circle text-xl mr-3"></i>
+            <div>
+                <p class="font-semibold" id="toast-title">Success!</p>
+                <p id="toast-message">Your action was completed successfully.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const programFilters = document.getElementById('program-filters');
+        const programCards = Array.from(document.querySelectorAll('#program-cards [data-category]'));
+        const programSearch = document.getElementById('program-search');
+        const emptyState = document.getElementById('program-empty');
+
+        function applyProgramFilters() {
+            const activeFilter = programFilters.querySelector('.bg-blue-600')?.dataset.filter || 'all';
+            const query = programSearch.value.toLowerCase();
+
+            const visible = programCards.filter(card => {
+                const matchesFilter = activeFilter === 'all' || card.dataset.category === activeFilter;
+                const matchesQuery = card.textContent.toLowerCase().includes(query);
+                const shouldShow = matchesFilter && matchesQuery;
+                card.classList.toggle('hidden', !shouldShow);
+                return shouldShow;
+            });
+
+            emptyState.classList.toggle('hidden', visible.length > 0);
+        }
+
+        programFilters.addEventListener('click', (event) => {
+            if (!event.target.matches('button[data-filter]')) return;
+            programFilters.querySelectorAll('button').forEach(btn => {
+                btn.classList.remove('bg-blue-600', 'text-white');
+                btn.classList.add('bg-gray-100', 'text-gray-700');
+            });
+            event.target.classList.add('bg-blue-600', 'text-white');
+            event.target.classList.remove('bg-gray-100', 'text-gray-700');
+            applyProgramFilters();
+        });
+
+        programSearch.addEventListener('input', applyProgramFilters);
+    </script>
+
+    <!-- JavaScript modules -->
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>
