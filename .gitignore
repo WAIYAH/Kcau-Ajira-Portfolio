@@ -1,0 +1,48 @@
+# ==================================================
+# .gitignore — KCA Ajira Club Portfolio
+# ==================================================
+
+# --- OS generated files ---
+.DS_Store
+.DS_Store?
+._*
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# --- Editor / IDE ---
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+*.sublime-project
+*.sublime-workspace
+
+# --- Node (if added later) ---
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+
+# --- Build outputs ---
+dist/
+build/
+.cache/
+.parcel-cache/
+
+# --- Environment ---
+.env
+.env.local
+.env.*.local
+
+# --- Logs ---
+*.log
+
+# --- Temporary files ---
+*.tmp
+*.temp
+*.bak
+*.orig

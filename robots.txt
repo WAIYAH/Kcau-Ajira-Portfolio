@@ -1,0 +1,8 @@
+# robots.txt — KCA Ajira Club Portfolio
+# https://www.robotstxt.org/
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://kcaajiraclub.ke/sitemap.xml

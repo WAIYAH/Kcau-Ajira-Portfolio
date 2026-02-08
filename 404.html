@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 — Page Not Found | KCA Ajira Club</title>
+
+    <!-- Tailwind CSS -->
+    <script src="css/tailwind-config.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-gray-50 text-gray-800 min-h-screen flex flex-col">
+
+    <!-- Header -->
+    <header class="sticky top-0 z-40 bg-white shadow-sm">
+        <nav class="container mx-auto px-4 py-3">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-gradient-to-br from-blue-600 to-teal-500 rounded-full flex items-center justify-center">
+                        <i class="fas fa-rocket text-white text-sm"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-xl font-bold text-blue-700">
+                            <a href="index.html" class="hover:text-blue-800 transition-colors">
+                                KCA <span class="text-orange-500">Ajira</span> Club
+                            </a>
+                        </h1>
+                        <p class="text-xs text-gray-500">Digital Economy Launchpad</p>
+                    </div>
+                </div>
+                <a href="index.html" class="btn-primary text-white font-semibold py-2 px-6 rounded-lg text-sm">
+                    <i class="fas fa-home mr-2"></i> Home
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- 404 Content -->
+    <main class="flex-1 flex items-center justify-center px-4">
+        <div class="text-center max-w-lg">
+            <div class="mb-8">
+                <p class="text-9xl font-extrabold bg-gradient-to-r from-blue-600 to-teal-500 bg-clip-text text-transparent leading-none">404</p>
+            </div>
+            <h2 class="text-3xl font-bold text-gray-800 mb-4">Page Not Found</h2>
+            <p class="text-gray-600 mb-8 text-lg">
+                Oops! The page you're looking for doesn't exist or has been moved. Let's get you back on track.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="index.html" class="btn-primary text-white font-semibold py-3 px-8 rounded-lg">
+                    <i class="fas fa-home mr-2"></i> Back to Home
+                </a>
+                <a href="contact.html" class="bg-gray-100 text-gray-700 font-semibold py-3 px-8 rounded-lg hover:bg-gray-200 transition-colors">
+                    <i class="fas fa-envelope mr-2"></i> Contact Us
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-400 py-6 text-center text-sm">
+        <p>&copy; 2026 KCA Ajira Club. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
