@@ -78,11 +78,8 @@ The KCAU Ajira Club digital platform is a **public-facing website coupled with a
 ---
 
 ## Public Pages Documentation
-
 ### 🏠 Page 1: Home (Landing Page)
-
 **URL:** `/` or `/index.html`
-
 #### Purpose & User Goal
 - **Primary:** Inspire visitors + drive conversions (newsletter signup, "Join" CTA)
 - **Secondary:** Communicate club value proposition in <10 seconds
@@ -105,7 +102,6 @@ The KCAU Ajira Club digital platform is a **public-facing website coupled with a
 ```
 
 #### Section Breakdown
-
 **1. Navigation Bar (Sticky)**
 - Logo + Club name (left)
 - Menu: Home | About | Programs | Skills | Success Stories | Contact | Join Now
