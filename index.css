@@ -1,0 +1,539 @@
+/* ==================================================
+   index.css — Futuristic Landing Page Styles
+   KCA Ajira Club — Next-Gen Landing Experience
+   ================================================== */
+
+/* ---------- Custom Properties ---------- */
+:root {
+  --glow-blue: rgba(37, 99, 235, 0.35);
+  --glow-orange: rgba(249, 115, 22, 0.35);
+  --glow-teal: rgba(13, 148, 136, 0.3);
+  --glass-bg: rgba(255, 255, 255, 0.08);
+  --glass-border: rgba(255, 255, 255, 0.18);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+  --transition-smooth: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ---------- Smooth Scrolling ---------- */
+html {
+  scroll-behavior: smooth;
+}
+
+/* ---------- Hero Slider ---------- */
+.hero-slider {
+  position: relative;
+  overflow: hidden;
+  min-height: 600px;
+}
+
+.hero-slide {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  opacity: 0;
+  transform: scale(1.04);
+  transition: opacity 1s var(--transition-smooth), transform 1.2s var(--transition-smooth);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.hero-slide.active {
+  opacity: 1;
+  transform: scale(1);
+  pointer-events: auto;
+  z-index: 1;
+}
+
+/* Slide backgrounds */
+.hero-slide-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  filter: brightness(0.35);
+  transition: transform 8s linear;
+}
+
+.hero-slide.active .hero-slide-bg {
+  transform: scale(1.08);
+}
+
+/* Slide content animation */
+.hero-slide .slide-content {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s 0.3s var(--transition-smooth), transform 0.8s 0.3s var(--transition-smooth);
+}
+
+.hero-slide.active .slide-content {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Slider dots/indicators */
+.slider-dots {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+}
+
+.slider-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.35);
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  transition: all 0.4s var(--transition-smooth);
+}
+
+.slider-dot.active {
+  background: #f97316;
+  border-color: #f97316;
+  width: 36px;
+}
+
+/* Animated mesh gradient overlay on hero */
+.hero-mesh-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 20% 50%, rgba(37, 99, 235, 0.25) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 20%, rgba(249, 115, 22, 0.18) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 100%, rgba(13, 148, 136, 0.15) 0%, transparent 50%);
+  z-index: 1;
+  pointer-events: none;
+  animation: meshShift 12s ease-in-out infinite alternate;
+}
+
+@keyframes meshShift {
+  0%   { opacity: 0.7; }
+  50%  { opacity: 1; }
+  100% { opacity: 0.7; }
+}
+
+/* Floating particles */
+.hero-particles {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.hero-particle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.25);
+  animation: particleFloat linear infinite;
+}
+
+@keyframes particleFloat {
+  0%   { transform: translateY(0) translateX(0); opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 1; }
+  100% { transform: translateY(-100vh) translateX(50px); opacity: 0; }
+}
+
+/* ---------- Glassmorphism ---------- */
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  transition: all 0.4s var(--transition-smooth);
+}
+
+.glass-card:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.25);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+/* ---------- Scroll Animations ---------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s var(--transition-smooth), transform 0.7s var(--transition-smooth);
+}
+
+.reveal.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-40px);
+  transition: opacity 0.7s var(--transition-smooth), transform 0.7s var(--transition-smooth);
+}
+
+.reveal-left.revealed {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.reveal-right {
+  opacity: 0;
+  transform: translateX(40px);
+  transition: opacity 0.7s var(--transition-smooth), transform 0.7s var(--transition-smooth);
+}
+
+.reveal-right.revealed {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.reveal-scale {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 0.6s var(--transition-smooth), transform 0.6s var(--transition-smooth);
+}
+
+.reveal-scale.revealed {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Stagger children delays */
+.stagger-children > * {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s var(--transition-smooth), transform 0.5s var(--transition-smooth);
+}
+
+.stagger-children.revealed > *:nth-child(1) { transition-delay: 0s; opacity: 1; transform: translateY(0); }
+.stagger-children.revealed > *:nth-child(2) { transition-delay: 0.1s; opacity: 1; transform: translateY(0); }
+.stagger-children.revealed > *:nth-child(3) { transition-delay: 0.2s; opacity: 1; transform: translateY(0); }
+.stagger-children.revealed > *:nth-child(4) { transition-delay: 0.3s; opacity: 1; transform: translateY(0); }
+.stagger-children.revealed > *:nth-child(5) { transition-delay: 0.4s; opacity: 1; transform: translateY(0); }
+.stagger-children.revealed > *:nth-child(6) { transition-delay: 0.5s; opacity: 1; transform: translateY(0); }
+
+/* ---------- Countdown Timer ---------- */
+.countdown-container {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.countdown-unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 72px;
+}
+
+.countdown-value {
+  font-family: 'Poppins', sans-serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 1;
+  background: linear-gradient(135deg, #2563eb, #0d9488);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  transition: transform 0.3s var(--transition-smooth);
+}
+
+.countdown-value.tick {
+  transform: scale(1.15);
+}
+
+.countdown-label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #64748b;
+  margin-top: 4px;
+}
+
+.countdown-separator {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #cbd5e1;
+  line-height: 1;
+  align-self: flex-start;
+  padding-top: 2px;
+  animation: blink 1s ease-in-out infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+/* ---------- Event Card ---------- */
+.event-card {
+  border-radius: 20px;
+  overflow: hidden;
+  background: white;
+  transition: all 0.4s var(--transition-smooth);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+}
+
+.event-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 40px rgba(37, 99, 235, 0.12);
+}
+
+.event-card-image {
+  position: relative;
+  overflow: hidden;
+}
+
+.event-card-image img {
+  transition: transform 0.6s var(--transition-smooth);
+}
+
+.event-card:hover .event-card-image img {
+  transform: scale(1.06);
+}
+
+.event-date-badge {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(8px);
+  border-radius: 12px;
+  padding: 8px 14px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* ---------- Glow / Neon Effects ---------- */
+.glow-blue {
+  box-shadow: 0 0 20px var(--glow-blue), 0 0 60px rgba(37, 99, 235, 0.1);
+}
+
+.glow-orange {
+  box-shadow: 0 0 20px var(--glow-orange), 0 0 60px rgba(249, 115, 22, 0.1);
+}
+
+.glow-text {
+  text-shadow: 0 0 40px rgba(37, 99, 235, 0.3);
+}
+
+/* ---------- Futuristic Stat Cards ---------- */
+.futuristic-stat {
+  position: relative;
+  overflow: hidden;
+  border-radius: 16px;
+  transition: all 0.4s var(--transition-smooth);
+}
+
+.futuristic-stat::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, transparent 0%, rgba(37, 99, 235, 0.05) 100%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.futuristic-stat:hover::before {
+  opacity: 1;
+}
+
+.futuristic-stat:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+}
+
+/* Animated gradient border */
+.gradient-border {
+  position: relative;
+  background: white;
+  border-radius: 16px;
+}
+
+.gradient-border::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #2563eb, #f97316, #0d9488, #2563eb);
+  background-size: 300% 300%;
+  z-index: -1;
+  animation: gradientRotate 4s ease infinite;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.gradient-border:hover::before {
+  opacity: 1;
+}
+
+@keyframes gradientRotate {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ---------- Program Cards ---------- */
+.program-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 20px;
+  transition: all 0.4s var(--transition-smooth);
+}
+
+.program-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, var(--primary-blue), var(--secondary-orange));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s var(--transition-smooth);
+}
+
+.program-card:hover::after {
+  transform: scaleX(1);
+}
+
+.program-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+/* ---------- Section Dividers ---------- */
+.section-divider {
+  width: 60px;
+  height: 4px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--primary-blue), var(--secondary-orange));
+  margin: 0 auto;
+}
+
+/* ---------- Floating Badge ---------- */
+.float-badge {
+  animation: floatBadge 3s ease-in-out infinite;
+}
+
+@keyframes floatBadge {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-8px); }
+}
+
+/* ---------- Pulse Ring ---------- */
+.pulse-ring {
+  position: relative;
+}
+
+.pulse-ring::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: inherit;
+  border: 2px solid var(--primary-blue);
+  animation: pulseRing 2s ease-in-out infinite;
+}
+
+@keyframes pulseRing {
+  0%, 100% { opacity: 0; transform: scale(1); }
+  50%      { opacity: 0.4; transform: scale(1.05); }
+}
+
+/* ---------- CTA shimmer ---------- */
+.btn-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-shimmer::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0%   { left: -100%; }
+  100% { left: 200%; }
+}
+
+/* ---------- Skills Grid ---------- */
+.skill-item {
+  transition: all 0.3s var(--transition-smooth);
+  cursor: default;
+}
+
+.skill-item:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+/* ---------- Testimonial Card V2 ---------- */
+.testimonial-v2 {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s var(--transition-smooth);
+}
+
+.testimonial-v2::before {
+  content: '\201C';
+  font-family: 'Poppins', serif;
+  font-size: 6rem;
+  line-height: 1;
+  color: rgba(37, 99, 235, 0.06);
+  position: absolute;
+  top: -10px;
+  left: 12px;
+}
+
+.testimonial-v2:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.08);
+}
+
+/* ---------- Responsive Tweaks ---------- */
+@media (max-width: 768px) {
+  .hero-slider {
+    min-height: 520px;
+  }
+  .countdown-value {
+    font-size: 1.8rem;
+  }
+  .countdown-unit {
+    min-width: 56px;
+  }
+  .slider-dots {
+    bottom: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-slider {
+    min-height: 480px;
+  }
+  .countdown-value {
+    font-size: 1.4rem;
+  }
+}

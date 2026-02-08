@@ -1,276 +1,896 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About — KCA Ajira Club</title>
-  <meta name="description" content="About KCA Ajira Club — our mission, vision, team, partners and how we empower students for the digital economy.">
-  <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
-  <script src="https://cdn.tailwindcss.com"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Primary Meta Tags -->
+    <title>About — Ajira Club KCA University | Mission, Leadership &amp; Constitution</title>
+    <meta name="description" content="Learn about Ajira Club - KCA University — our mission, vision, leadership team, constitution and how we empower students for the global digital economy through Ajira Kenya's 5 pillars.">
+    <meta name="keywords" content="Ajira Club, KCA University, Ajira Kenya, about, mission, vision, leadership, constitution, digital skills, freelancing">
+    <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
+
+    <!-- Tailwind CSS -->
+    <script src="css/tailwind-config.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body class="bg-gray-50 text-gray-800">
-  <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-blue-600 text-white p-2 z-50">Skip to main content</a>
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-blue-600 text-white p-2 z-50">Skip to main content</a>
 
-  <!-- Header / Navigation (same as index) -->
-  <header class="sticky top-0 z-40 bg-white shadow-md">
-      <nav class="container mx-auto px-4 py-3" aria-label="Main navigation">
-          <div class="flex justify-between items-center">
-              <div class="flex items-center space-x-3">
-                  <div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center">
-                      <i class="fas fa-rocket text-white"></i>
-                  </div>
-                  <div>
-                      <h1 class="text-xl font-bold text-blue-700">
-                          <a href="index.html" class="hover:text-blue-800 transition-colors">
-                              KCA <span class="text-orange-500">Ajira</span> Club
-                          </a>
-                      </h1>
-                      <p class="text-xs text-gray-500">Digital Economy Launchpad</p>
-                  </div>
-              </div>
+    <!-- ==================== HEADER / NAVIGATION ==================== -->
+    <header class="sticky top-0 z-40 bg-white shadow-md">
+        <nav class="container mx-auto px-4 py-3" aria-label="Main navigation">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center">
+                        <i class="fas fa-rocket text-white"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-xl font-bold text-blue-700">
+                            <a href="index.html" class="hover:text-blue-800 transition-colors">
+                                KCA <span class="text-orange-500">Ajira</span> Club
+                            </a>
+                        </h1>
+                        <p class="text-xs text-gray-500">Digital Economy Launchpad</p>
+                    </div>
+                </div>
 
-              <div class="hidden md:flex space-x-8">
-                  <a href="index.html" class="text-gray-700 hover:text-blue-600 font-medium transition-colors">Home</a>
-                  <a href="about.html" class="text-gray-700 hover:text-blue-600 font-medium transition-colors nav-active">About</a>
-                  <a href="programs.html" class="text-gray-700 hover:text-blue-600 font-medium transition-colors">Programs</a>
-                  <a href="skills.html" class="text-gray-700 hover:text-blue-600 font-medium transition-colors">Skills</a>
-                  <a href="success-stories.html" class="text-gray-700 hover:text-blue-600 font-medium transition-colors">Success Stories</a>
-                  <a href="contact.html" class="text-gray-700 hover:text-blue-600 font-medium transition-colors">Contact</a>
-              </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html" class="text-gray-700 hover:text-blue-600 font-medium transition-colors">Home</a>
+                    <a href="about.html" class="text-gray-700 hover:text-blue-600 font-medium transition-colors nav-active">About</a>
+                    <a href="programs.html" class="text-gray-700 hover:text-blue-600 font-medium transition-colors">Programs</a>
+                    <a href="skills.html" class="text-gray-700 hover:text-blue-600 font-medium transition-colors">Skills</a>
+                    <a href="success-stories.html" class="text-gray-700 hover:text-blue-600 font-medium transition-colors">Success Stories</a>
+                    <a href="contact.html" class="text-gray-700 hover:text-blue-600 font-medium transition-colors">Contact</a>
+                </div>
 
-              <div class="hidden md:block">
-                  <button onclick="openJoinModal()" class="btn-primary text-white font-semibold py-2 px-6 rounded-lg">
-                      Join Now <i class="ml-2 fas fa-arrow-right"></i>
-                  </button>
-              </div>
+                <div class="hidden md:block">
+                    <button onclick="openJoinModal()" class="btn-primary text-white font-semibold py-2 px-6 rounded-lg">
+                        Join Now <i class="ml-2 fas fa-arrow-right"></i>
+                    </button>
+                </div>
 
-              <button id="mobile-menu-button" class="md:hidden text-gray-700" aria-label="Open mobile menu">
-                  <i class="fas fa-bars text-2xl"></i>
-              </button>
-          </div>
+                <button id="mobile-menu-button" class="md:hidden text-gray-700" aria-label="Open mobile menu">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
 
-          <div id="mobile-menu" class="hidden md:hidden mt-4 pb-4 border-t pt-4">
-              <div class="flex flex-col space-y-4">
-                  <a href="index.html" class="text-gray-700 hover:text-blue-600 font-medium py-2 border-b">Home</a>
-                  <a href="about.html" class="text-gray-700 hover:text-blue-600 font-medium py-2 border-b">About</a>
-                  <a href="programs.html" class="text-gray-700 hover:text-blue-600 font-medium py-2 border-b">Programs</a>
-                  <a href="skills.html" class="text-gray-700 hover:text-blue-600 font-medium py-2 border-b">Skills</a>
-                  <a href="success-stories.html" class="text-gray-700 hover:text-blue-600 font-medium py-2 border-b">Success Stories</a>
-                  <a href="contact.html" class="text-gray-700 hover:text-blue-600 font-medium py-2 border-b">Contact</a>
-                  <button onclick="openJoinModal()" class="btn-primary text-white font-semibold py-3 px-4 rounded-lg mt-2">
-                      Join Ajira Club
-                  </button>
-              </div>
-          </div>
-      </nav>
-  </header>
+            <div id="mobile-menu" class="hidden md:hidden mt-4 pb-4 border-t pt-4">
+                <div class="flex flex-col space-y-4">
+                    <a href="index.html" class="text-gray-700 hover:text-blue-600 font-medium py-2 border-b">Home</a>
+                    <a href="about.html" class="text-gray-700 hover:text-blue-600 font-medium py-2 border-b">About</a>
+                    <a href="programs.html" class="text-gray-700 hover:text-blue-600 font-medium py-2 border-b">Programs</a>
+                    <a href="skills.html" class="text-gray-700 hover:text-blue-600 font-medium py-2 border-b">Skills</a>
+                    <a href="success-stories.html" class="text-gray-700 hover:text-blue-600 font-medium py-2 border-b">Success Stories</a>
+                    <a href="contact.html" class="text-gray-700 hover:text-blue-600 font-medium py-2 border-b">Contact</a>
+                    <button onclick="openJoinModal()" class="btn-primary text-white font-semibold py-3 px-4 rounded-lg mt-2">
+                        Join Ajira Club
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
 
-  <!-- Main About Content -->
-  <main id="main-content">
-      <section class="hero-gradient text-white py-20 md:py-28">
-          <div class="container mx-auto px-4 text-center">
-              <h2 class="text-4xl md:text-5xl font-bold mb-4">About <span class="text-orange-300">KCA Ajira Club</span></h2>
-              <p class="max-w-3xl mx-auto text-lg md:text-xl text-blue-100">We empower KCA University students with practical digital skills, mentorship and pathways to freelancing, remote work and entrepreneurship.</p>
-          </div>
-      </section>
+    <!-- ==================== MAIN CONTENT ==================== -->
+    <main id="main-content">
 
-      <section class="py-16 bg-white">
-          <div class="container mx-auto px-4">
-              <div class="grid md:grid-cols-2 gap-12 items-center">
-                  <div>
-                      <h3 class="text-2xl font-bold text-gray-800 mb-4">Our Mission</h3>
-                      <p class="text-gray-600 mb-6">To equip students with in-demand digital skills and connect them to global opportunities, enabling financial independence and career readiness.</p>
+        <!-- ========== HERO ========== -->
+        <section class="hero-gradient text-white py-20 md:py-28 relative overflow-hidden">
+            <div class="absolute inset-0 opacity-10">
+                <div class="absolute top-10 left-10 w-32 h-32 bg-white rounded-full"></div>
+                <div class="absolute bottom-10 right-10 w-48 h-48 bg-white rounded-full"></div>
+                <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-white rounded-full"></div>
+            </div>
+            <div class="container mx-auto px-4 text-center relative z-10">
+                <span class="inline-block bg-white/20 text-white text-sm font-medium px-4 py-1 rounded-full mb-6">
+                    <i class="fas fa-info-circle mr-2"></i>Learn About Us
+                </span>
+                <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+                    About <span class="text-orange-300">Ajira Club — KCA University</span>
+                </h2>
+                <p class="max-w-3xl mx-auto text-lg md:text-xl text-blue-100 mb-4">
+                    Inspired by the national vision of Ajira Kenya to transform Kenya into a global freelancing hub, we are a vibrant campus community empowering students with 21st-century digital competencies to thrive in the global digital economy.
+                </p>
+                <p class="max-w-2xl mx-auto text-sm text-blue-200 mb-8">
+                    <i class="fas fa-file-alt mr-1"></i> Constitution Revised Version 2026 — Ratified 21st January 2026
+                </p>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <a href="#constitution" class="inline-flex items-center bg-white text-blue-700 font-semibold py-3 px-6 rounded-lg hover:bg-blue-50 transition-colors">
+                        <i class="fas fa-book-open mr-2"></i> Read Constitution
+                    </a>
+                    <a href="#leadership" class="inline-flex items-center bg-orange-500 text-white font-semibold py-3 px-6 rounded-lg hover:bg-orange-600 transition-colors">
+                        <i class="fas fa-users mr-2"></i> Meet Our Leaders
+                    </a>
+                </div>
+            </div>
+        </section>
 
-                      <h3 class="text-2xl font-bold text-gray-800 mb-4">Our Vision</h3>
-                      <p class="text-gray-600 mb-6">To be Kenya's leading student digital empowerment community, driving inclusive participation in the digital economy.</p>
+        <!-- ========== CLUB OVERVIEW / PREAMBLE ========== -->
+        <section class="py-16 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <span class="text-blue-600 font-semibold text-sm uppercase tracking-wider">Preamble &amp; Story</span>
+                        <h3 class="text-3xl font-bold text-gray-800 mt-2 mb-6">Who We Are</h3>
+                        <p class="text-gray-600 mb-4 leading-relaxed">
+                            We, the students of KCA University, inspired by the national vision of <strong>Ajira Kenya</strong> to transform Kenya into a global freelancing hub by empowering youth with digital skills and opportunities, hereby established the <strong>Ajira Club — KCA University</strong>.
+                        </p>
+                        <p class="text-gray-600 mb-4 leading-relaxed">
+                            This club serves as a vibrant campus embodiment of Ajira Kenya's mission, fostering a community where young minds harness 21st-century digital competencies to thrive in the global digital economy. By nurturing <strong>innovation, collaboration, and resilience</strong>, we commit to bridging the gap between education and employment.
+                        </p>
+                        <p class="text-gray-600 mb-6 leading-relaxed">
+                            Our purpose is to cultivate a dynamic ecosystem that empowers students to excel in the digital economy — unlocking opportunities in freelancing, gig work, and digital entrepreneurship, positioning members as key contributors to Kenya's vision of becoming a global hub for online jobs and innovation.
+                        </p>
+                        <div class="flex flex-wrap gap-3">
+                            <span class="bg-blue-50 text-blue-700 text-sm font-medium px-3 py-1 rounded-full"><i class="fas fa-check-circle mr-1"></i> Registered at KCA University</span>
+                            <span class="bg-green-50 text-green-700 text-sm font-medium px-3 py-1 rounded-full"><i class="fas fa-check-circle mr-1"></i> Aligned with Ajira Kenya</span>
+                            <span class="bg-orange-50 text-orange-700 text-sm font-medium px-3 py-1 rounded-full"><i class="fas fa-check-circle mr-1"></i> Ratified Jan 21, 2026</span>
+                        </div>
+                    </div>
+                    <div>
+                        <img src="img/about-image.jpg" alt="Ajira Club KCA University members in a training session" class="w-full h-80 object-cover rounded-2xl shadow-lg">
+                    </div>
+                </div>
+            </div>
+        </section>
 
-                      <h3 class="text-2xl font-bold text-gray-800 mb-4">What We Do</h3>
-                      <ul class="list-inside ml-4 text-gray-600 space-y-2">
-                          <li>Weekly hands-on Skill Labs (web, design, marketing, data, AI tools)</li>
-                          <li>Freelance Launchpad to build profiles & win clients</li>
-                          <li>Mentorship and alumni support for real projects</li>
-                          <li>Portfolio & interview preparation</li>
-                          <li>Industry partnerships & job linkages</li>
-                      </ul>
+        <!-- ========== MISSION, VISION & CORE VALUES ========== -->
+        <section class="py-16 bg-gray-50">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-12">
+                    <span class="text-blue-600 font-semibold text-sm uppercase tracking-wider">What Drives Us</span>
+                    <h3 class="text-3xl font-bold text-gray-800 mt-2">Purpose, Vision &amp; Core Values</h3>
+                </div>
 
-                      <div class="mt-8">
-                          <button onclick="openJoinModal()" class="btn-secondary text-white font-semibold py-3 px-6 rounded-lg mr-4">Join a Session</button>
-                          <a href="programs.html" class="inline-block bg-gray-100 text-blue-700 py-3 px-6 rounded-lg">View Programs</a>
-                      </div>
-                  </div>
+                <div class="grid md:grid-cols-2 gap-8 mb-12">
+                    <!-- Purpose -->
+                    <div class="bg-white rounded-2xl p-8 shadow-md border-l-4 border-blue-600">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-bullseye text-blue-600 text-xl"></i>
+                            </div>
+                            <h4 class="text-2xl font-bold text-gray-800">Our Purpose</h4>
+                        </div>
+                        <p class="text-gray-600 leading-relaxed">
+                            To cultivate a dynamic ecosystem that empowers students to excel in the digital economy, directly aligning with Ajira Kenya's national framework. Through targeted initiatives, the Club aims to unlock opportunities in freelancing, gig work, and digital entrepreneurship, positioning members as key contributors to Kenya's vision of becoming a global hub for online jobs and innovation.
+                        </p>
+                    </div>
 
-                  <div>
-                      <div class="bg-white rounded-xl shadow-lg overflow-hidden">
-                          <div class="h-64 bg-gradient-to-r from-blue-500 to-teal-400 flex items-center justify-center">
-                              <i class="fas fa-users text-white text-6xl"></i>
-                          </div>
-                          <div class="p-6">
-                              <h4 class="text-xl font-bold text-gray-800 mb-3">Impact at a glance</h4>
-                              <div class="grid grid-cols-2 gap-4 text-center">
-                                  <div>
-                                      <p class="text-3xl font-bold text-blue-700">1,200+</p>
-                                      <p class="text-gray-600 text-sm">Members</p>
-                                  </div>
-                                  <div>
-                                      <p class="text-3xl font-bold text-orange-500">KES 2M+</p>
-                                      <p class="text-gray-600 text-sm">Earned by Members</p>
-                                  </div>
-                                  <div>
-                                      <p class="text-3xl font-bold text-teal-600">40+</p>
-                                      <p class="text-gray-600 text-sm">Partners</p>
-                                  </div>
-                                  <div>
-                                      <p class="text-3xl font-bold text-purple-600">85%</p>
-                                      <p class="text-gray-600 text-sm">Skill Application</p>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-          </div>
-      </section>
+                    <!-- Vision -->
+                    <div class="bg-white rounded-2xl p-8 shadow-md border-l-4 border-orange-500">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-eye text-orange-500 text-xl"></i>
+                            </div>
+                            <h4 class="text-2xl font-bold text-gray-800">Our Vision</h4>
+                        </div>
+                        <p class="text-gray-600 leading-relaxed">
+                            To transform Kenya into a global freelancing hub by empowering KCA University youth with digital skills and opportunities — nurturing digital competencies, creating pathways to economic independence, and propelling Kenya's transformation into a digital workforce powerhouse as envisioned by Ajira Kenya.
+                        </p>
+                    </div>
+                </div>
 
-      <section class="py-16 bg-gray-50">
-          <div class="container mx-auto px-4">
-              <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center">Meet the Team</h3>
-              <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                  <div class="team-card bg-white rounded-xl p-6 text-center shadow">
-                      <div class="w-24 h-24 bg-gray-100 rounded-full mx-auto flex items-center justify-center text-blue-600 text-3xl mb-4">AA</div>
-                      <h4 class="font-bold">Alice Achieng</h4>
-                      <p class="text-sm text-gray-500">President & Program Lead</p>
-                      <p class="text-gray-600 mt-3 text-sm">Alice coordinates partnerships, delivers workshops and oversees mentorship programs.</p>
-                  </div>
+                <!-- Core Values (from Section 3.2 - integrity, respect, inclusivity, ethical digital practices) -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                    <div class="bg-white rounded-xl p-6 text-center shadow hover:shadow-lg transition-shadow">
+                        <div class="w-14 h-14 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-lightbulb text-blue-600 text-2xl"></i>
+                        </div>
+                        <h5 class="font-bold text-gray-800 mb-2">Innovation</h5>
+                        <p class="text-gray-500 text-sm">Nurturing creativity, collaboration and resilience in the digital age</p>
+                    </div>
+                    <div class="bg-white rounded-xl p-6 text-center shadow hover:shadow-lg transition-shadow">
+                        <div class="w-14 h-14 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-handshake text-green-600 text-2xl"></i>
+                        </div>
+                        <h5 class="font-bold text-gray-800 mb-2">Integrity</h5>
+                        <p class="text-gray-500 text-sm">Promoting integrity, respect and ethical digital practices in all we do</p>
+                    </div>
+                    <div class="bg-white rounded-xl p-6 text-center shadow hover:shadow-lg transition-shadow">
+                        <div class="w-14 h-14 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-people-group text-orange-500 text-2xl"></i>
+                        </div>
+                        <h5 class="font-bold text-gray-800 mb-2">Inclusivity</h5>
+                        <p class="text-gray-500 text-sm">Open to all registered students — diverse representation reflecting Kenya's spirit</p>
+                    </div>
+                    <div class="bg-white rounded-xl p-6 text-center shadow hover:shadow-lg transition-shadow">
+                        <div class="w-14 h-14 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-trophy text-purple-600 text-2xl"></i>
+                        </div>
+                        <h5 class="font-bold text-gray-800 mb-2">Resilience</h5>
+                        <p class="text-gray-500 text-sm">Building future-focused leaders equipped to drive Kenya's digital transformation</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-                  <div class="team-card bg-white rounded-xl p-6 text-center shadow">
-                      <div class="w-24 h-24 bg-gray-100 rounded-full mx-auto flex items-center justify-center text-orange-500 text-3xl mb-4">BM</div>
-                      <h4 class="font-bold">Brian Mwangi</h4>
-                      <p class="text-sm text-gray-500">Head of Skills & Curriculum</p>
-                      <p class="text-gray-600 mt-3 text-sm">Brian designs the skill labs and curates practical project-based learning tracks.</p>
-                  </div>
+        <!-- ========== AJIRA KENYA'S 5 PILLARS — WHAT WE DO ========== -->
+        <section class="py-16 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-12">
+                    <span class="text-blue-600 font-semibold text-sm uppercase tracking-wider">Ajira Kenya's 5 Pillars</span>
+                    <h3 class="text-3xl font-bold text-gray-800 mt-2">What We Do</h3>
+                    <p class="max-w-3xl mx-auto text-gray-600 mt-3">Our objectives are structured around Ajira Kenya's five foundational pillars — designed to collectively nurture digital skills, create pathways to economic independence, and propel Kenya's transformation.</p>
+                </div>
 
-                  <div class="team-card bg-white rounded-xl p-6 text-center shadow">
-                      <div class="w-24 h-24 bg-gray-100 rounded-full mx-auto flex items-center justify-center text-teal-600 text-3xl mb-4">CN</div>
-                      <h4 class="font-bold">Catherine Njeri</h4>
-                      <p class="text-sm text-gray-500">Mentorship & Community</p>
-                      <p class="text-gray-600 mt-3 text-sm">Catherine manages mentor matches, alumni relations and member support services.</p>
-                  </div>
-              </div>
-          </div>
-      </section>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Pillar 1: Skills Development -->
+                    <div class="bg-gray-50 rounded-2xl p-6 border border-gray-200 hover:border-blue-300 transition-colors group">
+                        <div class="w-14 h-14 bg-blue-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                            <i class="fas fa-laptop-code text-white text-2xl"></i>
+                        </div>
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="bg-blue-100 text-blue-700 text-xs font-bold px-2 py-0.5 rounded">Pillar 1</span>
+                            <h4 class="text-lg font-bold text-gray-800">Skills Development</h4>
+                        </div>
+                        <p class="text-gray-600 text-sm">Comprehensive training in 21st-century digital skills including web development, graphic design, content creation, data analysis, and AI-driven tools — enabling members to build competitive portfolios and certifications.</p>
+                    </div>
 
-      <section class="py-16 bg-white">
-          <div class="container mx-auto px-4">
-              <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center">Partners & Supporters</h3>
-              <div class="grid grid-cols-2 md:grid-cols-4 gap-6 items-center">
-                  <div class="flex items-center justify-center p-4 bg-gray-50 rounded">
-                      <i class="fas fa-university text-4xl text-blue-700"></i>
-                  </div>
-                  <div class="flex items-center justify-center p-4 bg-gray-50 rounded">
-                      <i class="fas fa-flag text-4xl text-green-700"></i>
-                  </div>
-                  <div class="flex items-center justify-center p-4 bg-gray-50 rounded">
-                      <i class="fas fa-briefcase text-4xl text-orange-500"></i>
-                  </div>
-                  <div class="flex items-center justify-center p-4 bg-gray-50 rounded">
-                      <i class="fas fa-globe text-4xl text-purple-700"></i>
-                  </div>
-              </div>
-          </div>
-      </section>
+                    <!-- Pillar 2: Mentorship -->
+                    <div class="bg-gray-50 rounded-2xl p-6 border border-gray-200 hover:border-orange-300 transition-colors group">
+                        <div class="w-14 h-14 bg-orange-500 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                            <i class="fas fa-user-tie text-white text-2xl"></i>
+                        </div>
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="bg-orange-100 text-orange-700 text-xs font-bold px-2 py-0.5 rounded">Pillar 2</span>
+                            <h4 class="text-lg font-bold text-gray-800">Mentorship</h4>
+                        </div>
+                        <p class="text-gray-600 text-sm">Personalized guidance from industry experts, alumni, and Ajira Kenya mentors — fostering personal and professional growth through one-on-one sessions, peer mentoring circles, and career coaching.</p>
+                    </div>
 
-      <section class="py-12 bg-gray-50">
-          <div class="container mx-auto px-4 text-center">
-              <h4 class="text-xl font-bold text-gray-800 mb-3">Ready to join the next cohort?</h4>
-              <p class="text-gray-600 mb-6">Sign up for a free intro session and start building your digital career today.</p>
-              <button onclick="openJoinModal()" class="btn-primary text-white font-semibold py-3 px-6 rounded-lg">Join Now</button>
-          </div>
-      </section>
-  </main>
+                    <!-- Pillar 3: Access to Jobs & Gigs -->
+                    <div class="bg-gray-50 rounded-2xl p-6 border border-gray-200 hover:border-teal-300 transition-colors group">
+                        <div class="w-14 h-14 bg-teal-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                            <i class="fas fa-briefcase text-white text-2xl"></i>
+                        </div>
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="bg-teal-100 text-teal-700 text-xs font-bold px-2 py-0.5 rounded">Pillar 3</span>
+                            <h4 class="text-lg font-bold text-gray-800">Access to Jobs &amp; Gigs</h4>
+                        </div>
+                        <p class="text-gray-600 text-sm">Connecting members with real-world opportunities — freelance gigs, internships, attachments, and full-time digital roles via job boards, platforms like Upwork &amp; Fiverr, and exclusive Ajira Kenya-linked programs.</p>
+                    </div>
 
-  <!-- Footer (copied from index for consistency) -->
-  <footer class="bg-gray-900 text-gray-300 py-12">
-      <div class="container mx-auto px-4">
-          <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-              <div>
-                  <h3 class="text-white text-xl font-bold mb-6">KCA Ajira Club</h3>
-                  <p class="mb-6">Empowering KCA University students with digital skills for the future of work. Bridging the gap between academia and the digital economy.</p>
-                  <div class="flex space-x-4">
-                      <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter text-xl"></i></a>
-                      <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-linkedin text-xl"></i></a>
-                      <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram text-xl"></i></a>
-                      <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-youtube text-xl"></i></a>
-                  </div>
-              </div>
+                    <!-- Pillar 4: Infrastructure & Support -->
+                    <div class="bg-gray-50 rounded-2xl p-6 border border-gray-200 hover:border-purple-300 transition-colors group">
+                        <div class="w-14 h-14 bg-purple-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                            <i class="fas fa-server text-white text-2xl"></i>
+                        </div>
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="bg-purple-100 text-purple-700 text-xs font-bold px-2 py-0.5 rounded">Pillar 4</span>
+                            <h4 class="text-lg font-bold text-gray-800">Infrastructure &amp; Support</h4>
+                        </div>
+                        <p class="text-gray-600 text-sm">Ensuring access to essential resources — digital tools, workspaces, and support services while advocating for university-level enhancements in internet connectivity, software access, and entrepreneurial incubation.</p>
+                    </div>
 
-              <div>
-                  <h4 class="text-white text-lg font-semibold mb-6">Quick Links</h4>
-                  <ul class="space-y-3">
-                      <li><a href="index.html" class="hover:text-white transition-colors">Home</a></li>
-                      <li><a href="about.html" class="hover:text-white transition-colors">About Us</a></li>
-                      <li><a href="programs.html" class="hover:text-white transition-colors">Programs</a></li>
-                      <li><a href="skills.html" class="hover:text-white transition-colors">Skills</a></li>
-                      <li><a href="success-stories.html" class="hover:text-white transition-colors">Success Stories</a></li>
-                  </ul>
-              </div>
+                    <!-- Pillar 5: Linkages & Networking -->
+                    <div class="bg-gray-50 rounded-2xl p-6 border border-gray-200 hover:border-green-300 transition-colors group">
+                        <div class="w-14 h-14 bg-green-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                            <i class="fas fa-network-wired text-white text-2xl"></i>
+                        </div>
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="bg-green-100 text-green-700 text-xs font-bold px-2 py-0.5 rounded">Pillar 5</span>
+                            <h4 class="text-lg font-bold text-gray-800">Linkages &amp; Networking</h4>
+                        </div>
+                        <p class="text-gray-600 text-sm">Building strategic connections with local and global stakeholders — employers, Ajira Kenya affiliates, tech companies, and fellow youth networks through events promoting collaboration and knowledge exchange.</p>
+                    </div>
 
-              <div>
-                  <h4 class="text-white text-lg font-semibold mb-6">Resources</h4>
-                  <ul class="space-y-3">
-                      <li><a href="resources/learning-materials.html" class="hover:text-white transition-colors">Learning Materials</a></li>
-                      <li><a href="resources/freelancing-guides.html" class="hover:text-white transition-colors">Freelancing Guides</a></li>
-                      <li><a href="resources/portfolio-templates.html" class="hover:text-white transition-colors">Portfolio Templates</a></li>
-                      <li><a href="resources/job-board.html" class="hover:text-white transition-colors">Job Board</a></li>
-                      <li><a href="resources/ai-tools-directory.html" class="hover:text-white transition-colors">AI Tools Directory</a></li>
-                  </ul>
-              </div>
+                    <!-- Calendar of Events -->
+                    <div class="bg-gray-50 rounded-2xl p-6 border border-gray-200 hover:border-red-300 transition-colors group">
+                        <div class="w-14 h-14 bg-red-500 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                            <i class="fas fa-calendar-alt text-white text-2xl"></i>
+                        </div>
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="bg-red-100 text-red-700 text-xs font-bold px-2 py-0.5 rounded">Events</span>
+                            <h4 class="text-lg font-bold text-gray-800">Calendar of Events</h4>
+                        </div>
+                        <p class="text-gray-600 text-sm">Semester-based events blending education, inspiration and fun: orientation workshops, coding bootcamps, mentorship pairings, job/gig webinars, networking dinners, hackathons, and bi-weekly guest speaker series.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-              <div>
-                  <h4 class="text-white text-lg font-semibold mb-6">Partners</h4>
-                  <div class="space-y-4">
-                      <div class="flex items-center">
-                          <div class="w-10 h-10 bg-blue-800 rounded flex items-center justify-center mr-3"><i class="fas fa-university"></i></div>
-                          <span>KCA University</span>
-                      </div>
-                      <div class="flex items-center">
-                          <div class="w-10 h-10 bg-green-800 rounded flex items-center justify-center mr-3"><i class="fas fa-flag"></i></div>
-                          <span>Ajira Digital Program</span>
-                      </div>
-                  </div>
-              </div>
-          </div>
+        <!-- ========== IMPACT STATISTICS ========== -->
+        <section class="py-16 hero-gradient text-white">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-12">
+                    <h3 class="text-3xl font-bold">Our Impact in Numbers</h3>
+                    <p class="text-blue-200 mt-2">Real results from our community since establishment</p>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                    <div class="text-center">
+                        <p class="text-4xl md:text-5xl font-bold text-white">5</p>
+                        <p class="text-blue-200 mt-2">Ajira Kenya Pillars</p>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-4xl md:text-5xl font-bold text-orange-300">6</p>
+                        <p class="text-blue-200 mt-2">Executive Leaders</p>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-4xl md:text-5xl font-bold text-teal-300">10</p>
+                        <p class="text-blue-200 mt-2">Constitutional Articles</p>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-4xl md:text-5xl font-bold text-green-300">2026</p>
+                        <p class="text-blue-200 mt-2">Constitution Ratified</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-          <div class="border-t border-gray-800 mt-12 pt-8 text-center">
-              <p class="mb-4">&copy; <span id="current-year">2026</span> KCA Ajira Club. All rights reserved.</p>
-              <p class="text-sm text-gray-500">Part of Kenya's journey towards a knowledge-based economy (Vision 2030) | Contributing to UN SDGs 4, 8, and 9</p>
-              <div class="mt-6 flex flex-wrap justify-center gap-4 text-sm">
-                  <a href="legal/privacy-policy.html" class="hover:text-white">Privacy Policy</a>
-                  <span class="text-gray-600">|</span>
-                  <a href="legal/terms-of-service.html" class="hover:text-white">Terms of Service</a>
-                  <span class="text-gray-600">|</span>
-                  <a href="legal/code-of-conduct.html" class="hover:text-white">Code of Conduct</a>
-                  <span class="text-gray-600">|</span>
-                  <a href="mailto:ajiraclub@kca.ac.ke" class="hover:text-white">Contact Us</a>
-              </div>
-          </div>
-      </div>
-  </footer>
+        <!-- ========== CONSTITUTION SECTION ========== -->
+        <section id="constitution" class="py-16 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-12">
+                    <span class="text-blue-600 font-semibold text-sm uppercase tracking-wider">Governance</span>
+                    <h3 class="text-3xl font-bold text-gray-800 mt-2">Club Constitution</h3>
+                    <p class="max-w-3xl mx-auto text-gray-600 mt-3">The Constitution of Ajira Club — KCA University (Revised Version 2026) is the supreme governing document of our organization, prepared and ratified by the founding members in alignment with the Ajira Kenya Program.</p>
+                </div>
 
-  <!-- Modals + scripts reused from site -->
-  <div id="join-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
-      <div class="bg-white rounded-xl max-w-md w-full p-6">
-          <div class="flex justify-between items-center mb-6">
-              <h3 class="text-2xl font-bold text-gray-800">Join Ajira Club</h3>
-              <button onclick="closeJoinModal()" class="text-gray-500 hover:text-gray-700"><i class="fas fa-times text-xl"></i></button>
-          </div>
-          <p class="text-gray-600 mb-6">Ready to start your digital journey? Enter your details to join our next session.</p>
-          <div id="modal-content"><div class="text-center py-8"><i class="fas fa-spinner fa-spin text-blue-600 text-3xl"></i><p class="mt-4 text-gray-600">Loading form...</p></div></div>
-      </div>
-  </div>
+                <!-- Download & Read CTA -->
+                <div class="bg-gradient-to-r from-blue-50 to-blue-100 rounded-2xl p-8 md:p-10 mb-12 border border-blue-200">
+                    <div class="flex flex-col md:flex-row items-center gap-6">
+                        <div class="w-20 h-20 bg-blue-600 rounded-2xl flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-file-pdf text-white text-3xl"></i>
+                        </div>
+                        <div class="flex-1 text-center md:text-left">
+                            <h4 class="text-xl font-bold text-gray-800 mb-2">Constitution of Ajira Club — KCA University</h4>
+                            <p class="text-gray-600 text-sm">Revised Version 2026 — In alignment with the Ajira Kenya Program (Skills Development | Mentorship | Access to Jobs &amp; Gigs | Infrastructure &amp; Support | Linkages &amp; Networking). Ratified 21st January 2026.</p>
+                        </div>
+                        <div class="flex flex-col sm:flex-row gap-3 flex-shrink-0">
+                            <a href="Resources/KCAU AJIRA Constituition 2026.pdf" target="_blank" class="inline-flex items-center btn-primary text-white font-semibold py-3 px-6 rounded-lg">
+                                <i class="fas fa-eye mr-2"></i> Read Online
+                            </a>
+                            <a href="Resources/KCAU AJIRA Constituition 2026.pdf" download class="inline-flex items-center bg-white text-blue-700 font-semibold py-3 px-6 rounded-lg border-2 border-blue-600 hover:bg-blue-50 transition-colors">
+                                <i class="fas fa-download mr-2"></i> Download PDF
+                            </a>
+                        </div>
+                    </div>
+                </div>
 
-  <script type="module" src="js/main.js"></script>
+                <!-- Key Constitutional Articles (10 sections) -->
+                <h4 class="text-2xl font-bold text-gray-800 mb-8 text-center">Key Constitutional Sections</h4>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Section 1.0 -->
+                    <div class="bg-gray-50 rounded-xl p-6 border border-gray-200 hover:shadow-md transition-shadow">
+                        <div class="flex items-center mb-3">
+                            <span class="w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-bold mr-3">1</span>
+                            <h5 class="font-bold text-gray-800">Preamble &amp; Name</h5>
+                        </div>
+                        <p class="text-gray-600 text-sm">The official name shall be <strong>Ajira Club — KCA University</strong>. Established to embody Ajira Kenya's mission of fostering a community where young minds harness 21st-century digital competencies to thrive in the global digital economy.</p>
+                    </div>
+                    <!-- Section 2.0 -->
+                    <div class="bg-gray-50 rounded-xl p-6 border border-gray-200 hover:shadow-md transition-shadow">
+                        <div class="flex items-center mb-3">
+                            <span class="w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-bold mr-3">2</span>
+                            <h5 class="font-bold text-gray-800">Purpose &amp; Objectives</h5>
+                        </div>
+                        <p class="text-gray-600 text-sm">Structured around Ajira Kenya's 5 pillars: <strong>Skills Development</strong>, <strong>Mentorship</strong>, <strong>Access to Jobs &amp; Gigs</strong>, <strong>Infrastructure &amp; Support</strong>, and <strong>Linkages &amp; Networking</strong> — to unlock opportunities in freelancing, gig work and digital entrepreneurship.</p>
+                    </div>
+                    <!-- Section 3.0 -->
+                    <div class="bg-gray-50 rounded-xl p-6 border border-gray-200 hover:shadow-md transition-shadow">
+                        <div class="flex items-center mb-3">
+                            <span class="w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-bold mr-3">3</span>
+                            <h5 class="font-bold text-gray-800">Membership</h5>
+                        </div>
+                        <p class="text-gray-600 text-sm">Open to all registered KCA University students (undergraduate &amp; postgraduate). Includes rights (voting, resources, events), responsibilities (70% attendance, code of conduct), and fees: <strong>KES 200</strong> registration + <strong>KES 100</strong>/semester support fee.</p>
+                    </div>
+                    <!-- Section 4.0 -->
+                    <div class="bg-gray-50 rounded-xl p-6 border border-gray-200 hover:shadow-md transition-shadow">
+                        <div class="flex items-center mb-3">
+                            <span class="w-8 h-8 bg-orange-500 text-white rounded-full flex items-center justify-center text-sm font-bold mr-3">4</span>
+                            <h5 class="font-bold text-gray-800">Leadership &amp; Governance</h5>
+                        </div>
+                        <p class="text-gray-600 text-sm">Governed by an elected <strong>Executive Committee</strong> of 6: Chairperson, Vice Chairperson, Coordinator, Secretary, Treasurer and Public Relations Officer. Annual elections via secret ballot with one-year terms, eligible for re-election up to two terms.</p>
+                    </div>
+                    <!-- Section 5.0 -->
+                    <div class="bg-gray-50 rounded-xl p-6 border border-gray-200 hover:shadow-md transition-shadow">
+                        <div class="flex items-center mb-3">
+                            <span class="w-8 h-8 bg-orange-500 text-white rounded-full flex items-center justify-center text-sm font-bold mr-3">5</span>
+                            <h5 class="font-bold text-gray-800">Meetings</h5>
+                        </div>
+                        <p class="text-gray-600 text-sm">Regular weekly meetings on <strong>Fridays or Thursdays, 2:00–4:00 PM</strong>. Quorum requires 50% of active members. Emergency meetings with 24-hour notice. Virtual sessions via Zoom/Teams supported. Minutes distributed within 48 hours.</p>
+                    </div>
+                    <!-- Section 6.0 -->
+                    <div class="bg-gray-50 rounded-xl p-6 border border-gray-200 hover:shadow-md transition-shadow">
+                        <div class="flex items-center mb-3">
+                            <span class="w-8 h-8 bg-orange-500 text-white rounded-full flex items-center justify-center text-sm font-bold mr-3">6</span>
+                            <h5 class="font-bold text-gray-800">Finances</h5>
+                        </div>
+                        <p class="text-gray-600 text-sm">Funded by membership fees (KES 200 registration, KES 100/semester), voluntary contributions, corporate sponsorships, Ajira Kenya/university grants and event proceeds. Treasurer maintains records with monthly statements and annual independent audits.</p>
+                    </div>
+                    <!-- Section 7.0 -->
+                    <div class="bg-gray-50 rounded-xl p-6 border border-gray-200 hover:shadow-md transition-shadow">
+                        <div class="flex items-center mb-3">
+                            <span class="w-8 h-8 bg-teal-600 text-white rounded-full flex items-center justify-center text-sm font-bold mr-3">7</span>
+                            <h5 class="font-bold text-gray-800">Calendar of Events</h5>
+                        </div>
+                        <p class="text-gray-600 text-sm">Semester-based: <strong>1st Month</strong> — orientation &amp; membership drive; <strong>Mid-Semester</strong> — coding bootcamps, mentorship &amp; job/gig webinars; <strong>End of Semester</strong> — networking dinners, job fairs &amp; hackathons; <strong>Ongoing</strong> — bi-weekly guest speakers &amp; gig forums.</p>
+                    </div>
+                    <!-- Section 8.0 -->
+                    <div class="bg-gray-50 rounded-xl p-6 border border-gray-200 hover:shadow-md transition-shadow">
+                        <div class="flex items-center mb-3">
+                            <span class="w-8 h-8 bg-teal-600 text-white rounded-full flex items-center justify-center text-sm font-bold mr-3">8</span>
+                            <h5 class="font-bold text-gray-800">Amendments</h5>
+                        </div>
+                        <p class="text-gray-600 text-sm">Proposals submitted in writing by any member, reviewed by the Executive. Debated at a general meeting with at least <strong>two weeks' notice</strong> and adopted by a <strong>two-thirds majority vote</strong> of quorum members. Changes take effect immediately upon ratification.</p>
+                    </div>
+                    <!-- Section 9.0 -->
+                    <div class="bg-gray-50 rounded-xl p-6 border border-gray-200 hover:shadow-md transition-shadow">
+                        <div class="flex items-center mb-3">
+                            <span class="w-8 h-8 bg-teal-600 text-white rounded-full flex items-center justify-center text-sm font-bold mr-3">9</span>
+                            <h5 class="font-bold text-gray-800">Dissolution</h5>
+                        </div>
+                        <p class="text-gray-600 text-sm">May be dissolved by a <strong>two-thirds vote</strong> at a special meeting, or if membership falls below <strong>10 active members for two consecutive semesters</strong>. Upon dissolution, assets go to similar university clubs or Ajira Kenya initiatives per KCA University policies.</p>
+                    </div>
+                    <!-- Section 10.0 -->
+                    <div class="bg-gray-50 rounded-xl p-6 border border-gray-200 hover:shadow-md transition-shadow lg:col-start-2">
+                        <div class="flex items-center mb-3">
+                            <span class="w-9 h-8 bg-gray-800 text-white rounded-full flex items-center justify-center text-xs font-bold mr-3">10</span>
+                            <h5 class="font-bold text-gray-800">Adoption Clause</h5>
+                        </div>
+                        <p class="text-gray-600 text-sm">Adopted and ratified by the founding members on <strong>21st January 2026</strong>. Witnessed by KCA University Student Affairs Office and Ajira Kenya Representative. Supersedes all previous versions and shall be reviewed biennially.</p>
+                    </div>
+                </div>
+
+                <div class="text-center mt-10">
+                    <p class="text-gray-500 text-sm mb-4"><i class="fas fa-info-circle mr-1"></i> The above is a summary of each section. For the complete and official text, please read the full constitution document.</p>
+                    <a href="Resources/KCAU AJIRA Constituition 2026.pdf" target="_blank" class="inline-flex items-center text-blue-600 font-semibold hover:text-blue-800 transition-colors">
+                        Read Full Constitution <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== LEADERSHIP TEAM ========== -->
+        <section id="leadership" class="py-16 bg-gray-50">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-12">
+                    <span class="text-blue-600 font-semibold text-sm uppercase tracking-wider">Executive Committee</span>
+                    <h3 class="text-3xl font-bold text-gray-800 mt-2">Our Leadership Team</h3>
+                    <p class="max-w-3xl mx-auto text-gray-600 mt-3">Elected annually through democratic secret ballot, our Executive Committee ensures accountability and alignment with Ajira Kenya's emphasis on mentorship and skills pathways. Leaders mentor their successors and submit quarterly reports to members.</p>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- 1. Chairperson — Mercy Muli -->
+                    <div class="bg-white rounded-2xl p-6 text-center shadow-md hover:shadow-xl transition-shadow">
+                        <div class="w-28 h-28 rounded-full mx-auto mb-4 overflow-hidden border-4 border-blue-200">
+                            <img src="img/team-chairperson.jpg" alt="Chairperson Mercy Muli" class="w-full h-full object-cover" onerror="this.style.display='none'; this.parentElement.classList.add('bg-gradient-to-br','from-blue-500','to-blue-700'); this.parentElement.innerHTML='<span class=\'flex items-center justify-center w-full h-full text-white text-2xl font-bold\'>MM</span>';">
+                        </div>
+                        <div class="bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full inline-block mb-3">
+                            <i class="fas fa-crown mr-1"></i> Chairperson
+                        </div>
+                        <h4 class="font-bold text-gray-800 text-lg">Mercy Muli</h4>
+                        <p class="text-gray-500 text-sm mt-1">Vision, Strategy &amp; Representation</p>
+                        <p class="text-gray-600 text-xs mt-3 leading-relaxed">Provides overall vision and strategy. Represents the club in external engagements with Ajira Kenya and stakeholders. Chairs meetings and ensures all activities align with the constitution.</p>
+                        <div class="flex justify-center gap-3 mt-4">
+                            <a href="#" class="text-gray-400 hover:text-blue-600"><i class="fab fa-linkedin"></i></a>
+                            <a href="#" class="text-gray-400 hover:text-blue-600"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="text-gray-400 hover:text-blue-600"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- 2. Vice Chairperson — Jomo Bob -->
+                    <div class="bg-white rounded-2xl p-6 text-center shadow-md hover:shadow-xl transition-shadow">
+                        <div class="w-28 h-28 rounded-full mx-auto mb-4 overflow-hidden border-4 border-orange-200">
+                            <img src="img/team-vice-chairperson.jpg" alt="Vice Chairperson Jomo Bob" class="w-full h-full object-cover" onerror="this.style.display='none'; this.parentElement.classList.add('bg-gradient-to-br','from-orange-400','to-orange-600'); this.parentElement.innerHTML='<span class=\'flex items-center justify-center w-full h-full text-white text-2xl font-bold\'>JB</span>';">
+                        </div>
+                        <div class="bg-orange-500 text-white text-xs font-bold px-3 py-1 rounded-full inline-block mb-3">
+                            <i class="fas fa-star mr-1"></i> Vice Chairperson
+                        </div>
+                        <h4 class="font-bold text-gray-800 text-lg">Jomo Bob</h4>
+                        <p class="text-gray-500 text-sm mt-1">Strategic Planning &amp; Compliance</p>
+                        <p class="text-gray-600 text-xs mt-3 leading-relaxed">Assists the Chairperson in strategic duties. Oversees long-term planning and special projects. Ensures constitutional compliance and serves as primary liaison with university administration.</p>
+                        <div class="flex justify-center gap-3 mt-4">
+                            <a href="#" class="text-gray-400 hover:text-orange-500"><i class="fab fa-linkedin"></i></a>
+                            <a href="#" class="text-gray-400 hover:text-orange-500"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="text-gray-400 hover:text-orange-500"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- 3. Coordinator — Lucky Nakola -->
+                    <div class="bg-white rounded-2xl p-6 text-center shadow-md hover:shadow-xl transition-shadow">
+                        <div class="w-28 h-28 rounded-full mx-auto mb-4 overflow-hidden border-4 border-teal-200">
+                            <img src="img/team-coordinator.jpg" alt="Coordinator Lucky Nakola" class="w-full h-full object-cover" onerror="this.style.display='none'; this.parentElement.classList.add('bg-gradient-to-br','from-teal-500','to-teal-700'); this.parentElement.innerHTML='<span class=\'flex items-center justify-center w-full h-full text-white text-2xl font-bold\'>LN</span>';">
+                        </div>
+                        <div class="bg-teal-600 text-white text-xs font-bold px-3 py-1 rounded-full inline-block mb-3">
+                            <i class="fas fa-cogs mr-1"></i> Coordinator
+                        </div>
+                        <h4 class="font-bold text-gray-800 text-lg">Lucky Nakola</h4>
+                        <p class="text-gray-500 text-sm mt-1">Operations &amp; Event Management</p>
+                        <p class="text-gray-600 text-xs mt-3 leading-relaxed">Manages day-to-day operations. Organizes all events, training, workshops and club activities. Handles logistics, scheduling and member engagement aligned with Ajira Kenya's 5 pillars.</p>
+                        <div class="flex justify-center gap-3 mt-4">
+                            <a href="#" class="text-gray-400 hover:text-teal-600"><i class="fab fa-linkedin"></i></a>
+                            <a href="#" class="text-gray-400 hover:text-teal-600"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="text-gray-400 hover:text-teal-600"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- 4. Secretary — Virginia Wangari -->
+                    <div class="bg-white rounded-2xl p-6 text-center shadow-md hover:shadow-xl transition-shadow">
+                        <div class="w-28 h-28 rounded-full mx-auto mb-4 overflow-hidden border-4 border-indigo-200">
+                            <img src="img/team-secretary.jpg" alt="Secretary Virginia Wangari" class="w-full h-full object-cover" onerror="this.style.display='none'; this.parentElement.classList.add('bg-gradient-to-br','from-indigo-500','to-indigo-700'); this.parentElement.innerHTML='<span class=\'flex items-center justify-center w-full h-full text-white text-2xl font-bold\'>VW</span>';">
+                        </div>
+                        <div class="bg-indigo-600 text-white text-xs font-bold px-3 py-1 rounded-full inline-block mb-3">
+                            <i class="fas fa-pen mr-1"></i> Secretary
+                        </div>
+                        <h4 class="font-bold text-gray-800 text-lg">Virginia Wangari</h4>
+                        <p class="text-gray-500 text-sm mt-1">Records &amp; Correspondence</p>
+                        <p class="text-gray-600 text-xs mt-3 leading-relaxed">Keeps accurate records of meetings (minutes, attendance). Handles official correspondence, prepares agendas in consultation with the Chairperson, and ensures proper documentation of all activities.</p>
+                        <div class="flex justify-center gap-3 mt-4">
+                            <a href="#" class="text-gray-400 hover:text-indigo-600"><i class="fab fa-linkedin"></i></a>
+                            <a href="#" class="text-gray-400 hover:text-indigo-600"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="text-gray-400 hover:text-indigo-600"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- 5. Treasurer — Marylyn Mugo -->
+                    <div class="bg-white rounded-2xl p-6 text-center shadow-md hover:shadow-xl transition-shadow">
+                        <div class="w-28 h-28 rounded-full mx-auto mb-4 overflow-hidden border-4 border-green-200">
+                            <img src="img/team-treasurer.jpg" alt="Treasurer Marylyn Mugo" class="w-full h-full object-cover" onerror="this.style.display='none'; this.parentElement.classList.add('bg-gradient-to-br','from-green-500','to-green-700'); this.parentElement.innerHTML='<span class=\'flex items-center justify-center w-full h-full text-white text-2xl font-bold\'>MM</span>';">
+                        </div>
+                        <div class="bg-green-600 text-white text-xs font-bold px-3 py-1 rounded-full inline-block mb-3">
+                            <i class="fas fa-coins mr-1"></i> Treasurer
+                        </div>
+                        <h4 class="font-bold text-gray-800 text-lg">Marylyn Mugo</h4>
+                        <p class="text-gray-500 text-sm mt-1">Financial Management</p>
+                        <p class="text-gray-600 text-xs mt-3 leading-relaxed">Manages all financial records and transactions. Prepares budgets, expense reports and financial updates. Ensures funds are used responsibly and leads fund sourcing through proposals and partnerships.</p>
+                        <div class="flex justify-center gap-3 mt-4">
+                            <a href="#" class="text-gray-400 hover:text-green-600"><i class="fab fa-linkedin"></i></a>
+                            <a href="#" class="text-gray-400 hover:text-green-600"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="text-gray-400 hover:text-green-600"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- 6. Public Relations Officer — Wanjaa -->
+                    <div class="bg-white rounded-2xl p-6 text-center shadow-md hover:shadow-xl transition-shadow">
+                        <div class="w-28 h-28 rounded-full mx-auto mb-4 overflow-hidden border-4 border-purple-200">
+                            <img src="img/team-pro.jpg" alt="Public Relations Officer Wanjaa" class="w-full h-full object-cover" onerror="this.style.display='none'; this.parentElement.classList.add('bg-gradient-to-br','from-purple-500','to-purple-700'); this.parentElement.innerHTML='<span class=\'flex items-center justify-center w-full h-full text-white text-2xl font-bold\'>W</span>';">
+                        </div>
+                        <div class="bg-purple-600 text-white text-xs font-bold px-3 py-1 rounded-full inline-block mb-3">
+                            <i class="fas fa-bullhorn mr-1"></i> PR Officer
+                        </div>
+                        <h4 class="font-bold text-gray-800 text-lg">Wanjaa</h4>
+                        <p class="text-gray-500 text-sm mt-1">Communications &amp; Branding</p>
+                        <p class="text-gray-600 text-xs mt-3 leading-relaxed">Manages all external communications, digital presence and club branding. Coordinates marketing of events and activities. Builds and maintains relationships with media partners and stakeholders.</p>
+                        <div class="flex justify-center gap-3 mt-4">
+                            <a href="#" class="text-gray-400 hover:text-purple-600"><i class="fab fa-linkedin"></i></a>
+                            <a href="#" class="text-gray-400 hover:text-purple-600"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="text-gray-400 hover:text-purple-600"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Leadership Qualifications -->
+                <div class="mt-12 bg-blue-50 rounded-2xl p-8 border border-blue-200">
+                    <h4 class="text-xl font-bold text-gray-800 mb-4 text-center"><i class="fas fa-clipboard-check text-blue-600 mr-2"></i>Leadership Qualifications (Section 4.1)</h4>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div class="flex items-start gap-3">
+                            <i class="fas fa-check-circle text-blue-600 mt-0.5"></i>
+                            <p class="text-gray-600 text-sm">Must be an <strong>active member</strong> of the club</p>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <i class="fas fa-check-circle text-blue-600 mt-0.5"></i>
+                            <p class="text-gray-600 text-sm">Demonstrate <strong>leadership skills</strong></p>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <i class="fas fa-check-circle text-blue-600 mt-0.5"></i>
+                            <p class="text-gray-600 text-sm">Must have stayed in the club for <strong>at least one semester</strong></p>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <i class="fas fa-check-circle text-blue-600 mt-0.5"></i>
+                            <p class="text-gray-600 text-sm">Eligible members: Students between <strong>Year 1.2 to 4.1</strong></p>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <i class="fas fa-info-circle text-orange-500 mt-0.5"></i>
+                            <p class="text-gray-600 text-sm">Year 4.2 students are <strong>not eligible</strong> to vie for leadership positions</p>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <i class="fas fa-info-circle text-orange-500 mt-0.5"></i>
+                            <p class="text-gray-600 text-sm">Elections via <strong>secret ballot</strong> — simple majority wins, up to <strong>two terms</strong></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center mt-8">
+                    <p class="text-gray-500 text-sm"><i class="fas fa-camera mr-1"></i> Leader photos will be added soon. Drop your images into the <code class="bg-gray-100 px-1 rounded">img/</code> folder.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== MEMBERSHIP — RIGHTS, RESPONSIBILITIES & FEES ========== -->
+        <section class="py-16 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-12">
+                    <span class="text-blue-600 font-semibold text-sm uppercase tracking-wider">Section 3.0</span>
+                    <h3 class="text-3xl font-bold text-gray-800 mt-2">Membership</h3>
+                    <p class="max-w-2xl mx-auto text-gray-600 mt-3">Open to all registered KCA University students (undergraduate or postgraduate) who demonstrate a commitment to digital innovation and personal growth.</p>
+                </div>
+
+                <!-- Fees -->
+                <div class="bg-gradient-to-r from-orange-50 to-orange-100 rounded-2xl p-6 md:p-8 mb-10 border border-orange-200 max-w-3xl mx-auto">
+                    <h4 class="text-lg font-bold text-gray-800 mb-4 text-center"><i class="fas fa-coins text-orange-500 mr-2"></i>Membership Fees</h4>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                        <div class="bg-white rounded-xl p-4 text-center shadow-sm">
+                            <p class="text-2xl font-bold text-blue-600">KES 200</p>
+                            <p class="text-gray-600 text-sm mt-1">One-time Registration</p>
+                        </div>
+                        <div class="bg-white rounded-xl p-4 text-center shadow-sm">
+                            <p class="text-2xl font-bold text-orange-500">KES 100</p>
+                            <p class="text-gray-600 text-sm mt-1">Per Semester Support</p>
+                        </div>
+                        <div class="bg-white rounded-xl p-4 text-center shadow-sm">
+                            <p class="text-2xl font-bold text-teal-600">As Announced</p>
+                            <p class="text-gray-600 text-sm mt-1">Special Events Fee</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Rights & Responsibilities -->
+                <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                    <!-- Rights -->
+                    <div>
+                        <h4 class="text-xl font-bold text-gray-800 mb-4"><i class="fas fa-shield-alt text-blue-600 mr-2"></i>Rights of Members (3.1)</h4>
+                        <div class="space-y-3">
+                            <div class="flex items-start gap-3 bg-blue-50 rounded-lg p-3">
+                                <i class="fas fa-check text-blue-600 mt-0.5"></i>
+                                <p class="text-gray-700 text-sm">Participation in all Club activities — workshops, mentorship programs, and networking events</p>
+                            </div>
+                            <div class="flex items-start gap-3 bg-blue-50 rounded-lg p-3">
+                                <i class="fas fa-check text-blue-600 mt-0.5"></i>
+                                <p class="text-gray-700 text-sm">Voting rights in elections and decision-making processes</p>
+                            </div>
+                            <div class="flex items-start gap-3 bg-blue-50 rounded-lg p-3">
+                                <i class="fas fa-check text-blue-600 mt-0.5"></i>
+                                <p class="text-gray-700 text-sm">Access to Club resources — skill-building materials, job alerts, and exclusive Ajira Kenya partnerships</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Responsibilities -->
+                    <div>
+                        <h4 class="text-xl font-bold text-gray-800 mb-4"><i class="fas fa-tasks text-orange-500 mr-2"></i>Responsibilities (3.2)</h4>
+                        <div class="space-y-3">
+                            <div class="flex items-start gap-3 bg-orange-50 rounded-lg p-3">
+                                <i class="fas fa-check text-orange-500 mt-0.5"></i>
+                                <p class="text-gray-700 text-sm">Active participation in at least <strong>70% of Club meetings and events</strong></p>
+                            </div>
+                            <div class="flex items-start gap-3 bg-orange-50 rounded-lg p-3">
+                                <i class="fas fa-check text-orange-500 mt-0.5"></i>
+                                <p class="text-gray-700 text-sm">Adherence to the code of conduct — integrity, respect, inclusivity and ethical digital practices</p>
+                            </div>
+                            <div class="flex items-start gap-3 bg-orange-50 rounded-lg p-3">
+                                <i class="fas fa-check text-orange-500 mt-0.5"></i>
+                                <p class="text-gray-700 text-sm">Contribution to initiatives through volunteering, idea-sharing, or leadership roles</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== PARTNERS & SUPPORTERS ========== -->
+        <section class="py-16 bg-gray-50">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-12">
+                    <span class="text-blue-600 font-semibold text-sm uppercase tracking-wider">Our Ecosystem</span>
+                    <h3 class="text-3xl font-bold text-gray-800 mt-2">Partners &amp; Supporters</h3>
+                    <p class="max-w-2xl mx-auto text-gray-600 mt-3">Strategic connections with stakeholders driving collaboration, knowledge exchange and digital opportunities.</p>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                    <div class="bg-white rounded-xl p-6 flex flex-col items-center justify-center shadow hover:shadow-md transition-shadow">
+                        <i class="fas fa-university text-4xl text-blue-700 mb-3"></i>
+                        <h5 class="font-semibold text-gray-800 text-sm">KCA University</h5>
+                        <p class="text-gray-500 text-xs mt-1">Host Institution &amp; Student Affairs</p>
+                    </div>
+                    <div class="bg-white rounded-xl p-6 flex flex-col items-center justify-center shadow hover:shadow-md transition-shadow">
+                        <i class="fas fa-flag text-4xl text-green-700 mb-3"></i>
+                        <h5 class="font-semibold text-gray-800 text-sm">Ajira Kenya</h5>
+                        <p class="text-gray-500 text-xs mt-1">Government of Kenya Program</p>
+                    </div>
+                    <div class="bg-white rounded-xl p-6 flex flex-col items-center justify-center shadow hover:shadow-md transition-shadow">
+                        <i class="fas fa-briefcase text-4xl text-orange-500 mb-3"></i>
+                        <h5 class="font-semibold text-gray-800 text-sm">Tech Companies</h5>
+                        <p class="text-gray-500 text-xs mt-1">Industry &amp; Corporate Sponsors</p>
+                    </div>
+                    <div class="bg-white rounded-xl p-6 flex flex-col items-center justify-center shadow hover:shadow-md transition-shadow">
+                        <i class="fas fa-globe text-4xl text-purple-700 mb-3"></i>
+                        <h5 class="font-semibold text-gray-800 text-sm">Youth Networks</h5>
+                        <p class="text-gray-500 text-xs mt-1">Fellow Ajira Clubs &amp; Affiliates</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== FAQ ========== -->
+        <section class="py-16 bg-white">
+            <div class="container mx-auto px-4 max-w-3xl">
+                <div class="text-center mb-12">
+                    <span class="text-blue-600 font-semibold text-sm uppercase tracking-wider">Common Questions</span>
+                    <h3 class="text-3xl font-bold text-gray-800 mt-2">Frequently Asked Questions</h3>
+                </div>
+
+                <div class="space-y-4">
+                    <details class="bg-gray-50 rounded-xl border border-gray-200 overflow-hidden group" open>
+                        <summary class="cursor-pointer p-5 font-semibold text-gray-800 flex justify-between items-center hover:bg-gray-100 transition-colors">
+                            Who can join Ajira Club — KCA University?
+                            <i class="fas fa-chevron-down text-gray-400 text-sm transition-transform group-open:rotate-180"></i>
+                        </summary>
+                        <div class="px-5 pb-5 text-gray-600 text-sm">
+                            Membership is open to <strong>all registered students of KCA University</strong> who demonstrate a commitment to digital innovation and personal growth. This includes both undergraduate and postgraduate students. The club encourages diverse representation to reflect Kenya's youthful, innovative spirit.
+                        </div>
+                    </details>
+
+                    <details class="bg-gray-50 rounded-xl border border-gray-200 overflow-hidden group">
+                        <summary class="cursor-pointer p-5 font-semibold text-gray-800 flex justify-between items-center hover:bg-gray-100 transition-colors">
+                            What are the membership fees?
+                            <i class="fas fa-chevron-down text-gray-400 text-sm transition-transform group-open:rotate-180"></i>
+                        </summary>
+                        <div class="px-5 pb-5 text-gray-600 text-sm">
+                            As per the constitution: a <strong>one-time registration fee of KES 200</strong> upon joining, plus a <strong>semester support fee of KES 100</strong> to cover operational costs. There may also be reasonable fees for special events, networking activities or banquets, communicated in advance by the Executive Committee. These affordable fees help sustain our programs and resources.
+                        </div>
+                    </details>
+
+                    <details class="bg-gray-50 rounded-xl border border-gray-200 overflow-hidden group">
+                        <summary class="cursor-pointer p-5 font-semibold text-gray-800 flex justify-between items-center hover:bg-gray-100 transition-colors">
+                            When and where do meetings happen?
+                            <i class="fas fa-chevron-down text-gray-400 text-sm transition-transform group-open:rotate-180"></i>
+                        </summary>
+                        <div class="px-5 pb-5 text-gray-600 text-sm">
+                            Regular meetings are held <strong>weekly on Fridays or Thursdays from 2:00 PM to 4:00 PM</strong> at KCA University campus. Virtual sessions via Zoom or Microsoft Teams are also available for accessibility. Emergency meetings can be called with 24-hour notice. All meeting minutes are distributed within 48 hours for transparency.
+                        </div>
+                    </details>
+
+                    <details class="bg-gray-50 rounded-xl border border-gray-200 overflow-hidden group">
+                        <summary class="cursor-pointer p-5 font-semibold text-gray-800 flex justify-between items-center hover:bg-gray-100 transition-colors">
+                            Do I need prior tech experience?
+                            <i class="fas fa-chevron-down text-gray-400 text-sm transition-transform group-open:rotate-180"></i>
+                        </summary>
+                        <div class="px-5 pb-5 text-gray-600 text-sm">
+                            Not at all! Our programs are designed for all levels — from complete beginners to advanced learners. Our skills development pillar covers web development, graphic design, content creation, data analysis and AI-driven tools, with structured tracks that start from the basics and progressively build your skills.
+                        </div>
+                    </details>
+
+                    <details class="bg-gray-50 rounded-xl border border-gray-200 overflow-hidden group">
+                        <summary class="cursor-pointer p-5 font-semibold text-gray-800 flex justify-between items-center hover:bg-gray-100 transition-colors">
+                            How do I run for a leadership position?
+                            <i class="fas fa-chevron-down text-gray-400 text-sm transition-transform group-open:rotate-180"></i>
+                        </summary>
+                        <div class="px-5 pb-5 text-gray-600 text-sm">
+                            Elections are held <strong>annually at the end of the academic year</strong>. To be eligible you must: be an active member, have been in the club for at least one semester, demonstrate leadership skills, and be a student between <strong>Year 1.2 to 4.1</strong> (Year 4.2 students are not eligible). Nominations open two weeks prior, followed by a <strong>secret ballot vote</strong> requiring a simple majority. You can serve up to two terms.
+                        </div>
+                    </details>
+
+                    <details class="bg-gray-50 rounded-xl border border-gray-200 overflow-hidden group">
+                        <summary class="cursor-pointer p-5 font-semibold text-gray-800 flex justify-between items-center hover:bg-gray-100 transition-colors">
+                            What is expected of members?
+                            <i class="fas fa-chevron-down text-gray-400 text-sm transition-transform group-open:rotate-180"></i>
+                        </summary>
+                        <div class="px-5 pb-5 text-gray-600 text-sm">
+                            Members should attend at least <strong>70% of club meetings and events</strong>, adhere to the code of conduct (promoting integrity, respect, inclusivity and ethical digital practices), pay dues on time, and contribute to club initiatives through volunteering or idea-sharing. Membership may be revoked for violations, non-payment or inactivity after fair review.
+                        </div>
+                    </details>
+
+                    <details class="bg-gray-50 rounded-xl border border-gray-200 overflow-hidden group">
+                        <summary class="cursor-pointer p-5 font-semibold text-gray-800 flex justify-between items-center hover:bg-gray-100 transition-colors">
+                            Where can I read the full constitution?
+                            <i class="fas fa-chevron-down text-gray-400 text-sm transition-transform group-open:rotate-180"></i>
+                        </summary>
+                        <div class="px-5 pb-5 text-gray-600 text-sm">
+                            You can <a href="Resources/KCAU AJIRA Constituition 2026.pdf" target="_blank" class="text-blue-600 underline hover:text-blue-800">read it online</a> or <a href="Resources/KCAU AJIRA Constituition 2026.pdf" download class="text-blue-600 underline hover:text-blue-800">download the PDF</a> directly. It was ratified on 21st January 2026 and supersedes all previous versions. The constitution is also available at the KCA University Student Affairs Office.
+                        </div>
+                    </details>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== CTA ========== -->
+        <section class="py-16 hero-gradient text-white">
+            <div class="container mx-auto px-4 text-center">
+                <h3 class="text-3xl md:text-4xl font-bold mb-4">Ready to Start Your Digital Career?</h3>
+                <p class="text-blue-200 max-w-2xl mx-auto mb-8 text-lg">Join Ajira Club — KCA University today and become part of Kenya's journey to becoming a global freelancing hub. Registration is just KES 200.</p>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <button onclick="openJoinModal()" class="bg-white text-blue-700 font-semibold py-3 px-8 rounded-lg hover:bg-blue-50 transition-colors text-lg">
+                        <i class="fas fa-user-plus mr-2"></i> Join Now — KES 200
+                    </button>
+                    <a href="contact.html" class="border-2 border-white text-white font-semibold py-3 px-8 rounded-lg hover:bg-white hover:text-blue-700 transition-colors text-lg">
+                        <i class="fas fa-envelope mr-2"></i> Contact Us
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="bg-gray-900 text-gray-300 py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-white text-xl font-bold mb-6">KCA Ajira Club</h3>
+                    <p class="mb-6">Empowering KCA University students with digital skills for the future of work. A vibrant campus embodiment of Ajira Kenya's mission.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter text-xl"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-linkedin text-xl"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram text-xl"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-youtube text-xl"></i></a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="text-white text-lg font-semibold mb-6">Quick Links</h4>
+                    <ul class="space-y-3">
+                        <li><a href="index.html" class="hover:text-white transition-colors">Home</a></li>
+                        <li><a href="about.html" class="hover:text-white transition-colors">About Us</a></li>
+                        <li><a href="programs.html" class="hover:text-white transition-colors">Programs</a></li>
+                        <li><a href="skills.html" class="hover:text-white transition-colors">Skills</a></li>
+                        <li><a href="success-stories.html" class="hover:text-white transition-colors">Success Stories</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-white text-lg font-semibold mb-6">Resources</h4>
+                    <ul class="space-y-3">
+                        <li><a href="resources/learning-materials.html" class="hover:text-white transition-colors">Learning Materials</a></li>
+                        <li><a href="resources/freelancing-guides.html" class="hover:text-white transition-colors">Freelancing Guides</a></li>
+                        <li><a href="resources/portfolio-templates.html" class="hover:text-white transition-colors">Portfolio Templates</a></li>
+                        <li><a href="resources/job-board.html" class="hover:text-white transition-colors">Job Board</a></li>
+                        <li><a href="resources/ai-tools-directory.html" class="hover:text-white transition-colors">AI Tools Directory</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-white text-lg font-semibold mb-6">Partners</h4>
+                    <div class="space-y-4">
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 bg-blue-800 rounded flex items-center justify-center mr-3"><i class="fas fa-university"></i></div>
+                            <span>KCA University</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 bg-green-800 rounded flex items-center justify-center mr-3"><i class="fas fa-flag"></i></div>
+                            <span>Ajira Kenya Program</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-800 mt-12 pt-8 text-center">
+                <p class="mb-4">&copy; <span id="current-year">2026</span> Ajira Club — KCA University. All rights reserved.</p>
+                <p class="text-sm text-gray-500">In alignment with Ajira Kenya — Skills Development | Mentorship | Access to Jobs &amp; Gigs | Infrastructure &amp; Support | Linkages &amp; Networking</p>
+                <div class="mt-6 flex flex-wrap justify-center gap-4 text-sm">
+                    <a href="legal/privacy-policy.html" class="hover:text-white">Privacy Policy</a>
+                    <span class="text-gray-600">|</span>
+                    <a href="legal/terms-of-service.html" class="hover:text-white">Terms of Service</a>
+                    <span class="text-gray-600">|</span>
+                    <a href="legal/code-of-conduct.html" class="hover:text-white">Code of Conduct</a>
+                    <span class="text-gray-600">|</span>
+                    <a href="mailto:ajiraclub@kca.ac.ke" class="hover:text-white">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ==================== JOIN MODAL ==================== -->
+    <div id="join-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-xl max-w-md w-full p-6">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-bold text-gray-800">Join Ajira Club</h3>
+                <button onclick="closeJoinModal()" class="text-gray-500 hover:text-gray-700"><i class="fas fa-times text-xl"></i></button>
+            </div>
+            <p class="text-gray-600 mb-6">Ready to start your digital journey? Registration fee: KES 200 (one-time) + KES 100 semester support fee.</p>
+            <div id="modal-content"><div class="text-center py-8"><i class="fas fa-spinner fa-spin text-blue-600 text-3xl"></i><p class="mt-4 text-gray-600">Loading form...</p></div></div>
+        </div>
+    </div>
+
+    <script type="module" src="js/main.js"></script>
 </body>
 </html>
