@@ -103,9 +103,9 @@
         <!-- Hero Section -->
         <section class="hero-gradient text-white py-16 md:py-20">
             <div class="container mx-auto px-4 text-center">
-                <p class="text-orange-300 font-semibold mb-2"><i class="fas fa-layer-group mr-2"></i> Skills & Pathways</p>
+                <p class="text-orange-300 font-semibold mb-2"><i class="fas fa-layer-group mr-2"></i> Skills &amp; Pathways</p>
                 <h2 class="text-4xl md:text-5xl font-bold mb-6">Skills We Teach</h2>
-                <p class="text-blue-100 text-lg max-w-3xl mx-auto">Master the technical competencies that land jobs in Kenya and globally.</p>
+                <p class="text-blue-100 text-lg max-w-3xl mx-auto">From technical know-how to business acumen and soft skills — master what it takes to thrive in the digital economy.</p>
             </div>
         </section>
 
@@ -114,11 +114,11 @@
             <div class="container mx-auto px-4">
                 <div class="flex flex-wrap justify-center gap-3" id="skill-tabs">
                     <button class="px-4 py-2 rounded-full bg-blue-600 text-white text-sm font-medium" data-filter="all">All Skills</button>
-                    <button class="px-4 py-2 rounded-full bg-gray-100 text-gray-700 text-sm font-medium" data-filter="web">Web Development</button>
-                    <button class="px-4 py-2 rounded-full bg-gray-100 text-gray-700 text-sm font-medium" data-filter="mobile">Mobile Development</button>
-                    <button class="px-4 py-2 rounded-full bg-gray-100 text-gray-700 text-sm font-medium" data-filter="data">Data & AI</button>
-                    <button class="px-4 py-2 rounded-full bg-gray-100 text-gray-700 text-sm font-medium" data-filter="cloud">Cloud & DevOps</button>
-                    <button class="px-4 py-2 rounded-full bg-gray-100 text-gray-700 text-sm font-medium" data-filter="design">Design</button>
+                    <button class="px-4 py-2 rounded-full bg-gray-100 text-gray-700 text-sm font-medium" data-filter="tech">Tech &amp; Development</button>
+                    <button class="px-4 py-2 rounded-full bg-gray-100 text-gray-700 text-sm font-medium" data-filter="business">Business &amp; Freelancing</button>
+                    <button class="px-4 py-2 rounded-full bg-gray-100 text-gray-700 text-sm font-medium" data-filter="soft">Soft Skills</button>
+                    <button class="px-4 py-2 rounded-full bg-gray-100 text-gray-700 text-sm font-medium" data-filter="online">Online Work</button>
+                    <button class="px-4 py-2 rounded-full bg-gray-100 text-gray-700 text-sm font-medium" data-filter="security">Cybersecurity</button>
                 </div>
             </div>
         </section>
@@ -127,59 +127,128 @@
         <section class="py-12 bg-gray-50">
             <div class="container mx-auto px-4">
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="skills-grid">
-                    <div class="skill-card bg-white border border-gray-200 rounded-xl p-6 text-center" data-category="web">
+                    <!-- Tech & Development -->
+                    <div class="skill-card bg-white border border-gray-200 rounded-xl p-6 text-center" data-category="tech">
                         <div class="text-4xl mb-3">🏗️</div>
-                        <h3 class="text-xl font-bold text-gray-800 mb-2">HTML/CSS</h3>
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Web Development</h3>
                         <span class="inline-block bg-green-100 text-green-700 text-xs font-semibold px-3 py-1 rounded-full">Beginner</span>
-                        <p class="text-gray-600 mt-3">Foundation of web development and responsive design.</p>
+                        <p class="text-gray-600 mt-3">HTML, CSS, and JavaScript — build websites from scratch and make them responsive.</p>
                     </div>
-                    <div class="skill-card bg-white border border-gray-200 rounded-xl p-6 text-center" data-category="web">
-                        <div class="text-4xl mb-3">⚡</div>
-                        <h3 class="text-xl font-bold text-gray-800 mb-2">JavaScript</h3>
-                        <span class="inline-block bg-yellow-100 text-yellow-700 text-xs font-semibold px-3 py-1 rounded-full">Intermediate</span>
-                        <p class="text-gray-600 mt-3">Interactive web experiences and app logic.</p>
-                    </div>
-                    <div class="skill-card bg-white border border-gray-200 rounded-xl p-6 text-center" data-category="web">
-                        <div class="text-4xl mb-3">⚛️</div>
-                        <h3 class="text-xl font-bold text-gray-800 mb-2">React</h3>
-                        <span class="inline-block bg-yellow-100 text-yellow-700 text-xs font-semibold px-3 py-1 rounded-full">Intermediate</span>
-                        <p class="text-gray-600 mt-3">Modern UI development with components and hooks.</p>
-                    </div>
-                    <div class="skill-card bg-white border border-gray-200 rounded-xl p-6 text-center" data-category="data">
-                        <div class="text-4xl mb-3">🐍</div>
-                        <h3 class="text-xl font-bold text-gray-800 mb-2">Python</h3>
-                        <span class="inline-block bg-green-100 text-green-700 text-xs font-semibold px-3 py-1 rounded-full">Beginner</span>
-                        <p class="text-gray-600 mt-3">Versatile language for data and automation.</p>
-                    </div>
-                    <div class="skill-card bg-white border border-gray-200 rounded-xl p-6 text-center" data-category="data">
+                    <div class="skill-card bg-white border border-gray-200 rounded-xl p-6 text-center" data-category="tech">
                         <div class="text-4xl mb-3">🤖</div>
-                        <h3 class="text-xl font-bold text-gray-800 mb-2">Machine Learning</h3>
-                        <span class="inline-block bg-red-100 text-red-700 text-xs font-semibold px-3 py-1 rounded-full">Advanced</span>
-                        <p class="text-gray-600 mt-3">AI models and data-driven predictions.</p>
-                    </div>
-                    <div class="skill-card bg-white border border-gray-200 rounded-xl p-6 text-center" data-category="mobile">
-                        <div class="text-4xl mb-3">📱</div>
-                        <h3 class="text-xl font-bold text-gray-800 mb-2">React Native</h3>
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">AI Tools &amp; Automation</h3>
                         <span class="inline-block bg-yellow-100 text-yellow-700 text-xs font-semibold px-3 py-1 rounded-full">Intermediate</span>
-                        <p class="text-gray-600 mt-3">Build Android & iOS apps with one codebase.</p>
+                        <p class="text-gray-600 mt-3">Use ChatGPT, Canva AI, and automation tools to work 10x faster and smarter.</p>
                     </div>
-                    <div class="skill-card bg-white border border-gray-200 rounded-xl p-6 text-center" data-category="cloud">
-                        <div class="text-4xl mb-3">☁️</div>
-                        <h3 class="text-xl font-bold text-gray-800 mb-2">AWS</h3>
+                    <div class="skill-card bg-white border border-gray-200 rounded-xl p-6 text-center" data-category="tech">
+                        <div class="text-4xl mb-3">📊</div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Data Analysis</h3>
                         <span class="inline-block bg-yellow-100 text-yellow-700 text-xs font-semibold px-3 py-1 rounded-full">Intermediate</span>
-                        <p class="text-gray-600 mt-3">Cloud computing and deployment skills.</p>
+                        <p class="text-gray-600 mt-3">Excel, Google Sheets, and Python for data — turn numbers into actionable insights.</p>
                     </div>
-                    <div class="skill-card bg-white border border-gray-200 rounded-xl p-6 text-center" data-category="cloud">
-                        <div class="text-4xl mb-3">🐳</div>
-                        <h3 class="text-xl font-bold text-gray-800 mb-2">Docker</h3>
-                        <span class="inline-block bg-red-100 text-red-700 text-xs font-semibold px-3 py-1 rounded-full">Advanced</span>
-                        <p class="text-gray-600 mt-3">Containerization and scalable deployment.</p>
-                    </div>
-                    <div class="skill-card bg-white border border-gray-200 rounded-xl p-6 text-center" data-category="design">
+                    <div class="skill-card bg-white border border-gray-200 rounded-xl p-6 text-center" data-category="tech">
                         <div class="text-4xl mb-3">🎨</div>
-                        <h3 class="text-xl font-bold text-gray-800 mb-2">UI/UX Design</h3>
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Graphic Design</h3>
                         <span class="inline-block bg-green-100 text-green-700 text-xs font-semibold px-3 py-1 rounded-full">Beginner</span>
-                        <p class="text-gray-600 mt-3">Design user-centered digital experiences.</p>
+                        <p class="text-gray-600 mt-3">Create stunning visuals using Canva, Figma, and Adobe tools for social media and branding.</p>
+                    </div>
+
+                    <!-- Business & Freelancing -->
+                    <div class="skill-card bg-white border border-gray-200 rounded-xl p-6 text-center" data-category="business">
+                        <div class="text-4xl mb-3">📈</div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Digital Marketing</h3>
+                        <span class="inline-block bg-green-100 text-green-700 text-xs font-semibold px-3 py-1 rounded-full">Beginner</span>
+                        <p class="text-gray-600 mt-3">SEO, social media marketing, email campaigns, and Google Ads to grow businesses online.</p>
+                    </div>
+                    <div class="skill-card bg-white border border-gray-200 rounded-xl p-6 text-center" data-category="business">
+                        <div class="text-4xl mb-3">💼</div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Entrepreneurship</h3>
+                        <span class="inline-block bg-yellow-100 text-yellow-700 text-xs font-semibold px-3 py-1 rounded-full">Intermediate</span>
+                        <p class="text-gray-600 mt-3">Business planning, revenue models, pitching ideas, and launching your own digital venture.</p>
+                    </div>
+                    <div class="skill-card bg-white border border-gray-200 rounded-xl p-6 text-center" data-category="business">
+                        <div class="text-4xl mb-3">💰</div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Financial Literacy</h3>
+                        <span class="inline-block bg-green-100 text-green-700 text-xs font-semibold px-3 py-1 rounded-full">Beginner</span>
+                        <p class="text-gray-600 mt-3">Budgeting, invoicing, taxes for freelancers, M-Pesa business, and managing your earnings.</p>
+                    </div>
+                    <div class="skill-card bg-white border border-gray-200 rounded-xl p-6 text-center" data-category="business">
+                        <div class="text-4xl mb-3">✍️</div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Content Creation</h3>
+                        <span class="inline-block bg-green-100 text-green-700 text-xs font-semibold px-3 py-1 rounded-full">Beginner</span>
+                        <p class="text-gray-600 mt-3">Blog writing, video editing, podcasting, and building a personal brand that attracts clients.</p>
+                    </div>
+
+                    <!-- Soft Skills -->
+                    <div class="skill-card bg-white border border-gray-200 rounded-xl p-6 text-center" data-category="soft">
+                        <div class="text-4xl mb-3">🧠</div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Critical Thinking</h3>
+                        <span class="inline-block bg-purple-100 text-purple-700 text-xs font-semibold px-3 py-1 rounded-full">Essential</span>
+                        <p class="text-gray-600 mt-3">Analyze problems, evaluate options, and make sound decisions under pressure.</p>
+                    </div>
+                    <div class="skill-card bg-white border border-gray-200 rounded-xl p-6 text-center" data-category="soft">
+                        <div class="text-4xl mb-3">🗣️</div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Communication &amp; Presentation</h3>
+                        <span class="inline-block bg-purple-100 text-purple-700 text-xs font-semibold px-3 py-1 rounded-full">Essential</span>
+                        <p class="text-gray-600 mt-3">Write clearly, speak confidently, and present ideas that win over clients and employers.</p>
+                    </div>
+                    <div class="skill-card bg-white border border-gray-200 rounded-xl p-6 text-center" data-category="soft">
+                        <div class="text-4xl mb-3">🎯</div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Interview &amp; CV Skills</h3>
+                        <span class="inline-block bg-purple-100 text-purple-700 text-xs font-semibold px-3 py-1 rounded-full">Essential</span>
+                        <p class="text-gray-600 mt-3">Craft a standout CV, ace virtual interviews, and negotiate job offers with confidence.</p>
+                    </div>
+                    <div class="skill-card bg-white border border-gray-200 rounded-xl p-6 text-center" data-category="soft">
+                        <div class="text-4xl mb-3">⏱️</div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Time Management</h3>
+                        <span class="inline-block bg-purple-100 text-purple-700 text-xs font-semibold px-3 py-1 rounded-full">Essential</span>
+                        <p class="text-gray-600 mt-3">Prioritize tasks, meet deadlines, and balance studies with freelance work effectively.</p>
+                    </div>
+
+                    <!-- Online Work -->
+                    <div class="skill-card bg-white border border-gray-200 rounded-xl p-6 text-center" data-category="online">
+                        <div class="text-4xl mb-3">🌍</div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Freelancing Platforms</h3>
+                        <span class="inline-block bg-green-100 text-green-700 text-xs font-semibold px-3 py-1 rounded-full">Beginner</span>
+                        <p class="text-gray-600 mt-3">Set up and optimize profiles on Upwork, Fiverr, and LinkedIn to land your first gig.</p>
+                    </div>
+                    <div class="skill-card bg-white border border-gray-200 rounded-xl p-6 text-center" data-category="online">
+                        <div class="text-4xl mb-3">📝</div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Proposal &amp; Client Management</h3>
+                        <span class="inline-block bg-yellow-100 text-yellow-700 text-xs font-semibold px-3 py-1 rounded-full">Intermediate</span>
+                        <p class="text-gray-600 mt-3">Write winning proposals, manage client expectations, and build long-term relationships.</p>
+                    </div>
+                    <div class="skill-card bg-white border border-gray-200 rounded-xl p-6 text-center" data-category="online">
+                        <div class="text-4xl mb-3">🛒</div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">E-Commerce &amp; Virtual Assistance</h3>
+                        <span class="inline-block bg-green-100 text-green-700 text-xs font-semibold px-3 py-1 rounded-full">Beginner</span>
+                        <p class="text-gray-600 mt-3">Sell products online, manage Shopify stores, and offer virtual assistant services remotely.</p>
+                    </div>
+                    <div class="skill-card bg-white border border-gray-200 rounded-xl p-6 text-center" data-category="online">
+                        <div class="text-4xl mb-3">📄</div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Portfolio Building</h3>
+                        <span class="inline-block bg-green-100 text-green-700 text-xs font-semibold px-3 py-1 rounded-full">Beginner</span>
+                        <p class="text-gray-600 mt-3">Create a professional online portfolio that showcases your work and attracts opportunities.</p>
+                    </div>
+
+                    <!-- Cybersecurity -->
+                    <div class="skill-card bg-white border border-gray-200 rounded-xl p-6 text-center" data-category="security">
+                        <div class="text-4xl mb-3">🔒</div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Online Safety &amp; Privacy</h3>
+                        <span class="inline-block bg-red-100 text-red-700 text-xs font-semibold px-3 py-1 rounded-full">Important</span>
+                        <p class="text-gray-600 mt-3">Protect your accounts, recognize phishing, and stay safe while working online.</p>
+                    </div>
+                    <div class="skill-card bg-white border border-gray-200 rounded-xl p-6 text-center" data-category="security">
+                        <div class="text-4xl mb-3">🛡️</div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Cybersecurity Basics</h3>
+                        <span class="inline-block bg-yellow-100 text-yellow-700 text-xs font-semibold px-3 py-1 rounded-full">Intermediate</span>
+                        <p class="text-gray-600 mt-3">Understand threats, encryption, secure passwords, and how to protect digital assets.</p>
+                    </div>
+                    <div class="skill-card bg-white border border-gray-200 rounded-xl p-6 text-center" data-category="security">
+                        <div class="text-4xl mb-3">⚖️</div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Digital Ethics &amp; Data Protection</h3>
+                        <span class="inline-block bg-red-100 text-red-700 text-xs font-semibold px-3 py-1 rounded-full">Important</span>
+                        <p class="text-gray-600 mt-3">Kenya's Data Protection Act, ethical tech use, and responsible digital citizenship.</p>
                     </div>
                 </div>
             </div>
@@ -190,38 +259,48 @@
             <div class="container mx-auto px-4">
                 <div class="text-center mb-10">
                     <h3 class="text-3xl font-bold text-gray-800 mb-4">Recommended Learning Paths</h3>
-                    <p class="text-gray-600 max-w-2xl mx-auto">Choose a pathway and build skills in a structured sequence.</p>
+                    <p class="text-gray-600 max-w-2xl mx-auto">Pick a pathway that fits your goals and build skills step by step.</p>
                 </div>
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                     <div class="border border-gray-200 rounded-xl p-6 bg-gray-50">
-                        <h4 class="text-xl font-semibold text-blue-700 mb-4"><i class="fas fa-palette mr-2 text-orange-500"></i> Frontend Developer</h4>
-                        <ol class="space-y-3 text-gray-700">
-                            <li>1. HTML/CSS</li>
+                        <h4 class="text-lg font-semibold text-blue-700 mb-4"><i class="fas fa-code mr-2 text-orange-500"></i> Web Developer</h4>
+                        <ol class="space-y-2 text-gray-700 text-sm">
+                            <li>1. HTML &amp; CSS</li>
                             <li>2. JavaScript</li>
-                            <li>3. React</li>
-                            <li>4. TypeScript</li>
+                            <li>3. Portfolio Building</li>
+                            <li>4. Freelancing Platforms</li>
                         </ol>
-                        <p class="text-sm text-gray-500 mt-4">Estimated: 16-20 weeks</p>
+                        <p class="text-xs text-gray-500 mt-4">12–16 weeks</p>
                     </div>
                     <div class="border border-gray-200 rounded-xl p-6 bg-gray-50">
-                        <h4 class="text-xl font-semibold text-blue-700 mb-4"><i class="fas fa-server mr-2 text-orange-500"></i> Backend Developer</h4>
-                        <ol class="space-y-3 text-gray-700">
-                            <li>1. Python / Node.js</li>
-                            <li>2. Databases (SQL)</li>
-                            <li>3. APIs & REST</li>
-                            <li>4. Cloud & DevOps</li>
+                        <h4 class="text-lg font-semibold text-blue-700 mb-4"><i class="fas fa-bullhorn mr-2 text-orange-500"></i> Digital Marketer</h4>
+                        <ol class="space-y-2 text-gray-700 text-sm">
+                            <li>1. Digital Marketing</li>
+                            <li>2. Content Creation</li>
+                            <li>3. AI Tools &amp; Automation</li>
+                            <li>4. Client Management</li>
                         </ol>
-                        <p class="text-sm text-gray-500 mt-4">Estimated: 16-20 weeks</p>
+                        <p class="text-xs text-gray-500 mt-4">10–14 weeks</p>
                     </div>
                     <div class="border border-gray-200 rounded-xl p-6 bg-gray-50">
-                        <h4 class="text-xl font-semibold text-blue-700 mb-4"><i class="fas fa-brain mr-2 text-orange-500"></i> AI/ML Specialist</h4>
-                        <ol class="space-y-3 text-gray-700">
-                            <li>1. Python for Data</li>
-                            <li>2. Statistics & Math</li>
-                            <li>3. Machine Learning</li>
-                            <li>4. Deep Learning</li>
+                        <h4 class="text-lg font-semibold text-blue-700 mb-4"><i class="fas fa-hand-holding-usd mr-2 text-orange-500"></i> Freelancer</h4>
+                        <ol class="space-y-2 text-gray-700 text-sm">
+                            <li>1. Freelancing Platforms</li>
+                            <li>2. Proposal Writing</li>
+                            <li>3. Financial Literacy</li>
+                            <li>4. Online Safety</li>
                         </ol>
-                        <p class="text-sm text-gray-500 mt-4">Estimated: 20-24 weeks</p>
+                        <p class="text-xs text-gray-500 mt-4">8–12 weeks</p>
+                    </div>
+                    <div class="border border-gray-200 rounded-xl p-6 bg-gray-50">
+                        <h4 class="text-lg font-semibold text-blue-700 mb-4"><i class="fas fa-user-tie mr-2 text-orange-500"></i> Career Ready</h4>
+                        <ol class="space-y-2 text-gray-700 text-sm">
+                            <li>1. CV &amp; Interview Skills</li>
+                            <li>2. Communication</li>
+                            <li>3. Critical Thinking</li>
+                            <li>4. Time Management</li>
+                        </ol>
+                        <p class="text-xs text-gray-500 mt-4">6–8 weeks</p>
                     </div>
                 </div>
             </div>
@@ -231,29 +310,33 @@
         <section class="py-12 bg-gray-50">
             <div class="container mx-auto px-4">
                 <div class="text-center mb-10">
-                    <h3 class="text-3xl font-bold text-gray-800 mb-4">Most Sought-After Skills in Kenya</h3>
-                    <p class="text-gray-600 max-w-2xl mx-auto">Based on job market analysis from LinkedIn and leading Kenyan tech companies.</p>
+                    <h3 class="text-3xl font-bold text-gray-800 mb-4">Most In-Demand Skills in Kenya's Digital Economy</h3>
+                    <p class="text-gray-600 max-w-2xl mx-auto">Based on employer demand, freelancing trends, and the Ajira Digital Kenya program.</p>
                 </div>
                 <div class="max-w-3xl mx-auto space-y-5">
                     <div>
-                        <div class="flex justify-between text-sm font-semibold text-gray-700 mb-1"><span>Python</span><span>85%</span></div>
-                        <div class="w-full bg-gray-200 rounded-full h-3"><div class="h-3 rounded-full bg-blue-600" data-bar="85"></div></div>
+                        <div class="flex justify-between text-sm font-semibold text-gray-700 mb-1"><span>Digital Marketing &amp; Social Media</span><span>90%</span></div>
+                        <div class="w-full bg-gray-200 rounded-full h-3"><div class="h-3 rounded-full bg-blue-600" data-bar="90"></div></div>
                     </div>
                     <div>
-                        <div class="flex justify-between text-sm font-semibold text-gray-700 mb-1"><span>JavaScript</span><span>81%</span></div>
-                        <div class="w-full bg-gray-200 rounded-full h-3"><div class="h-3 rounded-full bg-orange-500" data-bar="81"></div></div>
+                        <div class="flex justify-between text-sm font-semibold text-gray-700 mb-1"><span>Communication &amp; Writing</span><span>87%</span></div>
+                        <div class="w-full bg-gray-200 rounded-full h-3"><div class="h-3 rounded-full bg-orange-500" data-bar="87"></div></div>
                     </div>
                     <div>
-                        <div class="flex justify-between text-sm font-semibold text-gray-700 mb-1"><span>SQL & Databases</span><span>78%</span></div>
-                        <div class="w-full bg-gray-200 rounded-full h-3"><div class="h-3 rounded-full bg-blue-600" data-bar="78"></div></div>
+                        <div class="flex justify-between text-sm font-semibold text-gray-700 mb-1"><span>Web Development</span><span>82%</span></div>
+                        <div class="w-full bg-gray-200 rounded-full h-3"><div class="h-3 rounded-full bg-blue-600" data-bar="82"></div></div>
                     </div>
                     <div>
-                        <div class="flex justify-between text-sm font-semibold text-gray-700 mb-1"><span>React</span><span>72%</span></div>
-                        <div class="w-full bg-gray-200 rounded-full h-3"><div class="h-3 rounded-full bg-orange-500" data-bar="72"></div></div>
+                        <div class="flex justify-between text-sm font-semibold text-gray-700 mb-1"><span>AI Tools &amp; Data Analysis</span><span>78%</span></div>
+                        <div class="w-full bg-gray-200 rounded-full h-3"><div class="h-3 rounded-full bg-orange-500" data-bar="78"></div></div>
                     </div>
                     <div>
-                        <div class="flex justify-between text-sm font-semibold text-gray-700 mb-1"><span>Cloud (AWS/Azure)</span><span>68%</span></div>
-                        <div class="w-full bg-gray-200 rounded-full h-3"><div class="h-3 rounded-full bg-blue-600" data-bar="68"></div></div>
+                        <div class="flex justify-between text-sm font-semibold text-gray-700 mb-1"><span>Freelancing &amp; Remote Work</span><span>75%</span></div>
+                        <div class="w-full bg-gray-200 rounded-full h-3"><div class="h-3 rounded-full bg-blue-600" data-bar="75"></div></div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between text-sm font-semibold text-gray-700 mb-1"><span>Cybersecurity Awareness</span><span>70%</span></div>
+                        <div class="w-full bg-gray-200 rounded-full h-3"><div class="h-3 rounded-full bg-orange-500" data-bar="70"></div></div>
                     </div>
                 </div>
             </div>
@@ -262,11 +345,11 @@
         <!-- CTA -->
         <section class="py-12 bg-white">
             <div class="container mx-auto px-4 text-center">
-                <h3 class="text-3xl font-bold text-gray-800 mb-4">Ready to Master These Skills?</h3>
-                <p class="text-gray-600 max-w-2xl mx-auto mb-8">Choose a program that matches your learning goals and start your journey today.</p>
+                <h3 class="text-3xl font-bold text-gray-800 mb-4">Ready to Start Learning?</h3>
+                <p class="text-gray-600 max-w-2xl mx-auto mb-8">Whether you want to code, freelance, start a business, or ace your next interview — we've got a path for you.</p>
                 <div class="flex flex-col sm:flex-row justify-center gap-4">
                     <a href="programs.html" class="btn-primary text-white font-semibold py-3 px-8 rounded-lg">Browse Programs</a>
-                    <a href="contact.html" class="bg-gray-900 text-white font-semibold py-3 px-8 rounded-lg hover:bg-gray-800 transition-colors">Chat with a Mentor</a>
+                    <button onclick="openJoinModal()" class="bg-gray-900 text-white font-semibold py-3 px-8 rounded-lg hover:bg-gray-800 transition-colors">Join Ajira Club</button>
                 </div>
             </div>
         </section>
