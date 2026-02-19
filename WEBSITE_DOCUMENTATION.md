@@ -2161,7 +2161,7 @@ This documentation provides a **complete roadmap for building a future-ready dig
 
 ---
 
-**Questions or feedback?** Contact the development team at `hello@kcauajira.club`
+**Questions or feedback?** Contact the development team at `ajira@students.kcau.ac.ke`
 
 *Last updated: February 2026*  
 *Maintained by: KCAU Ajira Club Product & Engineering Teams*
