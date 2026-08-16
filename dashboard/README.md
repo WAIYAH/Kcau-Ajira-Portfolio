@@ -24,7 +24,7 @@ UI/UX redesign — see [`improve.md`](improve.md) for the full plan and rational
 ### 1. Create a Supabase project
 
 1. Go to [supabase.com](https://supabase.com), create a free project.
-2. In the SQL Editor, run every file in [`supabase/migrations/`](supabase/migrations/) **in order** (0001 → 0009). Note: 0009 needs manual edits first (project ref + a secret) — see step 6 below; skip it initially and come back once you've done step 5. Each is safe to run once; re-running an already-applied one is usually harmless (`create or replace`, `on conflict do nothing`) but they're not designed to be re-run out of order.
+2. In the SQL Editor, run every file in [`supabase/migrations/`](supabase/migrations/) **in order** (0001 → 0010). Note: 0009 needs manual edits first (project ref + a secret) — see step 6 below; skip it initially and come back once you've done step 5. Each is safe to run once; re-running an already-applied one is usually harmless (`create or replace`, `on conflict do nothing`) but they're not designed to be re-run out of order.
 3. In **Project Settings → API**, copy the **Project URL** and **anon public** key.
 
 ### 2. Configure environment variables
@@ -113,8 +113,9 @@ src/
     ThemeContext.tsx           Light/dark/system theme state + localStorage persistence
   hooks/
     useOverviewData.ts         All of the Overview page's Supabase queries, in one place
-    useGlobalSearch.ts          Header search (debounced, events + announcements)
-    useNotificationSignals.ts   Header notification-bell signals
+    useGlobalSearch.ts          Header search (debounced, events + opportunities + announcements)
+    useNotificationSignals.ts   Header notification-bell: ephemeral staff signals + real
+                                 persisted notifications (mark-as-read, live via Realtime)
   components/
     ui/                        Design-system primitives — Card, Button, Input, Select,
                                 Textarea, TagInput, Modal, Drawer, Dropdown, Tooltip, Skeleton,
@@ -152,7 +153,9 @@ supabase/
                  0006 inquiries table (public Contact + Join forms -> Inbox),
                  0007 profile bio/skills/CV columns + avatars/cvs storage buckets,
                  0008 opportunities table (jobs/internships/gigs/freelance board),
-                 0009 weekly dues-reminder cron schedule (needs manual edits, see step 6)
+                 0009 weekly dues-reminder cron schedule (needs manual edits, see step 6),
+                 0010 notifications table + triggers + Realtime (announcements/
+                 opportunities/election-open fan out to a per-member bell)
   functions/
     send-announcement-email/  Edge Function: verifies caller is staff,
                                sends via Resend, logs to email_log

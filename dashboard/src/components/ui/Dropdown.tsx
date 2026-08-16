@@ -76,7 +76,7 @@ export default function Dropdown({ trigger, items, align = 'end', triggerLabel }
                 <div key={`divider-${i}`} className="my-1 h-px bg-border" role="separator" />
               ) : (
                 <button
-                  key={item.label}
+                  key={`item-${i}`}
                   type="button"
                   role="menuitem"
                   onClick={() => {

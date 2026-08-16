@@ -13,7 +13,7 @@ Being built in phases, each independently verified (`tsc -b`, `lint`, `build`, a
 - [x] **Phase 1** — CI workflow, form honeypot, storage cleanup on replace, route-level code splitting, member search
 - [x] **Phase 2** — Opportunities / Gigs board (§2.1)
 - [x] **Phase 3** — Automated dues reminder emails (§2.3)
-- [ ] **Phase 4** — Persisted notifications table + realtime bell (§2.2)
+- [x] **Phase 4** — Persisted notifications table + realtime bell (§2.2)
 - [ ] **Phase 5** — Public site ↔ dashboard content unification (§2.4)
 - [ ] **Phase 6** — Engineering hygiene: Vitest + first tests, error boundary, backup routine doc (§3.1–3.3)
 - [ ] **Phase 7** — Remaining Tier 4 items where genuinely doable without a human in the loop (PWA, tablet sidebar default); command-palette and real screen-reader hardware testing stay explicitly deferred (see notes in that phase)

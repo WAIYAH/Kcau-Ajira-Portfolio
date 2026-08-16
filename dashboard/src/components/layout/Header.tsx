@@ -6,7 +6,7 @@ import { useTheme, type Theme } from '@/contexts/ThemeContext'
 import { useGlobalSearch } from '@/hooks/useGlobalSearch'
 import { useNotificationSignals } from '@/hooks/useNotificationSignals'
 import Avatar from '@/components/ui/Avatar'
-import Dropdown, { type DropdownItem } from '@/components/ui/Dropdown'
+import Dropdown, { type DropdownItem, type DropdownDivider } from '@/components/ui/Dropdown'
 import { cn } from '@/lib/cn'
 
 const themeOptions: { value: Theme; icon: LucideIcon; label: string }[] = [
@@ -26,7 +26,7 @@ export default function Header({ onOpenMobileNav }: HeaderProps) {
   const [query, setQuery] = useState('')
   const [searchFocused, setSearchFocused] = useState(false)
   const { results } = useGlobalSearch(query, isStaff)
-  const { count: notificationCount, items: notificationItems } = useNotificationSignals()
+  const { count: notificationCount, items: notificationItems, notifications, markRead } = useNotificationSignals()
   const searchRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
@@ -46,10 +46,18 @@ export default function Header({ onOpenMobileNav }: HeaderProps) {
     { label: 'Sign out', icon: LogOut, onClick: () => signOut(), danger: true },
   ]
 
-  const notificationMenuItems: DropdownItem[] =
-    notificationItems.length > 0
-      ? notificationItems.map((n) => ({ label: n.label, onClick: () => navigate(n.to) }))
-      : [{ label: "You're all caught up", onClick: () => {} }]
+  const notificationMenuItems: (DropdownItem | DropdownDivider)[] = [
+    ...notificationItems.map((n) => ({ label: n.label, onClick: () => navigate(n.to) })),
+    ...(notificationItems.length > 0 && notifications.length > 0 ? [{ divider: true as const }] : []),
+    ...notifications.map((n) => ({
+      label: n.title,
+      onClick: () => {
+        markRead(n.id)
+        navigate(n.link)
+      },
+    })),
+  ]
+  if (notificationMenuItems.length === 0) notificationMenuItems.push({ label: "You're all caught up", onClick: () => {} })
 
   return (
     <header className="sticky top-0 z-30 flex h-16 shrink-0 items-center gap-3 border-b border-border bg-surface/80 px-4 backdrop-blur md:px-6">
