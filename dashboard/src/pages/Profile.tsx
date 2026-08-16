@@ -13,7 +13,7 @@ import TagInput from '@/components/ui/TagInput'
 
 const MAX_CV_BYTES = 5 * 1024 * 1024
 
-function cvFileName(path: string) {
+export function cvFileName(path: string) {
   const raw = path.split('/').pop() ?? path
   // Stored as `${uuid}-${original filename}` — strip the uuid prefix for display.
   return raw.replace(/^[0-9a-f-]{36}-/i, '')
@@ -22,7 +22,7 @@ function cvFileName(path: string) {
 // `avatar_url` is a full public URL (avatars is a public bucket); storage
 // deletion needs the bare object path, which sits right after the bucket
 // name in that URL.
-function avatarPathFromUrl(url: string) {
+export function avatarPathFromUrl(url: string) {
   const marker = '/avatars/'
   const idx = url.indexOf(marker)
   return idx === -1 ? null : url.slice(idx + marker.length)

@@ -12,7 +12,7 @@ import Select from '@/components/ui/Select'
 import EmptyState from '@/components/ui/EmptyState'
 import { cn } from '@/lib/cn'
 
-function statusFor(amountDue: number, amountPaid: number): MembershipDue['status'] {
+export function statusFor(amountDue: number, amountPaid: number): MembershipDue['status'] {
   if (amountPaid <= 0) return 'unpaid'
   if (amountPaid >= amountDue) return 'paid'
   return 'partial'

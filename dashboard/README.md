@@ -1,6 +1,6 @@
 # KCA Ajira Club — Member Dashboard
 
-Authenticated React app for the member/leader dashboard described in [`../PLAN.md`](../PLAN.md). Separate app from the public marketing site (`../index.html` etc.) — it doesn't touch that site at all.
+Authenticated React app for the member/leader dashboard described in [`../PLAN.md`](../PLAN.md). Separate app from the public marketing site (`../index.html` etc.) — this app's code doesn't touch that site, though as of [`../ROADMAP.md`](../ROADMAP.md) Phase 5 the public site independently reads a few tables (events, inquiries) from the same Supabase project.
 
 **Stack:** React 19 + Vite + TypeScript + Tailwind CSS v4, backed by Supabase (Postgres + Auth + Storage + Edge Functions). UI built on Lucide icons, Motion (Framer Motion) for animation, and self-hosted Inter/Plus Jakarta Sans fonts — see [Design system](#design-system) below.
 
@@ -18,6 +18,11 @@ Functionality (see [`../PLAN.md`](../PLAN.md) for the full build history):
 UI/UX redesign — see [`improve.md`](improve.md) for the full plan and rationale:
 
 - [x] **Phases 1–7** — design system (tokens, dark mode, component primitives), collapsible sidebar + real header, Overview rebuild, full page-by-page consistency pass, motion/reduced-motion, WCAG AA contrast audit, docs
+
+System-wide improvements (public site + dashboard) — see [`../ROADMAP.md`](../ROADMAP.md):
+
+- [x] **Phases 1–6** — CI + spam protection + perf + member search, Opportunities/Gigs board, automated dues reminders, live notifications, public/dashboard content unification, testing + error boundary + backups
+- [ ] **Phase 7** — remaining stretch items, in progress
 
 ## One-time setup
 
@@ -121,6 +126,7 @@ src/
                                 Textarea, TagInput, Modal, Drawer, Dropdown, Tooltip, Skeleton,
                                 Avatar, EmptyState, ProgressRing (see Design system above)
     Logo.tsx                    Shared brand mark (sidebar, header, auth pages)
+    ErrorBoundary.tsx             Top-level fallback UI for unhandled render errors
     ProtectedRoute.tsx           Redirects unauthenticated / pending users
     RoleGate.tsx                  Hides staff-only routes from plain members
     Badge.tsx                     Status/role pill components
@@ -172,3 +178,22 @@ supabase/
 - Raw financial transactions and raw ballots are staff-only / nobody-reads-directly respectively. Everyone else only ever sees an aggregate (`club_balance` view, `get_election_results()` function) — see the comments in the migration files for why.
 - The `send-announcement-email` function independently re-checks the caller's role server-side against `profiles` (using the service role key) before sending anything — it doesn't trust the client's claim of being staff.
 - Receipts and generated reports live in private Storage buckets, staff-only, downloaded via short-lived signed URLs rather than public links.
+
+## Testing
+
+```bash
+npm test
+```
+
+Runs the Vitest suite (`*.test.ts`/`*.test.tsx` next to the code they cover). Not aiming for full coverage — it currently covers the places a silent regression would actually hurt: role-gating (`RoleGate`), the dues status calculation, the `TagInput` primitive's add/remove/dedupe behavior, the profile Storage path helpers, and the top-level error boundary. The CI workflow (`.github/workflows/dashboard-ci.yml`) runs this on every push/PR alongside the type check, lint, and build.
+
+## Backups
+
+Supabase's free tier doesn't include point-in-time recovery. There's no automated backup running for this project — if you want one, the whole database can be dumped with the Supabase CLI (already linked if you've run any of the setup steps above):
+
+```bash
+# from inside the dashboard/ folder
+npx supabase db dump -f backup-$(date +%Y-%m-%d).sql
+```
+
+Store the resulting file somewhere safe (not committed to this repo). Worth doing on a recurring reminder — e.g. monthly, or before any risky schema change.
