@@ -32,3 +32,17 @@ export async function submitInquiry({ type, name, email, phone = null, subject =
   });
   return { error };
 }
+
+// Reads upcoming one-time events (elections, hackathons, guest sessions,
+// etc.) posted by a Leader in the dashboard, so the public site's "More on
+// the calendar" list doesn't need manual HTML edits to stay current. Read
+// via `events: public read` in dashboard/supabase/migrations/0011_events_public_read.sql.
+export async function fetchUpcomingEvents(limit = 3) {
+  const { data, error } = await supabase
+    .from('events')
+    .select('id, title, description, category, location, starts_at')
+    .gte('starts_at', new Date().toISOString())
+    .order('starts_at', { ascending: true })
+    .limit(limit);
+  return { events: data ?? [], error };
+}

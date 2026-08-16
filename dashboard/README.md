@@ -24,7 +24,7 @@ UI/UX redesign — see [`improve.md`](improve.md) for the full plan and rational
 ### 1. Create a Supabase project
 
 1. Go to [supabase.com](https://supabase.com), create a free project.
-2. In the SQL Editor, run every file in [`supabase/migrations/`](supabase/migrations/) **in order** (0001 → 0010). Note: 0009 needs manual edits first (project ref + a secret) — see step 6 below; skip it initially and come back once you've done step 5. Each is safe to run once; re-running an already-applied one is usually harmless (`create or replace`, `on conflict do nothing`) but they're not designed to be re-run out of order.
+2. In the SQL Editor, run every file in [`supabase/migrations/`](supabase/migrations/) **in order** (0001 → 0011). Note: 0009 needs manual edits first (project ref + a secret) — see step 6 below; skip it initially and come back once you've done step 5. Each is safe to run once; re-running an already-applied one is usually harmless (`create or replace`, `on conflict do nothing`) but they're not designed to be re-run out of order.
 3. In **Project Settings → API**, copy the **Project URL** and **anon public** key.
 
 ### 2. Configure environment variables
@@ -155,7 +155,9 @@ supabase/
                  0008 opportunities table (jobs/internships/gigs/freelance board),
                  0009 weekly dues-reminder cron schedule (needs manual edits, see step 6),
                  0010 notifications table + triggers + Realtime (announcements/
-                 opportunities/election-open fan out to a per-member bell)
+                 opportunities/election-open fan out to a per-member bell),
+                 0011 public (anon) read access to events, for the public
+                 site's live "More on the Calendar" list
   functions/
     send-announcement-email/  Edge Function: verifies caller is staff,
                                sends via Resend, logs to email_log

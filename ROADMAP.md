@@ -14,7 +14,7 @@ Being built in phases, each independently verified (`tsc -b`, `lint`, `build`, a
 - [x] **Phase 2** — Opportunities / Gigs board (§2.1)
 - [x] **Phase 3** — Automated dues reminder emails (§2.3)
 - [x] **Phase 4** — Persisted notifications table + realtime bell (§2.2)
-- [ ] **Phase 5** — Public site ↔ dashboard content unification (§2.4)
+- [x] **Phase 5** — Public site ↔ dashboard content unification (§2.4)
 - [ ] **Phase 6** — Engineering hygiene: Vitest + first tests, error boundary, backup routine doc (§3.1–3.3)
 - [ ] **Phase 7** — Remaining Tier 4 items where genuinely doable without a human in the loop (PWA, tablet sidebar default); command-palette and real screen-reader hardware testing stay explicitly deferred (see notes in that phase)
 
@@ -67,11 +67,11 @@ The dues tracker (`Finance/Dues`) is fully manual today — a leader has to noti
 - **Fix:** a scheduled Edge Function (Supabase Cron / `pg_cron`, both free-tier available) that runs weekly, queries `membership_dues` for `status != 'paid' and due_date < now() + interval '7 days'`, and sends a reminder email per member via the same Resend call pattern already proven in `send-announcement-email`.
 - **Effort:** S–M — mostly copy-adapt of an Edge Function that's already been written once.
 
-### 2.4 Public site ↔ dashboard content unification
-The public `skills.html` and events/countdown content on `index.html` are hand-maintained static HTML, while the dashboard already has live `learning_resources` and `events` tables covering overlapping ground — meaning leaders currently have to update content in two places by hand and they will drift.
-- **Fix (lower risk, do first):** have the public site's events countdown widget (`js/countdown.js`) fetch from the dashboard's `events` table via the anon key (read-only, already public-safe data) instead of a hardcoded date.
-- **Fix (bigger, optional):** same for `skills.html` pulling from `learning_resources`.
-- **Effort:** S for the events widget, M if extended to skills content. Explicitly optional — the current static pages work fine, this is a maintenance-burden reduction, not a functionality gap.
+### 2.4 Public site ↔ dashboard content unification ✅ (done, delivered differently than first scoped)
+Original plan assumed the events "countdown" widget could just point at the `events` table. On inspection that was wrong: `js/countdown.js`'s two cards are permanent recurring-schedule facts (Thu/Fri weekly meeting, Wed/Sat trainings) with their own branded images/video, not discrete dated events — retrofitting them would have replaced real evergreen content with generic listings, a regression, not a fix. Left them untouched.
+- **What shipped instead:** a new, additive "More on the Calendar" section below the two evergreen cards, fed live from the dashboard's `events` table (one-time events — elections, guest talks, hackathons — that a Leader posts once in the dashboard and it now shows up publicly with no HTML edit). Added `events: public read` RLS policy (`0011_events_public_read.sql`) since event details aren't sensitive; the section stays hidden entirely when there are zero upcoming one-time events, so it never shows an empty gap.
+- **`skills.html` → `learning_resources` pull:** still genuinely optional per the original note — skipped for this pass, current static page works fine.
+- Verified live: mocked the public anon `events` query both with and without upcoming rows — section renders/hides correctly, zero console errors.
 
 ---
 

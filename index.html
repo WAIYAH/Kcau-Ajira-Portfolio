@@ -556,6 +556,13 @@
                     </div>
                 </div>
 
+                <!-- More on the calendar: live one-time events from the dashboard,
+                     hidden until populated (see js/upcoming-events.js) -->
+                <div id="dynamic-events-list" class="mt-10 max-w-5xl mx-auto hidden">
+                    <h3 class="text-lg font-bold text-white text-center mb-5">More on the Calendar</h3>
+                    <div data-dynamic-events-grid class="grid grid-cols-1 md:grid-cols-3 gap-5"></div>
+                </div>
+
                 <!-- Video Preview -->
                 <div class="mt-14 max-w-3xl mx-auto reveal-scale">
                     <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 text-center">
@@ -1066,5 +1073,6 @@
     <script type="module" src="js/hero-slider.js"></script>
     <script type="module" src="js/countdown.js"></script>
     <script type="module" src="js/animations.js"></script>
+    <script type="module" src="js/upcoming-events.js"></script>
 </body>
 </html>
