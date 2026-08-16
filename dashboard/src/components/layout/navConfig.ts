@@ -5,6 +5,7 @@ import {
   CalendarDays,
   Vote,
   GraduationCap,
+  Briefcase,
   Users,
   Wallet,
   Megaphone,
@@ -22,6 +23,7 @@ export interface NavLinkItem {
 export const memberLinks: NavLinkItem[] = [
   { to: '/', label: 'Overview', icon: LayoutDashboard, end: true },
   { to: '/profile', label: 'My Profile', icon: UserCircle },
+  { to: '/opportunities', label: 'Opportunities', icon: Briefcase },
   { to: '/events', label: 'Events', icon: CalendarDays },
   { to: '/voting', label: 'Voting', icon: Vote },
   { to: '/learning', label: 'Learning Hub', icon: GraduationCap },

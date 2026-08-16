@@ -171,6 +171,28 @@ export interface LearningProgress {
   updated_at: string
 }
 
+export type OpportunityType = 'job' | 'internship' | 'gig' | 'freelance' | 'scholarship'
+export type OpportunityStatus = 'open' | 'closed'
+
+export interface Opportunity {
+  id: string
+  title: string
+  organization: string
+  type: OpportunityType
+  location: string | null
+  is_remote: boolean
+  skill_tags: string[]
+  description: string
+  apply_url: string | null
+  apply_email: string | null
+  status: OpportunityStatus
+  expires_at: string | null
+  posted_by: string | null
+  created_at: string
+  updated_at: string
+  poster?: Pick<Profile, 'full_name'> | null
+}
+
 export type InquiryType = 'contact' | 'join_interest'
 export type InquiryStatus = 'new' | 'in_progress' | 'resolved'
 

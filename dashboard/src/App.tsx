@@ -20,6 +20,7 @@ import NotFound from './pages/NotFound'
 // what has to download before someone can even see the login screen.
 const Overview = lazy(() => import('./pages/Overview'))
 const Profile = lazy(() => import('./pages/Profile'))
+const Opportunities = lazy(() => import('./pages/opportunities/Opportunities'))
 const Events = lazy(() => import('./pages/events/Events'))
 const Voting = lazy(() => import('./pages/voting/Voting'))
 const Learning = lazy(() => import('./pages/learning/Learning'))
@@ -56,6 +57,7 @@ export default function App() {
                   <Route element={<DashboardLayout />}>
                     <Route index element={<Overview />} />
                     <Route path="/profile" element={<Profile />} />
+                    <Route path="/opportunities" element={<Opportunities />} />
                     <Route path="/events" element={<Events />} />
                     <Route path="/voting" element={<Voting />} />
                     <Route path="/learning" element={<Learning />} />

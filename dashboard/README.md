@@ -24,7 +24,7 @@ UI/UX redesign — see [`improve.md`](improve.md) for the full plan and rational
 ### 1. Create a Supabase project
 
 1. Go to [supabase.com](https://supabase.com), create a free project.
-2. In the SQL Editor, run every file in [`supabase/migrations/`](supabase/migrations/) **in order** (0001 → 0007). Each is safe to run once; re-running an already-applied one is usually harmless (`create or replace`, `on conflict do nothing`) but they're not designed to be re-run out of order.
+2. In the SQL Editor, run every file in [`supabase/migrations/`](supabase/migrations/) **in order** (0001 → 0008). Each is safe to run once; re-running an already-applied one is usually harmless (`create or replace`, `on conflict do nothing`) but they're not designed to be re-run out of order.
 3. In **Project Settings → API**, copy the **Project URL** and **anon public** key.
 
 ### 2. Configure environment variables
@@ -100,7 +100,7 @@ src/
     useNotificationSignals.ts   Header notification-bell signals
   components/
     ui/                        Design-system primitives — Card, Button, Input, Select,
-                                Textarea, Modal, Drawer, Dropdown, Tooltip, Skeleton,
+                                Textarea, TagInput, Modal, Drawer, Dropdown, Tooltip, Skeleton,
                                 Avatar, EmptyState, ProgressRing (see Design system above)
     Logo.tsx                    Shared brand mark (sidebar, header, auth pages)
     ProtectedRoute.tsx           Redirects unauthenticated / pending users
@@ -119,6 +119,8 @@ src/
     auth/                     Login, SignUp, ForgotPassword, PendingApproval
     Overview.tsx              Role-aware landing dashboard
     Profile.tsx               Self-service profile editor
+    opportunities/Opportunities.tsx  Jobs/internships/gigs/freelance board, skill-matched
+                                      "Recommended for you" (ROADMAP.md Phase 2)
     members/MemberList.tsx    Member management (Phase 1)
     finance/                  Ledger, Dues, Budgets tabs (Phase 2)
     events/Events.tsx         Events + RSVP (Phase 3)
@@ -131,7 +133,8 @@ supabase/
   migrations/    0001 schema+RLS, 0002/0003 bootstrap-admin trigger fixes,
                  0004 receipts storage bucket, 0005 reports storage bucket,
                  0006 inquiries table (public Contact + Join forms -> Inbox),
-                 0007 profile bio/skills/CV columns + avatars/cvs storage buckets
+                 0007 profile bio/skills/CV columns + avatars/cvs storage buckets,
+                 0008 opportunities table (jobs/internships/gigs/freelance board)
   functions/
     send-announcement-email/  Edge Function: verifies caller is staff,
                                sends via Resend, logs to email_log

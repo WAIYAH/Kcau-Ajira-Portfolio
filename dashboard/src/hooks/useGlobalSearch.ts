@@ -32,9 +32,10 @@ export function useGlobalSearch(query: string, includeMembers: boolean) {
     setLoading(true)
 
     const timeout = window.setTimeout(async () => {
-      const [eventsRes, announcementsRes, membersRes] = await Promise.all([
+      const [eventsRes, announcementsRes, opportunitiesRes, membersRes] = await Promise.all([
         supabase.from('events').select('id, title').ilike('title', `%${trimmed}%`).limit(5),
         supabase.from('announcements').select('id, title').ilike('title', `%${trimmed}%`).limit(5),
+        supabase.from('opportunities').select('id, title').ilike('title', `%${trimmed}%`).limit(5),
         includeMembers
           ? supabase
               .from('profiles')
@@ -57,6 +58,12 @@ export function useGlobalSearch(query: string, includeMembers: boolean) {
           label: row.title,
           sublabel: 'Announcement',
           to: '/communications/announcements',
+        })),
+        ...(opportunitiesRes.data ?? []).map((row) => ({
+          id: `opp-${row.id}`,
+          label: row.title,
+          sublabel: 'Opportunity',
+          to: '/opportunities',
         })),
         ...(membersRes.data ?? []).map((row) => ({
           id: `member-${row.id}`,

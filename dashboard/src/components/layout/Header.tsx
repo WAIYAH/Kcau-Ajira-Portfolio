@@ -75,7 +75,7 @@ export default function Header({ onOpenMobileNav }: HeaderProps) {
           onChange={(e) => setQuery(e.target.value)}
           onFocus={() => setSearchFocused(true)}
           onBlur={() => window.setTimeout(() => setSearchFocused(false), 150)}
-          placeholder={isStaff ? 'Search events, announcements, members…' : 'Search events, announcements…'}
+          placeholder={isStaff ? 'Search events, opportunities, members…' : 'Search events, opportunities…'}
           aria-label="Search"
           className="h-10 w-full rounded-control border border-border bg-bg pl-9 pr-9 text-sm text-fg placeholder:text-fg-subtle transition-colors focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary"
         />

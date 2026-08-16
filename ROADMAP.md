@@ -11,7 +11,7 @@ Items are grouped by payoff-vs-effort, not by feature area, so you can work top-
 Being built in phases, each independently verified (`tsc -b`, `lint`, `build`, and live verification for anything user-facing) and committed:
 
 - [x] **Phase 1** — CI workflow, form honeypot, storage cleanup on replace, route-level code splitting, member search
-- [ ] **Phase 2** — Opportunities / Gigs board (§2.1)
+- [x] **Phase 2** — Opportunities / Gigs board (§2.1)
 - [ ] **Phase 3** — Automated dues reminder emails (§2.3)
 - [ ] **Phase 4** — Persisted notifications table + realtime bell (§2.2)
 - [ ] **Phase 5** — Public site ↔ dashboard content unification (§2.4)

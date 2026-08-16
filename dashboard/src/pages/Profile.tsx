@@ -1,6 +1,6 @@
-import { useState, type ChangeEvent, type FormEvent, type KeyboardEvent } from 'react'
+import { useState, type ChangeEvent, type FormEvent } from 'react'
 import { format } from 'date-fns'
-import { Camera, FileText, Loader2, Trash2, X } from 'lucide-react'
+import { Camera, FileText, Loader2, Trash2 } from 'lucide-react'
 import { supabase } from '@/lib/supabaseClient'
 import { useAuth } from '@/contexts/AuthContext'
 import { RoleBadge, StatusBadge } from '@/components/Badge'
@@ -9,6 +9,7 @@ import Input from '@/components/ui/Input'
 import Textarea from '@/components/ui/Textarea'
 import Button from '@/components/ui/Button'
 import Avatar from '@/components/ui/Avatar'
+import TagInput from '@/components/ui/TagInput'
 
 const MAX_CV_BYTES = 5 * 1024 * 1024
 
@@ -35,7 +36,6 @@ export default function Profile() {
   const [yearOfStudy, setYearOfStudy] = useState(profile?.year_of_study ?? '')
   const [bio, setBio] = useState(profile?.bio ?? '')
   const [skills, setSkills] = useState<string[]>(profile?.skills ?? [])
-  const [skillInput, setSkillInput] = useState('')
   const [saving, setSaving] = useState(false)
   const [message, setMessage] = useState<string | null>(null)
 
@@ -60,28 +60,6 @@ export default function Profile() {
     else {
       setMessage('Profile updated.')
       await refreshProfile()
-    }
-  }
-
-  function addSkill() {
-    const value = skillInput.trim()
-    if (!value) return
-    if (!skills.some((s) => s.toLowerCase() === value.toLowerCase())) {
-      setSkills([...skills, value])
-    }
-    setSkillInput('')
-  }
-
-  function removeSkill(skill: string) {
-    setSkills(skills.filter((s) => s !== skill))
-  }
-
-  function handleSkillKeyDown(e: KeyboardEvent<HTMLInputElement>) {
-    if (e.key === 'Enter' || e.key === ',') {
-      e.preventDefault()
-      addSkill()
-    } else if (e.key === 'Backspace' && !skillInput && skills.length > 0) {
-      setSkills(skills.slice(0, -1))
     }
   }
 
@@ -288,34 +266,10 @@ export default function Profile() {
               Skills
             </label>
             <p className="mt-0.5 text-xs text-fg-muted">Add skills one at a time — press Enter or comma to add.</p>
-
-            {skills.length > 0 && (
-              <div className="mt-3 flex flex-wrap gap-1.5">
-                {skills.map((skill) => (
-                  <span
-                    key={skill}
-                    className="inline-flex items-center gap-1 rounded-full bg-primary/10 py-0.5 pl-2.5 pr-1.5 text-xs font-medium text-primary"
-                  >
-                    {skill}
-                    <button
-                      type="button"
-                      onClick={() => removeSkill(skill)}
-                      className="rounded-full p-0.5 hover:bg-primary/20"
-                      aria-label={`Remove ${skill}`}
-                    >
-                      <X size={12} strokeWidth={2.5} aria-hidden="true" />
-                    </button>
-                  </span>
-                ))}
-              </div>
-            )}
-
-            <Input
+            <TagInput
               id="skill-input"
-              value={skillInput}
-              onChange={(e) => setSkillInput(e.target.value)}
-              onKeyDown={handleSkillKeyDown}
-              onBlur={addSkill}
+              values={skills}
+              onChange={setSkills}
               placeholder="e.g. Python, Graphic design, Public speaking"
               className="mt-3"
             />
