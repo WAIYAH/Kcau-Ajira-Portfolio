@@ -150,7 +150,7 @@ export default function Announcements() {
             Also send by email
           </label>
 
-          {error && <p className="text-sm text-danger sm:col-span-2">{error}</p>}
+          {error && <p className="text-sm text-danger-ink sm:col-span-2">{error}</p>}
           {notice && <p className="text-sm text-fg-muted sm:col-span-2">{notice}</p>}
 
           <div className="sm:col-span-2">
@@ -214,7 +214,7 @@ export default function Announcements() {
                       <span
                         className={cn(
                           'rounded-full px-2.5 py-0.5 text-xs font-medium capitalize',
-                          entry.status === 'sent' ? 'bg-success/15 text-success' : 'bg-danger/15 text-danger',
+                          entry.status === 'sent' ? 'bg-success/15 text-success-ink' : 'bg-danger/15 text-danger-ink',
                         )}
                       >
                         {entry.status}

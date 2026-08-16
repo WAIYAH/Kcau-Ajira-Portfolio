@@ -110,7 +110,7 @@ export default function SidebarNav({ collapsed, onNavigate, showCollapseToggle =
                 type="button"
                 onClick={() => signOut()}
                 aria-label="Sign out"
-                className="rounded-control p-2 text-fg-subtle transition-colors hover:bg-danger/10 hover:text-danger"
+                className="rounded-control p-2 text-fg-subtle transition-colors hover:bg-danger/10 hover:text-danger-ink"
               >
                 <LogOut size={16} strokeWidth={1.75} />
               </button>

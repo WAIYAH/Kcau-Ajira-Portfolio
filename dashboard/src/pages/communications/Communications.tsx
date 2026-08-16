@@ -35,7 +35,7 @@ export default function Communications() {
         >
           Inbox
           {newCount > 0 && (
-            <span className="rounded-full bg-secondary/15 px-2 py-0.5 text-xs font-semibold text-secondary">{newCount}</span>
+            <span className="rounded-full bg-secondary/15 px-2 py-0.5 text-xs font-semibold text-secondary-ink">{newCount}</span>
           )}
         </NavLink>
         <NavLink

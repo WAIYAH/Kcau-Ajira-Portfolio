@@ -130,7 +130,7 @@ export default function MemberDrawer({ member, onClose, onSaved }: MemberDrawerP
           {!isAdmin && <p className="mt-1 text-xs text-fg-subtle">Only an admin can grant the admin role.</p>}
         </div>
 
-        {error && <p className="text-sm text-danger">{error}</p>}
+        {error && <p className="text-sm text-danger-ink">{error}</p>}
 
         <Button onClick={handleSave} loading={saving} disabled={isSelf} className="w-full">
           {saving ? 'Saving…' : 'Save changes'}

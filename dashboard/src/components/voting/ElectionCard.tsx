@@ -10,7 +10,7 @@ import Input from '@/components/ui/Input'
 
 const statusStyles: Record<ElectionStatus, string> = {
   draft: 'bg-fg/10 text-fg-muted',
-  open: 'bg-success/15 text-success',
+  open: 'bg-success/15 text-success-ink',
   closed: 'bg-fg/10 text-fg-muted',
 }
 
@@ -137,7 +137,7 @@ export default function ElectionCard({
             <Button
               size="sm"
               onClick={() => updateStatus('open')}
-              className="bg-success text-white hover:bg-success"
+              className="bg-success-solid text-white hover:bg-success-solid"
             >
               Open voting
             </Button>
@@ -213,12 +213,12 @@ export default function ElectionCard({
         })}
       </div>
 
-      {voteError && <p className="mt-3 text-sm text-danger">{voteError}</p>}
+      {voteError && <p className="mt-3 text-sm text-danger-ink">{voteError}</p>}
 
       {!results && election.status === 'open' && !isStaff && (
         <p className="mt-4 text-xs text-fg-subtle">Results are hidden until voting closes.</p>
       )}
-      {resultsError && <p className="mt-3 text-sm text-danger">{resultsError}</p>}
+      {resultsError && <p className="mt-3 text-sm text-danger-ink">{resultsError}</p>}
     </Card>
   )
 }

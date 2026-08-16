@@ -111,7 +111,7 @@ export default function MemberList() {
         </Select>
       </div>
 
-      {error && <p className="text-sm text-danger">{error}</p>}
+      {error && <p className="text-sm text-danger-ink">{error}</p>}
 
       <Card padding="none" className="overflow-x-auto">
         <table className="w-full text-left text-sm">
@@ -171,7 +171,7 @@ export default function MemberList() {
                           size="sm"
                           onClick={() => quickApprove(member)}
                           loading={busyId === member.id}
-                          className="bg-success/15 text-success hover:bg-success/25"
+                          className="bg-success/15 text-success-ink hover:bg-success/25"
                         >
                           {busyId === member.id ? 'Approving…' : 'Approve'}
                         </Button>

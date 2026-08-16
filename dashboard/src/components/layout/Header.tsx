@@ -129,7 +129,7 @@ export default function Header({ onOpenMobileNav }: HeaderProps) {
               aria-pressed={theme === opt.value}
               className={cn(
                 'rounded-control p-1.5 transition-[color,background-color,transform] active:scale-90',
-                theme === opt.value ? 'bg-primary text-white' : 'text-fg-subtle hover:text-fg',
+                theme === opt.value ? 'bg-primary-solid text-white' : 'text-fg-subtle hover:text-fg',
               )}
             >
               <opt.icon size={15} strokeWidth={1.75} />
@@ -139,11 +139,15 @@ export default function Header({ onOpenMobileNav }: HeaderProps) {
 
         <Dropdown
           align="end"
+          triggerLabel={notificationCount > 0 ? `Notifications (${notificationCount} unread)` : 'Notifications'}
           trigger={
             <span className="relative flex h-10 w-10 items-center justify-center rounded-control text-fg-muted transition-colors hover:bg-fg/5 hover:text-fg">
-              <Bell size={19} strokeWidth={1.75} />
+              <Bell size={19} strokeWidth={1.75} aria-hidden="true" />
               {notificationCount > 0 && (
-                <span className="absolute right-1.5 top-1.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-danger px-1 text-[10px] font-semibold text-white">
+                <span
+                  className="absolute right-1.5 top-1.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-danger-solid px-1 text-[10px] font-semibold text-white"
+                  aria-hidden="true"
+                >
                   {notificationCount > 9 ? '9+' : notificationCount}
                 </span>
               )}
@@ -154,11 +158,14 @@ export default function Header({ onOpenMobileNav }: HeaderProps) {
 
         <Dropdown
           align="end"
+          triggerLabel={`Account menu for ${profile?.full_name ?? 'your account'}`}
           trigger={
             <span className="flex items-center gap-2 rounded-control py-1 pl-1 pr-2 transition-colors hover:bg-fg/5">
               <Avatar name={profile?.full_name ?? '?'} size="sm" />
-              <span className="hidden text-sm font-medium text-fg lg:block">{profile?.full_name?.split(' ')[0]}</span>
-              <ChevronDown size={14} strokeWidth={1.75} className="hidden text-fg-subtle lg:block" />
+              <span className="hidden text-sm font-medium text-fg lg:block" aria-hidden="true">
+                {profile?.full_name?.split(' ')[0]}
+              </span>
+              <ChevronDown size={14} strokeWidth={1.75} className="hidden text-fg-subtle lg:block" aria-hidden="true" />
             </span>
           }
           items={accountItems}

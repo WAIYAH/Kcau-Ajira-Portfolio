@@ -10,9 +10,9 @@ import EmptyState from '@/components/ui/EmptyState'
 import { cn } from '@/lib/cn'
 
 const statusStyles: Record<InquiryStatus, string> = {
-  new: 'bg-secondary/15 text-secondary',
+  new: 'bg-secondary/15 text-secondary-ink',
   in_progress: 'bg-primary/15 text-primary',
-  resolved: 'bg-success/15 text-success',
+  resolved: 'bg-success/15 text-success-ink',
 }
 
 const typeLabels: Record<InquiryType, string> = {
@@ -70,7 +70,7 @@ export default function Inbox() {
         <h1 className="font-display text-2xl font-bold text-fg">Inbox</h1>
         <p className="mt-1 text-sm text-fg-muted">
           Real submissions from the public website's Contact and Join forms.
-          {newCount > 0 && <span className="ml-1 font-medium text-secondary">{newCount} new.</span>}
+          {newCount > 0 && <span className="ml-1 font-medium text-secondary-ink">{newCount} new.</span>}
         </p>
       </div>
 
@@ -88,7 +88,7 @@ export default function Inbox() {
         </Select>
       </div>
 
-      {error && <p className="text-sm text-danger">{error}</p>}
+      {error && <p className="text-sm text-danger-ink">{error}</p>}
 
       {loading ? (
         <p className="text-sm text-fg-subtle">Loading inquiries…</p>
@@ -143,7 +143,7 @@ export default function Inbox() {
                       size="sm"
                       onClick={() => updateStatus(inquiry.id, 'resolved')}
                       loading={busyId === inquiry.id}
-                      className="bg-success text-white hover:bg-success"
+                      className="bg-success-solid text-white hover:bg-success-solid"
                     >
                       Mark resolved
                     </Button>

@@ -190,7 +190,7 @@ export default function Events() {
                 className={cn(
                   'rounded-control border px-3 py-1.5 text-xs font-medium transition-[color,background-color,transform] active:scale-95',
                   mine?.status === opt.value
-                    ? 'border-primary bg-primary text-white'
+                    ? 'border-primary bg-primary-solid text-white'
                     : 'border-border text-fg-muted hover:bg-fg/5',
                 )}
               >
@@ -208,7 +208,7 @@ export default function Events() {
                 <button onClick={() => startEdit(event)} className="text-xs font-medium text-primary hover:underline">
                   Edit
                 </button>
-                <button onClick={() => deleteEvent(event.id)} className="text-xs font-medium text-danger hover:underline">
+                <button onClick={() => deleteEvent(event.id)} className="text-xs font-medium text-danger-ink hover:underline">
                   Delete
                 </button>
               </div>
@@ -326,7 +326,7 @@ export default function Events() {
               />
             </div>
 
-            {error && <p className="text-sm text-danger sm:col-span-2">{error}</p>}
+            {error && <p className="text-sm text-danger-ink sm:col-span-2">{error}</p>}
 
             <div className="sm:col-span-2">
               <Button type="submit" loading={saving}>
@@ -337,7 +337,7 @@ export default function Events() {
         </Card>
       )}
 
-      {!showForm && error && <p className="text-sm text-danger">{error}</p>}
+      {!showForm && error && <p className="text-sm text-danger-ink">{error}</p>}
 
       {loading ? (
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">

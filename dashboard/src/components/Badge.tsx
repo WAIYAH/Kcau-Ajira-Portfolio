@@ -1,9 +1,9 @@
 import type { MemberRole, MemberStatus } from '../types'
 
 const statusStyles: Record<MemberStatus, string> = {
-  pending: 'bg-secondary/15 text-secondary',
-  active: 'bg-success/15 text-success',
-  suspended: 'bg-danger/15 text-danger',
+  pending: 'bg-secondary/15 text-secondary-ink',
+  active: 'bg-success/15 text-success-ink',
+  suspended: 'bg-danger/15 text-danger-ink',
   alumni: 'bg-fg/10 text-fg-muted',
 }
 

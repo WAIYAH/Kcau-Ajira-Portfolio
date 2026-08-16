@@ -37,7 +37,7 @@ export default function ForgotPassword() {
             <Input id="email" type="email" required value={email} onChange={(e) => setEmail(e.target.value)} className="mt-1" />
           </div>
 
-          {error && <p className="text-sm text-danger">{error}</p>}
+          {error && <p className="text-sm text-danger-ink">{error}</p>}
 
           <Button type="submit" loading={submitting} className="w-full">
             {submitting ? 'Sending…' : 'Send reset link'}

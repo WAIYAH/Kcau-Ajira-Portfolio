@@ -20,8 +20,8 @@ const progressLabels: Record<ProgressStatus, string> = {
 
 const progressStyles: Record<ProgressStatus, string> = {
   not_started: 'bg-fg/10 text-fg-muted',
-  in_progress: 'bg-secondary/15 text-secondary',
-  done: 'bg-success/15 text-success',
+  in_progress: 'bg-secondary/15 text-secondary-ink',
+  done: 'bg-success/15 text-success-ink',
 }
 
 const typeIcons: Record<LearningResourceType, string> = {
@@ -232,7 +232,7 @@ export default function Learning() {
               />
             </div>
 
-            {error && <p className="text-sm text-danger sm:col-span-2">{error}</p>}
+            {error && <p className="text-sm text-danger-ink sm:col-span-2">{error}</p>}
 
             <div className="sm:col-span-2">
               <Button type="submit" loading={saving}>
@@ -243,7 +243,7 @@ export default function Learning() {
         </Card>
       )}
 
-      {!showForm && error && <p className="text-sm text-danger">{error}</p>}
+      {!showForm && error && <p className="text-sm text-danger-ink">{error}</p>}
 
       <div className="flex flex-wrap gap-2" role="group" aria-label="Filter by category">
         <button
@@ -251,7 +251,7 @@ export default function Learning() {
           aria-pressed={categoryFilter === 'all'}
           className={cn(
             'rounded-full px-3 py-1.5 text-xs font-medium transition-[color,background-color,transform] active:scale-95',
-            categoryFilter === 'all' ? 'bg-primary text-white' : 'bg-fg/10 text-fg-muted hover:bg-fg/15',
+            categoryFilter === 'all' ? 'bg-primary-solid text-white' : 'bg-fg/10 text-fg-muted hover:bg-fg/15',
           )}
         >
           All
@@ -263,7 +263,7 @@ export default function Learning() {
             aria-pressed={categoryFilter === c}
             className={cn(
               'rounded-full px-3 py-1.5 text-xs font-medium transition-[color,background-color,transform] active:scale-95',
-              categoryFilter === c ? 'bg-primary text-white' : 'bg-fg/10 text-fg-muted hover:bg-fg/15',
+              categoryFilter === c ? 'bg-primary-solid text-white' : 'bg-fg/10 text-fg-muted hover:bg-fg/15',
             )}
           >
             {c}
@@ -317,7 +317,7 @@ export default function Learning() {
                             aria-pressed={status === s}
                             className={cn(
                               'rounded-control border px-2 py-1 text-[11px] font-medium transition-[color,background-color,transform] active:scale-95',
-                              status === s ? 'border-primary bg-primary text-white' : 'border-border text-fg-muted hover:bg-fg/5',
+                              status === s ? 'border-primary bg-primary-solid text-white' : 'border-border text-fg-muted hover:bg-fg/5',
                             )}
                           >
                             {progressLabels[s]}
@@ -328,7 +328,7 @@ export default function Learning() {
                       {isStaff && (
                         <button
                           onClick={() => deleteResource(resource.id)}
-                          className="mt-3 text-[11px] font-medium text-danger hover:underline"
+                          className="mt-3 text-[11px] font-medium text-danger-ink hover:underline"
                         >
                           Remove
                         </button>

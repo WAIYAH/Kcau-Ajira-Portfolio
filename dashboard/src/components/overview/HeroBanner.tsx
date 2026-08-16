@@ -52,7 +52,7 @@ export default function HeroBanner({ firstName, statusLine, isStaff, pendingAppr
                 <action.icon size={15} strokeWidth={1.75} className="text-primary" aria-hidden="true" />
                 {action.label}
                 {!!action.badge && (
-                  <span className="flex h-4 min-w-4 items-center justify-center rounded-full bg-danger px-1 text-[10px] font-semibold text-white">
+                  <span className="flex h-4 min-w-4 items-center justify-center rounded-full bg-danger-solid px-1 text-[10px] font-semibold text-white">
                     {action.badge > 9 ? '9+' : action.badge}
                   </span>
                 )}

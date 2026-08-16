@@ -19,9 +19,9 @@ function statusFor(amountDue: number, amountPaid: number): MembershipDue['status
 }
 
 const statusStyles: Record<MembershipDue['status'], string> = {
-  unpaid: 'bg-danger/15 text-danger',
-  partial: 'bg-secondary/15 text-secondary',
-  paid: 'bg-success/15 text-success',
+  unpaid: 'bg-danger/15 text-danger-ink',
+  partial: 'bg-secondary/15 text-secondary-ink',
+  paid: 'bg-success/15 text-success-ink',
 }
 
 export default function Dues() {
@@ -188,7 +188,7 @@ export default function Dues() {
               <Input id="due-date" type="date" value={dueDate} onChange={(e) => setDueDate(e.target.value)} className="mt-1" />
             </div>
 
-            {error && <p className="text-sm text-danger sm:col-span-2">{error}</p>}
+            {error && <p className="text-sm text-danger-ink sm:col-span-2">{error}</p>}
 
             <div className="sm:col-span-2">
               <Button type="submit" loading={saving}>
@@ -199,7 +199,7 @@ export default function Dues() {
         </Card>
       )}
 
-      {!showForm && error && <p className="text-sm text-danger">{error}</p>}
+      {!showForm && error && <p className="text-sm text-danger-ink">{error}</p>}
 
       <Card padding="none" className="overflow-x-auto">
         <table className="w-full text-left text-sm">
@@ -272,7 +272,7 @@ export default function Dues() {
                           <Button
                             size="sm"
                             onClick={() => recordPayment(due)}
-                            className="bg-success text-white hover:bg-success"
+                            className="bg-success-solid text-white hover:bg-success-solid"
                           >
                             Save
                           </Button>

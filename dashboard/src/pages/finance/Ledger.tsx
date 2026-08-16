@@ -219,7 +219,7 @@ export default function Ledger() {
               />
             </div>
 
-            {error && <p className="text-sm text-danger sm:col-span-2">{error}</p>}
+            {error && <p className="text-sm text-danger-ink sm:col-span-2">{error}</p>}
 
             <div className="sm:col-span-2">
               <Button type="submit" loading={saving}>
@@ -230,7 +230,7 @@ export default function Ledger() {
         </Card>
       )}
 
-      {!showForm && error && <p className="text-sm text-danger">{error}</p>}
+      {!showForm && error && <p className="text-sm text-danger-ink">{error}</p>}
 
       <Card padding="none" className="overflow-x-auto">
         <table className="w-full text-left text-sm">
@@ -271,7 +271,7 @@ export default function Ledger() {
                   <td
                     className={cn(
                       'whitespace-nowrap px-4 py-3 text-right font-medium',
-                      t.type === 'income' ? 'text-success' : 'text-danger',
+                      t.type === 'income' ? 'text-success-ink' : 'text-danger-ink',
                     )}
                   >
                     {t.type === 'income' ? '+' : '-'}
@@ -285,7 +285,7 @@ export default function Ledger() {
                         </button>
                       )}
                       {isAdmin && (
-                        <button onClick={() => deleteTransaction(t.id)} className="text-xs font-medium text-danger hover:underline">
+                        <button onClick={() => deleteTransaction(t.id)} className="text-xs font-medium text-danger-ink hover:underline">
                           Delete
                         </button>
                       )}

@@ -9,13 +9,37 @@
   --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
   --font-display: 'Plus Jakarta Sans', 'Inter', ui-sans-serif, system-ui, sans-serif;
 
-  /* Brand accents */
+  /*
+   * Brand accents. Each status color (secondary/success/danger) has three
+   * roles that need genuinely different values to all pass WCAG AA — one
+   * value can't serve all three, verified by contrast audit:
+   *   - base: vivid, for icons/chart series/tint backgrounds (badge pills use
+   *     this at 15% opacity) — not held to text-contrast rules on its own.
+   *   - -ink: darker (light mode) text color for that same badge/pill, and
+   *     for any other small readable text (error messages, delete links,
+   *     amount +/- coloring). Darkening the *tint* instead doesn't work: a
+   *     15%-opacity blend of a darker base is still proportionally close to
+   *     its own tint, so contrast against "a lightened version of itself"
+   *     stays roughly constant regardless of how dark the base is — the text
+   *     color has to come from an independent, deliberately darker value.
+   *   - -solid: for solid white-text button/badge fills. Dark-mode base
+   *     colors are intentionally light (so they read well as *text* on a
+   *     dark page) which makes them fail as backgrounds *for* white text —
+   *     the opposite requirement. -solid is the same value in both themes
+   *     since white-on-X contrast doesn't depend on page theme.
+   */
   --color-primary: #4f46e5;
   --color-primary-hover: #4338ca;
+  --color-primary-solid: #4f46e5;
   --color-accent: #06b6d4;
   --color-secondary: #f59e0b;
+  --color-secondary-ink: #78350f;
   --color-success: #10b981;
+  --color-success-ink: #065f46;
+  --color-success-solid: #047857;
   --color-danger: #ef4444;
+  --color-danger-ink: #991b1b;
+  --color-danger-solid: #dc2626;
 
   /* Surfaces & text (light defaults; overridden under .dark below) */
   --color-bg: #f6f7fb;
@@ -25,7 +49,7 @@
   --color-border-strong: #d6d9e4;
   --color-fg: #0f1222;
   --color-fg-muted: #6b7280;
-  --color-fg-subtle: #9ca3af;
+  --color-fg-subtle: #616b79;
 
   /*
    * Radius & elevation scale, deliberately namespaced (rounded-control/surface,
@@ -51,10 +75,16 @@
 
   --color-primary: #818cf8;
   --color-primary-hover: #6366f1;
+  --color-primary-solid: #4f46e5;
   --color-accent: #22d3ee;
   --color-secondary: #fbbf24;
+  --color-secondary-ink: #fbbf24;
   --color-success: #34d399;
+  --color-success-ink: #34d399;
+  --color-success-solid: #047857;
   --color-danger: #f87171;
+  --color-danger-ink: #f87171;
+  --color-danger-solid: #dc2626;
 
   --color-bg: #0b1120;
   --color-surface: #141b2e;
@@ -63,7 +93,7 @@
   --color-border-strong: #33405f;
   --color-fg: #eef1fa;
   --color-fg-muted: #93a0c2;
-  --color-fg-subtle: #5c6788;
+  --color-fg-subtle: #7d88a8;
 
   --shadow-elevate-xs: 0 1px 2px 0 rgb(0 0 0 / 0.3);
   --shadow-elevate-sm: 0 1px 3px 0 rgb(0 0 0 / 0.4), 0 1px 2px -1px rgb(0 0 0 / 0.3);

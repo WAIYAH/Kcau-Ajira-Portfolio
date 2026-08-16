@@ -183,7 +183,7 @@ export default function Reports() {
         <p className="mt-1 text-sm text-fg-muted">Generate a CSV export, download it, and keep a history for later.</p>
       </div>
 
-      {error && <p className="text-sm text-danger">{error}</p>}
+      {error && <p className="text-sm text-danger-ink">{error}</p>}
 
       <div className="grid gap-4 sm:grid-cols-2">
         <Card padding="md">

@@ -72,6 +72,7 @@ export default function Tooltip({ label, children, side = 'right', disabled = fa
         createPortal(
           <span
             role="tooltip"
+            aria-hidden={!visible}
             style={coords ? { position: 'fixed', top: coords.top, left: coords.left } : undefined}
             className={cn(
               'pointer-events-none z-50 whitespace-nowrap rounded-control bg-fg px-2.5 py-1.5 text-xs font-medium text-bg shadow-elevate-md transition-opacity duration-150',

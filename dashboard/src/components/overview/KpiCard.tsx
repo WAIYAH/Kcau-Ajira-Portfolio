@@ -38,8 +38,8 @@ const accentClasses: Record<Accent, string> = {
 }
 
 const trendClasses: Record<TrendVisual['direction'], string> = {
-  up: 'text-success',
-  down: 'text-danger',
+  up: 'text-success-ink',
+  down: 'text-danger-ink',
   flat: 'text-fg-subtle',
 }
 
@@ -75,7 +75,11 @@ export default function KpiCard({ icon: Icon, label, value, hint, visual, accent
       className="h-full"
     >
       {to ? (
-        <Link to={to} className="block h-full">
+        <Link
+          to={to}
+          className="block h-full"
+          aria-label={[label, value, hint].filter(Boolean).join(', ')}
+        >
           {body}
         </Link>
       ) : (

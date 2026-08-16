@@ -32,7 +32,7 @@ export default function OpenElectionsCard({ elections }: { elections: OpenElecti
                 <span
                   className={cn(
                     'shrink-0 whitespace-nowrap rounded-full px-2 py-0.5 text-xs font-medium',
-                    closingSoon ? 'bg-danger/10 text-danger' : 'bg-fg/5 text-fg-muted',
+                    closingSoon ? 'bg-danger/10 text-danger-ink' : 'bg-fg/5 text-fg-muted',
                   )}
                 >
                   {daysLeft <= 0 ? 'Closes today' : `Closes in ${daysLeft}d`}

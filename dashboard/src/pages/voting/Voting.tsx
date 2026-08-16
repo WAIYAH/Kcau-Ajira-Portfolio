@@ -168,7 +168,7 @@ export default function Voting() {
               you're ready.
             </p>
 
-            {error && <p className="text-sm text-danger sm:col-span-2">{error}</p>}
+            {error && <p className="text-sm text-danger-ink sm:col-span-2">{error}</p>}
 
             <div className="sm:col-span-2">
               <Button type="submit" loading={saving}>
@@ -179,7 +179,7 @@ export default function Voting() {
         </Card>
       )}
 
-      {!showForm && error && <p className="text-sm text-danger">{error}</p>}
+      {!showForm && error && <p className="text-sm text-danger-ink">{error}</p>}
 
       {loading ? (
         <div className="space-y-4">

@@ -18,13 +18,15 @@ interface DropdownProps {
   trigger: ReactNode
   items: (DropdownItem | DropdownDivider)[]
   align?: 'start' | 'end'
+  /** Required when `trigger` has no visible text (icon-only triggers like the notification bell). */
+  triggerLabel?: string
 }
 
 function isDivider(item: DropdownItem | DropdownDivider): item is DropdownDivider {
   return 'divider' in item
 }
 
-export default function Dropdown({ trigger, items, align = 'end' }: DropdownProps) {
+export default function Dropdown({ trigger, items, align = 'end', triggerLabel }: DropdownProps) {
   const [open, setOpen] = useState(false)
   const rootRef = useRef<HTMLDivElement>(null)
 
@@ -51,6 +53,7 @@ export default function Dropdown({ trigger, items, align = 'end' }: DropdownProp
         onClick={() => setOpen((v) => !v)}
         aria-haspopup="menu"
         aria-expanded={open}
+        aria-label={triggerLabel}
         className="flex items-center rounded-control focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
       >
         {trigger}
@@ -82,7 +85,7 @@ export default function Dropdown({ trigger, items, align = 'end' }: DropdownProp
                   }}
                   className={cn(
                     'flex w-full items-center gap-2.5 rounded-control px-3 py-2 text-left text-sm transition-colors',
-                    item.danger ? 'text-danger hover:bg-danger/10' : 'text-fg hover:bg-fg/5',
+                    item.danger ? 'text-danger-ink hover:bg-danger/10' : 'text-fg hover:bg-fg/5',
                   )}
                 >
                   {item.icon && <item.icon size={16} strokeWidth={1.75} aria-hidden="true" />}

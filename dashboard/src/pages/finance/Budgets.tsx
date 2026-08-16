@@ -135,7 +135,7 @@ export default function Budgets() {
               />
             </div>
 
-            {error && <p className="text-sm text-danger sm:col-span-3">{error}</p>}
+            {error && <p className="text-sm text-danger-ink sm:col-span-3">{error}</p>}
 
             <div className="sm:col-span-3">
               <Button type="submit" loading={saving}>
@@ -146,7 +146,7 @@ export default function Budgets() {
         </Card>
       )}
 
-      {!showForm && error && <p className="text-sm text-danger">{error}</p>}
+      {!showForm && error && <p className="text-sm text-danger-ink">{error}</p>}
 
       <Card padding="none" className="overflow-x-auto">
         <table className="w-full text-left text-sm">
@@ -189,7 +189,7 @@ export default function Budgets() {
                     <td
                       className={cn(
                         'whitespace-nowrap px-4 py-3 text-right font-medium',
-                        variance < 0 ? 'text-danger' : 'text-success',
+                        variance < 0 ? 'text-danger-ink' : 'text-success-ink',
                       )}
                     >
                       {variance < 0 ? '-' : '+'}
