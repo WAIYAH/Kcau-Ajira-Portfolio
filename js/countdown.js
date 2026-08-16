@@ -3,18 +3,44 @@
    - Live countdown timer for upcoming events
    - Exported as ES module, auto-initializes on import
    - Finds all [data-countdown] elements and ticks them
+   - Supports two modes:
+     1. One-off: data-countdown="2026-04-01T14:00:00" (fixed date/time)
+     2. Recurring weekly: data-recurring-days="4,5" data-recurring-time="14:00"
+        (day numbers are JS getDay(): 0=Sun..6=Sat). Always counts down to
+        the NEXT upcoming occurrence, so it never goes stale after the
+        first event passes.
    ================================================== */
 
 class CountdownTimer {
   constructor(element) {
     this.element = element;
-    this.targetDate = new Date(element.dataset.countdown).getTime();
+    this.recurringDays = element.dataset.recurringDays
+      ? element.dataset.recurringDays.split(',').map(Number)
+      : null;
+    this.recurringTime = element.dataset.recurringTime || '00:00';
+    this.targetDate = this.recurringDays ? this.computeNextOccurrence() : new Date(element.dataset.countdown).getTime();
     this.daysEl = element.querySelector('[data-days]');
     this.hoursEl = element.querySelector('[data-hours]');
     this.minutesEl = element.querySelector('[data-minutes]');
     this.secondsEl = element.querySelector('[data-seconds]');
     this.interval = null;
     this.prevValues = { d: -1, h: -1, m: -1, s: -1 };
+  }
+
+  // Finds the next date/time matching one of `recurringDays` at `recurringTime`,
+  // scanning forward from right now (today counts if the time hasn't passed yet).
+  computeNextOccurrence() {
+    const [hh, mm] = this.recurringTime.split(':').map(Number);
+    const now = new Date();
+    for (let addDays = 0; addDays < 8; addDays++) {
+      const candidate = new Date(now);
+      candidate.setDate(now.getDate() + addDays);
+      candidate.setHours(hh, mm, 0, 0);
+      if (this.recurringDays.includes(candidate.getDay()) && candidate.getTime() > now.getTime()) {
+        return candidate.getTime();
+      }
+    }
+    return now.getTime();
   }
 
   start() {
@@ -28,16 +54,22 @@ class CountdownTimer {
 
   tick() {
     const now = Date.now();
-    const diff = this.targetDate - now;
+    let diff = this.targetDate - now;
 
     if (diff <= 0) {
-      this.stop();
-      this.setValues(0, 0, 0, 0);
-      this.element.classList.add('countdown-ended');
-      // Try to show an "Event Started!" message
-      const msg = this.element.querySelector('[data-countdown-msg]');
-      if (msg) msg.textContent = 'Event has started!';
-      return;
+      if (this.recurringDays) {
+        // Recurring event: roll forward to the next occurrence instead of
+        // freezing at "Event has started!" forever.
+        this.targetDate = this.computeNextOccurrence();
+        diff = this.targetDate - now;
+      } else {
+        this.stop();
+        this.setValues(0, 0, 0, 0);
+        this.element.classList.add('countdown-ended');
+        const msg = this.element.querySelector('[data-countdown-msg]');
+        if (msg) msg.textContent = 'Event has started!';
+        return;
+      }
     }
 
     const d = Math.floor(diff / (1000 * 60 * 60 * 24));
@@ -70,7 +102,7 @@ class CountdownTimer {
 
 // Auto-initialize all countdown timers on the page
 export function initCountdowns() {
-  const elements = document.querySelectorAll('[data-countdown]');
+  const elements = document.querySelectorAll('[data-countdown], [data-recurring-days]');
   elements.forEach(el => {
     const timer = new CountdownTimer(el);
     timer.start();

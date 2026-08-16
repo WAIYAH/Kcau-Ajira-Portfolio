@@ -28,8 +28,8 @@
     <link rel="canonical" href="https://kcaajiraclub.ke/">
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
-    <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+    <link rel="icon" type="image/png" href="img/KCAU%20AJIRA%20CLUB%20LOGO%202.png">
+    <link rel="apple-touch-icon" href="img/KCAU%20AJIRA%20CLUB%20LOGO%202.png">
 
     <!-- Tailwind CSS -->
     <script src="css/tailwind-config.js"></script>
@@ -72,8 +72,10 @@
                     </div>
                 </div>
 
-                <!-- Desktop Navigation -->
-                <div class="hidden md:flex space-x-8">
+                <!-- Desktop Navigation (lg: not md: — with Log In + Join Now added, this needs
+                     the extra room; tablets reliably get the hamburger menu instead of a cramped/
+                     wrapping navbar) -->
+                <div class="hidden lg:flex space-x-8">
                     <a href="index.html" class="text-gray-700 hover:text-blue-600 font-medium transition-colors nav-active">Home</a>
                     <a href="about.html" class="text-gray-700 hover:text-blue-600 font-medium transition-colors">About</a>
                     <a href="programs.html" class="text-gray-700 hover:text-blue-600 font-medium transition-colors">Programs</a>
@@ -83,20 +85,25 @@
                 </div>
 
                 <!-- CTA -->
-                <div class="hidden md:block">
-                    <button onclick="openJoinModal()" class="btn-primary btn-shimmer text-white font-semibold py-2 px-6 rounded-lg">
+                <!-- Member portal: points at the dashboard app (js/main.js, DASHBOARD_URL). Update that
+                     one constant when the dashboard is deployed to its real production URL. -->
+                <div class="hidden lg:flex items-center gap-3">
+                    <a href="#" data-dashboard-link="/login" class="text-gray-700 hover:text-blue-600 font-semibold px-4 py-2 rounded-lg border border-gray-200 hover:border-blue-300 transition-colors">
+                        Log In
+                    </a>
+                    <a href="#" data-dashboard-link="/signup" class="btn-primary btn-shimmer text-white font-semibold py-2 px-6 rounded-lg">
                         Join Now <i class="ml-2 fas fa-arrow-right"></i>
-                    </button>
+                    </a>
                 </div>
 
                 <!-- Mobile Menu Button -->
-                <button id="mobile-menu-button" class="md:hidden text-gray-700" aria-label="Open mobile menu">
+                <button id="mobile-menu-button" class="lg:hidden text-gray-700" aria-label="Open mobile menu" aria-expanded="false" aria-controls="mobile-menu">
                     <i class="fas fa-bars text-2xl"></i>
                 </button>
             </div>
 
             <!-- Mobile Navigation -->
-            <div id="mobile-menu" class="hidden md:hidden mt-4 pb-4 border-t pt-4">
+            <div id="mobile-menu" class="hidden lg:hidden mt-4 pb-4 border-t pt-4">
                 <div class="flex flex-col space-y-4">
                     <a href="index.html" class="text-gray-700 hover:text-blue-600 font-medium py-2 border-b">Home</a>
                     <a href="about.html" class="text-gray-700 hover:text-blue-600 font-medium py-2 border-b">About</a>
@@ -104,9 +111,12 @@
                     <a href="skills.html" class="text-gray-700 hover:text-blue-600 font-medium py-2 border-b">Skills</a>
                     <a href="success-stories.html" class="text-gray-700 hover:text-blue-600 font-medium py-2 border-b">Success Stories</a>
                     <a href="contact.html" class="text-gray-700 hover:text-blue-600 font-medium py-2 border-b">Contact</a>
-                    <button onclick="openJoinModal()" class="btn-primary text-white font-semibold py-3 px-4 rounded-lg mt-2">
+                    <a href="#" data-dashboard-link="/signup" class="btn-primary text-white font-semibold py-3 px-4 rounded-lg mt-2">
                         Join Ajira Club
-                    </button>
+                    </a>
+                    <a href="#" data-dashboard-link="/login" class="text-center text-gray-700 hover:text-blue-600 font-semibold py-3 px-4 rounded-lg border border-gray-200">
+                        Member Log In
+                    </a>
                 </div>
             </div>
         </nav>
@@ -472,8 +482,8 @@
                             </div>
                             <p class="text-blue-200 text-sm mb-5">Join us for our weekly club meeting featuring skill-building workshops, guest speakers, and collaborative projects.</p>
 
-                            <!-- Countdown -->
-                            <div data-countdown="2026-02-13T14:00:00" class="mt-4">
+                            <!-- Countdown: recurring every Thursday & Friday at 2:00 PM -->
+                            <div data-recurring-days="4,5" data-recurring-time="14:00" class="mt-4">
                                 <p class="text-xs uppercase tracking-wider text-blue-400 mb-3 font-semibold text-center" data-countdown-msg>Next session starts in:</p>
                                 <div class="countdown-container">
                                     <div class="countdown-unit">
@@ -517,8 +527,8 @@
                             </div>
                             <p class="text-blue-200 text-sm mb-5">Intensive training sessions focusing on practical digital skills. Perfect for students looking to fast-track their learning journey.</p>
 
-                            <!-- Countdown -->
-                            <div data-countdown="2026-02-11T10:00:00" class="mt-4">
+                            <!-- Countdown: recurring every Wednesday & Saturday at 10:00 AM -->
+                            <div data-recurring-days="3,6" data-recurring-time="10:00" class="mt-4">
                                 <p class="text-xs uppercase tracking-wider text-blue-400 mb-3 font-semibold text-center" data-countdown-msg>Next training starts in:</p>
                                 <div class="countdown-container">
                                     <div class="countdown-unit">
@@ -898,6 +908,9 @@
                                     By joining, you agree to receive updates about Ajira Club activities and resources.
                                 </p>
                             </form>
+                            <p class="text-gray-500 text-sm text-center mt-5 pt-5 border-t border-gray-100">
+                                Already a member? <a href="#" data-dashboard-link="/login" class="text-blue-600 font-semibold hover:underline">Log in to your dashboard</a>
+                            </p>
                         </div>
                     </div>
 
@@ -1001,9 +1014,9 @@
 
     <!-- Join Modal -->
     <div id="join-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl">
+        <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl" role="dialog" aria-modal="true" aria-labelledby="join-modal-title">
             <div class="flex justify-between items-center mb-6">
-                <h3 class="text-2xl font-bold text-gray-800">Join Ajira Club</h3>
+                <h3 id="join-modal-title" class="text-2xl font-bold text-gray-800">Join Ajira Club</h3>
                 <button onclick="closeJoinModal()" class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center text-gray-500 hover:bg-gray-200 hover:text-gray-700 transition-colors">
                     <i class="fas fa-times text-sm"></i>
                 </button>
@@ -1022,7 +1035,7 @@
 
     <!-- Program Detail Modal -->
     <div id="program-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-white rounded-2xl max-w-2xl w-full p-6 max-h-[90vh] overflow-y-auto shadow-2xl">
+        <div class="bg-white rounded-2xl max-w-2xl w-full p-6 max-h-[90vh] overflow-y-auto shadow-2xl" role="dialog" aria-modal="true" aria-labelledby="program-modal-title">
             <div class="flex justify-between items-center mb-6">
                 <h3 id="program-modal-title" class="text-2xl font-bold text-gray-800">Program Details</h3>
                 <button onclick="closeProgramModal()" class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center text-gray-500 hover:bg-gray-200 hover:text-gray-700 transition-colors">

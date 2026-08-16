@@ -25,8 +25,8 @@
     <link rel="canonical" href="https://kcaajiraclub.ke/programs.html">
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
-    <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+    <link rel="icon" type="image/png" href="img/KCAU%20AJIRA%20CLUB%20LOGO%202.png">
+    <link rel="apple-touch-icon" href="img/KCAU%20AJIRA%20CLUB%20LOGO%202.png">
 
     <!-- Tailwind CSS -->
     <script src="css/tailwind-config.js"></script>
@@ -67,7 +67,7 @@
                 </div>
 
                 <!-- Desktop Navigation -->
-                <div class="hidden md:flex space-x-8">
+                <div class="hidden lg:flex space-x-8">
                     <a href="index.html" class="text-gray-700 hover:text-blue-600 font-medium transition-colors">Home</a>
                     <a href="about.html" class="text-gray-700 hover:text-blue-600 font-medium transition-colors">About</a>
                     <a href="programs.html" class="text-gray-700 hover:text-blue-600 font-medium transition-colors nav-active">Programs</a>
@@ -77,20 +77,25 @@
                 </div>
 
                 <!-- Call to Action Button -->
-                <div class="hidden md:block">
-                    <button onclick="openJoinModal()" class="btn-primary text-white font-semibold py-2 px-6 rounded-lg">
+                <!-- Member portal: points at the dashboard app (js/main.js, DASHBOARD_URL). Update that
+                     one constant when the dashboard is deployed to its real production URL. -->
+                <div class="hidden lg:flex items-center gap-3">
+                    <a href="#" data-dashboard-link="/login" class="text-gray-700 hover:text-blue-600 font-semibold px-4 py-2 rounded-lg border border-gray-200 hover:border-blue-300 transition-colors">
+                        Log In
+                    </a>
+                    <a href="#" data-dashboard-link="/signup" class="btn-primary text-white font-semibold py-2 px-6 rounded-lg">
                         Join Now <i class="ml-2 fas fa-arrow-right"></i>
-                    </button>
+                    </a>
                 </div>
 
                 <!-- Mobile Menu Button -->
-                <button id="mobile-menu-button" class="md:hidden text-gray-700" aria-label="Open mobile menu">
+                <button id="mobile-menu-button" class="lg:hidden text-gray-700" aria-label="Open mobile menu" aria-expanded="false" aria-controls="mobile-menu">
                     <i class="fas fa-bars text-2xl"></i>
                 </button>
             </div>
 
             <!-- Mobile Navigation (Hidden by default) -->
-            <div id="mobile-menu" class="hidden md:hidden mt-4 pb-4 border-t pt-4">
+            <div id="mobile-menu" class="hidden lg:hidden mt-4 pb-4 border-t pt-4">
                 <div class="flex flex-col space-y-4">
                     <a href="index.html" class="text-gray-700 hover:text-blue-600 font-medium py-2 border-b">Home</a>
                     <a href="about.html" class="text-gray-700 hover:text-blue-600 font-medium py-2 border-b">About</a>
@@ -98,9 +103,12 @@
                     <a href="skills.html" class="text-gray-700 hover:text-blue-600 font-medium py-2 border-b">Skills</a>
                     <a href="success-stories.html" class="text-gray-700 hover:text-blue-600 font-medium py-2 border-b">Success Stories</a>
                     <a href="contact.html" class="text-gray-700 hover:text-blue-600 font-medium py-2 border-b">Contact</a>
-                    <button onclick="openJoinModal()" class="btn-primary text-white font-semibold py-3 px-4 rounded-lg mt-2">
+                    <a href="#" data-dashboard-link="/signup" class="btn-primary text-white font-semibold py-3 px-4 rounded-lg mt-2">
                         Join Ajira Club
-                    </button>
+                    </a>
+                    <a href="#" data-dashboard-link="/login" class="text-center text-gray-700 hover:text-blue-600 font-semibold py-3 px-4 rounded-lg border border-gray-200">
+                        Member Log In
+                    </a>
                 </div>
             </div>
         </nav>
@@ -110,19 +118,29 @@
     <main id="main-content">
         <!-- Hero Section -->
         <section class="hero-gradient text-white py-16 md:py-20">
-            <div class="container mx-auto px-4 text-center">
-                <p class="text-orange-300 font-semibold mb-2"><i class="fas fa-bolt mr-2"></i> Program Pathways</p>
-                <h2 class="text-4xl md:text-5xl font-bold mb-6">Explore Our Programs</h2>
-                <p class="text-blue-100 text-lg max-w-3xl mx-auto mb-8">
-                    Hands-on, industry-aligned programs designed to transform students into confident digital professionals.
-                </p>
-                <div class="flex flex-col sm:flex-row justify-center gap-4">
-                    <a href="#program-list" class="bg-white text-blue-700 font-semibold py-3 px-8 rounded-lg text-lg hover:bg-gray-100 transition-colors">
-                        Browse Programs <i class="ml-2 fas fa-arrow-down"></i>
-                    </a>
-                    <button onclick="openJoinModal()" class="btn-secondary text-white font-semibold py-3 px-8 rounded-lg text-lg">
-                        Join Next Session <i class="ml-2 fas fa-calendar-alt"></i>
-                    </button>
+            <div class="container mx-auto px-4">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+                    <div class="text-center md:text-left">
+                        <p class="text-orange-300 font-semibold mb-2"><i class="fas fa-bolt mr-2"></i> Program Pathways</p>
+                        <h2 class="text-4xl md:text-5xl font-bold mb-6">Explore Our Programs</h2>
+                        <p class="text-blue-100 text-lg max-w-2xl mx-auto md:mx-0 mb-8">
+                            Hands-on, industry-aligned programs designed to transform students into confident digital professionals.
+                        </p>
+                        <div class="flex flex-col sm:flex-row justify-center md:justify-start gap-4">
+                            <a href="#program-list" class="bg-white text-blue-700 font-semibold py-3 px-8 rounded-lg text-lg hover:bg-gray-100 transition-colors">
+                                Browse Programs <i class="ml-2 fas fa-arrow-down"></i>
+                            </a>
+                            <button onclick="openJoinModal()" class="btn-secondary text-white font-semibold py-3 px-8 rounded-lg text-lg">
+                                Join Next Session <i class="ml-2 fas fa-calendar-alt"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="hidden md:block">
+                        <div class="relative max-w-sm mx-auto">
+                            <div class="absolute -inset-3 bg-white/10 rounded-3xl rotate-3"></div>
+                            <img src="img/KCAU%20AJIRA%20CLUB.jpg" alt="KCA Ajira Club members at a session" class="relative rounded-2xl shadow-2xl w-full aspect-[4/5] object-cover" loading="lazy" width="1080" height="1350">
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -153,88 +171,118 @@
         <section id="program-list" class="py-12 bg-gray-50">
             <div class="container mx-auto px-4">
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="program-cards">
-                    <article class="skill-card bg-white border border-gray-200 rounded-xl p-6" data-category="labs">
-                        <div class="bg-blue-100 w-14 h-14 rounded-lg flex items-center justify-center mb-6">
-                            <i class="fas fa-laptop-code text-blue-600 text-2xl"></i>
+                    <article class="group skill-card bg-white border border-gray-200 rounded-xl overflow-hidden" data-category="labs">
+                        <div class="relative h-48 overflow-hidden">
+                            <img src="img/programs/skill-labs.jpg" alt="Students working together on laptops during a KCA Ajira Club weekly skill lab" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" width="900" height="675">
+                            <div class="absolute top-4 left-4 bg-white/90 backdrop-blur-sm w-12 h-12 rounded-lg flex items-center justify-center shadow-lg">
+                                <i class="fas fa-laptop-code text-blue-600 text-xl"></i>
+                            </div>
                         </div>
-                        <h3 class="text-xl font-bold text-gray-800 mb-3">Weekly Skill Labs</h3>
-                        <p class="text-gray-600 mb-4">Hands-on sessions covering digital marketing, web development, data analysis, and AI tools.</p>
-                        <div class="text-sm text-gray-600 space-y-2 mb-6">
-                            <p><i class="fas fa-clock text-green-500 mr-2"></i> Every Wednesday, 5-7 PM</p>
-                            <p><i class="fas fa-map-marker-alt text-green-500 mr-2"></i> Tech Lab 3, KCA University</p>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-gray-800 mb-3">Weekly Skill Labs</h3>
+                            <p class="text-gray-600 mb-4">Hands-on sessions covering digital marketing, web development, data analysis, and AI tools.</p>
+                            <div class="text-sm text-gray-600 space-y-2 mb-6">
+                                <p><i class="fas fa-clock text-green-500 mr-2"></i> Every Wednesday, 5-7 PM</p>
+                                <p><i class="fas fa-map-marker-alt text-green-500 mr-2"></i> Tech Lab 3, KCA University</p>
+                            </div>
+                            <button onclick="openProgramModal('skill-labs')" class="w-full btn-primary text-white font-semibold py-3 rounded-lg">
+                                View Details
+                            </button>
                         </div>
-                        <button onclick="openProgramModal('skill-labs')" class="w-full btn-primary text-white font-semibold py-3 rounded-lg">
-                            View Details
-                        </button>
                     </article>
 
-                    <article class="skill-card bg-white border border-gray-200 rounded-xl p-6" data-category="freelance">
-                        <div class="bg-orange-100 w-14 h-14 rounded-lg flex items-center justify-center mb-6">
-                            <i class="fas fa-hand-holding-usd text-orange-600 text-2xl"></i>
+                    <article class="group skill-card bg-white border border-gray-200 rounded-xl overflow-hidden" data-category="freelance">
+                        <div class="relative h-48 overflow-hidden">
+                            <img src="img/programs/freelance-launchpad.jpg" alt="Laptop and coffee at a workspace, representing remote freelance work" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" width="900" height="675">
+                            <div class="absolute top-4 left-4 bg-white/90 backdrop-blur-sm w-12 h-12 rounded-lg flex items-center justify-center shadow-lg">
+                                <i class="fas fa-hand-holding-usd text-orange-600 text-xl"></i>
+                            </div>
                         </div>
-                        <h3 class="text-xl font-bold text-gray-800 mb-3">Freelance Launchpad</h3>
-                        <p class="text-gray-600 mb-4">Start freelancing on Upwork, Fiverr, and LinkedIn with real portfolio support.</p>
-                        <div class="text-sm text-gray-600 space-y-2 mb-6">
-                            <p><i class="fas fa-check text-green-500 mr-2"></i> Profile optimization & pitching</p>
-                            <p><i class="fas fa-check text-green-500 mr-2"></i> Client management & proposals</p>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-gray-800 mb-3">Freelance Launchpad</h3>
+                            <p class="text-gray-600 mb-4">Start freelancing on Upwork, Fiverr, and LinkedIn with real portfolio support.</p>
+                            <div class="text-sm text-gray-600 space-y-2 mb-6">
+                                <p><i class="fas fa-check text-green-500 mr-2"></i> Profile optimization & pitching</p>
+                                <p><i class="fas fa-check text-green-500 mr-2"></i> Client management & proposals</p>
+                            </div>
+                            <button onclick="openProgramModal('freelance-launchpad')" class="w-full btn-primary text-white font-semibold py-3 rounded-lg">
+                                View Details
+                            </button>
                         </div>
-                        <button onclick="openProgramModal('freelance-launchpad')" class="w-full btn-primary text-white font-semibold py-3 rounded-lg">
-                            View Details
-                        </button>
                     </article>
 
-                    <article class="skill-card bg-white border border-gray-200 rounded-xl p-6" data-category="mentorship">
-                        <div class="bg-teal-100 w-14 h-14 rounded-lg flex items-center justify-center mb-6">
-                            <i class="fas fa-user-tie text-teal-600 text-2xl"></i>
+                    <article class="group skill-card bg-white border border-gray-200 rounded-xl overflow-hidden" data-category="mentorship">
+                        <div class="relative h-48 overflow-hidden">
+                            <img src="img/programs/digital-mentorship.jpg" alt="Two students collaborating and discussing over a laptop during a mentorship session" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" width="900" height="675">
+                            <div class="absolute top-4 left-4 bg-white/90 backdrop-blur-sm w-12 h-12 rounded-lg flex items-center justify-center shadow-lg">
+                                <i class="fas fa-user-tie text-teal-600 text-xl"></i>
+                            </div>
                         </div>
-                        <h3 class="text-xl font-bold text-gray-800 mb-3">Digital Mentorship</h3>
-                        <p class="text-gray-600 mb-4">1-on-1 mentorship pairing with industry professionals and successful alumni.</p>
-                        <div class="text-sm text-gray-600 space-y-2 mb-6">
-                            <p><i class="fas fa-check text-green-500 mr-2"></i> Career guidance</p>
-                            <p><i class="fas fa-check text-green-500 mr-2"></i> Personalized growth plans</p>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-gray-800 mb-3">Digital Mentorship</h3>
+                            <p class="text-gray-600 mb-4">1-on-1 mentorship pairing with industry professionals and successful alumni.</p>
+                            <div class="text-sm text-gray-600 space-y-2 mb-6">
+                                <p><i class="fas fa-check text-green-500 mr-2"></i> Career guidance</p>
+                                <p><i class="fas fa-check text-green-500 mr-2"></i> Personalized growth plans</p>
+                            </div>
+                            <button onclick="openProgramModal('digital-mentorship')" class="w-full btn-primary text-white font-semibold py-3 rounded-lg">
+                                View Details
+                            </button>
                         </div>
-                        <button onclick="openProgramModal('digital-mentorship')" class="w-full btn-primary text-white font-semibold py-3 rounded-lg">
-                            View Details
-                        </button>
                     </article>
 
-                    <article class="skill-card bg-white border border-gray-200 rounded-xl p-6" data-category="tech">
-                        <div class="bg-purple-100 w-14 h-14 rounded-lg flex items-center justify-center mb-6">
-                            <i class="fas fa-code text-purple-600 text-2xl"></i>
+                    <article class="group skill-card bg-white border border-gray-200 rounded-xl overflow-hidden" data-category="tech">
+                        <div class="relative h-48 overflow-hidden">
+                            <img src="img/programs/web-development.jpg" alt="Code editor showing programming syntax on a monitor" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" width="900" height="675">
+                            <div class="absolute top-4 left-4 bg-white/90 backdrop-blur-sm w-12 h-12 rounded-lg flex items-center justify-center shadow-lg">
+                                <i class="fas fa-code text-purple-600 text-xl"></i>
+                            </div>
                         </div>
-                        <h3 class="text-xl font-bold text-gray-800 mb-3">Web Development Track</h3>
-                        <p class="text-gray-600 mb-4">Front-end to full-stack training with real-world project delivery.</p>
-                        <div class="text-sm text-gray-600 space-y-2 mb-6">
-                            <p><i class="fas fa-check text-green-500 mr-2"></i> HTML, CSS, JavaScript, React</p>
-                            <p><i class="fas fa-check text-green-500 mr-2"></i> Portfolio-ready projects</p>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-gray-800 mb-3">Web Development Track</h3>
+                            <p class="text-gray-600 mb-4">Front-end to full-stack training with real-world project delivery.</p>
+                            <div class="text-sm text-gray-600 space-y-2 mb-6">
+                                <p><i class="fas fa-check text-green-500 mr-2"></i> HTML, CSS, JavaScript, React</p>
+                                <p><i class="fas fa-check text-green-500 mr-2"></i> Portfolio-ready projects</p>
+                            </div>
+                            <a href="contact.html" class="w-full inline-block text-center btn-primary text-white font-semibold py-3 rounded-lg">Get Details</a>
                         </div>
-                        <a href="contact.html" class="w-full inline-block text-center btn-primary text-white font-semibold py-3 rounded-lg">Get Details</a>
                     </article>
 
-                    <article class="skill-card bg-white border border-gray-200 rounded-xl p-6" data-category="tech">
-                        <div class="bg-green-100 w-14 h-14 rounded-lg flex items-center justify-center mb-6">
-                            <i class="fas fa-chart-line text-green-600 text-2xl"></i>
+                    <article class="group skill-card bg-white border border-gray-200 rounded-xl overflow-hidden" data-category="tech">
+                        <div class="relative h-48 overflow-hidden">
+                            <img src="img/programs/data-ai.jpg" alt="Graphs and performance analytics displayed on a laptop screen" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" width="900" height="675">
+                            <div class="absolute top-4 left-4 bg-white/90 backdrop-blur-sm w-12 h-12 rounded-lg flex items-center justify-center shadow-lg">
+                                <i class="fas fa-chart-line text-green-600 text-xl"></i>
+                            </div>
                         </div>
-                        <h3 class="text-xl font-bold text-gray-800 mb-3">Data & AI Track</h3>
-                        <p class="text-gray-600 mb-4">Data analysis, Python, and AI tools for modern digital roles.</p>
-                        <div class="text-sm text-gray-600 space-y-2 mb-6">
-                            <p><i class="fas fa-check text-green-500 mr-2"></i> Python & Data Analysis</p>
-                            <p><i class="fas fa-check text-green-500 mr-2"></i> AI tooling for productivity</p>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-gray-800 mb-3">Data & AI Track</h3>
+                            <p class="text-gray-600 mb-4">Data analysis, Python, and AI tools for modern digital roles.</p>
+                            <div class="text-sm text-gray-600 space-y-2 mb-6">
+                                <p><i class="fas fa-check text-green-500 mr-2"></i> Python & Data Analysis</p>
+                                <p><i class="fas fa-check text-green-500 mr-2"></i> AI tooling for productivity</p>
+                            </div>
+                            <a href="contact.html" class="w-full inline-block text-center btn-primary text-white font-semibold py-3 rounded-lg">Get Details</a>
                         </div>
-                        <a href="contact.html" class="w-full inline-block text-center btn-primary text-white font-semibold py-3 rounded-lg">Get Details</a>
                     </article>
 
-                    <article class="skill-card bg-white border border-gray-200 rounded-xl p-6" data-category="tech">
-                        <div class="bg-yellow-100 w-14 h-14 rounded-lg flex items-center justify-center mb-6">
-                            <i class="fas fa-palette text-yellow-600 text-2xl"></i>
+                    <article class="group skill-card bg-white border border-gray-200 rounded-xl overflow-hidden" data-category="tech">
+                        <div class="relative h-48 overflow-hidden">
+                            <img src="img/programs/design-creativity.jpg" alt="Colorful gradient displayed on a design workstation screen" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" width="900" height="675">
+                            <div class="absolute top-4 left-4 bg-white/90 backdrop-blur-sm w-12 h-12 rounded-lg flex items-center justify-center shadow-lg">
+                                <i class="fas fa-palette text-yellow-600 text-xl"></i>
+                            </div>
                         </div>
-                        <h3 class="text-xl font-bold text-gray-800 mb-3">Design & Creativity Track</h3>
-                        <p class="text-gray-600 mb-4">UX/UI design, branding, and creative tools for digital creators.</p>
-                        <div class="text-sm text-gray-600 space-y-2 mb-6">
-                            <p><i class="fas fa-check text-green-500 mr-2"></i> Figma & Design Systems</p>
-                            <p><i class="fas fa-check text-green-500 mr-2"></i> User research & prototyping</p>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-gray-800 mb-3">Design & Creativity Track</h3>
+                            <p class="text-gray-600 mb-4">UX/UI design, branding, and creative tools for digital creators.</p>
+                            <div class="text-sm text-gray-600 space-y-2 mb-6">
+                                <p><i class="fas fa-check text-green-500 mr-2"></i> Figma & Design Systems</p>
+                                <p><i class="fas fa-check text-green-500 mr-2"></i> User research & prototyping</p>
+                            </div>
+                            <a href="contact.html" class="w-full inline-block text-center btn-primary text-white font-semibold py-3 rounded-lg">Get Details</a>
                         </div>
-                        <a href="contact.html" class="w-full inline-block text-center btn-primary text-white font-semibold py-3 rounded-lg">Get Details</a>
                     </article>
                 </div>
 
@@ -325,10 +373,10 @@
                     <h3 class="text-white text-xl font-bold mb-6">KCA Ajira Club</h3>
                     <p class="mb-6">Empowering KCA University students with digital skills for the future of work.</p>
                     <div class="flex space-x-4">
-                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter text-xl"></i></a>
-                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-linkedin text-xl"></i></a>
-                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram text-xl"></i></a>
-                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-youtube text-xl"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white" aria-label="Twitter"><i class="fab fa-twitter text-xl"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white" aria-label="LinkedIn"><i class="fab fa-linkedin text-xl"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white" aria-label="Instagram"><i class="fab fa-instagram text-xl"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white" aria-label="YouTube"><i class="fab fa-youtube text-xl"></i></a>
                     </div>
                 </div>
                 <div>
@@ -388,10 +436,10 @@
 
     <!-- Join Modal -->
     <div id="join-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-white rounded-xl max-w-md w-full p-6">
+        <div class="bg-white rounded-xl max-w-md w-full p-6" role="dialog" aria-modal="true" aria-labelledby="join-modal-title">
             <div class="flex justify-between items-center mb-6">
-                <h3 class="text-2xl font-bold text-gray-800">Join Ajira Club</h3>
-                <button onclick="closeJoinModal()" class="text-gray-500 hover:text-gray-700">
+                <h3 id="join-modal-title" class="text-2xl font-bold text-gray-800">Join Ajira Club</h3>
+                <button onclick="closeJoinModal()" class="text-gray-500 hover:text-gray-700" aria-label="Close">
                     <i class="fas fa-times text-xl"></i>
                 </button>
             </div>
@@ -407,10 +455,10 @@
 
     <!-- Program Detail Modal -->
     <div id="program-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-white rounded-xl max-w-2xl w-full p-6 max-h-[90vh] overflow-y-auto">
+        <div class="bg-white rounded-xl max-w-2xl w-full p-6 max-h-[90vh] overflow-y-auto" role="dialog" aria-modal="true" aria-labelledby="program-modal-title">
             <div class="flex justify-between items-center mb-6">
                 <h3 id="program-modal-title" class="text-2xl font-bold text-gray-800">Program Details</h3>
-                <button onclick="closeProgramModal()" class="text-gray-500 hover:text-gray-700">
+                <button onclick="closeProgramModal()" class="text-gray-500 hover:text-gray-700" aria-label="Close">
                     <i class="fas fa-times text-xl"></i>
                 </button>
             </div>

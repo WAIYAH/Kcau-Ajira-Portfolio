@@ -9,6 +9,11 @@
 import { openJoinModal, closeJoinModal, openProgramModal, closeProgramModal, programDetails } from './modals.js';
 import { initFormHandlers } from './form-handler.js';
 
+// Single place to point "Log In" / member-portal links at the dashboard app.
+// Update this when the dashboard is deployed to its real production URL
+// (e.g. https://dashboard.kcaajiraclub.ke or https://kcaajiraclub.ke/dashboard).
+const DASHBOARD_URL = 'http://localhost:5174';
+
 // Expose program content (moving long HTML content separated from modals.js)
 programDetails['skill-labs'].content = `
   <div class="space-y-6">
@@ -82,14 +87,21 @@ function init() {
   const yearEl = document.getElementById('current-year');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
+  // Point member-portal links (Log In, etc.) at the dashboard app
+  document.querySelectorAll('[data-dashboard-link]').forEach(link => {
+    link.setAttribute('href', DASHBOARD_URL + link.dataset.dashboardLink);
+  });
+
   // Mobile menu toggle
   const mobileMenuButton = document.getElementById('mobile-menu-button');
   const mobileMenu = document.getElementById('mobile-menu');
   if (mobileMenuButton && mobileMenu) {
     mobileMenuButton.addEventListener('click', () => {
       mobileMenu.classList.toggle('hidden');
+      const isOpen = !mobileMenu.classList.contains('hidden');
+      mobileMenuButton.setAttribute('aria-expanded', String(isOpen));
       const icon = mobileMenuButton.querySelector('i');
-      if (mobileMenu.classList.contains('hidden')) {
+      if (!isOpen) {
         icon.classList.remove('fa-times');
         icon.classList.add('fa-bars');
       } else {
@@ -102,6 +114,7 @@ function init() {
     mobileMenu.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', () => {
         mobileMenu.classList.add('hidden');
+        mobileMenuButton.setAttribute('aria-expanded', 'false');
         const icon = mobileMenuButton.querySelector('i');
         icon.classList.remove('fa-times');
         icon.classList.add('fa-bars');
