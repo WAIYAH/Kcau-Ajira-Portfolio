@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { MotionConfig } from 'motion/react'
 import { AuthProvider } from './contexts/AuthContext'
 import { ThemeProvider } from './contexts/ThemeContext'
 import ProtectedRoute from './components/ProtectedRoute'
@@ -25,78 +26,80 @@ import NotFound from './pages/NotFound'
 
 export default function App() {
   return (
-    <ThemeProvider>
-      <BrowserRouter>
-        <AuthProvider>
-          <Routes>
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<SignUp />} />
-            <Route path="/forgot-password" element={<ForgotPassword />} />
-            <Route path="/pending-approval" element={<PendingApproval />} />
+    <MotionConfig reducedMotion="user">
+      <ThemeProvider>
+        <BrowserRouter>
+          <AuthProvider>
+            <Routes>
+              <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<SignUp />} />
+              <Route path="/forgot-password" element={<ForgotPassword />} />
+              <Route path="/pending-approval" element={<PendingApproval />} />
 
-            <Route element={<ProtectedRoute />}>
-              <Route element={<DashboardLayout />}>
-                <Route index element={<Overview />} />
-                <Route path="/profile" element={<Profile />} />
-                <Route path="/events" element={<Events />} />
-                <Route path="/voting" element={<Voting />} />
-                <Route path="/learning" element={<Learning />} />
+              <Route element={<ProtectedRoute />}>
+                <Route element={<DashboardLayout />}>
+                  <Route index element={<Overview />} />
+                  <Route path="/profile" element={<Profile />} />
+                  <Route path="/events" element={<Events />} />
+                  <Route path="/voting" element={<Voting />} />
+                  <Route path="/learning" element={<Learning />} />
 
-                <Route
-                  path="/members"
-                  element={
-                    <RoleGate staffOnly>
-                      <MemberList />
-                    </RoleGate>
-                  }
-                />
-                <Route
-                  path="/finance/*"
-                  element={
-                    <RoleGate staffOnly>
-                      <Finance />
-                    </RoleGate>
-                  }
-                />
-                <Route
-                  path="/communications/*"
-                  element={
-                    <RoleGate staffOnly>
-                      <Communications />
-                    </RoleGate>
-                  }
-                />
-                <Route
-                  path="/reports"
-                  element={
-                    <RoleGate staffOnly>
-                      <Reports />
-                    </RoleGate>
-                  }
-                />
-                <Route
-                  path="/settings/audit-log"
-                  element={
-                    <RoleGate adminOnly>
-                      <AuditLog />
-                    </RoleGate>
-                  }
-                />
-                <Route
-                  path="/dev/ui-kit"
-                  element={
-                    <RoleGate adminOnly>
-                      <UiKit />
-                    </RoleGate>
-                  }
-                />
+                  <Route
+                    path="/members"
+                    element={
+                      <RoleGate staffOnly>
+                        <MemberList />
+                      </RoleGate>
+                    }
+                  />
+                  <Route
+                    path="/finance/*"
+                    element={
+                      <RoleGate staffOnly>
+                        <Finance />
+                      </RoleGate>
+                    }
+                  />
+                  <Route
+                    path="/communications/*"
+                    element={
+                      <RoleGate staffOnly>
+                        <Communications />
+                      </RoleGate>
+                    }
+                  />
+                  <Route
+                    path="/reports"
+                    element={
+                      <RoleGate staffOnly>
+                        <Reports />
+                      </RoleGate>
+                    }
+                  />
+                  <Route
+                    path="/settings/audit-log"
+                    element={
+                      <RoleGate adminOnly>
+                        <AuditLog />
+                      </RoleGate>
+                    }
+                  />
+                  <Route
+                    path="/dev/ui-kit"
+                    element={
+                      <RoleGate adminOnly>
+                        <UiKit />
+                      </RoleGate>
+                    }
+                  />
+                </Route>
               </Route>
-            </Route>
 
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </AuthProvider>
-      </BrowserRouter>
-    </ThemeProvider>
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </AuthProvider>
+        </BrowserRouter>
+      </ThemeProvider>
+    </MotionConfig>
   )
 }

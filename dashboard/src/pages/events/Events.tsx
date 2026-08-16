@@ -188,7 +188,7 @@ export default function Events() {
                 onClick={() => setRsvp(event.id, opt.value)}
                 aria-pressed={mine?.status === opt.value}
                 className={cn(
-                  'rounded-control border px-3 py-1.5 text-xs font-medium transition-colors',
+                  'rounded-control border px-3 py-1.5 text-xs font-medium transition-[color,background-color,transform] active:scale-95',
                   mine?.status === opt.value
                     ? 'border-primary bg-primary text-white'
                     : 'border-border text-fg-muted hover:bg-fg/5',

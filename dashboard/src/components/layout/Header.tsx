@@ -128,7 +128,7 @@ export default function Header({ onOpenMobileNav }: HeaderProps) {
               aria-label={opt.label}
               aria-pressed={theme === opt.value}
               className={cn(
-                'rounded-control p-1.5 transition-colors',
+                'rounded-control p-1.5 transition-[color,background-color,transform] active:scale-90',
                 theme === opt.value ? 'bg-primary text-white' : 'text-fg-subtle hover:text-fg',
               )}
             >
