@@ -12,7 +12,7 @@ Being built in phases, each independently verified (`tsc -b`, `lint`, `build`, a
 
 - [x] **Phase 1** — CI workflow, form honeypot, storage cleanup on replace, route-level code splitting, member search
 - [x] **Phase 2** — Opportunities / Gigs board (§2.1)
-- [ ] **Phase 3** — Automated dues reminder emails (§2.3)
+- [x] **Phase 3** — Automated dues reminder emails (§2.3)
 - [ ] **Phase 4** — Persisted notifications table + realtime bell (§2.2)
 - [ ] **Phase 5** — Public site ↔ dashboard content unification (§2.4)
 - [ ] **Phase 6** — Engineering hygiene: Vitest + first tests, error boundary, backup routine doc (§3.1–3.3)

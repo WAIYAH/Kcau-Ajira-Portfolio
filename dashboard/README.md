@@ -24,7 +24,7 @@ UI/UX redesign — see [`improve.md`](improve.md) for the full plan and rational
 ### 1. Create a Supabase project
 
 1. Go to [supabase.com](https://supabase.com), create a free project.
-2. In the SQL Editor, run every file in [`supabase/migrations/`](supabase/migrations/) **in order** (0001 → 0008). Each is safe to run once; re-running an already-applied one is usually harmless (`create or replace`, `on conflict do nothing`) but they're not designed to be re-run out of order.
+2. In the SQL Editor, run every file in [`supabase/migrations/`](supabase/migrations/) **in order** (0001 → 0009). Note: 0009 needs manual edits first (project ref + a secret) — see step 6 below; skip it initially and come back once you've done step 5. Each is safe to run once; re-running an already-applied one is usually harmless (`create or replace`, `on conflict do nothing`) but they're not designed to be re-run out of order.
 3. In **Project Settings → API**, copy the **Project URL** and **anon public** key.
 
 ### 2. Configure environment variables
@@ -71,6 +71,23 @@ Notes:
 - Without a verified sending domain on Resend, use their sandbox address `onboarding@resend.dev` as `RESEND_FROM_EMAIL` (it only delivers to your own verified Resend account email until you verify a domain).
 - `SUPABASE_URL`, `SUPABASE_ANON_KEY`, and `SUPABASE_SERVICE_ROLE_KEY` are provided to the function automatically by Supabase — you don't set those.
 - Until this is deployed, checking "Also send by email" in Communications will still post the in-app announcement, but will show a clear error instead of silently pretending to send.
+
+### 6. (Optional) Enable automated weekly dues reminders
+
+Once step 5 is done (Resend is already configured), members with unpaid/partial dues that are overdue or due within 7 days can get an automatic reminder email every Monday, instead of a Leader manually checking the Dues tab.
+
+```bash
+# from inside the dashboard/ folder, after steps above
+npx supabase secrets set CRON_SECRET=<any random string you choose>
+npx supabase functions deploy send-dues-reminder --no-verify-jwt
+```
+
+Then either open [`supabase/migrations/0009_dues_reminder_cron.sql`](supabase/migrations/0009_dues_reminder_cron.sql), fill in your project ref and the same `CRON_SECRET` value, and run it in the SQL Editor — or skip that file and create the equivalent schedule from **Database → Cron Jobs** in the Supabase dashboard UI, which fills in the project URL for you.
+
+To test it immediately rather than waiting for Monday:
+```bash
+curl -X POST https://<your-project-ref>.functions.supabase.co/send-dues-reminder -H "x-cron-secret: <your CRON_SECRET>"
+```
 
 ## Design system
 
@@ -134,10 +151,13 @@ supabase/
                  0004 receipts storage bucket, 0005 reports storage bucket,
                  0006 inquiries table (public Contact + Join forms -> Inbox),
                  0007 profile bio/skills/CV columns + avatars/cvs storage buckets,
-                 0008 opportunities table (jobs/internships/gigs/freelance board)
+                 0008 opportunities table (jobs/internships/gigs/freelance board),
+                 0009 weekly dues-reminder cron schedule (needs manual edits, see step 6)
   functions/
     send-announcement-email/  Edge Function: verifies caller is staff,
                                sends via Resend, logs to email_log
+    send-dues-reminder/       Edge Function: emails members with overdue/
+                               soon-due dues, shared-secret auth (cron-only)
 ```
 
 ## Notes on the security model
