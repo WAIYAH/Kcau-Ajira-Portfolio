@@ -1,5 +1,7 @@
 import type { ReactNode } from 'react'
+import { ShieldAlert } from 'lucide-react'
 import { useAuth } from '../contexts/AuthContext'
+import EmptyState from './ui/EmptyState'
 
 export default function RoleGate({
   staffOnly,
@@ -13,18 +15,12 @@ export default function RoleGate({
   const { isStaff, isAdmin } = useAuth()
 
   if (adminOnly && !isAdmin) {
-    return (
-      <div className="rounded-xl border border-gray-200 bg-white p-8 text-center text-gray-500">
-        You don't have access to this section. It's reserved for admins.
-      </div>
-    )
+    return <EmptyState icon={ShieldAlert} title="Admins only" description="This section is reserved for admins." />
   }
 
   if (staffOnly && !isStaff) {
     return (
-      <div className="rounded-xl border border-gray-200 bg-white p-8 text-center text-gray-500">
-        You don't have access to this section. It's reserved for club leaders and admins.
-      </div>
+      <EmptyState icon={ShieldAlert} title="Leaders and admins only" description="This section is reserved for club leaders and admins." />
     )
   }
 

@@ -28,11 +28,9 @@
   --color-fg-subtle: #9ca3af;
 
   /*
-   * Radius & elevation scale for the new component primitives, deliberately
-   * namespaced (rounded-control/surface, shadow-elevate-*) instead of
-   * overriding Tailwind's default rounded-sm/md/lg and shadow-sm/md/lg —
-   * ~100 untouched legacy elements still rely on the stock scale until
-   * Phase 4 migrates them one page at a time.
+   * Radius & elevation scale, deliberately namespaced (rounded-control/surface,
+   * shadow-elevate-*) instead of overriding Tailwind's default rounded-sm/md/lg
+   * and shadow-sm/md/lg, so the two scales can't collide.
    */
   --radius-control: 12px;
   --radius-surface: 16px;
@@ -42,17 +40,6 @@
   --shadow-elevate-md: 0 4px 12px -2px rgb(15 18 34 / 0.1), 0 2px 4px -2px rgb(15 18 34 / 0.06);
   --shadow-elevate-lg: 0 12px 32px -8px rgb(15 18 34 / 0.18), 0 4px 8px -4px rgb(15 18 34 / 0.08);
   --shadow-glow-primary: 0 0 0 1px rgb(79 70 229 / 0.15), 0 4px 16px -2px rgb(79 70 229 / 0.35);
-
-  /*
-   * Legacy brand tokens — kept at their original values so the ~22 pages not
-   * yet migrated to the new primitive/token system (bg-kca-blue, from-kca-teal,
-   * etc.) keep rendering exactly as before. Phase 4 migrates every call site
-   * to the semantic tokens above; once that's done, delete this block.
-   */
-  --color-kca-blue: #2563eb;
-  --color-kca-dark: #1e40af;
-  --color-kca-orange: #f97316;
-  --color-kca-teal: #14b8a6;
 }
 
 :root {

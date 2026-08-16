@@ -1,14 +1,17 @@
 import { useEffect, useMemo, useState, type FormEvent } from 'react'
 import { format } from 'date-fns'
-import { supabase } from '../../lib/supabaseClient'
-import { useAuth } from '../../contexts/AuthContext'
-import { logAudit } from '../../lib/audit'
-import type { Candidate, Election, ElectionResultRow, ElectionStatus } from '../../types'
+import { supabase } from '@/lib/supabaseClient'
+import { useAuth } from '@/contexts/AuthContext'
+import { logAudit } from '@/lib/audit'
+import type { Candidate, Election, ElectionResultRow, ElectionStatus } from '@/types'
+import Card from '@/components/ui/Card'
+import Button from '@/components/ui/Button'
+import Input from '@/components/ui/Input'
 
 const statusStyles: Record<ElectionStatus, string> = {
-  draft: 'bg-gray-100 text-gray-600',
-  open: 'bg-emerald-100 text-emerald-700',
-  closed: 'bg-gray-100 text-gray-600',
+  draft: 'bg-fg/10 text-fg-muted',
+  open: 'bg-success/15 text-success',
+  closed: 'bg-fg/10 text-fg-muted',
 }
 
 export default function ElectionCard({
@@ -32,7 +35,8 @@ export default function ElectionCard({
   const [candidateForm, setCandidateForm] = useState({ displayName: '', positionTitle: '', statement: '' })
 
   const now = Date.now()
-  const isVotingWindowOpen = election.status === 'open' && now >= new Date(election.opens_at).getTime() && now <= new Date(election.closes_at).getTime()
+  const isVotingWindowOpen =
+    election.status === 'open' && now >= new Date(election.opens_at).getTime() && now <= new Date(election.closes_at).getTime()
 
   const positions = useMemo(() => {
     const map = new Map<string, Candidate[]>()
@@ -112,12 +116,12 @@ export default function ElectionCard({
   }
 
   return (
-    <div className="rounded-2xl border border-gray-200 bg-white p-6">
+    <Card padding="lg">
       <div className="flex items-start justify-between gap-2">
         <div>
-          <h3 className="font-semibold text-gray-900">{election.title}</h3>
-          {election.description && <p className="mt-1 text-sm text-gray-500">{election.description}</p>}
-          <p className="mt-1 text-xs text-gray-400">
+          <h3 className="font-semibold text-fg">{election.title}</h3>
+          {election.description && <p className="mt-1 text-sm text-fg-muted">{election.description}</p>}
+          <p className="mt-1 text-xs text-fg-subtle">
             {format(new Date(election.opens_at), 'MMM d, HH:mm')} – {format(new Date(election.closes_at), 'MMM d, HH:mm')}
             {election.is_anonymous && ' · Anonymous ballot'}
           </p>
@@ -128,90 +132,78 @@ export default function ElectionCard({
       </div>
 
       {isStaff && (
-        <div className="mt-4 flex flex-wrap gap-2 border-t border-gray-100 pt-4">
+        <div className="mt-4 flex flex-wrap gap-2 border-t border-border pt-4">
           {election.status === 'draft' && (
-            <button onClick={() => updateStatus('open')} className="rounded-lg bg-emerald-600 px-3 py-1.5 text-xs font-semibold text-white hover:bg-emerald-700">
+            <Button
+              size="sm"
+              onClick={() => updateStatus('open')}
+              className="bg-success text-white hover:bg-success"
+            >
               Open voting
-            </button>
+            </Button>
           )}
           {election.status === 'open' && (
-            <button onClick={() => updateStatus('closed')} className="rounded-lg bg-gray-700 px-3 py-1.5 text-xs font-semibold text-white hover:bg-gray-800">
+            <Button size="sm" variant="secondary" onClick={() => updateStatus('closed')} className="bg-fg/10 text-fg hover:bg-fg/20">
               Close voting
-            </button>
+            </Button>
           )}
-          <button
-            onClick={() => setShowCandidateForm((v) => !v)}
-            className="rounded-lg border border-gray-200 px-3 py-1.5 text-xs font-medium text-gray-600 hover:bg-gray-100"
-          >
+          <Button size="sm" variant="ghost" onClick={() => setShowCandidateForm((v) => !v)} className="border border-border">
             {showCandidateForm ? 'Cancel' : '+ Add candidate'}
-          </button>
+          </Button>
         </div>
       )}
 
       {showCandidateForm && (
-        <form onSubmit={handleAddCandidate} className="mt-4 grid gap-3 rounded-xl bg-gray-50 p-4 sm:grid-cols-3">
-          <input
+        <form onSubmit={handleAddCandidate} className="mt-4 grid gap-3 rounded-control bg-bg p-4 sm:grid-cols-3">
+          <Input
             required
             aria-label="Position"
             placeholder="Position (e.g. President)"
             value={candidateForm.positionTitle}
             onChange={(e) => setCandidateForm({ ...candidateForm, positionTitle: e.target.value })}
-            className="rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-kca-blue focus:outline-none focus:ring-1 focus:ring-kca-blue"
           />
-          <input
+          <Input
             required
             aria-label="Candidate name"
             placeholder="Candidate name"
             value={candidateForm.displayName}
             onChange={(e) => setCandidateForm({ ...candidateForm, displayName: e.target.value })}
-            className="rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-kca-blue focus:outline-none focus:ring-1 focus:ring-kca-blue"
           />
-          <input
+          <Input
             aria-label="Candidate statement"
             placeholder="Statement (optional)"
             value={candidateForm.statement}
             onChange={(e) => setCandidateForm({ ...candidateForm, statement: e.target.value })}
-            className="rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-kca-blue focus:outline-none focus:ring-1 focus:ring-kca-blue"
           />
-          <button
-            type="submit"
-            disabled={candidateSaving}
-            className="rounded-lg bg-kca-blue px-3 py-2 text-xs font-semibold text-white hover:bg-kca-dark disabled:opacity-60 sm:col-span-3"
-          >
+          <Button type="submit" loading={candidateSaving} size="sm" className="sm:col-span-3">
             {candidateSaving ? 'Saving…' : 'Save candidate'}
-          </button>
+          </Button>
         </form>
       )}
 
       <div className="mt-4 space-y-4">
-        {positions.length === 0 && <p className="text-sm text-gray-400">No candidates added yet.</p>}
+        {positions.length === 0 && <p className="text-sm text-fg-subtle">No candidates added yet.</p>}
 
         {positions.map(([positionTitle, positionCandidates]) => {
           const alreadyVoted = votedPositions.has(positionTitle)
           return (
             <div key={positionTitle}>
-              <p className="text-sm font-semibold text-gray-800">{positionTitle}</p>
+              <p className="text-sm font-semibold text-fg">{positionTitle}</p>
               <div className="mt-2 space-y-2">
                 {positionCandidates.map((c) => (
-                  <div key={c.id} className="flex items-center justify-between rounded-lg border border-gray-100 px-3 py-2">
+                  <div key={c.id} className="flex items-center justify-between rounded-control border border-border px-3 py-2">
                     <div>
-                      <p className="text-sm font-medium text-gray-800">{c.display_name}</p>
-                      {c.statement && <p className="text-xs text-gray-500">{c.statement}</p>}
+                      <p className="text-sm font-medium text-fg">{c.display_name}</p>
+                      {c.statement && <p className="text-xs text-fg-muted">{c.statement}</p>}
                     </div>
                     <div className="flex items-center gap-3">
-                      {results && (
-                        <span className="text-xs font-medium text-gray-500">{votesFor(c.id)} votes</span>
-                      )}
+                      {results && <span className="text-xs font-medium text-fg-muted">{votesFor(c.id)} votes</span>}
                       {isVotingWindowOpen && !alreadyVoted && (
-                        <button
-                          onClick={() => castVote(positionTitle, c.id)}
-                          disabled={votingFor === c.id}
-                          className="rounded-lg bg-kca-blue px-3 py-1.5 text-xs font-semibold text-white hover:bg-kca-dark disabled:opacity-60"
-                        >
+                        <Button size="sm" onClick={() => castVote(positionTitle, c.id)} loading={votingFor === c.id}>
                           {votingFor === c.id ? 'Voting…' : 'Vote'}
-                        </button>
+                        </Button>
                       )}
-                      {alreadyVoted && <span className="text-xs text-gray-400">Voted</span>}
+                      {alreadyVoted && <span className="text-xs text-fg-subtle">Voted</span>}
                     </div>
                   </div>
                 ))}
@@ -221,12 +213,12 @@ export default function ElectionCard({
         })}
       </div>
 
-      {voteError && <p className="mt-3 text-sm text-red-600">{voteError}</p>}
+      {voteError && <p className="mt-3 text-sm text-danger">{voteError}</p>}
 
       {!results && election.status === 'open' && !isStaff && (
-        <p className="mt-4 text-xs text-gray-400">Results are hidden until voting closes.</p>
+        <p className="mt-4 text-xs text-fg-subtle">Results are hidden until voting closes.</p>
       )}
-      {resultsError && <p className="mt-3 text-sm text-red-600">{resultsError}</p>}
-    </div>
+      {resultsError && <p className="mt-3 text-sm text-danger">{resultsError}</p>}
+    </Card>
   )
 }

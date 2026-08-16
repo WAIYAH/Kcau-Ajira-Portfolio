@@ -1,7 +1,14 @@
 import { useEffect, useMemo, useState, type FormEvent } from 'react'
-import { supabase } from '../../lib/supabaseClient'
-import { useAuth } from '../../contexts/AuthContext'
-import type { LearningResource, LearningResourceType, LearningProgress, ProgressStatus } from '../../types'
+import { GraduationCap } from 'lucide-react'
+import { supabase } from '@/lib/supabaseClient'
+import { useAuth } from '@/contexts/AuthContext'
+import type { LearningResource, LearningResourceType, LearningProgress, ProgressStatus } from '@/types'
+import Card from '@/components/ui/Card'
+import Button from '@/components/ui/Button'
+import Input from '@/components/ui/Input'
+import Select from '@/components/ui/Select'
+import EmptyState from '@/components/ui/EmptyState'
+import { cn } from '@/lib/cn'
 
 const emptyForm = { title: '', type: 'article' as LearningResourceType, category: '', skillTag: '', urlOrContent: '' }
 
@@ -12,9 +19,9 @@ const progressLabels: Record<ProgressStatus, string> = {
 }
 
 const progressStyles: Record<ProgressStatus, string> = {
-  not_started: 'bg-gray-100 text-gray-500',
-  in_progress: 'bg-amber-100 text-amber-700',
-  done: 'bg-emerald-100 text-emerald-700',
+  not_started: 'bg-fg/10 text-fg-muted',
+  in_progress: 'bg-secondary/15 text-secondary',
+  done: 'bg-success/15 text-success',
 }
 
 const typeIcons: Record<LearningResourceType, string> = {
@@ -133,117 +140,119 @@ export default function Learning() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Learning Hub</h1>
-          <p className="mt-1 text-sm text-gray-500">Skill-tagged resources to grow your digital economy skillset.</p>
+          <h1 className="font-display text-2xl font-bold text-fg">Learning Hub</h1>
+          <p className="mt-1 text-sm text-fg-muted">Skill-tagged resources to grow your digital economy skillset.</p>
         </div>
-        {isStaff && (
-          <button
-            onClick={() => setShowForm((v) => !v)}
-            className="rounded-lg bg-kca-blue px-4 py-2 text-sm font-semibold text-white hover:bg-kca-dark"
-          >
-            {showForm ? 'Cancel' : '+ Add resource'}
-          </button>
-        )}
+        {isStaff && <Button onClick={() => setShowForm((v) => !v)}>{showForm ? 'Cancel' : '+ Add resource'}</Button>}
       </div>
 
-      <div className="rounded-2xl border border-gray-200 bg-white p-5">
+      <Card padding="md">
         <div className="flex items-center justify-between text-sm">
-          <p className="font-medium text-gray-700">Your progress</p>
-          <p className="text-gray-500">
+          <p className="font-medium text-fg">Your progress</p>
+          <p className="text-fg-muted">
             {doneCount} / {resources.length} completed
           </p>
         </div>
-        <div className="mt-2 h-2 w-full overflow-hidden rounded-full bg-gray-100">
-          <div className="h-full rounded-full bg-kca-teal transition-all" style={{ width: `${overallPct}%` }} />
+        <div className="mt-2 h-2 w-full overflow-hidden rounded-full bg-fg/10">
+          <div className="h-full rounded-full bg-success transition-all" style={{ width: `${overallPct}%` }} />
         </div>
-      </div>
+      </Card>
 
       {showForm && (
-        <form onSubmit={handleSubmit} className="grid gap-4 rounded-2xl border border-gray-200 bg-white p-6 sm:grid-cols-2">
-          <div>
-            <label htmlFor="resource-title" className="block text-sm font-medium text-gray-700">Title</label>
-            <input
-              id="resource-title"
-              required
-              value={form.title}
-              onChange={(e) => setForm({ ...form, title: e.target.value })}
-              className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-kca-blue focus:outline-none focus:ring-1 focus:ring-kca-blue"
-            />
-          </div>
+        <Card padding="lg">
+          <form onSubmit={handleSubmit} className="grid gap-4 sm:grid-cols-2">
+            <div>
+              <label htmlFor="resource-title" className="block text-sm font-medium text-fg">
+                Title
+              </label>
+              <Input
+                id="resource-title"
+                required
+                value={form.title}
+                onChange={(e) => setForm({ ...form, title: e.target.value })}
+                className="mt-1"
+              />
+            </div>
 
-          <div>
-            <label htmlFor="resource-type" className="block text-sm font-medium text-gray-700">Type</label>
-            <select
-              id="resource-type"
-              value={form.type}
-              onChange={(e) => setForm({ ...form, type: e.target.value as LearningResourceType })}
-              className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-kca-blue focus:outline-none focus:ring-1 focus:ring-kca-blue"
-            >
-              <option value="article">Article</option>
-              <option value="video">Video</option>
-              <option value="course">Course</option>
-              <option value="link">Link</option>
-            </select>
-          </div>
+            <div>
+              <label htmlFor="resource-type" className="block text-sm font-medium text-fg">
+                Type
+              </label>
+              <Select
+                id="resource-type"
+                value={form.type}
+                onChange={(e) => setForm({ ...form, type: e.target.value as LearningResourceType })}
+                className="mt-1"
+              >
+                <option value="article">Article</option>
+                <option value="video">Video</option>
+                <option value="course">Course</option>
+                <option value="link">Link</option>
+              </Select>
+            </div>
 
-          <div>
-            <label htmlFor="resource-category" className="block text-sm font-medium text-gray-700">Category</label>
-            <input
-              id="resource-category"
-              required
-              placeholder="e.g. Web Development, AI, Freelancing"
-              value={form.category}
-              onChange={(e) => setForm({ ...form, category: e.target.value })}
-              className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-kca-blue focus:outline-none focus:ring-1 focus:ring-kca-blue"
-            />
-          </div>
+            <div>
+              <label htmlFor="resource-category" className="block text-sm font-medium text-fg">
+                Category
+              </label>
+              <Input
+                id="resource-category"
+                required
+                placeholder="e.g. Web Development, AI, Freelancing"
+                value={form.category}
+                onChange={(e) => setForm({ ...form, category: e.target.value })}
+                className="mt-1"
+              />
+            </div>
 
-          <div>
-            <label htmlFor="resource-skill-tag" className="block text-sm font-medium text-gray-700">Skill tag (optional)</label>
-            <input
-              id="resource-skill-tag"
-              placeholder="e.g. React, Copywriting"
-              value={form.skillTag}
-              onChange={(e) => setForm({ ...form, skillTag: e.target.value })}
-              className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-kca-blue focus:outline-none focus:ring-1 focus:ring-kca-blue"
-            />
-          </div>
+            <div>
+              <label htmlFor="resource-skill-tag" className="block text-sm font-medium text-fg">
+                Skill tag (optional)
+              </label>
+              <Input
+                id="resource-skill-tag"
+                placeholder="e.g. React, Copywriting"
+                value={form.skillTag}
+                onChange={(e) => setForm({ ...form, skillTag: e.target.value })}
+                className="mt-1"
+              />
+            </div>
 
-          <div className="sm:col-span-2">
-            <label htmlFor="resource-url" className="block text-sm font-medium text-gray-700">URL or content</label>
-            <input
-              id="resource-url"
-              required
-              placeholder="https://… or a short write-up"
-              value={form.urlOrContent}
-              onChange={(e) => setForm({ ...form, urlOrContent: e.target.value })}
-              className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-kca-blue focus:outline-none focus:ring-1 focus:ring-kca-blue"
-            />
-          </div>
+            <div className="sm:col-span-2">
+              <label htmlFor="resource-url" className="block text-sm font-medium text-fg">
+                URL or content
+              </label>
+              <Input
+                id="resource-url"
+                required
+                placeholder="https://… or a short write-up"
+                value={form.urlOrContent}
+                onChange={(e) => setForm({ ...form, urlOrContent: e.target.value })}
+                className="mt-1"
+              />
+            </div>
 
-          {error && <p className="text-sm text-red-600 sm:col-span-2">{error}</p>}
+            {error && <p className="text-sm text-danger sm:col-span-2">{error}</p>}
 
-          <div className="sm:col-span-2">
-            <button
-              type="submit"
-              disabled={saving}
-              className="rounded-lg bg-kca-blue px-4 py-2.5 text-sm font-semibold text-white hover:bg-kca-dark disabled:opacity-60"
-            >
-              {saving ? 'Saving…' : 'Save resource'}
-            </button>
-          </div>
-        </form>
+            <div className="sm:col-span-2">
+              <Button type="submit" loading={saving}>
+                {saving ? 'Saving…' : 'Save resource'}
+              </Button>
+            </div>
+          </form>
+        </Card>
       )}
 
-      {!showForm && error && <p className="text-sm text-red-600">{error}</p>}
+      {!showForm && error && <p className="text-sm text-danger">{error}</p>}
 
       <div className="flex flex-wrap gap-2" role="group" aria-label="Filter by category">
         <button
           onClick={() => setCategoryFilter('all')}
           aria-pressed={categoryFilter === 'all'}
-          className={`rounded-full px-3 py-1.5 text-xs font-medium ${
-            categoryFilter === 'all' ? 'bg-kca-blue text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-          }`}
+          className={cn(
+            'rounded-full px-3 py-1.5 text-xs font-medium transition-colors',
+            categoryFilter === 'all' ? 'bg-primary text-white' : 'bg-fg/10 text-fg-muted hover:bg-fg/15',
+          )}
         >
           All
         </button>
@@ -252,9 +261,10 @@ export default function Learning() {
             key={c}
             onClick={() => setCategoryFilter(c)}
             aria-pressed={categoryFilter === c}
-            className={`rounded-full px-3 py-1.5 text-xs font-medium ${
-              categoryFilter === c ? 'bg-kca-blue text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-            }`}
+            className={cn(
+              'rounded-full px-3 py-1.5 text-xs font-medium transition-colors',
+              categoryFilter === c ? 'bg-primary text-white' : 'bg-fg/10 text-fg-muted hover:bg-fg/15',
+            )}
           >
             {c}
           </button>
@@ -262,34 +272,39 @@ export default function Learning() {
       </div>
 
       {loading ? (
-        <p className="text-sm text-gray-400">Loading resources…</p>
+        <p className="text-sm text-fg-subtle">Loading resources…</p>
       ) : grouped.length === 0 ? (
-        <p className="text-sm text-gray-400">No learning resources yet.</p>
+        <EmptyState icon={GraduationCap} title="No learning resources yet" />
       ) : (
         <div className="space-y-6">
           {grouped.map(([category, items]) => (
             <section key={category}>
-              <h2 className="mb-3 text-sm font-semibold uppercase tracking-wide text-gray-400">{category}</h2>
+              <h2 className="mb-3 text-sm font-semibold uppercase tracking-wide text-fg-subtle">{category}</h2>
               <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
                 {items.map((resource) => {
                   const mine = myProgress(resource.id)
                   const status = mine?.status ?? 'not_started'
                   return (
-                    <div key={resource.id} className="rounded-2xl border border-gray-200 bg-white p-4">
+                    <Card key={resource.id} padding="sm">
                       <div className="flex items-start justify-between gap-2">
-                        <p className="text-sm font-medium text-gray-900">
+                        <p className="text-sm font-medium text-fg">
                           {typeIcons[resource.type]} {resource.title}
                         </p>
-                        <span className={`whitespace-nowrap rounded-full px-2 py-0.5 text-[10px] font-medium ${progressStyles[status]}`}>
+                        <span
+                          className={cn(
+                            'whitespace-nowrap rounded-full px-2 py-0.5 text-[10px] font-medium',
+                            progressStyles[status],
+                          )}
+                        >
                           {progressLabels[status]}
                         </span>
                       </div>
-                      {resource.skill_tag && <p className="mt-1 text-xs text-gray-400">Skill: {resource.skill_tag}</p>}
+                      {resource.skill_tag && <p className="mt-1 text-xs text-fg-subtle">Skill: {resource.skill_tag}</p>}
                       <a
                         href={resource.url_or_content}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="mt-2 block truncate text-xs text-kca-blue hover:underline"
+                        className="mt-2 block truncate text-xs text-primary hover:underline"
                       >
                         {resource.url_or_content}
                       </a>
@@ -300,9 +315,10 @@ export default function Learning() {
                             key={s}
                             onClick={() => setProgressStatus(resource.id, s)}
                             aria-pressed={status === s}
-                            className={`rounded-lg border px-2 py-1 text-[11px] font-medium ${
-                              status === s ? 'border-kca-blue bg-kca-blue text-white' : 'border-gray-200 text-gray-500 hover:bg-gray-100'
-                            }`}
+                            className={cn(
+                              'rounded-control border px-2 py-1 text-[11px] font-medium transition-colors',
+                              status === s ? 'border-primary bg-primary text-white' : 'border-border text-fg-muted hover:bg-fg/5',
+                            )}
                           >
                             {progressLabels[s]}
                           </button>
@@ -312,12 +328,12 @@ export default function Learning() {
                       {isStaff && (
                         <button
                           onClick={() => deleteResource(resource.id)}
-                          className="mt-3 text-[11px] font-medium text-red-500 hover:underline"
+                          className="mt-3 text-[11px] font-medium text-danger hover:underline"
                         >
                           Remove
                         </button>
                       )}
-                    </div>
+                    </Card>
                   )
                 })}
               </div>

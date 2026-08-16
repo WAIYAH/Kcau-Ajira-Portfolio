@@ -1,7 +1,9 @@
 import { useState, type FormEvent } from 'react'
 import { Link, Navigate, useLocation } from 'react-router-dom'
-import AuthLayout from '../../components/layout/AuthLayout'
-import { useAuth } from '../../contexts/AuthContext'
+import AuthLayout from '@/components/layout/AuthLayout'
+import { useAuth } from '@/contexts/AuthContext'
+import Input from '@/components/ui/Input'
+import Button from '@/components/ui/Button'
 
 export default function Login() {
   const { session, signIn } = useAuth()
@@ -29,49 +31,38 @@ export default function Login() {
     <AuthLayout title="Welcome back" subtitle="Sign in to your member dashboard">
       <form className="space-y-4" onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+          <label htmlFor="email" className="block text-sm font-medium text-fg">
             Email
           </label>
-          <input
-            id="email"
-            type="email"
-            required
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-kca-blue focus:outline-none focus:ring-1 focus:ring-kca-blue"
-          />
+          <Input id="email" type="email" required value={email} onChange={(e) => setEmail(e.target.value)} className="mt-1" />
         </div>
 
         <div>
-          <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+          <label htmlFor="password" className="block text-sm font-medium text-fg">
             Password
           </label>
-          <input
+          <Input
             id="password"
             type="password"
             required
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-kca-blue focus:outline-none focus:ring-1 focus:ring-kca-blue"
+            className="mt-1"
           />
         </div>
 
-        {error && <p className="text-sm text-red-600">{error}</p>}
+        {error && <p className="text-sm text-danger">{error}</p>}
 
-        <button
-          type="submit"
-          disabled={submitting}
-          className="w-full rounded-lg bg-kca-blue px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-kca-dark disabled:opacity-60"
-        >
+        <Button type="submit" loading={submitting} className="w-full">
           {submitting ? 'Signing in…' : 'Sign in'}
-        </button>
+        </Button>
       </form>
 
       <div className="mt-4 flex justify-between text-sm">
-        <Link to="/forgot-password" className="text-kca-blue hover:underline">
+        <Link to="/forgot-password" className="text-primary hover:underline">
           Forgot password?
         </Link>
-        <Link to="/signup" className="text-kca-blue hover:underline">
+        <Link to="/signup" className="text-primary hover:underline">
           Create account
         </Link>
       </div>

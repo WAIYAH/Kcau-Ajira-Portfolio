@@ -1,9 +1,16 @@
 import { useEffect, useState, type FormEvent } from 'react'
 import { format } from 'date-fns'
-import { supabase } from '../../lib/supabaseClient'
-import { formatKes } from '../../lib/format'
-import type { MembershipDue, Profile } from '../../types'
-import StatCard from '../../components/StatCard'
+import { PiggyBank } from 'lucide-react'
+import { supabase } from '@/lib/supabaseClient'
+import { formatKes } from '@/lib/format'
+import type { MembershipDue, Profile } from '@/types'
+import StatCard from '@/components/StatCard'
+import Card from '@/components/ui/Card'
+import Button from '@/components/ui/Button'
+import Input from '@/components/ui/Input'
+import Select from '@/components/ui/Select'
+import EmptyState from '@/components/ui/EmptyState'
+import { cn } from '@/lib/cn'
 
 function statusFor(amountDue: number, amountPaid: number): MembershipDue['status'] {
   if (amountPaid <= 0) return 'unpaid'
@@ -12,9 +19,9 @@ function statusFor(amountDue: number, amountPaid: number): MembershipDue['status
 }
 
 const statusStyles: Record<MembershipDue['status'], string> = {
-  unpaid: 'bg-red-100 text-red-700',
-  partial: 'bg-amber-100 text-amber-700',
-  paid: 'bg-emerald-100 text-emerald-700',
+  unpaid: 'bg-danger/15 text-danger',
+  partial: 'bg-secondary/15 text-secondary',
+  paid: 'bg-success/15 text-success',
 }
 
 export default function Dues() {
@@ -36,10 +43,7 @@ export default function Dues() {
   async function loadData() {
     setLoading(true)
     const [duesRes, membersRes] = await Promise.all([
-      supabase
-        .from('membership_dues')
-        .select('*, profiles(full_name, email)')
-        .order('due_date', { ascending: true }),
+      supabase.from('membership_dues').select('*, profiles(full_name, email)').order('due_date', { ascending: true }),
       supabase.from('profiles').select('*').order('full_name'),
     ])
     setLoading(false)
@@ -117,15 +121,10 @@ export default function Dues() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Membership Dues</h1>
-          <p className="mt-1 text-sm text-gray-500">Track who's paid, who owes, and by when.</p>
+          <h1 className="font-display text-2xl font-bold text-fg">Membership Dues</h1>
+          <p className="mt-1 text-sm text-fg-muted">Track who's paid, who owes, and by when.</p>
         </div>
-        <button
-          onClick={() => setShowForm((v) => !v)}
-          className="rounded-lg bg-kca-blue px-4 py-2 text-sm font-semibold text-white hover:bg-kca-dark"
-        >
-          {showForm ? 'Cancel' : '+ Add dues record'}
-        </button>
+        <Button onClick={() => setShowForm((v) => !v)}>{showForm ? 'Cancel' : '+ Add dues record'}</Button>
       </div>
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
@@ -135,96 +134,90 @@ export default function Dues() {
       </div>
 
       {showForm && (
-        <form onSubmit={handleSubmit} className="grid gap-4 rounded-2xl border border-gray-200 bg-white p-6 sm:grid-cols-2">
-          <div className="sm:col-span-2">
-            <label htmlFor="due-member" className="block text-sm font-medium text-gray-700">Member</label>
-            <select
-              id="due-member"
-              required
-              value={profileId}
-              onChange={(e) => setProfileId(e.target.value)}
-              className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-kca-blue focus:outline-none focus:ring-1 focus:ring-kca-blue"
-            >
-              <option value="">Select a member…</option>
-              {members.map((m) => (
-                <option key={m.id} value={m.id}>
-                  {m.full_name} ({m.email})
-                </option>
-              ))}
-            </select>
-          </div>
+        <Card padding="lg">
+          <form onSubmit={handleSubmit} className="grid gap-4 sm:grid-cols-2">
+            <div className="sm:col-span-2">
+              <label htmlFor="due-member" className="block text-sm font-medium text-fg">
+                Member
+              </label>
+              <Select id="due-member" required value={profileId} onChange={(e) => setProfileId(e.target.value)} className="mt-1">
+                <option value="">Select a member…</option>
+                {members.map((m) => (
+                  <option key={m.id} value={m.id}>
+                    {m.full_name} ({m.email})
+                  </option>
+                ))}
+              </Select>
+            </div>
 
-          <div>
-            <label htmlFor="due-term" className="block text-sm font-medium text-gray-700">Term</label>
-            <input
-              id="due-term"
-              type="text"
-              required
-              placeholder="e.g. 2026 Trimester 1"
-              value={term}
-              onChange={(e) => setTerm(e.target.value)}
-              className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-kca-blue focus:outline-none focus:ring-1 focus:ring-kca-blue"
-            />
-          </div>
+            <div>
+              <label htmlFor="due-term" className="block text-sm font-medium text-fg">
+                Term
+              </label>
+              <Input
+                id="due-term"
+                type="text"
+                required
+                placeholder="e.g. 2026 Trimester 1"
+                value={term}
+                onChange={(e) => setTerm(e.target.value)}
+                className="mt-1"
+              />
+            </div>
 
-          <div>
-            <label htmlFor="due-amount" className="block text-sm font-medium text-gray-700">Amount due (KES)</label>
-            <input
-              id="due-amount"
-              type="number"
-              min="0"
-              step="0.01"
-              required
-              value={amountDue}
-              onChange={(e) => setAmountDue(e.target.value)}
-              className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-kca-blue focus:outline-none focus:ring-1 focus:ring-kca-blue"
-            />
-          </div>
+            <div>
+              <label htmlFor="due-amount" className="block text-sm font-medium text-fg">
+                Amount due (KES)
+              </label>
+              <Input
+                id="due-amount"
+                type="number"
+                min="0"
+                step="0.01"
+                required
+                value={amountDue}
+                onChange={(e) => setAmountDue(e.target.value)}
+                className="mt-1"
+              />
+            </div>
 
-          <div>
-            <label htmlFor="due-date" className="block text-sm font-medium text-gray-700">Due date (optional)</label>
-            <input
-              id="due-date"
-              type="date"
-              value={dueDate}
-              onChange={(e) => setDueDate(e.target.value)}
-              className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-kca-blue focus:outline-none focus:ring-1 focus:ring-kca-blue"
-            />
-          </div>
+            <div>
+              <label htmlFor="due-date" className="block text-sm font-medium text-fg">
+                Due date (optional)
+              </label>
+              <Input id="due-date" type="date" value={dueDate} onChange={(e) => setDueDate(e.target.value)} className="mt-1" />
+            </div>
 
-          {error && <p className="text-sm text-red-600 sm:col-span-2">{error}</p>}
+            {error && <p className="text-sm text-danger sm:col-span-2">{error}</p>}
 
-          <div className="sm:col-span-2">
-            <button
-              type="submit"
-              disabled={saving}
-              className="rounded-lg bg-kca-blue px-4 py-2.5 text-sm font-semibold text-white hover:bg-kca-dark disabled:opacity-60"
-            >
-              {saving ? 'Saving…' : 'Save dues record'}
-            </button>
-          </div>
-        </form>
+            <div className="sm:col-span-2">
+              <Button type="submit" loading={saving}>
+                {saving ? 'Saving…' : 'Save dues record'}
+              </Button>
+            </div>
+          </form>
+        </Card>
       )}
 
-      {!showForm && error && <p className="text-sm text-red-600">{error}</p>}
+      {!showForm && error && <p className="text-sm text-danger">{error}</p>}
 
-      <div className="overflow-x-auto rounded-2xl border border-gray-200 bg-white">
+      <Card padding="none" className="overflow-x-auto">
         <table className="w-full text-left text-sm">
-          <thead className="border-b border-gray-200 bg-gray-50 text-xs uppercase tracking-wide text-gray-500">
+          <thead className="border-b border-border bg-bg text-xs uppercase tracking-wide text-fg-subtle">
             <tr>
               <th className="px-4 py-3 font-medium">Member</th>
               <th className="px-4 py-3 font-medium">Term</th>
               <th className="px-4 py-3 font-medium">Due date</th>
-              <th className="px-4 py-3 font-medium text-right">Due</th>
-              <th className="px-4 py-3 font-medium text-right">Paid</th>
+              <th className="px-4 py-3 text-right font-medium">Due</th>
+              <th className="px-4 py-3 text-right font-medium">Paid</th>
               <th className="px-4 py-3 font-medium">Status</th>
-              <th className="px-4 py-3 font-medium text-right">Actions</th>
+              <th className="px-4 py-3 text-right font-medium">Actions</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-gray-100">
+          <tbody className="divide-y divide-border">
             {loading && (
               <tr>
-                <td colSpan={7} className="px-4 py-8 text-center text-gray-400">
+                <td colSpan={7} className="px-4 py-8 text-center text-fg-subtle">
                   Loading dues…
                 </td>
               </tr>
@@ -232,27 +225,32 @@ export default function Dues() {
 
             {!loading && dues.length === 0 && (
               <tr>
-                <td colSpan={7} className="px-4 py-8 text-center text-gray-400">
-                  No dues records yet.
+                <td colSpan={7} className="px-4 py-10">
+                  <EmptyState icon={PiggyBank} title="No dues records yet" className="border-none" />
                 </td>
               </tr>
             )}
 
             {!loading &&
               dues.map((due) => (
-                <tr key={due.id} className="hover:bg-gray-50">
+                <tr key={due.id} className="transition-colors hover:bg-fg/5">
                   <td className="px-4 py-3">
-                    <p className="font-medium text-gray-800">{due.profiles?.full_name ?? 'Unknown member'}</p>
-                    <p className="text-xs text-gray-400">{due.profiles?.email}</p>
+                    <p className="font-medium text-fg">{due.profiles?.full_name ?? 'Unknown member'}</p>
+                    <p className="text-xs text-fg-subtle">{due.profiles?.email}</p>
                   </td>
-                  <td className="px-4 py-3 text-gray-600">{due.term}</td>
-                  <td className="whitespace-nowrap px-4 py-3 text-gray-500">
+                  <td className="px-4 py-3 text-fg-muted">{due.term}</td>
+                  <td className="whitespace-nowrap px-4 py-3 text-fg-muted">
                     {due.due_date ? format(new Date(due.due_date), 'MMM d, yyyy') : '—'}
                   </td>
-                  <td className="whitespace-nowrap px-4 py-3 text-right text-gray-800">{formatKes(Number(due.amount_due))}</td>
-                  <td className="whitespace-nowrap px-4 py-3 text-right text-gray-800">{formatKes(Number(due.amount_paid))}</td>
+                  <td className="whitespace-nowrap px-4 py-3 text-right text-fg">{formatKes(Number(due.amount_due))}</td>
+                  <td className="whitespace-nowrap px-4 py-3 text-right text-fg">{formatKes(Number(due.amount_paid))}</td>
                   <td className="px-4 py-3">
-                    <span className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium capitalize ${statusStyles[due.status]}`}>
+                    <span
+                      className={cn(
+                        'inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium capitalize',
+                        statusStyles[due.status],
+                      )}
+                    >
                       {due.status}
                     </span>
                   </td>
@@ -260,7 +258,7 @@ export default function Dues() {
                     {due.status !== 'paid' &&
                       (paymentEditId === due.id ? (
                         <div className="flex items-center justify-end gap-1">
-                          <input
+                          <Input
                             type="number"
                             min="0.01"
                             step="0.01"
@@ -269,38 +267,36 @@ export default function Dues() {
                             value={paymentAmount}
                             onChange={(e) => setPaymentAmount(e.target.value)}
                             placeholder="Amount"
-                            className="w-24 rounded-lg border border-gray-300 px-2 py-1 text-xs focus:border-kca-blue focus:outline-none focus:ring-1 focus:ring-kca-blue"
+                            className="h-8 w-24 text-xs"
                           />
-                          <button
+                          <Button
+                            size="sm"
                             onClick={() => recordPayment(due)}
-                            className="rounded-lg bg-emerald-600 px-2 py-1 text-xs font-semibold text-white hover:bg-emerald-700"
+                            className="bg-success text-white hover:bg-success"
                           >
                             Save
-                          </button>
+                          </Button>
                           <button
                             onClick={() => {
                               setPaymentEditId(null)
                               setPaymentAmount('')
                             }}
-                            className="text-xs text-gray-400 hover:text-gray-600"
+                            className="text-xs text-fg-subtle hover:text-fg"
                           >
                             Cancel
                           </button>
                         </div>
                       ) : (
-                        <button
-                          onClick={() => setPaymentEditId(due.id)}
-                          className="rounded-lg border border-gray-200 px-3 py-1.5 text-xs font-medium text-gray-600 hover:bg-gray-100"
-                        >
+                        <Button variant="ghost" size="sm" onClick={() => setPaymentEditId(due.id)} className="border border-border">
                           Record payment
-                        </button>
+                        </Button>
                       ))}
                   </td>
                 </tr>
               ))}
           </tbody>
         </table>
-      </div>
+      </Card>
     </div>
   )
 }

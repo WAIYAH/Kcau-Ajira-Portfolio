@@ -1,12 +1,18 @@
 import { useEffect, useMemo, useState } from 'react'
 import { format } from 'date-fns'
-import { supabase } from '../../lib/supabaseClient'
-import type { Inquiry, InquiryStatus, InquiryType } from '../../types'
+import { Inbox as InboxIcon } from 'lucide-react'
+import { supabase } from '@/lib/supabaseClient'
+import type { Inquiry, InquiryStatus, InquiryType } from '@/types'
+import Card from '@/components/ui/Card'
+import Button from '@/components/ui/Button'
+import Select from '@/components/ui/Select'
+import EmptyState from '@/components/ui/EmptyState'
+import { cn } from '@/lib/cn'
 
 const statusStyles: Record<InquiryStatus, string> = {
-  new: 'bg-amber-100 text-amber-700',
-  in_progress: 'bg-blue-100 text-blue-700',
-  resolved: 'bg-emerald-100 text-emerald-700',
+  new: 'bg-secondary/15 text-secondary',
+  in_progress: 'bg-primary/15 text-primary',
+  resolved: 'bg-success/15 text-success',
 }
 
 const typeLabels: Record<InquiryType, string> = {
@@ -61,90 +67,90 @@ export default function Inbox() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold text-gray-900">Inbox</h1>
-        <p className="mt-1 text-sm text-gray-500">
+        <h1 className="font-display text-2xl font-bold text-fg">Inbox</h1>
+        <p className="mt-1 text-sm text-fg-muted">
           Real submissions from the public website's Contact and Join forms.
-          {newCount > 0 && <span className="ml-1 font-medium text-amber-600">{newCount} new.</span>}
+          {newCount > 0 && <span className="ml-1 font-medium text-secondary">{newCount} new.</span>}
         </p>
       </div>
 
       <div className="flex flex-wrap gap-2">
-        <select
-          value={typeFilter}
-          onChange={(e) => setTypeFilter(e.target.value as TypeFilter)}
-          className="rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-kca-blue focus:outline-none focus:ring-1 focus:ring-kca-blue"
-        >
+        <Select value={typeFilter} onChange={(e) => setTypeFilter(e.target.value as TypeFilter)} className="w-auto">
           <option value="all">All types</option>
           <option value="contact">Contact form</option>
           <option value="join_interest">Join interest</option>
-        </select>
-        <select
-          value={statusFilter}
-          onChange={(e) => setStatusFilter(e.target.value as StatusFilter)}
-          className="rounded-lg border border-gray-300 px-3 py-2 text-sm capitalize focus:border-kca-blue focus:outline-none focus:ring-1 focus:ring-kca-blue"
-        >
+        </Select>
+        <Select value={statusFilter} onChange={(e) => setStatusFilter(e.target.value as StatusFilter)} className="w-auto capitalize">
           <option value="all">All statuses</option>
           <option value="new">New</option>
           <option value="in_progress">In progress</option>
           <option value="resolved">Resolved</option>
-        </select>
+        </Select>
       </div>
 
-      {error && <p className="text-sm text-red-600">{error}</p>}
+      {error && <p className="text-sm text-danger">{error}</p>}
 
       {loading ? (
-        <p className="text-sm text-gray-400">Loading inquiries…</p>
+        <p className="text-sm text-fg-subtle">Loading inquiries…</p>
       ) : filtered.length === 0 ? (
-        <p className="text-sm text-gray-400">No inquiries match your filters.</p>
+        <EmptyState icon={InboxIcon} title="No inquiries match your filters" />
       ) : (
         <div className="space-y-3">
           {filtered.map((inquiry) => (
-            <div key={inquiry.id} className="rounded-2xl border border-gray-200 bg-white p-5">
+            <Card key={inquiry.id} padding="md">
               <div className="flex flex-wrap items-start justify-between gap-2">
                 <div>
-                  <p className="font-medium text-gray-900">{inquiry.name}</p>
-                  <p className="text-sm text-gray-500">
+                  <p className="font-medium text-fg">{inquiry.name}</p>
+                  <p className="text-sm text-fg-muted">
                     {inquiry.email}
                     {inquiry.phone && ` · ${inquiry.phone}`}
                   </p>
                 </div>
                 <div className="flex items-center gap-2">
-                  <span className="whitespace-nowrap rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-600">
+                  <span className="whitespace-nowrap rounded-full bg-fg/10 px-2.5 py-0.5 text-xs font-medium text-fg-muted">
                     {typeLabels[inquiry.type]}
                   </span>
-                  <span className={`whitespace-nowrap rounded-full px-2.5 py-0.5 text-xs font-medium capitalize ${statusStyles[inquiry.status]}`}>
+                  <span
+                    className={cn(
+                      'whitespace-nowrap rounded-full px-2.5 py-0.5 text-xs font-medium capitalize',
+                      statusStyles[inquiry.status],
+                    )}
+                  >
                     {inquiry.status.replace('_', ' ')}
                   </span>
                 </div>
               </div>
 
-              {inquiry.subject && <p className="mt-3 text-sm font-medium text-gray-700">{inquiry.subject}</p>}
-              {inquiry.message && <p className="mt-1 whitespace-pre-wrap text-sm text-gray-600">{inquiry.message}</p>}
+              {inquiry.subject && <p className="mt-3 text-sm font-medium text-fg">{inquiry.subject}</p>}
+              {inquiry.message && <p className="mt-1 whitespace-pre-wrap text-sm text-fg-muted">{inquiry.message}</p>}
 
-              <div className="mt-4 flex items-center justify-between border-t border-gray-100 pt-3">
-                <p className="text-xs text-gray-400">{format(new Date(inquiry.created_at), 'MMM d, yyyy HH:mm')}</p>
+              <div className="mt-4 flex items-center justify-between border-t border-border pt-3">
+                <p className="text-xs text-fg-subtle">{format(new Date(inquiry.created_at), 'MMM d, yyyy HH:mm')}</p>
                 <div className="flex gap-2">
                   {inquiry.status !== 'in_progress' && (
-                    <button
+                    <Button
+                      variant="ghost"
+                      size="sm"
                       onClick={() => updateStatus(inquiry.id, 'in_progress')}
-                      disabled={busyId === inquiry.id}
-                      className="rounded-lg border border-gray-200 px-3 py-1.5 text-xs font-medium text-gray-600 hover:bg-gray-100 disabled:opacity-60"
+                      loading={busyId === inquiry.id}
+                      className="border border-border"
                     >
                       Mark in progress
-                    </button>
+                    </Button>
                   )}
                   {inquiry.status !== 'resolved' && (
-                    <button
+                    <Button
+                      size="sm"
                       onClick={() => updateStatus(inquiry.id, 'resolved')}
-                      disabled={busyId === inquiry.id}
-                      className="rounded-lg bg-emerald-600 px-3 py-1.5 text-xs font-semibold text-white hover:bg-emerald-700 disabled:opacity-60"
+                      loading={busyId === inquiry.id}
+                      className="bg-success text-white hover:bg-success"
                     >
                       Mark resolved
-                    </button>
+                    </Button>
                   )}
                 </div>
               </div>
-            </div>
+            </Card>
           ))}
         </div>
       )}

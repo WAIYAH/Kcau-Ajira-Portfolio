@@ -1,7 +1,15 @@
 import { useEffect, useState, type FormEvent } from 'react'
 import { format } from 'date-fns'
-import { supabase } from '../../lib/supabaseClient'
-import type { Announcement, AnnouncementAudience, EmailLogEntry } from '../../types'
+import { Megaphone, Mail } from 'lucide-react'
+import { supabase } from '@/lib/supabaseClient'
+import type { Announcement, AnnouncementAudience, EmailLogEntry } from '@/types'
+import Card from '@/components/ui/Card'
+import Button from '@/components/ui/Button'
+import Input from '@/components/ui/Input'
+import Textarea from '@/components/ui/Textarea'
+import Select from '@/components/ui/Select'
+import EmptyState from '@/components/ui/EmptyState'
+import { cn } from '@/lib/cn'
 
 const audienceOptions: { value: AnnouncementAudience; label: string }[] = [
   { value: 'all', label: 'Everyone' },
@@ -30,11 +38,7 @@ export default function Announcements() {
         .select('*, sender:profiles!sent_by(full_name)')
         .order('created_at', { ascending: false })
         .limit(20),
-      supabase
-        .from('email_log')
-        .select('*, sender:profiles!sent_by(full_name)')
-        .order('created_at', { ascending: false })
-        .limit(10),
+      supabase.from('email_log').select('*, sender:profiles!sent_by(full_name)').order('created_at', { ascending: false }).limit(10),
     ])
     setLoading(false)
     if (announcementsRes.error) setError(announcementsRes.error.message)
@@ -95,100 +99,103 @@ export default function Announcements() {
 
   return (
     <div className="space-y-8">
-      <form onSubmit={handleSubmit} className="grid gap-4 rounded-2xl border border-gray-200 bg-white p-6 sm:grid-cols-2">
-        <div className="sm:col-span-2">
-          <label htmlFor="announcement-title" className="block text-sm font-medium text-gray-700">Title</label>
-          <input
-            id="announcement-title"
-            required
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-kca-blue focus:outline-none focus:ring-1 focus:ring-kca-blue"
-          />
-        </div>
+      <Card padding="lg">
+        <form onSubmit={handleSubmit} className="grid gap-4 sm:grid-cols-2">
+          <div className="sm:col-span-2">
+            <label htmlFor="announcement-title" className="block text-sm font-medium text-fg">
+              Title
+            </label>
+            <Input id="announcement-title" required value={title} onChange={(e) => setTitle(e.target.value)} className="mt-1" />
+          </div>
 
-        <div className="sm:col-span-2">
-          <label htmlFor="announcement-body" className="block text-sm font-medium text-gray-700">Message</label>
-          <textarea
-            id="announcement-body"
-            required
-            rows={4}
-            value={body}
-            onChange={(e) => setBody(e.target.value)}
-            className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-kca-blue focus:outline-none focus:ring-1 focus:ring-kca-blue"
-          />
-        </div>
+          <div className="sm:col-span-2">
+            <label htmlFor="announcement-body" className="block text-sm font-medium text-fg">
+              Message
+            </label>
+            <Textarea
+              id="announcement-body"
+              required
+              rows={4}
+              value={body}
+              onChange={(e) => setBody(e.target.value)}
+              className="mt-1 min-h-0"
+            />
+          </div>
 
-        <div>
-          <label htmlFor="announcement-audience" className="block text-sm font-medium text-gray-700">Audience</label>
-          <select
-            id="announcement-audience"
-            value={audience}
-            onChange={(e) => setAudience(e.target.value as AnnouncementAudience)}
-            className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-kca-blue focus:outline-none focus:ring-1 focus:ring-kca-blue"
-          >
-            {audienceOptions.map((opt) => (
-              <option key={opt.value} value={opt.value}>
-                {opt.label}
-              </option>
-            ))}
-          </select>
-        </div>
+          <div>
+            <label htmlFor="announcement-audience" className="block text-sm font-medium text-fg">
+              Audience
+            </label>
+            <Select
+              id="announcement-audience"
+              value={audience}
+              onChange={(e) => setAudience(e.target.value as AnnouncementAudience)}
+              className="mt-1"
+            >
+              {audienceOptions.map((opt) => (
+                <option key={opt.value} value={opt.value}>
+                  {opt.label}
+                </option>
+              ))}
+            </Select>
+          </div>
 
-        <label className="flex items-end gap-2 pb-2 text-sm text-gray-700">
-          <input type="checkbox" checked={alsoEmail} onChange={(e) => setAlsoEmail(e.target.checked)} />
-          Also send by email
-        </label>
+          <label className="flex items-end gap-2 pb-2 text-sm text-fg">
+            <input
+              type="checkbox"
+              checked={alsoEmail}
+              onChange={(e) => setAlsoEmail(e.target.checked)}
+              className="h-4 w-4 rounded border-border text-primary focus:ring-primary"
+            />
+            Also send by email
+          </label>
 
-        {error && <p className="text-sm text-red-600 sm:col-span-2">{error}</p>}
-        {notice && <p className="text-sm text-gray-600 sm:col-span-2">{notice}</p>}
+          {error && <p className="text-sm text-danger sm:col-span-2">{error}</p>}
+          {notice && <p className="text-sm text-fg-muted sm:col-span-2">{notice}</p>}
 
-        <div className="sm:col-span-2">
-          <button
-            type="submit"
-            disabled={saving}
-            className="rounded-lg bg-kca-blue px-4 py-2.5 text-sm font-semibold text-white hover:bg-kca-dark disabled:opacity-60"
-          >
-            {saving ? 'Posting…' : 'Post announcement'}
-          </button>
-        </div>
-      </form>
+          <div className="sm:col-span-2">
+            <Button type="submit" loading={saving}>
+              {saving ? 'Posting…' : 'Post announcement'}
+            </Button>
+          </div>
+        </form>
+      </Card>
 
       <section>
-        <h2 className="mb-3 text-sm font-semibold uppercase tracking-wide text-gray-400">Announcements feed</h2>
+        <h2 className="mb-3 text-sm font-semibold uppercase tracking-wide text-fg-subtle">Announcements feed</h2>
         {loading ? (
-          <p className="text-sm text-gray-400">Loading…</p>
+          <p className="text-sm text-fg-subtle">Loading…</p>
         ) : announcements.length === 0 ? (
-          <p className="text-sm text-gray-400">No announcements yet.</p>
+          <EmptyState icon={Megaphone} title="No announcements yet" />
         ) : (
           <div className="space-y-3">
             {announcements.map((a) => (
-              <div key={a.id} className="rounded-2xl border border-gray-200 bg-white p-5">
+              <Card key={a.id} padding="md">
                 <div className="flex items-start justify-between gap-2">
-                  <p className="font-medium text-gray-900">{a.title}</p>
-                  <span className="whitespace-nowrap rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium capitalize text-gray-600">
+                  <p className="font-medium text-fg">{a.title}</p>
+                  <span className="whitespace-nowrap rounded-full bg-fg/10 px-2.5 py-0.5 text-xs font-medium capitalize text-fg-muted">
                     {a.audience}
                   </span>
                 </div>
-                <p className="mt-1 whitespace-pre-wrap text-sm text-gray-600">{a.body}</p>
-                <p className="mt-2 text-xs text-gray-400">
+                <p className="mt-1 whitespace-pre-wrap text-sm text-fg-muted">{a.body}</p>
+                <p className="mt-2 text-xs text-fg-subtle">
                   {a.sender?.full_name ?? 'Unknown'} · {format(new Date(a.created_at), 'MMM d, yyyy HH:mm')} ·{' '}
                   {a.sent_via === 'both' ? 'In-app + email' : 'In-app only'}
                 </p>
-              </div>
+              </Card>
             ))}
           </div>
         )}
       </section>
 
       <section>
-        <h2 className="mb-3 text-sm font-semibold uppercase tracking-wide text-gray-400">Recent email sends</h2>
+        <h2 className="mb-3 text-sm font-semibold uppercase tracking-wide text-fg-subtle">Recent email sends</h2>
         {emailLog.length === 0 ? (
-          <p className="text-sm text-gray-400">No emails sent yet.</p>
+          <EmptyState icon={Mail} title="No emails sent yet" />
         ) : (
-          <div className="overflow-x-auto rounded-2xl border border-gray-200 bg-white">
+          <Card padding="none" className="overflow-x-auto">
             <table className="w-full text-left text-sm">
-              <thead className="border-b border-gray-200 bg-gray-50 text-xs uppercase tracking-wide text-gray-500">
+              <thead className="border-b border-border bg-bg text-xs uppercase tracking-wide text-fg-subtle">
                 <tr>
                   <th className="px-4 py-3 font-medium">Subject</th>
                   <th className="px-4 py-3 font-medium">Audience</th>
@@ -197,29 +204,30 @@ export default function Announcements() {
                   <th className="px-4 py-3 font-medium">Sent</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-100">
+              <tbody className="divide-y divide-border">
                 {emailLog.map((entry) => (
                   <tr key={entry.id}>
-                    <td className="px-4 py-3 text-gray-800">{entry.subject}</td>
-                    <td className="px-4 py-3 capitalize text-gray-600">{entry.audience}</td>
-                    <td className="px-4 py-3 text-gray-600">{entry.recipient_count}</td>
+                    <td className="px-4 py-3 text-fg">{entry.subject}</td>
+                    <td className="px-4 py-3 capitalize text-fg-muted">{entry.audience}</td>
+                    <td className="px-4 py-3 text-fg-muted">{entry.recipient_count}</td>
                     <td className="px-4 py-3">
                       <span
-                        className={`rounded-full px-2.5 py-0.5 text-xs font-medium capitalize ${
-                          entry.status === 'sent' ? 'bg-emerald-100 text-emerald-700' : 'bg-red-100 text-red-700'
-                        }`}
+                        className={cn(
+                          'rounded-full px-2.5 py-0.5 text-xs font-medium capitalize',
+                          entry.status === 'sent' ? 'bg-success/15 text-success' : 'bg-danger/15 text-danger',
+                        )}
                       >
                         {entry.status}
                       </span>
                     </td>
-                    <td className="whitespace-nowrap px-4 py-3 text-gray-500">
+                    <td className="whitespace-nowrap px-4 py-3 text-fg-muted">
                       {format(new Date(entry.created_at), 'MMM d, yyyy HH:mm')}
                     </td>
                   </tr>
                 ))}
               </tbody>
             </table>
-          </div>
+          </Card>
         )}
       </section>
     </div>

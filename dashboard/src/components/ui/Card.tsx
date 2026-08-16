@@ -1,13 +1,17 @@
-import { forwardRef, type HTMLAttributes } from 'react'
+import type { ComponentPropsWithoutRef, ElementType, ReactElement } from 'react'
 import { cn } from '@/lib/cn'
 
 type CardVariant = 'surface' | 'raised' | 'interactive'
 type CardPadding = 'none' | 'sm' | 'md' | 'lg'
 
-export interface CardProps extends HTMLAttributes<HTMLDivElement> {
+interface CardOwnProps<T extends ElementType> {
+  as?: T
   variant?: CardVariant
   padding?: CardPadding
 }
+
+export type CardProps<T extends ElementType = 'div'> = CardOwnProps<T> &
+  Omit<ComponentPropsWithoutRef<T>, keyof CardOwnProps<T>>
 
 const paddingClasses: Record<CardPadding, string> = {
   none: '',
@@ -23,10 +27,19 @@ const variantClasses: Record<CardVariant, string> = {
     'shadow-elevate-xs transition-all duration-150 ease-out hover:-translate-y-0.5 hover:shadow-elevate-md hover:border-border-strong',
 }
 
-const Card = forwardRef<HTMLDivElement, CardProps>(
-  ({ className, variant = 'surface', padding = 'md', ...props }, ref) => (
-    <div
-      ref={ref}
+// Polymorphic (`as="form"`, etc.) rather than forwardRef — nothing in this
+// codebase forwards a ref into Card, and the generic-plus-forwardRef typing
+// isn't worth the complexity until something actually needs it.
+export default function Card<T extends ElementType = 'div'>({
+  as,
+  className,
+  variant = 'surface',
+  padding = 'md',
+  ...props
+}: CardProps<T>): ReactElement {
+  const Component = as || 'div'
+  return (
+    <Component
       className={cn(
         'rounded-surface border border-border bg-surface',
         paddingClasses[padding],
@@ -35,8 +48,5 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
       )}
       {...props}
     />
-  ),
-)
-Card.displayName = 'Card'
-
-export default Card
+  )
+}

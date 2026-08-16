@@ -1,8 +1,14 @@
 import { useEffect, useState } from 'react'
 import { format } from 'date-fns'
-import { supabase } from '../../lib/supabaseClient'
-import { toCsv, downloadCsv } from '../../lib/csv'
-import type { Election, ReportRecord, ReportType } from '../../types'
+import { FileBarChart } from 'lucide-react'
+import { supabase } from '@/lib/supabaseClient'
+import { toCsv, downloadCsv } from '@/lib/csv'
+import type { Election, ReportRecord, ReportType } from '@/types'
+import Card from '@/components/ui/Card'
+import Button from '@/components/ui/Button'
+import Input from '@/components/ui/Input'
+import Select from '@/components/ui/Select'
+import EmptyState from '@/components/ui/EmptyState'
 
 export default function Reports() {
   const [history, setHistory] = useState<ReportRecord[]>([])
@@ -173,119 +179,89 @@ export default function Reports() {
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="text-2xl font-bold text-gray-900">Reports</h1>
-        <p className="mt-1 text-sm text-gray-500">Generate a CSV export, download it, and keep a history for later.</p>
+        <h1 className="font-display text-2xl font-bold text-fg">Reports</h1>
+        <p className="mt-1 text-sm text-fg-muted">Generate a CSV export, download it, and keep a history for later.</p>
       </div>
 
-      {error && <p className="text-sm text-red-600">{error}</p>}
+      {error && <p className="text-sm text-danger">{error}</p>}
 
       <div className="grid gap-4 sm:grid-cols-2">
-        <div className="rounded-2xl border border-gray-200 bg-white p-5">
-          <h3 className="font-semibold text-gray-900">Membership roster</h3>
-          <p className="mt-1 text-sm text-gray-500">Every member's profile, role, and status.</p>
-          <button
-            onClick={generateMembership}
-            disabled={busy === 'membership'}
-            className="mt-4 rounded-lg bg-kca-blue px-4 py-2 text-sm font-semibold text-white hover:bg-kca-dark disabled:opacity-60"
-          >
+        <Card padding="md">
+          <h3 className="font-semibold text-fg">Membership roster</h3>
+          <p className="mt-1 text-sm text-fg-muted">Every member's profile, role, and status.</p>
+          <Button onClick={generateMembership} loading={busy === 'membership'} className="mt-4">
             {busy === 'membership' ? 'Generating…' : 'Generate & download'}
-          </button>
-        </div>
+          </Button>
+        </Card>
 
-        <div className="rounded-2xl border border-gray-200 bg-white p-5">
-          <h3 className="font-semibold text-gray-900">Finance statement</h3>
-          <p className="mt-1 text-sm text-gray-500">All transactions, optionally filtered by date range.</p>
+        <Card padding="md">
+          <h3 className="font-semibold text-fg">Finance statement</h3>
+          <p className="mt-1 text-sm text-fg-muted">All transactions, optionally filtered by date range.</p>
           <div className="mt-3 flex gap-2">
-            <input
-              type="date"
-              value={financeStart}
-              onChange={(e) => setFinanceStart(e.target.value)}
-              className="w-full rounded-lg border border-gray-300 px-2 py-1.5 text-xs focus:border-kca-blue focus:outline-none focus:ring-1 focus:ring-kca-blue"
-            />
-            <input
-              type="date"
-              value={financeEnd}
-              onChange={(e) => setFinanceEnd(e.target.value)}
-              className="w-full rounded-lg border border-gray-300 px-2 py-1.5 text-xs focus:border-kca-blue focus:outline-none focus:ring-1 focus:ring-kca-blue"
-            />
+            <Input type="date" value={financeStart} onChange={(e) => setFinanceStart(e.target.value)} className="h-9 text-xs" />
+            <Input type="date" value={financeEnd} onChange={(e) => setFinanceEnd(e.target.value)} className="h-9 text-xs" />
           </div>
-          <button
-            onClick={generateFinance}
-            disabled={busy === 'finance'}
-            className="mt-3 rounded-lg bg-kca-blue px-4 py-2 text-sm font-semibold text-white hover:bg-kca-dark disabled:opacity-60"
-          >
+          <Button onClick={generateFinance} loading={busy === 'finance'} className="mt-3">
             {busy === 'finance' ? 'Generating…' : 'Generate & download'}
-          </button>
-        </div>
+          </Button>
+        </Card>
 
-        <div className="rounded-2xl border border-gray-200 bg-white p-5">
-          <h3 className="font-semibold text-gray-900">Event attendance</h3>
-          <p className="mt-1 text-sm text-gray-500">RSVP breakdown for every event.</p>
-          <button
-            onClick={generateAttendance}
-            disabled={busy === 'attendance'}
-            className="mt-4 rounded-lg bg-kca-blue px-4 py-2 text-sm font-semibold text-white hover:bg-kca-dark disabled:opacity-60"
-          >
+        <Card padding="md">
+          <h3 className="font-semibold text-fg">Event attendance</h3>
+          <p className="mt-1 text-sm text-fg-muted">RSVP breakdown for every event.</p>
+          <Button onClick={generateAttendance} loading={busy === 'attendance'} className="mt-4">
             {busy === 'attendance' ? 'Generating…' : 'Generate & download'}
-          </button>
-        </div>
+          </Button>
+        </Card>
 
-        <div className="rounded-2xl border border-gray-200 bg-white p-5">
-          <h3 className="font-semibold text-gray-900">Election results</h3>
-          <p className="mt-1 text-sm text-gray-500">Final vote counts for a closed election.</p>
-          <select
-            value={selectedElectionId}
-            onChange={(e) => setSelectedElectionId(e.target.value)}
-            className="mt-3 w-full rounded-lg border border-gray-300 px-2 py-1.5 text-xs focus:border-kca-blue focus:outline-none focus:ring-1 focus:ring-kca-blue"
-          >
+        <Card padding="md">
+          <h3 className="font-semibold text-fg">Election results</h3>
+          <p className="mt-1 text-sm text-fg-muted">Final vote counts for a closed election.</p>
+          <Select value={selectedElectionId} onChange={(e) => setSelectedElectionId(e.target.value)} className="mt-3 h-9 text-xs">
             <option value="">Select a closed election…</option>
             {closedElections.map((e) => (
               <option key={e.id} value={e.id}>
                 {e.title}
               </option>
             ))}
-          </select>
-          <button
-            onClick={generateElection}
-            disabled={busy === 'election'}
-            className="mt-3 rounded-lg bg-kca-blue px-4 py-2 text-sm font-semibold text-white hover:bg-kca-dark disabled:opacity-60"
-          >
+          </Select>
+          <Button onClick={generateElection} loading={busy === 'election'} className="mt-3">
             {busy === 'election' ? 'Generating…' : 'Generate & download'}
-          </button>
-        </div>
+          </Button>
+        </Card>
       </div>
 
       <section>
-        <h2 className="mb-3 text-sm font-semibold uppercase tracking-wide text-gray-400">Report history</h2>
+        <h2 className="mb-3 text-sm font-semibold uppercase tracking-wide text-fg-subtle">Report history</h2>
         {loadingHistory ? (
-          <p className="text-sm text-gray-400">Loading…</p>
+          <p className="text-sm text-fg-subtle">Loading…</p>
         ) : history.length === 0 ? (
-          <p className="text-sm text-gray-400">No reports generated yet.</p>
+          <EmptyState icon={FileBarChart} title="No reports generated yet" />
         ) : (
-          <div className="overflow-x-auto rounded-2xl border border-gray-200 bg-white">
+          <Card padding="none" className="overflow-x-auto">
             <table className="w-full text-left text-sm">
-              <thead className="border-b border-gray-200 bg-gray-50 text-xs uppercase tracking-wide text-gray-500">
+              <thead className="border-b border-border bg-bg text-xs uppercase tracking-wide text-fg-subtle">
                 <tr>
                   <th className="px-4 py-3 font-medium">Type</th>
                   <th className="px-4 py-3 font-medium">Period</th>
                   <th className="px-4 py-3 font-medium">Generated by</th>
                   <th className="px-4 py-3 font-medium">Date</th>
-                  <th className="px-4 py-3 font-medium text-right">Action</th>
+                  <th className="px-4 py-3 text-right font-medium">Action</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-100">
+              <tbody className="divide-y divide-border">
                 {history.map((item) => (
                   <tr key={item.id}>
-                    <td className="px-4 py-3 capitalize text-gray-800">{item.type}</td>
-                    <td className="px-4 py-3 text-gray-500">
+                    <td className="px-4 py-3 capitalize text-fg">{item.type}</td>
+                    <td className="px-4 py-3 text-fg-muted">
                       {item.period_start && item.period_end ? `${item.period_start} – ${item.period_end}` : '—'}
                     </td>
-                    <td className="px-4 py-3 text-gray-500">{item.generator?.full_name ?? '—'}</td>
-                    <td className="whitespace-nowrap px-4 py-3 text-gray-500">
+                    <td className="px-4 py-3 text-fg-muted">{item.generator?.full_name ?? '—'}</td>
+                    <td className="whitespace-nowrap px-4 py-3 text-fg-muted">
                       {format(new Date(item.created_at), 'MMM d, yyyy HH:mm')}
                     </td>
                     <td className="px-4 py-3 text-right">
-                      <button onClick={() => downloadHistoryItem(item)} className="text-xs font-medium text-kca-blue hover:underline">
+                      <button onClick={() => downloadHistoryItem(item)} className="text-xs font-medium text-primary hover:underline">
                         Download
                       </button>
                     </td>
@@ -293,7 +269,7 @@ export default function Reports() {
                 ))}
               </tbody>
             </table>
-          </div>
+          </Card>
         )}
       </section>
     </div>

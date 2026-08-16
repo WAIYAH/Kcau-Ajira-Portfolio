@@ -1,11 +1,18 @@
 import { useEffect, useState, type FormEvent } from 'react'
 import { format } from 'date-fns'
-import { supabase } from '../../lib/supabaseClient'
-import { useAuth } from '../../contexts/AuthContext'
-import { formatKes } from '../../lib/format'
-import { logAudit } from '../../lib/audit'
-import type { Transaction, TransactionType } from '../../types'
-import StatCard from '../../components/StatCard'
+import { Receipt } from 'lucide-react'
+import { supabase } from '@/lib/supabaseClient'
+import { useAuth } from '@/contexts/AuthContext'
+import { formatKes } from '@/lib/format'
+import { logAudit } from '@/lib/audit'
+import type { Transaction, TransactionType } from '@/types'
+import StatCard from '@/components/StatCard'
+import Card from '@/components/ui/Card'
+import Button from '@/components/ui/Button'
+import Input from '@/components/ui/Input'
+import Select from '@/components/ui/Select'
+import EmptyState from '@/components/ui/EmptyState'
+import { cn } from '@/lib/cn'
 
 export default function Ledger() {
   const { isAdmin } = useAuth()
@@ -110,7 +117,12 @@ export default function Ledger() {
       setError(error.message)
     } else {
       setTransactions((prev) => prev.filter((t) => t.id !== id))
-      logAudit('delete_transaction', 'transactions', id, target ? { type: target.type, amount: target.amount, category: target.category } : undefined)
+      logAudit(
+        'delete_transaction',
+        'transactions',
+        id,
+        target ? { type: target.type, amount: target.amount, category: target.category } : undefined,
+      )
     }
   }
 
@@ -118,15 +130,10 @@ export default function Ledger() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Finance Ledger</h1>
-          <p className="mt-1 text-sm text-gray-500">Every income and expense, in one running record.</p>
+          <h1 className="font-display text-2xl font-bold text-fg">Finance Ledger</h1>
+          <p className="mt-1 text-sm text-fg-muted">Every income and expense, in one running record.</p>
         </div>
-        <button
-          onClick={() => setShowForm((v) => !v)}
-          className="rounded-lg bg-kca-blue px-4 py-2 text-sm font-semibold text-white hover:bg-kca-dark"
-        >
-          {showForm ? 'Cancel' : '+ Add transaction'}
-        </button>
+        <Button onClick={() => setShowForm((v) => !v)}>{showForm ? 'Cancel' : '+ Add transaction'}</Button>
       </div>
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
@@ -136,113 +143,111 @@ export default function Ledger() {
       </div>
 
       {showForm && (
-        <form onSubmit={handleSubmit} className="grid gap-4 rounded-2xl border border-gray-200 bg-white p-6 sm:grid-cols-2">
-          <div>
-            <label htmlFor="txn-type" className="block text-sm font-medium text-gray-700">Type</label>
-            <select
-              id="txn-type"
-              value={type}
-              onChange={(e) => setType(e.target.value as TransactionType)}
-              className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-kca-blue focus:outline-none focus:ring-1 focus:ring-kca-blue"
-            >
-              <option value="income">Income</option>
-              <option value="expense">Expense</option>
-            </select>
-          </div>
+        <Card padding="lg">
+          <form onSubmit={handleSubmit} className="grid gap-4 sm:grid-cols-2">
+            <div>
+              <label htmlFor="txn-type" className="block text-sm font-medium text-fg">
+                Type
+              </label>
+              <Select id="txn-type" value={type} onChange={(e) => setType(e.target.value as TransactionType)} className="mt-1">
+                <option value="income">Income</option>
+                <option value="expense">Expense</option>
+              </Select>
+            </div>
 
-          <div>
-            <label htmlFor="txn-amount" className="block text-sm font-medium text-gray-700">Amount (KES)</label>
-            <input
-              id="txn-amount"
-              type="number"
-              min="0.01"
-              step="0.01"
-              required
-              value={amount}
-              onChange={(e) => setAmount(e.target.value)}
-              className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-kca-blue focus:outline-none focus:ring-1 focus:ring-kca-blue"
-            />
-          </div>
+            <div>
+              <label htmlFor="txn-amount" className="block text-sm font-medium text-fg">
+                Amount (KES)
+              </label>
+              <Input
+                id="txn-amount"
+                type="number"
+                min="0.01"
+                step="0.01"
+                required
+                value={amount}
+                onChange={(e) => setAmount(e.target.value)}
+                className="mt-1"
+              />
+            </div>
 
-          <div>
-            <label htmlFor="txn-category" className="block text-sm font-medium text-gray-700">Category</label>
-            <input
-              id="txn-category"
-              type="text"
-              required
-              placeholder="e.g. Membership dues, Venue hire, Catering"
-              value={category}
-              onChange={(e) => setCategory(e.target.value)}
-              className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-kca-blue focus:outline-none focus:ring-1 focus:ring-kca-blue"
-            />
-          </div>
+            <div>
+              <label htmlFor="txn-category" className="block text-sm font-medium text-fg">
+                Category
+              </label>
+              <Input
+                id="txn-category"
+                type="text"
+                required
+                placeholder="e.g. Membership dues, Venue hire, Catering"
+                value={category}
+                onChange={(e) => setCategory(e.target.value)}
+                className="mt-1"
+              />
+            </div>
 
-          <div>
-            <label htmlFor="txn-date" className="block text-sm font-medium text-gray-700">Date</label>
-            <input
-              id="txn-date"
-              type="date"
-              required
-              value={occurredAt}
-              onChange={(e) => setOccurredAt(e.target.value)}
-              className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-kca-blue focus:outline-none focus:ring-1 focus:ring-kca-blue"
-            />
-          </div>
+            <div>
+              <label htmlFor="txn-date" className="block text-sm font-medium text-fg">
+                Date
+              </label>
+              <Input id="txn-date" type="date" required value={occurredAt} onChange={(e) => setOccurredAt(e.target.value)} className="mt-1" />
+            </div>
 
-          <div className="sm:col-span-2">
-            <label htmlFor="txn-description" className="block text-sm font-medium text-gray-700">Description (optional)</label>
-            <input
-              id="txn-description"
-              type="text"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-              className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-kca-blue focus:outline-none focus:ring-1 focus:ring-kca-blue"
-            />
-          </div>
+            <div className="sm:col-span-2">
+              <label htmlFor="txn-description" className="block text-sm font-medium text-fg">
+                Description (optional)
+              </label>
+              <Input
+                id="txn-description"
+                type="text"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+                className="mt-1"
+              />
+            </div>
 
-          <div className="sm:col-span-2">
-            <label htmlFor="txn-receipt" className="block text-sm font-medium text-gray-700">Receipt (optional)</label>
-            <input
-              id="txn-receipt"
-              type="file"
-              accept="image/*,application/pdf"
-              onChange={(e) => setReceiptFile(e.target.files?.[0] ?? null)}
-              className="mt-1 w-full text-sm text-gray-600"
-            />
-          </div>
+            <div className="sm:col-span-2">
+              <label htmlFor="txn-receipt" className="block text-sm font-medium text-fg">
+                Receipt (optional)
+              </label>
+              <input
+                id="txn-receipt"
+                type="file"
+                accept="image/*,application/pdf"
+                onChange={(e) => setReceiptFile(e.target.files?.[0] ?? null)}
+                className="mt-1 w-full text-sm text-fg-muted"
+              />
+            </div>
 
-          {error && <p className="text-sm text-red-600 sm:col-span-2">{error}</p>}
+            {error && <p className="text-sm text-danger sm:col-span-2">{error}</p>}
 
-          <div className="sm:col-span-2">
-            <button
-              type="submit"
-              disabled={saving}
-              className="rounded-lg bg-kca-blue px-4 py-2.5 text-sm font-semibold text-white hover:bg-kca-dark disabled:opacity-60"
-            >
-              {saving ? 'Saving…' : 'Save transaction'}
-            </button>
-          </div>
-        </form>
+            <div className="sm:col-span-2">
+              <Button type="submit" loading={saving}>
+                {saving ? 'Saving…' : 'Save transaction'}
+              </Button>
+            </div>
+          </form>
+        </Card>
       )}
 
-      {!showForm && error && <p className="text-sm text-red-600">{error}</p>}
+      {!showForm && error && <p className="text-sm text-danger">{error}</p>}
 
-      <div className="overflow-x-auto rounded-2xl border border-gray-200 bg-white">
+      <Card padding="none" className="overflow-x-auto">
         <table className="w-full text-left text-sm">
-          <thead className="border-b border-gray-200 bg-gray-50 text-xs uppercase tracking-wide text-gray-500">
+          <thead className="border-b border-border bg-bg text-xs uppercase tracking-wide text-fg-subtle">
             <tr>
               <th className="px-4 py-3 font-medium">Date</th>
               <th className="px-4 py-3 font-medium">Category</th>
               <th className="px-4 py-3 font-medium">Description</th>
               <th className="px-4 py-3 font-medium">Recorded by</th>
-              <th className="px-4 py-3 font-medium text-right">Amount</th>
-              <th className="px-4 py-3 font-medium text-right">Actions</th>
+              <th className="px-4 py-3 text-right font-medium">Amount</th>
+              <th className="px-4 py-3 text-right font-medium">Actions</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-gray-100">
+          <tbody className="divide-y divide-border">
             {loading && (
               <tr>
-                <td colSpan={6} className="px-4 py-8 text-center text-gray-400">
+                <td colSpan={6} className="px-4 py-8 text-center text-fg-subtle">
                   Loading transactions…
                 </td>
               </tr>
@@ -250,32 +255,37 @@ export default function Ledger() {
 
             {!loading && transactions.length === 0 && (
               <tr>
-                <td colSpan={6} className="px-4 py-8 text-center text-gray-400">
-                  No transactions recorded yet.
+                <td colSpan={6} className="px-4 py-10">
+                  <EmptyState icon={Receipt} title="No transactions recorded yet" className="border-none" />
                 </td>
               </tr>
             )}
 
             {!loading &&
               transactions.map((t) => (
-                <tr key={t.id} className="hover:bg-gray-50">
-                  <td className="whitespace-nowrap px-4 py-3 text-gray-600">{format(new Date(t.occurred_at), 'MMM d, yyyy')}</td>
-                  <td className="px-4 py-3 text-gray-800">{t.category}</td>
-                  <td className="px-4 py-3 text-gray-500">{t.description || '—'}</td>
-                  <td className="px-4 py-3 text-gray-500">{t.recorder?.full_name ?? '—'}</td>
-                  <td className={`whitespace-nowrap px-4 py-3 text-right font-medium ${t.type === 'income' ? 'text-emerald-600' : 'text-red-600'}`}>
+                <tr key={t.id} className="transition-colors hover:bg-fg/5">
+                  <td className="whitespace-nowrap px-4 py-3 text-fg-muted">{format(new Date(t.occurred_at), 'MMM d, yyyy')}</td>
+                  <td className="px-4 py-3 text-fg">{t.category}</td>
+                  <td className="px-4 py-3 text-fg-muted">{t.description || '—'}</td>
+                  <td className="px-4 py-3 text-fg-muted">{t.recorder?.full_name ?? '—'}</td>
+                  <td
+                    className={cn(
+                      'whitespace-nowrap px-4 py-3 text-right font-medium',
+                      t.type === 'income' ? 'text-success' : 'text-danger',
+                    )}
+                  >
                     {t.type === 'income' ? '+' : '-'}
                     {formatKes(Number(t.amount))}
                   </td>
                   <td className="px-4 py-3 text-right">
                     <div className="flex justify-end gap-2">
                       {t.receipt_url && (
-                        <button onClick={() => viewReceipt(t.receipt_url!)} className="text-xs font-medium text-kca-blue hover:underline">
+                        <button onClick={() => viewReceipt(t.receipt_url!)} className="text-xs font-medium text-primary hover:underline">
                           Receipt
                         </button>
                       )}
                       {isAdmin && (
-                        <button onClick={() => deleteTransaction(t.id)} className="text-xs font-medium text-red-500 hover:underline">
+                        <button onClick={() => deleteTransaction(t.id)} className="text-xs font-medium text-danger hover:underline">
                           Delete
                         </button>
                       )}
@@ -285,7 +295,7 @@ export default function Ledger() {
               ))}
           </tbody>
         </table>
-      </div>
+      </Card>
     </div>
   )
 }

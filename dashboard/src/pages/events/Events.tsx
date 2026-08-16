@@ -1,8 +1,16 @@
 import { useEffect, useMemo, useState, type FormEvent } from 'react'
 import { format } from 'date-fns'
-import { supabase } from '../../lib/supabaseClient'
-import { useAuth } from '../../contexts/AuthContext'
-import type { EventItem, EventRsvp, RsvpStatus } from '../../types'
+import { CalendarDays } from 'lucide-react'
+import { supabase } from '@/lib/supabaseClient'
+import { useAuth } from '@/contexts/AuthContext'
+import type { EventItem, EventRsvp, RsvpStatus } from '@/types'
+import Card from '@/components/ui/Card'
+import Button from '@/components/ui/Button'
+import Input from '@/components/ui/Input'
+import Textarea from '@/components/ui/Textarea'
+import EmptyState from '@/components/ui/EmptyState'
+import Skeleton from '@/components/ui/Skeleton'
+import { cn } from '@/lib/cn'
 
 const emptyForm = {
   title: '',
@@ -153,27 +161,25 @@ export default function Events() {
     const mine = myRsvp(event.id)
 
     return (
-      <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white">
-        {event.cover_image_url && (
-          <img src={event.cover_image_url} alt="" className="h-40 w-full object-cover" />
-        )}
+      <Card padding="none" className="overflow-hidden">
+        {event.cover_image_url && <img src={event.cover_image_url} alt="" className="h-40 w-full object-cover" />}
         <div className="p-5">
           <div className="flex items-start justify-between gap-2">
             <div>
-              <h3 className="font-semibold text-gray-900">{event.title}</h3>
-              <p className="text-sm text-gray-500">
+              <h3 className="font-semibold text-fg">{event.title}</h3>
+              <p className="text-sm text-fg-muted">
                 {format(new Date(event.starts_at), 'EEE, MMM d, yyyy · HH:mm')}
                 {event.location && ` · ${event.location}`}
               </p>
             </div>
             {event.category && (
-              <span className="whitespace-nowrap rounded-full bg-blue-50 px-2.5 py-0.5 text-xs font-medium text-kca-blue">
+              <span className="whitespace-nowrap rounded-full bg-primary/10 px-2.5 py-0.5 text-xs font-medium text-primary">
                 {event.category}
               </span>
             )}
           </div>
 
-          {event.description && <p className="mt-3 text-sm text-gray-600">{event.description}</p>}
+          {event.description && <p className="mt-3 text-sm text-fg-muted">{event.description}</p>}
 
           <div className="mt-4 flex flex-wrap gap-2">
             {rsvpOptions.map((opt) => (
@@ -181,11 +187,12 @@ export default function Events() {
                 key={opt.value}
                 onClick={() => setRsvp(event.id, opt.value)}
                 aria-pressed={mine?.status === opt.value}
-                className={`rounded-lg border px-3 py-1.5 text-xs font-medium transition-colors ${
+                className={cn(
+                  'rounded-control border px-3 py-1.5 text-xs font-medium transition-colors',
                   mine?.status === opt.value
-                    ? 'border-kca-blue bg-kca-blue text-white'
-                    : 'border-gray-200 text-gray-600 hover:bg-gray-100'
-                }`}
+                    ? 'border-primary bg-primary text-white'
+                    : 'border-border text-fg-muted hover:bg-fg/5',
+                )}
               >
                 {opt.label}
               </button>
@@ -193,22 +200,22 @@ export default function Events() {
           </div>
 
           {isStaff && (
-            <div className="mt-4 flex items-center justify-between border-t border-gray-100 pt-4">
-              <p className="text-xs text-gray-500">
+            <div className="mt-4 flex items-center justify-between border-t border-border pt-4">
+              <p className="text-xs text-fg-muted">
                 {counts.going} going · {counts.maybe} maybe · {counts.declined} declined
               </p>
               <div className="flex gap-3">
-                <button onClick={() => startEdit(event)} className="text-xs font-medium text-kca-blue hover:underline">
+                <button onClick={() => startEdit(event)} className="text-xs font-medium text-primary hover:underline">
                   Edit
                 </button>
-                <button onClick={() => deleteEvent(event.id)} className="text-xs font-medium text-red-500 hover:underline">
+                <button onClick={() => deleteEvent(event.id)} className="text-xs font-medium text-danger hover:underline">
                   Delete
                 </button>
               </div>
             </div>
           )}
         </div>
-      </div>
+      </Card>
     )
   }
 
@@ -216,125 +223,134 @@ export default function Events() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Events</h1>
-          <p className="mt-1 text-sm text-gray-500">RSVP to what's coming up, or browse what's already happened.</p>
+          <h1 className="font-display text-2xl font-bold text-fg">Events</h1>
+          <p className="mt-1 text-sm text-fg-muted">RSVP to what's coming up, or browse what's already happened.</p>
         </div>
         {isStaff && (
-          <button
+          <Button
             onClick={() => {
               if (showForm) resetForm()
               setShowForm((v) => !v)
             }}
-            className="rounded-lg bg-kca-blue px-4 py-2 text-sm font-semibold text-white hover:bg-kca-dark"
           >
             {showForm ? 'Cancel' : '+ New event'}
-          </button>
+          </Button>
         )}
       </div>
 
       {showForm && (
-        <form onSubmit={handleSubmit} className="grid gap-4 rounded-2xl border border-gray-200 bg-white p-6 sm:grid-cols-2">
-          <div className="sm:col-span-2">
-            <label htmlFor="event-title" className="block text-sm font-medium text-gray-700">Title</label>
-            <input
-              id="event-title"
-              required
-              value={form.title}
-              onChange={(e) => setForm({ ...form, title: e.target.value })}
-              className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-kca-blue focus:outline-none focus:ring-1 focus:ring-kca-blue"
-            />
-          </div>
+        <Card padding="lg">
+          <form onSubmit={handleSubmit} className="grid gap-4 sm:grid-cols-2">
+            <div className="sm:col-span-2">
+              <label htmlFor="event-title" className="block text-sm font-medium text-fg">
+                Title
+              </label>
+              <Input id="event-title" required value={form.title} onChange={(e) => setForm({ ...form, title: e.target.value })} className="mt-1" />
+            </div>
 
-          <div>
-            <label htmlFor="event-starts" className="block text-sm font-medium text-gray-700">Starts at</label>
-            <input
-              id="event-starts"
-              type="datetime-local"
-              required
-              value={form.startsAt}
-              onChange={(e) => setForm({ ...form, startsAt: e.target.value })}
-              className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-kca-blue focus:outline-none focus:ring-1 focus:ring-kca-blue"
-            />
-          </div>
+            <div>
+              <label htmlFor="event-starts" className="block text-sm font-medium text-fg">
+                Starts at
+              </label>
+              <Input
+                id="event-starts"
+                type="datetime-local"
+                required
+                value={form.startsAt}
+                onChange={(e) => setForm({ ...form, startsAt: e.target.value })}
+                className="mt-1"
+              />
+            </div>
 
-          <div>
-            <label htmlFor="event-ends" className="block text-sm font-medium text-gray-700">Ends at (optional)</label>
-            <input
-              id="event-ends"
-              type="datetime-local"
-              value={form.endsAt}
-              onChange={(e) => setForm({ ...form, endsAt: e.target.value })}
-              className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-kca-blue focus:outline-none focus:ring-1 focus:ring-kca-blue"
-            />
-          </div>
+            <div>
+              <label htmlFor="event-ends" className="block text-sm font-medium text-fg">
+                Ends at (optional)
+              </label>
+              <Input
+                id="event-ends"
+                type="datetime-local"
+                value={form.endsAt}
+                onChange={(e) => setForm({ ...form, endsAt: e.target.value })}
+                className="mt-1"
+              />
+            </div>
 
-          <div>
-            <label htmlFor="event-category" className="block text-sm font-medium text-gray-700">Category</label>
-            <input
-              id="event-category"
-              value={form.category}
-              onChange={(e) => setForm({ ...form, category: e.target.value })}
-              placeholder="e.g. Skill Lab, Meeting, Social"
-              className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-kca-blue focus:outline-none focus:ring-1 focus:ring-kca-blue"
-            />
-          </div>
+            <div>
+              <label htmlFor="event-category" className="block text-sm font-medium text-fg">
+                Category
+              </label>
+              <Input
+                id="event-category"
+                value={form.category}
+                onChange={(e) => setForm({ ...form, category: e.target.value })}
+                placeholder="e.g. Skill Lab, Meeting, Social"
+                className="mt-1"
+              />
+            </div>
 
-          <div>
-            <label htmlFor="event-location" className="block text-sm font-medium text-gray-700">Location</label>
-            <input
-              id="event-location"
-              value={form.location}
-              onChange={(e) => setForm({ ...form, location: e.target.value })}
-              className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-kca-blue focus:outline-none focus:ring-1 focus:ring-kca-blue"
-            />
-          </div>
+            <div>
+              <label htmlFor="event-location" className="block text-sm font-medium text-fg">
+                Location
+              </label>
+              <Input
+                id="event-location"
+                value={form.location}
+                onChange={(e) => setForm({ ...form, location: e.target.value })}
+                className="mt-1"
+              />
+            </div>
 
-          <div className="sm:col-span-2">
-            <label htmlFor="event-cover" className="block text-sm font-medium text-gray-700">Cover image URL (optional)</label>
-            <input
-              id="event-cover"
-              value={form.coverImageUrl}
-              onChange={(e) => setForm({ ...form, coverImageUrl: e.target.value })}
-              placeholder="https://…"
-              className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-kca-blue focus:outline-none focus:ring-1 focus:ring-kca-blue"
-            />
-          </div>
+            <div className="sm:col-span-2">
+              <label htmlFor="event-cover" className="block text-sm font-medium text-fg">
+                Cover image URL (optional)
+              </label>
+              <Input
+                id="event-cover"
+                value={form.coverImageUrl}
+                onChange={(e) => setForm({ ...form, coverImageUrl: e.target.value })}
+                placeholder="https://…"
+                className="mt-1"
+              />
+            </div>
 
-          <div className="sm:col-span-2">
-            <label htmlFor="event-description" className="block text-sm font-medium text-gray-700">Description</label>
-            <textarea
-              id="event-description"
-              rows={3}
-              value={form.description}
-              onChange={(e) => setForm({ ...form, description: e.target.value })}
-              className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-kca-blue focus:outline-none focus:ring-1 focus:ring-kca-blue"
-            />
-          </div>
+            <div className="sm:col-span-2">
+              <label htmlFor="event-description" className="block text-sm font-medium text-fg">
+                Description
+              </label>
+              <Textarea
+                id="event-description"
+                rows={3}
+                value={form.description}
+                onChange={(e) => setForm({ ...form, description: e.target.value })}
+                className="mt-1 min-h-0"
+              />
+            </div>
 
-          {error && <p className="text-sm text-red-600 sm:col-span-2">{error}</p>}
+            {error && <p className="text-sm text-danger sm:col-span-2">{error}</p>}
 
-          <div className="sm:col-span-2">
-            <button
-              type="submit"
-              disabled={saving}
-              className="rounded-lg bg-kca-blue px-4 py-2.5 text-sm font-semibold text-white hover:bg-kca-dark disabled:opacity-60"
-            >
-              {saving ? 'Saving…' : editingId ? 'Save changes' : 'Create event'}
-            </button>
-          </div>
-        </form>
+            <div className="sm:col-span-2">
+              <Button type="submit" loading={saving}>
+                {saving ? 'Saving…' : editingId ? 'Save changes' : 'Create event'}
+              </Button>
+            </div>
+          </form>
+        </Card>
       )}
 
-      {!showForm && error && <p className="text-sm text-red-600">{error}</p>}
+      {!showForm && error && <p className="text-sm text-danger">{error}</p>}
 
       {loading ? (
-        <p className="text-sm text-gray-400">Loading events…</p>
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {Array.from({ length: 3 }).map((_, i) => (
+            <Skeleton key={i} className="h-48 w-full" />
+          ))}
+        </div>
       ) : (
         <>
           <section>
-            <h2 className="mb-3 text-sm font-semibold uppercase tracking-wide text-gray-400">Upcoming</h2>
+            <h2 className="mb-3 text-sm font-semibold uppercase tracking-wide text-fg-subtle">Upcoming</h2>
             {upcoming.length === 0 ? (
-              <p className="text-sm text-gray-400">No upcoming events.</p>
+              <EmptyState icon={CalendarDays} title="No upcoming events" />
             ) : (
               <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                 {upcoming.map((e) => (
@@ -346,7 +362,7 @@ export default function Events() {
 
           {past.length > 0 && (
             <section>
-              <h2 className="mb-3 text-sm font-semibold uppercase tracking-wide text-gray-400">Past</h2>
+              <h2 className="mb-3 text-sm font-semibold uppercase tracking-wide text-fg-subtle">Past</h2>
               <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                 {past.map((e) => (
                   <EventCard key={e.id} event={e} />

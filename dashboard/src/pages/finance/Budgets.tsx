@@ -1,7 +1,13 @@
 import { useEffect, useState, type FormEvent } from 'react'
-import { supabase } from '../../lib/supabaseClient'
-import { formatKes } from '../../lib/format'
-import type { Budget } from '../../types'
+import { Wallet } from 'lucide-react'
+import { supabase } from '@/lib/supabaseClient'
+import { formatKes } from '@/lib/format'
+import type { Budget } from '@/types'
+import Card from '@/components/ui/Card'
+import Button from '@/components/ui/Button'
+import Input from '@/components/ui/Input'
+import EmptyState from '@/components/ui/EmptyState'
+import { cn } from '@/lib/cn'
 
 export default function Budgets() {
   const [budgets, setBudgets] = useState<Budget[]>([])
@@ -72,92 +78,91 @@ export default function Budgets() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Budgets</h1>
-          <p className="mt-1 text-sm text-gray-500">
+          <h1 className="font-display text-2xl font-bold text-fg">Budgets</h1>
+          <p className="mt-1 text-sm text-fg-muted">
             Planned spend per category vs. actual expenses recorded in the ledger (all-time actuals).
           </p>
         </div>
-        <button
-          onClick={() => setShowForm((v) => !v)}
-          className="rounded-lg bg-kca-blue px-4 py-2 text-sm font-semibold text-white hover:bg-kca-dark"
-        >
-          {showForm ? 'Cancel' : '+ Add budget line'}
-        </button>
+        <Button onClick={() => setShowForm((v) => !v)}>{showForm ? 'Cancel' : '+ Add budget line'}</Button>
       </div>
 
       {showForm && (
-        <form onSubmit={handleSubmit} className="grid gap-4 rounded-2xl border border-gray-200 bg-white p-6 sm:grid-cols-3">
-          <div>
-            <label htmlFor="budget-term" className="block text-sm font-medium text-gray-700">Term</label>
-            <input
-              id="budget-term"
-              type="text"
-              required
-              placeholder="e.g. 2026 Trimester 1"
-              value={term}
-              onChange={(e) => setTerm(e.target.value)}
-              className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-kca-blue focus:outline-none focus:ring-1 focus:ring-kca-blue"
-            />
-          </div>
+        <Card padding="lg">
+          <form onSubmit={handleSubmit} className="grid gap-4 sm:grid-cols-3">
+            <div>
+              <label htmlFor="budget-term" className="block text-sm font-medium text-fg">
+                Term
+              </label>
+              <Input
+                id="budget-term"
+                type="text"
+                required
+                placeholder="e.g. 2026 Trimester 1"
+                value={term}
+                onChange={(e) => setTerm(e.target.value)}
+                className="mt-1"
+              />
+            </div>
 
-          <div>
-            <label htmlFor="budget-category" className="block text-sm font-medium text-gray-700">Category</label>
-            <input
-              id="budget-category"
-              type="text"
-              required
-              placeholder="Must match ledger category to compare"
-              value={category}
-              onChange={(e) => setCategory(e.target.value)}
-              className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-kca-blue focus:outline-none focus:ring-1 focus:ring-kca-blue"
-            />
-          </div>
+            <div>
+              <label htmlFor="budget-category" className="block text-sm font-medium text-fg">
+                Category
+              </label>
+              <Input
+                id="budget-category"
+                type="text"
+                required
+                placeholder="Must match ledger category to compare"
+                value={category}
+                onChange={(e) => setCategory(e.target.value)}
+                className="mt-1"
+              />
+            </div>
 
-          <div>
-            <label htmlFor="budget-planned" className="block text-sm font-medium text-gray-700">Planned amount (KES)</label>
-            <input
-              id="budget-planned"
-              type="number"
-              min="0"
-              step="0.01"
-              required
-              value={plannedAmount}
-              onChange={(e) => setPlannedAmount(e.target.value)}
-              className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-kca-blue focus:outline-none focus:ring-1 focus:ring-kca-blue"
-            />
-          </div>
+            <div>
+              <label htmlFor="budget-planned" className="block text-sm font-medium text-fg">
+                Planned amount (KES)
+              </label>
+              <Input
+                id="budget-planned"
+                type="number"
+                min="0"
+                step="0.01"
+                required
+                value={plannedAmount}
+                onChange={(e) => setPlannedAmount(e.target.value)}
+                className="mt-1"
+              />
+            </div>
 
-          {error && <p className="text-sm text-red-600 sm:col-span-3">{error}</p>}
+            {error && <p className="text-sm text-danger sm:col-span-3">{error}</p>}
 
-          <div className="sm:col-span-3">
-            <button
-              type="submit"
-              disabled={saving}
-              className="rounded-lg bg-kca-blue px-4 py-2.5 text-sm font-semibold text-white hover:bg-kca-dark disabled:opacity-60"
-            >
-              {saving ? 'Saving…' : 'Save budget line'}
-            </button>
-          </div>
-        </form>
+            <div className="sm:col-span-3">
+              <Button type="submit" loading={saving}>
+                {saving ? 'Saving…' : 'Save budget line'}
+              </Button>
+            </div>
+          </form>
+        </Card>
       )}
 
-      {!showForm && error && <p className="text-sm text-red-600">{error}</p>}
+      {!showForm && error && <p className="text-sm text-danger">{error}</p>}
 
-      <div className="overflow-x-auto rounded-2xl border border-gray-200 bg-white">
+      <Card padding="none" className="overflow-x-auto">
         <table className="w-full text-left text-sm">
-          <thead className="border-b border-gray-200 bg-gray-50 text-xs uppercase tracking-wide text-gray-500">
+          <thead className="border-b border-border bg-bg text-xs uppercase tracking-wide text-fg-subtle">
             <tr>
               <th className="px-4 py-3 font-medium">Term</th>
               <th className="px-4 py-3 font-medium">Category</th>
-              <th className="px-4 py-3 font-medium text-right">Planned</th>
-              <th className="px-4 py-3 font-medium text-right">Actual</th>
-              <th className="px-4 py-3 font-medium text-right">Variance</th>
+              <th className="px-4 py-3 text-right font-medium">Planned</th>
+              <th className="px-4 py-3 text-right font-medium">Actual</th>
+              <th className="px-4 py-3 text-right font-medium">Variance</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-gray-100">
+          <tbody className="divide-y divide-border">
             {loading && (
               <tr>
-                <td colSpan={5} className="px-4 py-8 text-center text-gray-400">
+                <td colSpan={5} className="px-4 py-8 text-center text-fg-subtle">
                   Loading budgets…
                 </td>
               </tr>
@@ -165,8 +170,8 @@ export default function Budgets() {
 
             {!loading && budgets.length === 0 && (
               <tr>
-                <td colSpan={5} className="px-4 py-8 text-center text-gray-400">
-                  No budget lines yet.
+                <td colSpan={5} className="px-4 py-10">
+                  <EmptyState icon={Wallet} title="No budget lines yet" className="border-none" />
                 </td>
               </tr>
             )}
@@ -176,12 +181,17 @@ export default function Budgets() {
                 const actual = actualsByCategory[b.category] ?? 0
                 const variance = Number(b.planned_amount) - actual
                 return (
-                  <tr key={b.id} className="hover:bg-gray-50">
-                    <td className="px-4 py-3 text-gray-600">{b.term}</td>
-                    <td className="px-4 py-3 text-gray-800">{b.category}</td>
-                    <td className="whitespace-nowrap px-4 py-3 text-right text-gray-800">{formatKes(Number(b.planned_amount))}</td>
-                    <td className="whitespace-nowrap px-4 py-3 text-right text-gray-800">{formatKes(actual)}</td>
-                    <td className={`whitespace-nowrap px-4 py-3 text-right font-medium ${variance < 0 ? 'text-red-600' : 'text-emerald-600'}`}>
+                  <tr key={b.id} className="transition-colors hover:bg-fg/5">
+                    <td className="px-4 py-3 text-fg-muted">{b.term}</td>
+                    <td className="px-4 py-3 text-fg">{b.category}</td>
+                    <td className="whitespace-nowrap px-4 py-3 text-right text-fg">{formatKes(Number(b.planned_amount))}</td>
+                    <td className="whitespace-nowrap px-4 py-3 text-right text-fg">{formatKes(actual)}</td>
+                    <td
+                      className={cn(
+                        'whitespace-nowrap px-4 py-3 text-right font-medium',
+                        variance < 0 ? 'text-danger' : 'text-success',
+                      )}
+                    >
                       {variance < 0 ? '-' : '+'}
                       {formatKes(Math.abs(variance))}
                     </td>
@@ -190,7 +200,7 @@ export default function Budgets() {
               })}
           </tbody>
         </table>
-      </div>
+      </Card>
     </div>
   )
 }

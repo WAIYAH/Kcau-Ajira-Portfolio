@@ -1,4 +1,5 @@
 import { NavLink, Route, Routes, Navigate } from 'react-router-dom'
+import { cn } from '@/lib/cn'
 import Ledger from './Ledger'
 import Dues from './Dues'
 import Budgets from './Budgets'
@@ -12,15 +13,16 @@ const tabs = [
 export default function Finance() {
   return (
     <div className="space-y-6">
-      <div className="flex gap-1 border-b border-gray-200">
+      <div className="flex gap-1 border-b border-border">
         {tabs.map((tab) => (
           <NavLink
             key={tab.to}
             to={tab.to}
             className={({ isActive }) =>
-              `px-4 py-2 text-sm font-medium ${
-                isActive ? 'border-b-2 border-kca-blue text-kca-blue' : 'text-gray-500 hover:text-gray-700'
-              }`
+              cn(
+                'border-b-2 px-4 py-2 text-sm font-medium transition-colors',
+                isActive ? 'border-primary text-primary' : 'border-transparent text-fg-muted hover:text-fg',
+              )
             }
           >
             {tab.label}
