@@ -1,249 +1,167 @@
-import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
-import { format, startOfMonth, subMonths } from 'date-fns'
-import { Bar, BarChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
-import { supabase } from '../lib/supabaseClient'
-import { useAuth } from '../contexts/AuthContext'
-import { formatKes } from '../lib/format'
-import StatCard from '../components/StatCard'
+import { differenceInCalendarDays } from 'date-fns'
+import {
+  Wallet,
+  CalendarDays,
+  Vote,
+  GraduationCap,
+  Users,
+  UserCheck,
+  Inbox,
+  Activity,
+  PiggyBank,
+  Sparkles,
+} from 'lucide-react'
+import { useAuth } from '@/contexts/AuthContext'
+import { useOverviewData } from '@/hooks/useOverviewData'
+import { formatKes } from '@/lib/format'
+import HeroBanner from '@/components/overview/HeroBanner'
+import KpiCard, { type KpiCardProps } from '@/components/overview/KpiCard'
+import IncomeExpenseChart from '@/components/overview/IncomeExpenseChart'
+import ActivityFeed from '@/components/overview/ActivityFeed'
+import UpcomingEventsCard from '@/components/overview/UpcomingEventsCard'
+import OpenElectionsCard from '@/components/overview/OpenElectionsCard'
+import AnnouncementsCard from '@/components/overview/AnnouncementsCard'
+import OverviewSkeleton from '@/components/overview/OverviewSkeleton'
 
-// Chart colors: reference palette slots 1 (blue) and 2 (orange), an
-// already-validated adjacent pair (CVD ΔE 9.1 light) — see the dataviz skill.
-const CHART_INCOME = '#2a78d6'
-const CHART_EXPENSE = '#eb6834'
-const CHART_GRID = '#e1e0d9'
-const CHART_AXIS = '#c3c2b7'
-const CHART_MUTED_INK = '#898781'
-
-interface MonthlyTotal {
-  month: string
-  income: number
-  expense: number
-}
-
-interface UpcomingEvent {
-  id: string
-  title: string
-  starts_at: string
-  location: string | null
-}
-
-interface OpenElection {
-  id: string
-  title: string
-  closes_at: string
-}
-
-interface Announcement {
-  id: string
-  title: string
-  body: string
-  created_at: string
+function buildStatusLine(isStaff: boolean, data: ReturnType<typeof useOverviewData>) {
+  if (isStaff) {
+    const parts: string[] = []
+    if (data.pendingApprovals) parts.push(`${data.pendingApprovals} pending approval${data.pendingApprovals === 1 ? '' : 's'}`)
+    if (data.newInquiries) parts.push(`${data.newInquiries} new inquir${data.newInquiries === 1 ? 'y' : 'ies'}`)
+    return parts.length > 0 ? `${parts.join(' · ')} need your attention.` : "Everything's running smoothly."
+  }
+  const parts: string[] = []
+  if (data.upcomingEvents.length) parts.push(`${data.upcomingEvents.length} upcoming event${data.upcomingEvents.length === 1 ? '' : 's'}`)
+  if (data.openElections.length) parts.push(`${data.openElections.length} open election${data.openElections.length === 1 ? '' : 's'}`)
+  return parts.length > 0 ? `You have ${parts.join(' and ')}.` : "Here's what's happening in the club right now."
 }
 
 export default function Overview() {
-  const { profile, isStaff } = useAuth()
+  const { profile, isStaff, isAdmin } = useAuth()
+  const data = useOverviewData()
 
-  const [balance, setBalance] = useState<number | null>(null)
-  const [events, setEvents] = useState<UpcomingEvent[]>([])
-  const [elections, setElections] = useState<OpenElection[]>([])
-  const [announcements, setAnnouncements] = useState<Announcement[]>([])
-  const [memberCount, setMemberCount] = useState<number | null>(null)
-  const [pendingCount, setPendingCount] = useState<number | null>(null)
-  const [newInquiryCount, setNewInquiryCount] = useState<number | null>(null)
-  const [monthlyTotals, setMonthlyTotals] = useState<MonthlyTotal[]>([])
+  if (data.loading) return <OverviewSkeleton />
 
-  useEffect(() => {
-    supabase
-      .from('club_balance')
-      .select('balance')
-      .single()
-      .then(({ data }) => setBalance(data ? Number(data.balance) : 0))
+  const firstName = profile?.full_name?.split(' ')[0] ?? 'there'
+  const statusLine = buildStatusLine(isStaff, data)
 
-    supabase
-      .from('events')
-      .select('id, title, starts_at, location')
-      .gte('starts_at', new Date().toISOString())
-      .order('starts_at', { ascending: true })
-      .limit(5)
-      .then(({ data }) => setEvents(data ?? []))
+  const earliestElection = data.openElections[0]
+  const earliestElectionDays = earliestElection ? differenceInCalendarDays(new Date(earliestElection.closes_at), new Date()) : null
 
-    supabase
-      .from('elections')
-      .select('id, title, closes_at')
-      .eq('status', 'open')
-      .order('closes_at', { ascending: true })
-      .limit(3)
-      .then(({ data }) => setElections(data ?? []))
+  const balanceDelta = data.balanceDeltaThisMonth
+  const balanceDirection: 'up' | 'down' | 'flat' = balanceDelta > 0 ? 'up' : balanceDelta < 0 ? 'down' : 'flat'
 
-    supabase
-      .from('announcements')
-      .select('id, title, body, created_at')
-      .order('created_at', { ascending: false })
-      .limit(3)
-      .then(({ data }) => setAnnouncements(data ?? []))
+  const cards: KpiCardProps[] = [
+    {
+      icon: Wallet,
+      label: 'Club Balance',
+      value: data.balance === null ? '—' : formatKes(data.balance),
+      accent: 'primary',
+      visual:
+        balanceDelta !== 0
+          ? { type: 'trend', direction: balanceDirection, label: `${balanceDelta > 0 ? '+' : ''}${formatKes(balanceDelta)} this month` }
+          : undefined,
+      hint: balanceDelta === 0 ? 'No change this month' : undefined,
+    },
+    {
+      icon: CalendarDays,
+      label: 'Upcoming Events',
+      value: String(data.upcomingEvents.length),
+      accent: 'primary',
+    },
+    {
+      icon: Vote,
+      label: 'Open Elections',
+      value: String(data.openElections.length),
+      accent: 'primary',
+      hint: earliestElectionDays !== null && earliestElectionDays <= 3 ? `Closes in ${Math.max(earliestElectionDays, 0)}d` : undefined,
+    },
+    {
+      icon: GraduationCap,
+      label: 'My Learning Progress',
+      value: data.myLearningProgressPct === null ? '—' : `${data.myLearningProgressPct}%`,
+      accent: 'success',
+      visual: data.myLearningProgressPct !== null ? { type: 'ring', percent: data.myLearningProgressPct } : undefined,
+    },
+  ]
 
-    if (isStaff) {
-      supabase
-        .from('profiles')
-        .select('id', { count: 'exact', head: true })
-        .eq('status', 'active')
-        .then(({ count }) => setMemberCount(count ?? 0))
+  if (isStaff) {
+    cards.push(
+      {
+        icon: Users,
+        label: 'Active Members',
+        value: data.activeMembers === null ? '—' : String(data.activeMembers),
+        accent: 'primary',
+        visual:
+          data.activeMembersNewThisMonth > 0
+            ? { type: 'trend', direction: 'up', label: `+${data.activeMembersNewThisMonth} this month` }
+            : undefined,
+      },
+      {
+        icon: UserCheck,
+        label: 'Pending Approvals',
+        value: data.pendingApprovals === null ? '—' : String(data.pendingApprovals),
+        accent: data.pendingApprovals ? 'secondary' : 'primary',
+        hint: data.pendingApprovals ? 'Needs your review' : undefined,
+        to: '/members',
+      },
+      {
+        icon: Inbox,
+        label: 'New Inquiries',
+        value: data.newInquiries === null ? '—' : String(data.newInquiries),
+        accent: data.newInquiries ? 'secondary' : 'primary',
+        hint: data.newInquiries ? 'From the website' : undefined,
+        to: '/communications/inbox',
+      },
+      {
+        icon: Activity,
+        label: 'Event Attendance',
+        value: data.eventAttendanceRate === null ? '—' : `${data.eventAttendanceRate}%`,
+        accent: 'success',
+        hint: 'Last 3 events',
+      },
+      {
+        icon: PiggyBank,
+        label: 'Dues Collection',
+        value: data.duesCollectionRate === null ? '—' : `${data.duesCollectionRate}%`,
+        accent: 'success',
+        hint: 'All recorded dues',
+        to: '/finance/dues',
+      },
+      {
+        icon: Sparkles,
+        label: 'Engagement Score',
+        value: data.engagementScore === null ? '—' : `${data.engagementScore}%`,
+        accent: 'primary',
+        hint: 'RSVPs + learning activity',
+      },
+    )
+  }
 
-      supabase
-        .from('profiles')
-        .select('id', { count: 'exact', head: true })
-        .eq('status', 'pending')
-        .then(({ count }) => setPendingCount(count ?? 0))
-
-      supabase
-        .from('inquiries')
-        .select('id', { count: 'exact', head: true })
-        .eq('status', 'new')
-        .then(({ count }) => setNewInquiryCount(count ?? 0))
-
-      const sixMonthsAgo = startOfMonth(subMonths(new Date(), 5))
-      supabase
-        .from('transactions')
-        .select('type, amount, occurred_at')
-        .gte('occurred_at', format(sixMonthsAgo, 'yyyy-MM-dd'))
-        .then(({ data }) => {
-          const buckets: MonthlyTotal[] = Array.from({ length: 6 }, (_, i) => {
-            const d = subMonths(new Date(), 5 - i)
-            return { month: format(d, 'MMM'), income: 0, expense: 0 }
-          })
-          for (const t of data ?? []) {
-            const label = format(new Date(t.occurred_at), 'MMM')
-            const bucket = buckets.find((b) => b.month === label)
-            if (!bucket) continue
-            if (t.type === 'income') bucket.income += Number(t.amount)
-            else bucket.expense += Number(t.amount)
-          }
-          setMonthlyTotals(buckets)
-        })
-    }
-  }, [isStaff])
+  const chartData = data.monthlyTotals.map((m) => ({ ...m, net: m.income - m.expense }))
 
   return (
-    <div className="space-y-8">
-      <div>
-        <h1 className="text-2xl font-bold text-gray-900">Welcome back, {profile?.full_name?.split(' ')[0]}</h1>
-        <p className="mt-1 text-sm text-gray-500">Here's what's happening in the club right now.</p>
+    <div className="space-y-6">
+      <HeroBanner firstName={firstName} statusLine={statusLine} isStaff={isStaff} pendingApprovals={data.pendingApprovals} />
+
+      <div className="grid grid-cols-2 gap-4 md:grid-cols-3 xl:grid-cols-4">
+        {cards.map((card, i) => (
+          <KpiCard key={card.label} {...card} index={i} />
+        ))}
       </div>
 
-      <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
-        <StatCard label="Club balance" value={balance === null ? '—' : `KES ${balance.toLocaleString()}`} />
-        <StatCard label="Upcoming events" value={String(events.length)} />
-        <StatCard label="Open elections" value={String(elections.length)} />
-        {isStaff && <StatCard label="Active members" value={memberCount === null ? '—' : String(memberCount)} />}
-        {isStaff && (
-          <StatCard
-            label="Pending approvals"
-            value={pendingCount === null ? '—' : String(pendingCount)}
-            hint={pendingCount ? 'Needs your review' : undefined}
-          />
-        )}
-        {isStaff && (
-          <Link to="/communications/inbox" className="block transition-transform hover:-translate-y-0.5">
-            <StatCard
-              label="New inquiries"
-              value={newInquiryCount === null ? '—' : String(newInquiryCount)}
-              hint={newInquiryCount ? 'From the website — click to view' : undefined}
-            />
-          </Link>
-        )}
-      </div>
-
-      {isStaff && (
-        <section className="rounded-2xl border border-gray-200 bg-white p-5">
-          <h2 className="text-sm font-semibold text-gray-900">Income vs. expenses</h2>
-          <p className="text-xs text-gray-400">Last 6 months</p>
-          <div className="mt-4 h-64">
-            <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={monthlyTotals} barGap={2} margin={{ left: 0, right: 0, top: 8, bottom: 0 }}>
-                <CartesianGrid stroke={CHART_GRID} vertical={false} />
-                <XAxis
-                  dataKey="month"
-                  axisLine={{ stroke: CHART_AXIS }}
-                  tickLine={false}
-                  tick={{ fill: CHART_MUTED_INK, fontSize: 12 }}
-                />
-                <YAxis
-                  axisLine={false}
-                  tickLine={false}
-                  tick={{ fill: CHART_MUTED_INK, fontSize: 12 }}
-                  tickFormatter={(v: number) => (v >= 1000 ? `${v / 1000}k` : String(v))}
-                  width={40}
-                />
-                <Tooltip
-                  formatter={(value) => formatKes(Number(value))}
-                  contentStyle={{ borderRadius: 8, borderColor: CHART_GRID, fontSize: 12 }}
-                />
-                <Legend
-                  wrapperStyle={{ fontSize: 12, color: '#52514e' }}
-                  formatter={(value) => (value === 'income' ? 'Income' : 'Expense')}
-                />
-                <Bar dataKey="income" fill={CHART_INCOME} radius={[4, 4, 0, 0]} maxBarSize={28} />
-                <Bar dataKey="expense" fill={CHART_EXPENSE} radius={[4, 4, 0, 0]} maxBarSize={28} />
-              </BarChart>
-            </ResponsiveContainer>
-          </div>
-        </section>
-      )}
+      {isStaff && <IncomeExpenseChart data={chartData} />}
 
       <div className="grid gap-6 md:grid-cols-2">
-        <section className="rounded-2xl border border-gray-200 bg-white p-5">
-          <h2 className="text-sm font-semibold text-gray-900">Upcoming activities</h2>
-          {events.length === 0 ? (
-            <p className="mt-3 text-sm text-gray-400">No upcoming events yet.</p>
-          ) : (
-            <ul className="mt-3 space-y-3">
-              {events.map((event) => (
-                <li key={event.id} className="flex items-start justify-between text-sm">
-                  <div>
-                    <p className="font-medium text-gray-800">{event.title}</p>
-                    {event.location && <p className="text-gray-400">{event.location}</p>}
-                  </div>
-                  <p className="whitespace-nowrap text-gray-500">{format(new Date(event.starts_at), 'MMM d, HH:mm')}</p>
-                </li>
-              ))}
-            </ul>
-          )}
-        </section>
-
-        <section className="rounded-2xl border border-gray-200 bg-white p-5">
-          <h2 className="text-sm font-semibold text-gray-900">Open elections</h2>
-          {elections.length === 0 ? (
-            <p className="mt-3 text-sm text-gray-400">No elections are open right now.</p>
-          ) : (
-            <ul className="mt-3 space-y-3">
-              {elections.map((election) => (
-                <li key={election.id} className="flex items-center justify-between text-sm">
-                  <p className="font-medium text-gray-800">{election.title}</p>
-                  <p className="text-gray-500">Closes {format(new Date(election.closes_at), 'MMM d')}</p>
-                </li>
-              ))}
-            </ul>
-          )}
-        </section>
+        <UpcomingEventsCard events={data.upcomingEvents} />
+        <OpenElectionsCard elections={data.openElections} />
       </div>
 
-      <section className="rounded-2xl border border-gray-200 bg-white p-5">
-        <h2 className="text-sm font-semibold text-gray-900">Latest announcements</h2>
-        {announcements.length === 0 ? (
-          <p className="mt-3 text-sm text-gray-400">No announcements yet.</p>
-        ) : (
-          <ul className="mt-3 space-y-4">
-            {announcements.map((a) => (
-              <li key={a.id}>
-                <p className="text-sm font-medium text-gray-800">{a.title}</p>
-                <p className="text-sm text-gray-500">{a.body}</p>
-                <p className="mt-1 text-xs text-gray-400">{format(new Date(a.created_at), 'MMM d, yyyy')}</p>
-              </li>
-            ))}
-          </ul>
-        )}
-      </section>
+      {isStaff ? (
+        <ActivityFeed announcements={data.announcements} auditEntries={isAdmin ? data.auditEntries : []} />
+      ) : (
+        <AnnouncementsCard announcements={data.announcements} />
+      )}
     </div>
   )
 }
