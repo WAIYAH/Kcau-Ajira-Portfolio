@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import { format } from 'date-fns'
 import { supabase } from '@/lib/supabaseClient'
 import { useAuth } from '@/contexts/AuthContext'
@@ -18,10 +19,13 @@ type RoleFilter = 'all' | MemberRole
 
 export default function MemberList() {
   const { profile: currentProfile } = useAuth()
+  const [searchParams] = useSearchParams()
   const [members, setMembers] = useState<Profile[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
-  const [search, setSearch] = useState('')
+  // Pre-filled from the header's global search (`/members?q=...`), still
+  // freely editable afterward — same local filter as typing it here directly.
+  const [search, setSearch] = useState(() => searchParams.get('q') ?? '')
   const [statusFilter, setStatusFilter] = useState<StatusFilter>('all')
   const [roleFilter, setRoleFilter] = useState<RoleFilter>('all')
   const [selected, setSelected] = useState<Profile | null>(null)

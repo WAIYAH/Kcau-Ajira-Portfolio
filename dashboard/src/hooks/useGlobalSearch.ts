@@ -9,12 +9,14 @@ export interface SearchResult {
 }
 
 /**
- * Scoped to events + announcements for now (both readable by every signed-in
- * role, so no RLS edge cases). Extending this to member search (staff-only,
- * RLS-gated) is real Phase 3 work once the data-layer conventions for
- * role-conditional queries are settled — see improve.md §11.
+ * Events + announcements are readable by every signed-in role, so they're
+ * always searched. Member search additionally queries `profiles` — gated on
+ * `includeMembers` (pass `isStaff`), since `profiles` RLS only grants
+ * broad-read to staff; members can only read their own row, so a plain
+ * member's query would just come back empty rather than error, but there's
+ * no reason to even send it.
  */
-export function useGlobalSearch(query: string) {
+export function useGlobalSearch(query: string, includeMembers: boolean) {
   const [results, setResults] = useState<SearchResult[]>([])
   const [loading, setLoading] = useState(false)
 
@@ -30,9 +32,16 @@ export function useGlobalSearch(query: string) {
     setLoading(true)
 
     const timeout = window.setTimeout(async () => {
-      const [eventsRes, announcementsRes] = await Promise.all([
+      const [eventsRes, announcementsRes, membersRes] = await Promise.all([
         supabase.from('events').select('id, title').ilike('title', `%${trimmed}%`).limit(5),
         supabase.from('announcements').select('id, title').ilike('title', `%${trimmed}%`).limit(5),
+        includeMembers
+          ? supabase
+              .from('profiles')
+              .select('id, full_name, email')
+              .or(`full_name.ilike.%${trimmed}%,email.ilike.%${trimmed}%`)
+              .limit(5)
+          : Promise.resolve({ data: [] as { id: string; full_name: string; email: string }[] }),
       ])
       if (!active) return
 
@@ -49,6 +58,12 @@ export function useGlobalSearch(query: string) {
           sublabel: 'Announcement',
           to: '/communications/announcements',
         })),
+        ...(membersRes.data ?? []).map((row) => ({
+          id: `member-${row.id}`,
+          label: row.full_name,
+          sublabel: 'Member',
+          to: `/members?q=${encodeURIComponent(row.full_name)}`,
+        })),
       ]
       setResults(next)
       setLoading(false)
@@ -58,7 +73,7 @@ export function useGlobalSearch(query: string) {
       active = false
       window.clearTimeout(timeout)
     }
-  }, [query])
+  }, [query, includeMembers])
 
   return { results, loading }
 }

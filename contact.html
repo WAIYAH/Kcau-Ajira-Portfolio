@@ -208,6 +208,12 @@
                                 class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-600 focus:ring-0 focus:outline-none transition-colors text-gray-800 placeholder-gray-400 resize-y"></textarea>
                         </div>
 
+                        <!-- Honeypot (bot trap, invisible to real visitors) -->
+                        <div class="honeypot-field" aria-hidden="true">
+                            <label for="website">Leave this field empty</label>
+                            <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+                        </div>
+
                         <!-- Checkboxes -->
                         <div class="space-y-3">
                             <label class="flex items-start gap-3 cursor-pointer">
@@ -450,6 +456,19 @@
             const form = document.getElementById('contactForm');
             const formMessage = document.getElementById('formMessage');
             const submitButton = document.getElementById('submitBtn');
+
+            // Honeypot: a real visitor never sees or fills this field, so a
+            // non-empty value means a bot. Show the normal success state
+            // without actually saving anything, so bots don't learn to avoid it.
+            const honeypot = document.getElementById('website');
+            if (honeypot && honeypot.value.trim() !== '') {
+                formMessage.className = 'bg-green-100 border-2 border-green-500 text-green-800 rounded-lg p-4 mb-6 text-center font-semibold';
+                formMessage.textContent = '✓ Message sent successfully! We\'ll get back to you soon.';
+                formMessage.classList.remove('hidden');
+                form.reset();
+                setTimeout(() => formMessage.classList.add('hidden'), 5000);
+                return;
+            }
 
             const email = document.getElementById('email').value;
             const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;

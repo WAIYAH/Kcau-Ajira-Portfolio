@@ -20,12 +20,12 @@ interface HeaderProps {
 }
 
 export default function Header({ onOpenMobileNav }: HeaderProps) {
-  const { profile, isAdmin, signOut } = useAuth()
+  const { profile, isAdmin, isStaff, signOut } = useAuth()
   const { theme, setTheme } = useTheme()
   const navigate = useNavigate()
   const [query, setQuery] = useState('')
   const [searchFocused, setSearchFocused] = useState(false)
-  const { results } = useGlobalSearch(query)
+  const { results } = useGlobalSearch(query, isStaff)
   const { count: notificationCount, items: notificationItems } = useNotificationSignals()
   const searchRef = useRef<HTMLInputElement>(null)
 
@@ -75,7 +75,7 @@ export default function Header({ onOpenMobileNav }: HeaderProps) {
           onChange={(e) => setQuery(e.target.value)}
           onFocus={() => setSearchFocused(true)}
           onBlur={() => window.setTimeout(() => setSearchFocused(false), 150)}
-          placeholder="Search events, announcements…"
+          placeholder={isStaff ? 'Search events, announcements, members…' : 'Search events, announcements…'}
           aria-label="Search"
           className="h-10 w-full rounded-control border border-border bg-bg pl-9 pr-9 text-sm text-fg placeholder:text-fg-subtle transition-colors focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary"
         />

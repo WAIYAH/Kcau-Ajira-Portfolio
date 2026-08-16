@@ -1,0 +1,47 @@
+name: Dashboard CI
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "dashboard/**"
+      - ".github/workflows/dashboard-ci.yml"
+  pull_request:
+    paths:
+      - "dashboard/**"
+      - ".github/workflows/dashboard-ci.yml"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: dashboard
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: dashboard/package-lock.json
+
+      - run: npm ci
+
+      - name: Type check
+        run: npx tsc -b
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Test
+        run: npm test --if-present
+
+      - name: Build
+        run: npm run build
+        env:
+          # Dummy values -- the build only needs these to exist, not to be
+          # real. No secret required, and no live Supabase call happens
+          # during a Vite production build.
+          VITE_SUPABASE_URL: https://placeholder.supabase.co
+          VITE_SUPABASE_ANON_KEY: placeholder-anon-key

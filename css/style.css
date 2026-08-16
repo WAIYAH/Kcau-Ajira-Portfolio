@@ -98,4 +98,15 @@ h1, h2, h3, h4, h5, h6 {
   border-width: 0;
 }
 
+/* Spam-bot trap for the Join/Contact forms: hidden from sighted users AND
+   assistive tech (unlike .sr-only, which stays in the accessibility tree --
+   a real user could still reach a .sr-only field via a screen reader).
+   Simple form-scraping bots fill every input; a human never sees or reaches
+   this one, so a non-empty value on submit means it's a bot. */
+.honeypot-field {
+  position: absolute;
+  left: -9999px;
+  top: -9999px;
+}
+
 /* End of custom styles */

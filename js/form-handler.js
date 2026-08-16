@@ -11,6 +11,14 @@
 
 import { submitInquiry } from './supabase-client.js';
 
+// True if the hidden honeypot field got filled in -- a real visitor never
+// sees or reaches it, so a non-empty value means a bot. Callers should treat
+// this as a silent success (no error shown) so bots don't learn to avoid it.
+function isBot(form) {
+  const honeypot = form.querySelector('input[name="website"]');
+  return !!honeypot && honeypot.value.trim() !== '';
+}
+
 function setSubmitting(form, isSubmitting) {
   const button = form.querySelector('button[type="submit"]');
   if (!button) return;
@@ -31,6 +39,14 @@ export function initFormHandlers(showToast) {
     // Page join form (full interest form: name, email, course, interest)
     if (form.id === 'join-form') {
       e.preventDefault();
+
+      if (isBot(form)) {
+        showToast('Application Submitted!', "Thanks! We've received your details and a club leader will follow up by email soon.");
+        form.reset();
+        if (typeof window.closeJoinModal === 'function') window.closeJoinModal();
+        return;
+      }
+
       const name = document.getElementById('name')?.value || '';
       const email = document.getElementById('email')?.value || '';
       const course = document.getElementById('course')?.value || '';
@@ -63,6 +79,14 @@ export function initFormHandlers(showToast) {
     // Modal join form (dynamically inserted, quick version: name + email only)
     if (form.id === 'modal-join-form') {
       e.preventDefault();
+
+      if (isBot(form)) {
+        showToast('Session Registered!', "Great! We've got your details and a club leader will follow up. See you Wednesday at 5 PM in Tech Lab 3.");
+        form.reset();
+        if (typeof window.closeJoinModal === 'function') window.closeJoinModal();
+        return;
+      }
+
       const name = document.getElementById('modal-name')?.value || '';
       const email = document.getElementById('modal-email')?.value || '';
 

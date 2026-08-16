@@ -37,6 +37,10 @@ export function openJoinModal() {
         <label class="block text-gray-700 mb-2" for="modal-email">KCA Email</label>
         <input type="email" id="modal-email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="john.doe@students.kca.ac.ke" required>
       </div>
+      <div class="honeypot-field" aria-hidden="true">
+        <label for="modal-website">Leave this field empty</label>
+        <input type="text" id="modal-website" name="website" tabindex="-1" autocomplete="off">
+      </div>
       <div class="pt-2">
         <button type="submit" class="w-full btn-primary text-white font-semibold py-3 rounded-lg">
           Join Next Session <i class="ml-2 fas fa-calendar-alt"></i>

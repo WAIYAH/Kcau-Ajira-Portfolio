@@ -18,6 +18,15 @@ function cvFileName(path: string) {
   return raw.replace(/^[0-9a-f-]{36}-/i, '')
 }
 
+// `avatar_url` is a full public URL (avatars is a public bucket); storage
+// deletion needs the bare object path, which sits right after the bucket
+// name in that URL.
+function avatarPathFromUrl(url: string) {
+  const marker = '/avatars/'
+  const idx = url.indexOf(marker)
+  return idx === -1 ? null : url.slice(idx + marker.length)
+}
+
 export default function Profile() {
   const { profile, refreshProfile } = useAuth()
   const [fullName, setFullName] = useState(profile?.full_name ?? '')
@@ -91,19 +100,33 @@ export default function Profile() {
       return
     }
     const { data } = supabase.storage.from('avatars').getPublicUrl(path)
+    const previousUrl = profile.avatar_url
     const { error: updateError } = await supabase.from('profiles').update({ avatar_url: data.publicUrl }).eq('id', profile.id)
     setAvatarUploading(false)
-    if (updateError) setAvatarError(updateError.message)
-    else await refreshProfile()
+    if (updateError) {
+      setAvatarError(updateError.message)
+      return
+    }
+    await refreshProfile()
+    // Best-effort cleanup of the replaced file — the profile already points
+    // at the new one, so a failure here just leaves an orphaned object.
+    const previousPath = previousUrl && avatarPathFromUrl(previousUrl)
+    if (previousPath) await supabase.storage.from('avatars').remove([previousPath])
   }
 
   async function handleRemoveAvatar() {
     setAvatarError(null)
     setAvatarUploading(true)
+    const previousUrl = profile!.avatar_url
     const { error } = await supabase.from('profiles').update({ avatar_url: null }).eq('id', profile!.id)
     setAvatarUploading(false)
-    if (error) setAvatarError(error.message)
-    else await refreshProfile()
+    if (error) {
+      setAvatarError(error.message)
+      return
+    }
+    await refreshProfile()
+    const previousPath = previousUrl && avatarPathFromUrl(previousUrl)
+    if (previousPath) await supabase.storage.from('avatars').remove([previousPath])
   }
 
   async function handleCvChange(e: ChangeEvent<HTMLInputElement>) {
@@ -117,6 +140,7 @@ export default function Profile() {
     setCvError(null)
     setCvUploading(true)
     const path = `${profile.id}/${crypto.randomUUID()}-${file.name}`
+    const previousPath = profile.cv_url
     const { error: uploadError } = await supabase.storage.from('cvs').upload(path, file)
     if (uploadError) {
       setCvUploading(false)
@@ -125,8 +149,12 @@ export default function Profile() {
     }
     const { error: updateError } = await supabase.from('profiles').update({ cv_url: path }).eq('id', profile.id)
     setCvUploading(false)
-    if (updateError) setCvError(updateError.message)
-    else await refreshProfile()
+    if (updateError) {
+      setCvError(updateError.message)
+      return
+    }
+    await refreshProfile()
+    if (previousPath) await supabase.storage.from('cvs').remove([previousPath])
   }
 
   async function viewCv() {
@@ -139,10 +167,15 @@ export default function Profile() {
   async function removeCv() {
     setCvError(null)
     setCvUploading(true)
+    const previousPath = profile!.cv_url
     const { error } = await supabase.from('profiles').update({ cv_url: null }).eq('id', profile!.id)
     setCvUploading(false)
-    if (error) setCvError(error.message)
-    else await refreshProfile()
+    if (error) {
+      setCvError(error.message)
+      return
+    }
+    await refreshProfile()
+    if (previousPath) await supabase.storage.from('cvs').remove([previousPath])
   }
 
   return (
