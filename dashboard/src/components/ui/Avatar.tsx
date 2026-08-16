@@ -28,15 +28,28 @@ const sizeClasses = {
   sm: 'h-7 w-7 text-xs',
   md: 'h-9 w-9 text-sm',
   lg: 'h-12 w-12 text-base',
+  xl: 'h-24 w-24 text-2xl',
 }
 
 export interface AvatarProps {
   name: string
+  src?: string | null
   size?: keyof typeof sizeClasses
   className?: string
 }
 
-export default function Avatar({ name, size = 'md', className }: AvatarProps) {
+export default function Avatar({ name, src, size = 'md', className }: AvatarProps) {
+  if (src) {
+    return (
+      <img
+        src={src}
+        alt=""
+        aria-hidden="true"
+        className={cn('shrink-0 rounded-full object-cover', sizeClasses[size], className)}
+      />
+    )
+  }
+
   const gradient = GRADIENTS[hashName(name || '?') % GRADIENTS.length]
   return (
     <div

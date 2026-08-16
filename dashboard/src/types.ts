@@ -12,6 +12,9 @@ export interface Profile {
   role: MemberRole
   status: MemberStatus
   avatar_url: string | null
+  bio: string | null
+  skills: string[]
+  cv_url: string | null
   joined_at: string
 }
 

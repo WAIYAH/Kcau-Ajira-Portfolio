@@ -161,7 +161,7 @@ export default function Header({ onOpenMobileNav }: HeaderProps) {
           triggerLabel={`Account menu for ${profile?.full_name ?? 'your account'}`}
           trigger={
             <span className="flex items-center gap-2 rounded-control py-1 pl-1 pr-2 transition-colors hover:bg-fg/5">
-              <Avatar name={profile?.full_name ?? '?'} size="sm" />
+              <Avatar name={profile?.full_name ?? '?'} src={profile?.avatar_url} size="sm" />
               <span className="hidden text-sm font-medium text-fg lg:block" aria-hidden="true">
                 {profile?.full_name?.split(' ')[0]}
               </span>

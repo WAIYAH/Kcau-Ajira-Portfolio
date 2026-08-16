@@ -96,11 +96,11 @@ export default function SidebarNav({ collapsed, onNavigate, showCollapseToggle =
       <div className={cn('border-t border-border p-3', collapsed && 'flex justify-center')}>
         {collapsed ? (
           <Tooltip label={profile?.full_name ?? 'Account'} side="right">
-            <Avatar name={profile?.full_name ?? '?'} size="sm" />
+            <Avatar name={profile?.full_name ?? '?'} src={profile?.avatar_url} size="sm" />
           </Tooltip>
         ) : (
           <div className="flex items-center gap-3 rounded-control p-2">
-            <Avatar name={profile?.full_name ?? '?'} size="sm" />
+            <Avatar name={profile?.full_name ?? '?'} src={profile?.avatar_url} size="sm" />
             <div className="min-w-0 flex-1">
               <p className="truncate text-sm font-medium text-fg">{profile?.full_name}</p>
               <p className="truncate text-xs capitalize text-fg-subtle">{profile?.role}</p>

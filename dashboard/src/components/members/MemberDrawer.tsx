@@ -8,6 +8,7 @@ import { RoleBadge, StatusBadge } from '@/components/Badge'
 import Drawer from '@/components/ui/Drawer'
 import Select from '@/components/ui/Select'
 import Button from '@/components/ui/Button'
+import Avatar from '@/components/ui/Avatar'
 
 const statusOptions: MemberStatus[] = ['pending', 'active', 'suspended', 'alumni']
 
@@ -46,6 +47,11 @@ export default function MemberDrawer({ member, onClose, onSaved }: MemberDrawerP
 
   if (!displayMember) return null
 
+  async function viewCv(path: string) {
+    const { data, error } = await supabase.storage.from('cvs').createSignedUrl(path, 60)
+    if (!error) window.open(data.signedUrl, '_blank', 'noopener')
+  }
+
   const roleOptions: MemberRole[] = isAdmin ? ['member', 'leader', 'admin'] : ['member', 'leader']
   const isSelf = currentProfile?.id === displayMember.id
 
@@ -70,12 +76,28 @@ export default function MemberDrawer({ member, onClose, onSaved }: MemberDrawerP
 
   return (
     <Drawer open={!!member} onClose={onClose} title={displayMember.full_name}>
-      <p className="-mt-2 text-sm text-fg-muted">{displayMember.email}</p>
-
-      <div className="mt-3 flex gap-2">
-        <StatusBadge status={displayMember.status} />
-        <RoleBadge role={displayMember.role} />
+      <div className="-mt-2 flex items-center gap-3">
+        <Avatar name={displayMember.full_name} src={displayMember.avatar_url} size="lg" />
+        <div className="min-w-0">
+          <p className="truncate text-sm text-fg-muted">{displayMember.email}</p>
+          <div className="mt-1.5 flex gap-2">
+            <StatusBadge status={displayMember.status} />
+            <RoleBadge role={displayMember.role} />
+          </div>
+        </div>
       </div>
+
+      {displayMember.bio && <p className="mt-4 text-sm text-fg-muted">{displayMember.bio}</p>}
+
+      {displayMember.skills.length > 0 && (
+        <div className="mt-4 flex flex-wrap gap-1.5">
+          {displayMember.skills.map((skill) => (
+            <span key={skill} className="rounded-full bg-primary/10 px-2.5 py-0.5 text-xs font-medium text-primary">
+              {skill}
+            </span>
+          ))}
+        </div>
+      )}
 
       <dl className="mt-6 space-y-3 text-sm">
         {detailFields.map(({ label, key }) => (
@@ -87,6 +109,18 @@ export default function MemberDrawer({ member, onClose, onSaved }: MemberDrawerP
         <div className="flex justify-between border-b border-border pb-2">
           <dt className="text-fg-muted">Joined</dt>
           <dd className="text-fg">{format(new Date(displayMember.joined_at), 'MMM d, yyyy')}</dd>
+        </div>
+        <div className="flex justify-between border-b border-border pb-2">
+          <dt className="text-fg-muted">CV / Résumé</dt>
+          <dd className="text-fg">
+            {displayMember.cv_url ? (
+              <button onClick={() => viewCv(displayMember.cv_url!)} className="font-medium text-primary hover:underline">
+                View
+              </button>
+            ) : (
+              '—'
+            )}
+          </dd>
         </div>
       </dl>
 
