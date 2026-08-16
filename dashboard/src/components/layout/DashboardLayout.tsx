@@ -6,9 +6,19 @@ import Header from './Header'
 
 const SIDEBAR_COLLAPSED_KEY = 'kca-sidebar-collapsed'
 
+// No stored choice yet (first visit) -> default collapsed below the desktop
+// breakpoint (1280px), matching the original responsive spec: expanded on
+// desktop, collapsed-by-default on tablet. Once a user manually toggles it,
+// that choice is persisted and wins from then on regardless of width.
+function getInitialCollapsed(): boolean {
+  const stored = localStorage.getItem(SIDEBAR_COLLAPSED_KEY)
+  if (stored !== null) return stored === '1'
+  return typeof window !== 'undefined' && window.innerWidth < 1280
+}
+
 export default function DashboardLayout() {
   const location = useLocation()
-  const [collapsed, setCollapsed] = useState(() => localStorage.getItem(SIDEBAR_COLLAPSED_KEY) === '1')
+  const [collapsed, setCollapsed] = useState(getInitialCollapsed)
   const [mobileNavOpen, setMobileNavOpen] = useState(false)
 
   useEffect(() => {

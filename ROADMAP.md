@@ -16,7 +16,9 @@ Being built in phases, each independently verified (`tsc -b`, `lint`, `build`, a
 - [x] **Phase 4** — Persisted notifications table + realtime bell (§2.2)
 - [x] **Phase 5** — Public site ↔ dashboard content unification (§2.4)
 - [x] **Phase 6** — Engineering hygiene: Vitest + first tests, error boundary, backup routine doc (§3.1–3.3)
-- [ ] **Phase 7** — Remaining Tier 4 items where genuinely doable without a human in the loop (PWA, tablet sidebar default); command-palette and real screen-reader hardware testing stay explicitly deferred (see notes in that phase)
+- [x] **Phase 7** — Remaining Tier 4 items where genuinely doable without a human in the loop (PWA, tablet sidebar default); command-palette and real screen-reader hardware testing stay explicitly deferred (see notes in that phase)
+
+**All 7 phases shipped.** See the closing section at the bottom of this file for what's left, honestly.
 
 ---
 
@@ -96,10 +98,10 @@ Supabase free-tier projects don't carry point-in-time recovery. If the project w
 
 ## Tier 4 — Worth doing eventually, not urgent
 
-- **PWA/installable dashboard** — `vite-plugin-pwa` is a small config addition; lets members "Add to Home Screen" on mobile. Cosmetic/convenience, not a gap.
-- **Command palette (⌘K)** — already flagged as deferred in `improve.md` §10; revisit once the header search (1.5) and opportunities board (2.1) exist, since a palette is most useful once there's more to search/act on.
-- **Sidebar auto-collapse at tablet width** — cosmetic gap already logged in `improve.md`'s Phase 6 notes; low priority, nothing is broken today.
-- **Real screen-reader hardware pass (NVDA/VoiceOver)** — `improve.md` §12 already flags that only the ARIA-tree proxy was tested, not real assistive tech. Costs nothing but a member's time with existing free software — worth scheduling once, not urgent.
+- **PWA/installable dashboard** ✅ done. `vite-plugin-pwa` precaches only the app shell (JS/CSS/fonts/icons) — no Supabase data is cached, so installed members never see stale financial/vote/member data. Icons (`public/pwa-192.png`, `public/pwa-512.png`) were generated once from the existing `favicon.svg` via a one-off `sharp` script (not kept as a dependency). Caveat: rasterized from a non-square logo onto a padded dark background — looks clean, but a designer-made icon would be a nicer long-term source than an SVG-favicon rasterization.
+- **Sidebar auto-collapse at tablet width** ✅ done. `DashboardLayout.tsx`'s initial `collapsed` state now defaults to collapsed below 1280px width when there's no stored user preference yet; a manual toggle is still remembered and wins after that, same as before. Verified live at 900px (defaults collapsed) and 1400px (defaults expanded).
+- **Command palette (⌘K)** — still deferred. Now that the header search covers events/opportunities/announcements/members (Phase 1) and there's a real actions surface (Opportunities composer, event creation, etc.), a palette would have more to search/act on than when this was first written — worth reconsidering, but it's a genuinely new UI surface (its own component, keybinding, fuzzy-match logic), not a small addition, so it's left for a dedicated pass rather than folded into this one.
+- **Real screen-reader hardware pass (NVDA/VoiceOver)** — still deferred, and honestly: this isn't something I can do myself. It requires a human with a screen reader actually navigating the app. Worth scheduling once with any club member who has NVDA (free) or a Mac (VoiceOver built in) — costs nothing but time.
 
 ---
 
@@ -116,3 +118,17 @@ If tackled in one pass, this order minimizes wasted setup and maximizes compound
 7. Everything else, as time/interest allows.
 
 Nothing above requires new paid infrastructure — every suggestion stays inside Supabase's free tier and the dependencies already in `dashboard/package.json`, plus at most one or two small additions (`vitest`, optionally `vite-plugin-pwa`, optionally Sentry's free tier).
+
+---
+
+## Closing status
+
+All 7 phases shipped, verified, and pushed to `main`. What's genuinely left, honestly:
+
+- **Two manual-only steps**, same category as the pre-existing Resend setup — nothing more could be automated here without holding your credentials: enabling the `send-dues-reminder` cron schedule (needs your project ref + a secret substitution, §2.3/README step 6) and, if you want it, Sentry error monitoring (§3.2 — the free code-level error boundary shipped; the optional hosted service was intentionally not added since it needs its own account, same reasoning as Resend).
+- **Command palette** — deferred, now with a stronger case than when first scoped (see Tier 4) but still a real standalone feature, not a small addition.
+- **Real screen-reader hardware testing** — needs a human with actual assistive tech, not something achievable in this environment.
+- **`skills.html` → `learning_resources` live pull** — explicitly optional per §2.4, current static page works fine, skipped for this pass.
+- **PWA icon quality** — functional but rasterized from a non-square SVG favicon rather than a purpose-made square mark; fine for now, revisit if the club ever commissions real app-icon artwork.
+
+Every code-shippable item from the original audit is done. What remains either needs a human decision/account the assistant can't make on your behalf, or was deliberately scoped out as genuinely optional.

@@ -94,6 +94,10 @@ To test it immediately rather than waiting for Monday:
 curl -X POST https://<your-project-ref>.functions.supabase.co/send-dues-reminder -H "x-cron-secret: <your CRON_SECRET>"
 ```
 
+## Installable (PWA)
+
+The dashboard is installable — "Add to Home Screen" on mobile, or the install icon in a desktop browser's address bar. Only the app shell (JS/CSS/fonts/icons) is precached by the service worker; every Supabase call stays live and uncached, so installed members never see stale financial/vote/member data. Configured in `vite.config.ts` via `vite-plugin-pwa`; the two icon PNGs in `public/` were generated once from `favicon.svg`.
+
 ## Design system
 
 The UI runs on a token-based design system — see [`improve.md`](improve.md) for the full rationale, phase-by-phase history, and the WCAG contrast audit. The short version:
