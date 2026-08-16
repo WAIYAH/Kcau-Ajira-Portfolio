@@ -1,16 +1,16 @@
 import type { MemberRole, MemberStatus } from '../types'
 
 const statusStyles: Record<MemberStatus, string> = {
-  pending: 'bg-amber-100 text-amber-700',
-  active: 'bg-emerald-100 text-emerald-700',
-  suspended: 'bg-red-100 text-red-700',
-  alumni: 'bg-gray-100 text-gray-600',
+  pending: 'bg-secondary/15 text-secondary',
+  active: 'bg-success/15 text-success',
+  suspended: 'bg-danger/15 text-danger',
+  alumni: 'bg-fg/10 text-fg-muted',
 }
 
 const roleStyles: Record<MemberRole, string> = {
-  member: 'bg-gray-100 text-gray-600',
-  leader: 'bg-blue-100 text-blue-700',
-  admin: 'bg-purple-100 text-purple-700',
+  member: 'bg-fg/10 text-fg-muted',
+  leader: 'bg-primary/15 text-primary',
+  admin: 'bg-violet-500/15 text-violet-700 dark:text-violet-300',
 }
 
 function Pill({ className, children }: { className: string; children: string }) {
