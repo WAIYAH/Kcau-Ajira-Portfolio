@@ -2,16 +2,22 @@
 
 Authenticated React app for the member/leader dashboard described in [`../PLAN.md`](../PLAN.md). Separate app from the public marketing site (`../index.html` etc.) — it doesn't touch that site at all.
 
-**Stack:** React 19 + Vite + TypeScript + Tailwind CSS v4, backed by Supabase (Postgres + Auth + Storage + Edge Functions).
+**Stack:** React 19 + Vite + TypeScript + Tailwind CSS v4, backed by Supabase (Postgres + Auth + Storage + Edge Functions). UI built on Lucide icons, Motion (Framer Motion) for animation, and self-hosted Inter/Plus Jakarta Sans fonts — see [Design system](#design-system) below.
 
 ## Status
+
+Functionality (see [`../PLAN.md`](../PLAN.md) for the full build history):
 
 - [x] **Phase 0** — schema + RLS, auth flows, role-aware shell, dashboard overview, profile page
 - [x] **Phase 1** — member management (search/filter, approval queue, role promotion)
 - [x] **Phase 2** — finance ledger, dues tracking, budgets vs. actuals, receipt uploads
 - [x] **Phase 3** — events + RSVP, elections + voting + results
 - [x] **Phase 4** — in-app announcements + email sending (Edge Function, needs your own Resend account — see below), CSV reports (membership/finance/attendance/election)
-- [ ] **Phase 5** — learning hub, remaining polish (see `PLAN.md`)
+- [x] **Phase 5** — learning hub, accessibility pass
+
+UI/UX redesign — see [`improve.md`](improve.md) for the full plan and rationale:
+
+- [x] **Phases 1–7** — design system (tokens, dark mode, component primitives), collapsible sidebar + real header, Overview rebuild, full page-by-page consistency pass, motion/reduced-motion, WCAG AA contrast audit, docs
 
 ## One-time setup
 
@@ -66,6 +72,16 @@ Notes:
 - `SUPABASE_URL`, `SUPABASE_ANON_KEY`, and `SUPABASE_SERVICE_ROLE_KEY` are provided to the function automatically by Supabase — you don't set those.
 - Until this is deployed, checking "Also send by email" in Communications will still post the in-app announcement, but will show a clear error instead of silently pretending to send.
 
+## Design system
+
+The UI runs on a token-based design system — see [`improve.md`](improve.md) for the full rationale, phase-by-phase history, and the WCAG contrast audit. The short version:
+
+- **Tokens** live in `src/index.css` under a single `@theme` block (Tailwind v4 CSS-first config, no separate config file) — semantic names only (`bg-surface`, `text-fg-muted`, `text-primary`), never raw hex or raw Tailwind gray classes. Each status color (`secondary`/`success`/`danger`) has three deliberately different values — a vivid **base** for icons/charts, a darker light-mode **`-ink`** for badge/error text, and a theme-independent **`-solid`** for white-text button fills — because a single value can't pass WCAG AA in all three roles at once (see `improve.md` §12 for why).
+- **Dark mode** is class-based (`<html class="dark">`, not just `prefers-color-scheme`), driven by `ThemeContext` (light/dark/system, persisted to `localStorage`, no-flash boot script in `index.html`). Toggle it from the header.
+- **Component primitives** live in `src/components/ui/` (`Card`, `Button`, `Input`, `Select`, `Textarea`, `Modal`, `Drawer`, `Dropdown`, `Tooltip`, `Skeleton`, `Avatar`, `EmptyState`, `ProgressRing`) — every page consumes these instead of hand-typing Tailwind strings.
+- **`/dev/ui-kit`** (admin-only route) is a living reference rendering every primitive and token swatch in both themes — check it first before hand-rolling a new pattern, and add to it if you add a new primitive.
+- **Motion** uses the `motion` package, wrapped in `<MotionConfig reducedMotion="user">` at the app root — every animation automatically respects the OS-level "reduce motion" setting with zero per-component code.
+
 ## Project structure
 
 ```
@@ -74,15 +90,32 @@ src/
     supabaseClient.ts        Supabase client (reads env vars)
     csv.ts                   CSV building + browser download helper
     format.ts                Currency formatting
-  contexts/AuthContext.tsx   Session + profile state, sign in/up/out, role helpers
+    cn.ts                    clsx wrapper for conditional className composition
+  contexts/
+    AuthContext.tsx           Session + profile state, sign in/up/out, role helpers
+    ThemeContext.tsx           Light/dark/system theme state + localStorage persistence
+  hooks/
+    useOverviewData.ts         All of the Overview page's Supabase queries, in one place
+    useGlobalSearch.ts          Header search (debounced, events + announcements)
+    useNotificationSignals.ts   Header notification-bell signals
   components/
-    ProtectedRoute.tsx       Redirects unauthenticated / pending users
-    RoleGate.tsx              Hides staff-only routes from plain members
-    Badge.tsx                 Status/role pill components
-    layout/                   DashboardLayout (role-aware sidebar), AuthLayout
-    members/MemberDrawer.tsx  Member detail/edit side panel
-    voting/ElectionCard.tsx   Election display, candidates, voting, results
+    ui/                        Design-system primitives — Card, Button, Input, Select,
+                                Textarea, Modal, Drawer, Dropdown, Tooltip, Skeleton,
+                                Avatar, EmptyState, ProgressRing (see Design system above)
+    Logo.tsx                    Shared brand mark (sidebar, header, auth pages)
+    ProtectedRoute.tsx           Redirects unauthenticated / pending users
+    RoleGate.tsx                  Hides staff-only routes from plain members
+    Badge.tsx                     Status/role pill components
+    layout/                       DashboardLayout, Sidebar, SidebarNav, Header,
+                                   MobileNavDrawer, AuthLayout, navConfig
+    overview/                     Overview page's presentational pieces — HeroBanner,
+                                   KpiCard, IncomeExpenseChart, ActivityFeed,
+                                   UpcomingEventsCard, OpenElectionsCard,
+                                   AnnouncementsCard, OverviewSkeleton
+    members/MemberDrawer.tsx      Member detail/edit slide-over (built on ui/Drawer)
+    voting/ElectionCard.tsx       Election display, candidates, voting, results
   pages/
+    dev/UiKit.tsx              Admin-only design-system reference (see Design system above)
     auth/                     Login, SignUp, ForgotPassword, PendingApproval
     Overview.tsx              Role-aware landing dashboard
     Profile.tsx               Self-service profile editor
@@ -92,7 +125,7 @@ src/
     voting/Voting.tsx         Elections list + create (Phase 3)
     communications/           Announcements composer + feed + email log (Phase 4)
     reports/Reports.tsx       CSV report generation + history (Phase 4)
-    learning/Learning.tsx     Still a "Coming soon" placeholder (Phase 5)
+    learning/Learning.tsx     Learning Hub — resources + per-member progress (Phase 5)
 
 supabase/
   migrations/    0001 schema+RLS, 0002/0003 bootstrap-admin trigger fixes,

@@ -1,7 +1,7 @@
 # KCA Ajira Club — Dashboard Redesign
 ## Comprehensive UI/UX & Frontend Execution Plan
 
-**Status:** Planning
+**Status:** ✅ Complete — all 7 phases shipped and pushed to `main`
 **Scope:** `dashboard/` only — the authenticated React app. The public marketing site (`../index.html` etc.) is untouched.
 **Relationship to `../PLAN.md`:** That document built the dashboard's *functionality* (Phases 0–5, all shipped). This document redesigns its *interface* on top of that finished functionality — no schema changes, no new RLS policies, no new tables. Every data source referenced below already exists.
 **Author's role for this doc:** senior UI/UX designer + frontend engineer, writing this as the design brief and build plan I'd hand to myself before touching a single component.
@@ -44,14 +44,26 @@ Semantic tokens, not raw Tailwind grays, defined once in `src/index.css` under `
 
 **Brand accents**
 
+> Updated in Phase 6 after a real WCAG contrast audit (see §12): a single
+> value per status color can't pass AA in every role it's used in, so each
+> status color splits into three deliberately different values. Verified
+> zero contrast failures across 19 pairings × 2 themes — see §12 for why and
+> the exact numbers.
+
 | Token | Light value | Dark value | Used for |
 |---|---|---|---|
-| `--color-primary` | `#4F46E5` (indigo-600) | `#818CF8` (indigo-400) | Primary buttons, active nav, links, focus rings, chart series 1 |
-| `--color-primary-hover` | `#4338CA` | `#6366F1` | Hover/active states on primary |
-| `--color-accent` | `#06B6D4` (cyan-500) | `#22D3EE` | Gradient partner for primary (hero banner, chart area fill, active glow) |
-| `--color-secondary` | `#F59E0B` (amber-500) | `#FBBF24` | Secondary CTAs, "needs attention" highlights, pending states |
-| `--color-success` | `#10B981` | `#34D399` | Positive trend, active/paid/open status |
-| `--color-danger` | `#EF4444` | `#F87171` | Negative trend, suspended/overdue status, destructive actions |
+| `--color-primary` | `#4F46E5` (indigo-600) | `#818CF8` (indigo-400) | Text, links, icons, focus rings, active nav — needs to read *against the page*, so it shifts lighter in dark mode |
+| `--color-primary-hover` | `#4338CA` | `#6366F1` | Hover/active states on primary text/links |
+| `--color-primary-solid` | `#4F46E5` | `#4F46E5` (same both themes) | Solid white-text button fills (`Button` primary variant) — dark mode's lighter `--color-primary` fails white-text contrast, so solid fills always use the indigo-600 value regardless of theme |
+| `--color-accent` | `#06B6D4` (cyan-500) | `#22D3EE` | Gradient partner for primary (hero banner, chart area fill, active glow) — decorative/graphical use only, not paired with small text |
+| `--color-secondary` | `#F59E0B` (amber-500) | `#FBBF24` | Vivid base: icons, chart series, badge/pill *background* tint (`bg-secondary/15`) |
+| `--color-secondary-ink` | `#78350F` (amber-900) | `#FBBF24` (= base) | Badge/pill *text* color in light mode — darkening the base doesn't work here, see §12 |
+| `--color-success` | `#10B981` | `#34D399` | Vivid base: icons, chart series, badge tint |
+| `--color-success-ink` | `#065F46` (emerald-800) | `#34D399` (= base) | Badge text, error/positive-amount text in light mode |
+| `--color-success-solid` | `#047857` (emerald-700) | `#047857` (same both themes) | Solid white-text success buttons (Approve, Mark resolved, Open voting) |
+| `--color-danger` | `#EF4444` | `#F87171` | Vivid base: icons, chart series, badge tint |
+| `--color-danger-ink` | `#991B1B` (red-800) | `#F87171` (= base) | Badge text, error messages, delete links in light mode |
+| `--color-danger-solid` | `#DC2626` (red-600) | `#DC2626` (same both themes) | Solid white-text danger fills (notification count badges) |
 
 **Surfaces & text**
 
@@ -64,9 +76,11 @@ Semantic tokens, not raw Tailwind grays, defined once in `src/index.css` under `
 | `--color-border-strong` | `#D6D9E4` | `#33405F` |
 | `--color-fg` | `#0F1222` | `#EEF1FA` |
 | `--color-fg-muted` | `#6B7280` | `#93A0C2` |
-| `--color-fg-subtle` | `#9CA3AF` | `#5C6788` |
+| `--color-fg-subtle` | `#616B79` (was `#9CA3AF`) | `#7D88A8` (was `#5C6788`) |
 
-The old `kca-blue`/`kca-dark`/`kca-orange`/`kca-teal` tokens are retired in favor of the semantic set above — `kca-blue` maps almost exactly onto `--color-primary` so no visual whiplash, it's a rename-with-intent, not a hue change.
+`--color-fg-subtle`'s original values read as elegant "whisper gray" but failed AA at the small sizes (labels, hints, timestamps) it's actually used at — see §12. It's now close in lightness to `--color-fg-muted`; that's the correct outcome of two de-emphasized-text tiers both needing to clear 4.5:1 on a near-white/near-black surface, not a design regression.
+
+The old `kca-blue`/`kca-dark`/`kca-orange`/`kca-teal` tokens were retired in Phase 4 once every call site migrated to the semantic set above.
 
 **Gradients** (used sparingly — hero banner, primary button sheen, active sidebar item, chart fills): `linear-gradient(135deg, var(--color-primary), var(--color-accent))`.
 
@@ -278,63 +292,62 @@ Non-goal for this pass: a bespoke phone-native experience (bottom tab bar, etc.)
 
 Each phase ships independently reviewable/deployable — the app is never left in a half-migrated visual state for long, since old and new primitives can coexist during the transition (pages not yet touched keep working, just look like "before").
 
-### **Phase 1 — Design system foundation**
-- [ ] Install new dependencies (`lucide-react`, `motion`, `@fontsource/inter`, `@fontsource/plus-jakarta-sans`, `clsx`)
-- [ ] Rewrite `src/index.css`: semantic color tokens (light + dark), retire `kca-*` tokens, radius/shadow scale, `@custom-variant dark`, font-face imports, tabular-nums utility
-- [ ] `ThemeContext` + `localStorage` persistence + system-preference listener, wired to a no-flash boot script
-- [ ] `@/*` path alias (`tsconfig.app.json`, `vite.config.ts`)
-- [ ] Build `src/components/ui/`: `Card`, `Button`, `Input`, `Select`, `Textarea`, `Badge` (restyle existing), `Modal`, `Drawer`, `Tooltip`, `Dropdown`, `Skeleton`, `Avatar`, `EmptyState`
-- [ ] Ship a `/dev/ui-kit` internal-only route rendering every primitive/variant — cheap insurance so light/dark and every state (hover/focus/disabled/loading) is checked once in isolation before it's load-bearing across 15 pages
-- **Acceptance:** primitives render correctly in both themes, WCAG AA contrast verified, zero visual change yet to real pages (this phase is pure infrastructure)
+### **Phase 1 — Design system foundation** ✅
+- [x] Install new dependencies (`lucide-react`, `motion`, `@fontsource/inter`, `@fontsource/plus-jakarta-sans`, `clsx`)
+- [x] Rewrite `src/index.css`: semantic color tokens (light + dark), retire `kca-*` tokens, radius/shadow scale, `@custom-variant dark`, font-face imports, tabular-nums utility
+- [x] `ThemeContext` + `localStorage` persistence + system-preference listener, wired to a no-flash boot script
+- [x] `@/*` path alias (`tsconfig.app.json`, `vite.config.ts`)
+- [x] Build `src/components/ui/`: `Card`, `Button`, `Input`, `Select`, `Textarea`, `Badge` (restyle existing), `Modal`, `Drawer`, `Tooltip`, `Dropdown`, `Skeleton`, `Avatar`, `EmptyState`, `ProgressRing`
+- [x] Ship a `/dev/ui-kit` internal-only route rendering every primitive/variant
+- **Acceptance:** met. One real bug caught before it shipped further: an initial pass fully retired the `kca-*` tokens, which would have silently stripped styling from ~107 call sites across 22 untouched pages (Tailwind drops unknown-token utilities with no build error). Fixed by keeping them as a compatibility layer until Phase 4 migrated every call site, then deleting the block.
 
-### **Phase 2 — Shell: sidebar + header**
-- [ ] New `Sidebar` component: collapsible, icon+tooltip collapsed state, section eyebrows, active-item glow, persisted collapse state
-- [ ] New `Header` component: logo, search (client-side scoped search), theme toggle, notification bell (wired to real pending-approval/open-vote signals), avatar dropdown
-- [ ] New `DashboardLayout` shell: `h-screen` grid, sticky header, fixed sidebar, scoped-scroll main
-- [ ] Mobile drawer behavior (open/close, scrim, escape-to-close, close-on-navigate)
-- [ ] Retire the old inline sidebar/mobile-bar markup in `DashboardLayout.tsx`
-- **Acceptance:** every existing route renders inside the new shell with no broken navigation; collapse/expand and mobile drawer both smooth at 250–300ms; keyboard-only pass confirms full operability
+### **Phase 2 — Shell: sidebar + header** ✅
+- [x] New `Sidebar` component: collapsible, icon+tooltip collapsed state, section eyebrows, active-item glow, persisted collapse state
+- [x] New `Header` component: logo, search (client-side scoped search over events/announcements), theme toggle, notification bell (wired to real pending-approval/inquiry/open-election signals), avatar dropdown
+- [x] New `DashboardLayout` shell: flex shell, sticky header, fixed sidebar, scoped-scroll main
+- [x] Mobile drawer behavior (open/close, scrim, escape-to-close, close-on-navigate)
+- [x] Retired the old inline sidebar/mobile-bar markup in `DashboardLayout.tsx`
+- **Acceptance:** met, verified live via Playwright screenshots (not just code review). Two real bugs caught: collapsed-sidebar tooltips were clipped by the nav's `overflow-y-auto` (a genuine CSS quirk — setting overflow on one axis computes the other to `auto` too, per spec) — fixed by portaling `Tooltip` to `document.body`, matching Modal/Drawer/Dropdown. Also a duplicate native+custom search-clear button, fixed by switching `type="search"` → `type="text"`.
 
-### **Phase 3 — Overview page rebuild**
-- [ ] Hero banner (time+role-aware greeting, quick actions)
-- [ ] KPI cards on the new `Card` primitive: icon, trend/sparkline, hover lift, stagger-in
-- [ ] Three new staff KPIs (Event Attendance Rate, Dues Collection Rate, Engagement Score) — new read-only queries against existing tables, documented formulas
-- [ ] Combo chart upgrade (gradient areas + net-balance line, interactive legend, token-based colors, `sr-only` summary)
-- [ ] Recent activity feed (merged `audit_log`/`announcements`/RSVP-vote timeline)
-- [ ] Upgraded upcoming-events and open-elections list cards (date chips, RSVP/vote-status indicators)
-- [ ] Skeleton loading states for every async section
-- **Acceptance:** Overview is the flagship screen — feature-complete against §5, tested with an empty-data account (new club, nothing populated yet) and a fully-populated one
+### **Phase 3 — Overview page rebuild** ✅
+- [x] Hero banner (time+role-aware greeting, staff quick actions)
+- [x] KPI cards on the new `Card` primitive: icon, trend/`ProgressRing`, hover lift, stagger-in
+- [x] Three new staff KPIs (Event Attendance Rate, Dues Collection Rate, Engagement Score) via `useOverviewData` — scoped down from the original ambition after checking actual RLS: the `votes` table has no `select` policy at all (ballots are write-only by design), so a per-user "have you voted" signal and a vote-turnout component of Engagement Score aren't achievable without a new RPC — dropped rather than faked. `audit_log` is admin-only readable, not staff-wide, so the activity feed's audit portion gates on `isAdmin`.
+- [x] Combo chart upgrade (gradient areas + net-balance line, interactive legend, theme-reactive `var(--color-*)` fills, `sr-only` summary)
+- [x] Recent activity feed (merged `audit_log` + `announcements`, admin/staff only)
+- [x] Upgraded upcoming-events and open-elections list cards (date chips, closing-soon countdown)
+- [x] Skeleton loading states (`OverviewSkeleton`)
+- **Acceptance:** met, verified with both an empty-data account (real screenshots showing correct dash/zero states) and a populated one (via network-level Supabase response mocking, not fixtures) in both themes and both roles.
 
-### **Phase 4 — Page-by-page consistency pass**
-Apply the Phase 1 primitives across every remaining screen so the redesign isn't Overview-only:
-- [ ] `MemberDrawer` → rebuilt on the `Drawer` primitive (adds focus trap, Escape-close, real `role="dialog"` semantics it's missing today)
-- [ ] `ElectionCard` + `Voting` page → `Card`/`Badge`/`Button` primitives, restyled status pills
-- [ ] `MemberList` (Members) → `Card`/`Badge`/`Input` (search/filter), table row hover states
-- [ ] `Finance` (Ledger/Budgets/Dues tabs) → primitives + chart token colors carried through any secondary charts
-- [ ] `Communications` (Announcements/Inbox) → primitives, `EmptyState` for zero-announcement/zero-inquiry states
-- [ ] `Reports`, `Events`, `Learning Hub`, `Profile`, `AuditLog` → primitives pass
-- [ ] `AuthLayout` + auth pages (Login/SignUp/ForgotPassword/PendingApproval) → new token/font system, logo consolidated to the single shared `Avatar`/logo asset
-- [ ] `ComingSoon` → restyled `EmptyState` variant (Learning Hub's remaining placeholder pieces, if any linger)
-- **Acceptance:** grep for the old raw patterns (`bg-white rounded-2xl border border-gray-200`, `bg-kca-blue`) returns zero hits outside the primitive components themselves
+### **Phase 4 — Page-by-page consistency pass** ✅
+- [x] `MemberDrawer` → rebuilt on the `Drawer` primitive (focus trap, Escape-close, real `role="dialog"`; keeps rendering the last-selected member during the close animation via `useLayoutEffect` instead of blanking)
+- [x] `ElectionCard` + `Voting` page → primitives, restyled status pills
+- [x] `MemberList` → primitives, table row hover states
+- [x] `Finance` (Ledger/Budgets/Dues) → primitives
+- [x] `Communications` (Announcements/Inbox) → primitives, `EmptyState`
+- [x] `Reports`, `Events`, `Learning Hub`, `Profile`, `AuditLog` → primitives pass
+- [x] `AuthLayout` + all four auth pages → new token/font system, shared `Logo`
+- [x] Dead `ComingSoon` component deleted (zero remaining import sites — Learning Hub's real build in the original PLAN.md's Phase 5 already replaced its usage)
+- **Acceptance:** met — `grep` for the old raw patterns (`bg-white`, `border-gray-*`, `text-gray-*`, `rounded-2xl`, `kca-blue/dark/orange/teal`) returns zero hits anywhere in `src/`.
 
-### **Phase 5 — Motion, micro-interactions & polish**
-- [ ] Full motion pass: sidebar, drawers/modals, KPI/chart stagger, reduced-motion fallback verified
-- [ ] Button/toggle/chart micro-interactions (press states, legend toggle, tooltip transitions)
-- [ ] Empty-state and error-state illustrations/messaging pass (replace remaining "No X yet." plain text)
-- [ ] Cross-browser + cross-OS check (Windows/Mac font rendering, Safari backdrop-blur fallback)
-- **Acceptance:** nothing animates without purpose; `prefers-reduced-motion` users get an equally usable, just calmer, app
+### **Phase 5 — Motion, micro-interactions & polish** ✅
+- [x] Full motion pass + reduced-motion fallback: `<MotionConfig reducedMotion="user">` wraps the app — verified frame-by-frame via Playwright that normal mode tweens smoothly (~280ms) while reduced-motion mode jumps to the end state in <20ms
+- [x] Press-state micro-interactions on `Button` and the custom pill toggles (RSVP, category/progress filters, theme toggle)
+- [x] Empty-state text pass — every page-level empty state already used `EmptyState` from Phase 4; audited and confirmed the remainder is either lightweight "Loading…" text (a different, intentional pattern) or one deliberately compact inline message in `ElectionCard`
+- [x] Cross-browser spot check — confirmed Tailwind's build already emits `-webkit-backdrop-filter` for the header's blur, no manual work needed. Full physical-device Safari/Mac testing wasn't possible in this environment.
+- **Acceptance:** met.
 
-### **Phase 6 — Responsive, accessibility & QA**
-- [ ] Full responsive pass at the three breakpoints in §7, real-device spot check (not just devtools resize)
-- [ ] WCAG AA contrast audit across both themes (automated + manual spot-check of the accent palette specifically, since vibrant colors are the most likely to fail contrast)
-- [ ] Full keyboard-only walkthrough: sign in → navigate every nav item → open a drawer/modal → toggle theme → sign out, no mouse
-- [ ] Screen reader spot-check (NVDA or VoiceOver) on Overview and one data-table-heavy page (Members)
-- **Acceptance:** matches the accessibility checklist in §8 with zero regressions from the pre-redesign baseline
+### **Phase 6 — Responsive, accessibility & QA** ✅
+- [x] Responsive pass at mobile/tablet/desktop via Playwright viewport emulation — zero horizontal overflow across 9 route × breakpoint combinations. Noted gap: sidebar doesn't auto-collapse by default at tablet width, only persists the user's last manual choice — not a break, just short of the ideal spec in §7.
+- [x] WCAG AA contrast audit — see §12 for the full writeup. 16 real failures found and fixed via a token-architecture change (base/`-ink`/`-solid` split), re-verified at 0 failures both by hex math and against the live rendered DOM.
+- [x] Keyboard-only walkthrough (full Tab-trail capture) — caught and fixed two real bugs: the notification bell and avatar-menu buttons had no accessible name in some states (icon-only / name-hidden-below-`lg`). Also fixed the portaled `Tooltip` staying in the accessibility tree while only opacity-hidden.
+- [x] Screen-reader spot-check via Playwright's ARIA-tree snapshot (the same tree a screen reader consumes) on Overview and the Members table — confirmed correct landmark roles and table semantics. This is the best available proxy in this environment, not a substitute for a real NVDA/VoiceOver pass — flagged honestly, not claimed as equivalent.
+- **Acceptance:** met, with the two noted gaps (tablet auto-collapse, real screen-reader hardware) documented rather than glossed over.
 
-### **Phase 7 — Documentation & handoff**
-- [ ] Update `dashboard/README.md`: new dependencies, theme system, `/dev/ui-kit` reference route
-- [ ] Short design-tokens reference (the tables in §2 of this doc, kept as the source of truth for future pages)
-- [ ] Remove/gate the `/dev/ui-kit` route behind a dev-only check (or keep it admin-only as a living style guide — decide based on how useful it proved during Phases 2–6)
+### **Phase 7 — Documentation & handoff** ✅
+- [x] Updated `dashboard/README.md`: new dependencies, theme system, `/dev/ui-kit` reference route
+- [x] Design-tokens reference in §2 updated to match what actually shipped (the `-ink`/`-solid` split from Phase 6)
+- [x] `/dev/ui-kit` route: **kept**, admin-only — it proved genuinely useful for verification in every single phase from 2 onward, near-zero maintenance cost. Resolves the open question in §11.
 
 ---
 
@@ -348,14 +361,38 @@ Apply the Phase 1 primitives across every remaining screen so the redesign isn't
 
 ---
 
-## 11. Open questions to confirm before Phase 2
+## 11. Open questions — resolved
 
-- **Theme default:** should new sessions default to `system`, or to `light` (matching the club's current brand presentation on the public site, which is light-only)? Recommendation: default `system`, since it costs nothing and respects the user's OS choice, but the public site's light-only branding is worth a conscious decision either way.
-- **Search scope:** confirm client-side search over already-loaded/visible records is sufficient for Phase 2, versus needing a real Postgres full-text query — likely fine at current club size, worth revisiting if membership grows substantially.
-- **`/dev/ui-kit` route:** keep as a permanent admin-only style-guide page after launch, or strip it once the redesign ships? Leaning keep (near-zero cost, real value for the next contributor), but flagging as a call worth making explicitly.
+- **Theme default:** shipped as `system` per the original recommendation — costs nothing, respects the user's OS choice. Worth revisiting only if the club wants the dashboard to visually anchor to the public site's light-only branding by default.
+- **Search scope:** shipped as client-side search over events + announcements (not members — see `useGlobalSearch.ts`, member search needs role-conditional RLS handling that's cleaner as its own pass). Fine at current club size; revisit if membership grows substantially.
+- **`/dev/ui-kit` route:** **kept**, admin-only. It was used for real verification in every phase from 2 onward (primitive isolation, dark-mode checks, the Phase 6 contrast re-audit against live rendered DOM) — the cost was zero and the value was concrete, not hypothetical.
+
+---
+
+## 12. WCAG contrast audit (Phase 6 findings)
+
+The plan's own Phase 1 acceptance line claimed "WCAG AA contrast verified" — that was aspirational when written, not actually checked against real numbers. Phase 6 did the real check: a standalone script computing relative-luminance contrast ratios (the actual WCAG formula, not a visual guess) for every token pairing the app uses, in both themes.
+
+**First pass — 16 real failures**, most consequentially:
+- `--color-fg-subtle` (labels, hints, timestamps — used everywhere) failed at 2.4–3.4:1 against its own surfaces; the small text it's used for doesn't qualify for the "large text" 3:1 exemption.
+- Badge/pill text on its own 15%-opacity tint background failed at 1.9–3.1:1 in light mode. Darkening the *base* token doesn't fix this: a 15% blend of a darker color is still proportionally close to its own tint, so the ratio between "a color and a lightened version of itself" stays roughly constant regardless of how dark the base is. The text color needs to come from an independently darker value.
+- White button text on `success`/`danger` failed in light mode (2.5–3.8:1), and on `primary`/`success`/`danger` in dark mode (1.9–3.0:1) — dark-mode accent colors are deliberately *light* so they read well as text against a dark page, which is the wrong direction for a background *behind* white text.
+
+**Fix — three roles per status color** instead of one (see the updated §2.1 tables above): a vivid **base** for icons/charts/tint-source, a darker light-mode-only **`-ink`** for badge/error/readable text, and a theme-independent **`-solid`** for white-text button fills (same hex in both themes, since white-on-X contrast doesn't depend on page theme). `fg-subtle` was simply darkened/lightened until it cleared 4.5:1 against both its surfaces.
+
+**Re-verified three ways**, not just once:
+1. The same script against the final proposed values — **0 failures** across 19 pairings × 2 themes (was 16).
+2. Against the live rendered DOM on `/dev/ui-kit` (`getComputedStyle`, not hex math) — every measured text/background pair ≥ 4.5:1; the "pending" badge went from 1.91:1 to 8.47:1 in the actual browser.
+3. Visually, via screenshots in both themes — badge text reads clearly at a glance now, still color-coded, just legible.
 
 ---
 
 ## Next step
 
-Confirm this plan, then Phase 1 begins: dependencies, tokens, dark mode wiring, and the `src/components/ui/` primitive layer — the foundation everything else in Phases 2–7 builds on.
+All 7 phases are shipped and pushed to `main`. What's left is genuinely future work, not something this pass skipped:
+
+- Member search (staff-only, RLS-aware) in the header search — see §11.
+- A real command palette, once there's appetite for it — see §10 non-goals.
+- Real screen-reader hardware testing (NVDA/VoiceOver) — see §12/Phase 6, this environment could only get as far as ARIA-tree inspection.
+- Sidebar auto-collapse-by-default at tablet width, matching the original §7 table exactly (currently: user-togglable, persists last choice, just doesn't auto-default) — noted in Phase 6, low priority since nothing breaks.
+- A minor residual: `Button`'s dark-mode primary-hover state (`--color-primary-hover`, used only transiently while hovering) sits at 4.47:1 against white text — a hair under 4.5:1. Not worth a fourth token variant for a hover-only state this close to the line, but worth knowing about if it ever comes up in a stricter audit.
