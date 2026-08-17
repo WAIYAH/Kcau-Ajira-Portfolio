@@ -46,3 +46,16 @@ export async function fetchUpcomingEvents(limit = 3) {
     .limit(limit);
   return { events: data ?? [], error };
 }
+
+// Reads the most recently added staff-curated learning resources so
+// skills.html's "From the Learning Hub" list doesn't need manual HTML edits
+// to stay current. Read via `resources: public read` in
+// dashboard/supabase/migrations/0012_learning_resources_public_read.sql.
+export async function fetchLearningResources(limit = 6) {
+  const { data, error } = await supabase
+    .from('learning_resources')
+    .select('id, title, type, category, skill_tag, url_or_content, created_at')
+    .order('created_at', { ascending: false })
+    .limit(limit);
+  return { resources: data ?? [], error };
+}

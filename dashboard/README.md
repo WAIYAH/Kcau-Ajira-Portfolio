@@ -21,15 +21,14 @@ UI/UX redesign — see [`improve.md`](improve.md) for the full plan and rational
 
 System-wide improvements (public site + dashboard) — see [`../ROADMAP.md`](../ROADMAP.md):
 
-- [x] **Phases 1–6** — CI + spam protection + perf + member search, Opportunities/Gigs board, automated dues reminders, live notifications, public/dashboard content unification, testing + error boundary + backups
-- [ ] **Phase 7** — remaining stretch items, in progress
+- [x] **Phases 1–8** — CI + spam protection + perf + member search, Opportunities/Gigs board, automated dues reminders, live notifications, public/dashboard content unification, testing + error boundary + backups, PWA + tablet sidebar default, command palette + live Learning Hub pull on the public site + real-logo PWA icon
 
 ## One-time setup
 
 ### 1. Create a Supabase project
 
 1. Go to [supabase.com](https://supabase.com), create a free project.
-2. In the SQL Editor, run every file in [`supabase/migrations/`](supabase/migrations/) **in order** (0001 → 0011). Note: 0009 needs manual edits first (project ref + a secret) — see step 6 below; skip it initially and come back once you've done step 5. Each is safe to run once; re-running an already-applied one is usually harmless (`create or replace`, `on conflict do nothing`) but they're not designed to be re-run out of order.
+2. In the SQL Editor, run every file in [`supabase/migrations/`](supabase/migrations/) **in order** (0001 → 0012). Note: 0009 needs manual edits first (project ref + a secret) — see step 6 below; skip it initially and come back once you've done step 5. Each is safe to run once; re-running an already-applied one is usually harmless (`create or replace`, `on conflict do nothing`) but they're not designed to be re-run out of order. **Already set up before?** You only need to run the new `0012_learning_resources_public_read.sql` against your existing project — it's additive (an extra RLS policy) and safe to run once on its own.
 3. In **Project Settings → API**, copy the **Project URL** and **anon public** key.
 
 ### 2. Configure environment variables
@@ -130,6 +129,9 @@ src/
                                 Textarea, TagInput, Modal, Drawer, Dropdown, Tooltip, Skeleton,
                                 Avatar, EmptyState, ProgressRing (see Design system above)
     Logo.tsx                    Shared brand mark (sidebar, header, auth pages)
+    CommandPalette.tsx           ⌘K overlay: role-gated nav + live record search,
+                                  arrow-key navigable (lib/commandPalette.ts has the pure
+                                  nav-item build/filter logic, opened from DashboardLayout)
     ErrorBoundary.tsx             Top-level fallback UI for unhandled render errors
     ProtectedRoute.tsx           Redirects unauthenticated / pending users
     RoleGate.tsx                  Hides staff-only routes from plain members
@@ -167,7 +169,9 @@ supabase/
                  0010 notifications table + triggers + Realtime (announcements/
                  opportunities/election-open fan out to a per-member bell),
                  0011 public (anon) read access to events, for the public
-                 site's live "More on the Calendar" list
+                 site's live "More on the Calendar" list,
+                 0012 public (anon) read access to learning_resources, for
+                 the public site's live "From the Learning Hub" list
   functions/
     send-announcement-email/  Edge Function: verifies caller is staff,
                                sends via Resend, logs to email_log

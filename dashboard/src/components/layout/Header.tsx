@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Menu, Search, X, Bell, Sun, Moon, Monitor, ChevronDown, User, ShieldCheck, LogOut, type LucideIcon } from 'lucide-react'
 import { useAuth } from '@/contexts/AuthContext'
@@ -17,9 +17,10 @@ const themeOptions: { value: Theme; icon: LucideIcon; label: string }[] = [
 
 interface HeaderProps {
   onOpenMobileNav: () => void
+  onOpenPalette: () => void
 }
 
-export default function Header({ onOpenMobileNav }: HeaderProps) {
+export default function Header({ onOpenMobileNav, onOpenPalette }: HeaderProps) {
   const { profile, isAdmin, isStaff, signOut } = useAuth()
   const { theme, setTheme } = useTheme()
   const navigate = useNavigate()
@@ -28,17 +29,6 @@ export default function Header({ onOpenMobileNav }: HeaderProps) {
   const { results } = useGlobalSearch(query, isStaff)
   const { count: notificationCount, items: notificationItems, notifications, markRead } = useNotificationSignals()
   const searchRef = useRef<HTMLInputElement>(null)
-
-  useEffect(() => {
-    function onKeyDown(e: KeyboardEvent) {
-      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
-        e.preventDefault()
-        searchRef.current?.focus()
-      }
-    }
-    document.addEventListener('keydown', onKeyDown)
-    return () => document.removeEventListener('keydown', onKeyDown)
-  }, [])
 
   const accountItems: DropdownItem[] = [
     { label: 'My Profile', icon: User, onClick: () => navigate('/profile') },
@@ -97,9 +87,14 @@ export default function Header({ onOpenMobileNav }: HeaderProps) {
             <X size={14} strokeWidth={1.75} />
           </button>
         ) : (
-          <kbd className="pointer-events-none absolute right-2.5 top-1/2 hidden -translate-y-1/2 rounded border border-border-strong px-1.5 py-0.5 text-[10px] font-medium text-fg-subtle md:block">
+          <button
+            type="button"
+            onClick={onOpenPalette}
+            aria-label="Open command palette"
+            className="absolute right-2.5 top-1/2 hidden -translate-y-1/2 rounded border border-border-strong px-1.5 py-0.5 text-[10px] font-medium text-fg-subtle transition-colors hover:border-primary hover:text-primary md:block"
+          >
             ⌘K
-          </kbd>
+          </button>
         )}
 
         {searchFocused && query.trim().length >= 2 && (

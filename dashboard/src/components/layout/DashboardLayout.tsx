@@ -3,6 +3,8 @@ import { Outlet, useLocation } from 'react-router-dom'
 import Sidebar from './Sidebar'
 import MobileNavDrawer from './MobileNavDrawer'
 import Header from './Header'
+import CommandPalette from '@/components/CommandPalette'
+import { useAuth } from '@/contexts/AuthContext'
 
 const SIDEBAR_COLLAPSED_KEY = 'kca-sidebar-collapsed'
 
@@ -18,8 +20,10 @@ function getInitialCollapsed(): boolean {
 
 export default function DashboardLayout() {
   const location = useLocation()
+  const { isStaff, isAdmin } = useAuth()
   const [collapsed, setCollapsed] = useState(getInitialCollapsed)
   const [mobileNavOpen, setMobileNavOpen] = useState(false)
+  const [paletteOpen, setPaletteOpen] = useState(false)
 
   useEffect(() => {
     localStorage.setItem(SIDEBAR_COLLAPSED_KEY, collapsed ? '1' : '0')
@@ -29,6 +33,19 @@ export default function DashboardLayout() {
   useEffect(() => {
     setMobileNavOpen(false)
   }, [location.pathname])
+
+  // Global ⌘K/Ctrl+K -- works from anywhere in the dashboard, not just while
+  // the header search box has focus.
+  useEffect(() => {
+    function onKeyDown(e: KeyboardEvent) {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault()
+        setPaletteOpen(true)
+      }
+    }
+    document.addEventListener('keydown', onKeyDown)
+    return () => document.removeEventListener('keydown', onKeyDown)
+  }, [])
 
   return (
     <div className="flex h-screen overflow-hidden bg-bg">
@@ -41,9 +58,10 @@ export default function DashboardLayout() {
 
       <Sidebar collapsed={collapsed} onToggleCollapse={() => setCollapsed((v) => !v)} />
       <MobileNavDrawer open={mobileNavOpen} onClose={() => setMobileNavOpen(false)} />
+      <CommandPalette open={paletteOpen} onClose={() => setPaletteOpen(false)} isStaff={isStaff} isAdmin={isAdmin} />
 
       <div className="flex min-w-0 flex-1 flex-col overflow-hidden">
-        <Header onOpenMobileNav={() => setMobileNavOpen(true)} />
+        <Header onOpenMobileNav={() => setMobileNavOpen(true)} onOpenPalette={() => setPaletteOpen(true)} />
         <main id="main-content" className="flex-1 overflow-y-auto p-4 md:p-8">
           <Outlet />
         </main>

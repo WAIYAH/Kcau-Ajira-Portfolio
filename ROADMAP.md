@@ -17,8 +17,9 @@ Being built in phases, each independently verified (`tsc -b`, `lint`, `build`, a
 - [x] **Phase 5** — Public site ↔ dashboard content unification (§2.4)
 - [x] **Phase 6** — Engineering hygiene: Vitest + first tests, error boundary, backup routine doc (§3.1–3.3)
 - [x] **Phase 7** — Remaining Tier 4 items where genuinely doable without a human in the loop (PWA, tablet sidebar default); command-palette and real screen-reader hardware testing stay explicitly deferred (see notes in that phase)
+- [x] **Phase 8** — The last code-shippable Tier 4 items: command palette (⌘K), `skills.html` → `learning_resources` live pull, and a proper PWA icon sourced from the real club emblem instead of a rasterized favicon
 
-**All 7 phases shipped.** See the closing section at the bottom of this file for what's left, honestly.
+**All 8 phases shipped.** See the closing section at the bottom of this file for what's left, honestly.
 
 ---
 
@@ -98,9 +99,11 @@ Supabase free-tier projects don't carry point-in-time recovery. If the project w
 
 ## Tier 4 — Worth doing eventually, not urgent
 
-- **PWA/installable dashboard** ✅ done. `vite-plugin-pwa` precaches only the app shell (JS/CSS/fonts/icons) — no Supabase data is cached, so installed members never see stale financial/vote/member data. Icons (`public/pwa-192.png`, `public/pwa-512.png`) were generated once from the existing `favicon.svg` via a one-off `sharp` script (not kept as a dependency). Caveat: rasterized from a non-square logo onto a padded dark background — looks clean, but a designer-made icon would be a nicer long-term source than an SVG-favicon rasterization.
+- **PWA/installable dashboard** ✅ done. `vite-plugin-pwa` precaches only the app shell (JS/CSS/fonts/icons) — no Supabase data is cached, so installed members never see stale financial/vote/member data.
 - **Sidebar auto-collapse at tablet width** ✅ done. `DashboardLayout.tsx`'s initial `collapsed` state now defaults to collapsed below 1280px width when there's no stored user preference yet; a manual toggle is still remembered and wins after that, same as before. Verified live at 900px (defaults collapsed) and 1400px (defaults expanded).
-- **Command palette (⌘K)** — still deferred. Now that the header search covers events/opportunities/announcements/members (Phase 1) and there's a real actions surface (Opportunities composer, event creation, etc.), a palette would have more to search/act on than when this was first written — worth reconsidering, but it's a genuinely new UI surface (its own component, keybinding, fuzzy-match logic), not a small addition, so it's left for a dedicated pass rather than folded into this one.
+- **Command palette (⌘K)** ✅ done (Phase 8). `CommandPalette.tsx`, a full overlay opened by the existing ⌘K/Ctrl+K binding (now global, in `DashboardLayout` — previously it only focused the header search input) or by clicking the header's "⌘K" hint. Merges role-gated nav destinations (`lib/commandPalette.ts`'s `buildNavItems`, same set `SidebarNav` shows) with the header's existing live record search (`useGlobalSearch`, events/announcements/opportunities/members) into one keyboard-navigable list — arrow keys to move, Enter to jump and close, Escape to dismiss. The header's inline search box is unchanged and still works for quick mouse-driven filtering.
+- **`skills.html` → `learning_resources` live pull** ✅ done (Phase 8), same additive/hide-if-empty pattern as the Phase 5 events section: `0012_learning_resources_public_read.sql` adds an anon-read policy (OR'd with the existing authenticated-read one, nothing weakened), `js/supabase-client.js` gained `fetchLearningResources`, and a new `js/learning-resources.js` renders a "From the Learning Hub" section between the static skills grid and the Learning Paths section — stays hidden until a Leader actually adds a resource, so it never shows an empty gap on the public site today.
+- **PWA icon quality** ✅ done (Phase 8). `public/pwa-192.png`/`pwa-512.png` are now composited from the real club emblem (`img/KCAU AJIRA CLUB LOGO 2.png`, the same badge already used as the public site's favicon) on the dashboard's dark theme background, instead of a rasterization of the abstract `favicon.svg` mark — no separate dependency needed, done with a one-off Pillow (already-installed on this machine) script, not committed as tooling.
 - **Real screen-reader hardware pass (NVDA/VoiceOver)** — still deferred, and honestly: this isn't something I can do myself. It requires a human with a screen reader actually navigating the app. Worth scheduling once with any club member who has NVDA (free) or a Mac (VoiceOver built in) — costs nothing but time.
 
 ---
@@ -123,12 +126,9 @@ Nothing above requires new paid infrastructure — every suggestion stays inside
 
 ## Closing status
 
-All 7 phases shipped, verified, and pushed to `main`. What's genuinely left, honestly:
+All 8 phases shipped, verified, and pushed to `main`. What's genuinely left, honestly:
 
-- **Two manual-only steps**, same category as the pre-existing Resend setup — nothing more could be automated here without holding your credentials: enabling the `send-dues-reminder` cron schedule (needs your project ref + a secret substitution, §2.3/README step 6) and, if you want it, Sentry error monitoring (§3.2 — the free code-level error boundary shipped; the optional hosted service was intentionally not added since it needs its own account, same reasoning as Resend).
-- **Command palette** — deferred, now with a stronger case than when first scoped (see Tier 4) but still a real standalone feature, not a small addition.
+- **Two manual-only steps**, same category as the pre-existing Resend setup — nothing more could be automated here without holding your credentials: enabling the `send-dues-reminder` cron schedule (needs your project ref + a secret substitution, §2.3/README step 6) and, if you want it, Sentry error monitoring (§3.2 — the free code-level error boundary shipped; the optional hosted service was intentionally not added since it needs its own account, same reasoning as Resend). **Status as of this pass: both confirmed done by the club.**
 - **Real screen-reader hardware testing** — needs a human with actual assistive tech, not something achievable in this environment.
-- **`skills.html` → `learning_resources` live pull** — explicitly optional per §2.4, current static page works fine, skipped for this pass.
-- **PWA icon quality** — functional but rasterized from a non-square SVG favicon rather than a purpose-made square mark; fine for now, revisit if the club ever commissions real app-icon artwork.
 
-Every code-shippable item from the original audit is done. What remains either needs a human decision/account the assistant can't make on your behalf, or was deliberately scoped out as genuinely optional.
+Every code-shippable item from the original audit — including every remaining Tier 4 stretch item except the one that structurally requires a human with assistive hardware — is done.
