@@ -2,10 +2,9 @@ import type { ReactNode } from 'react'
 import Logo from '@/components/Logo'
 import Card from '@/components/ui/Card'
 
-// Points "Back to Home" at the public marketing site. Update this when
-// the public site is deployed to its real production URL (mirrors
-// DASHBOARD_URL in the public site's js/main.js, which points the other way).
-const PUBLIC_SITE_URL = 'http://localhost:8080'
+// Points "Back to Home" at the public marketing site (mirrors DASHBOARD_URL
+// in the public site's js/main.js, which points the other way).
+const PUBLIC_SITE_URL = 'https://kcau-ajira-club.vercel.app'
 
 export default function AuthLayout({ title, subtitle, children }: { title: string; subtitle: string; children: ReactNode }) {
   return (
