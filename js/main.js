@@ -12,7 +12,7 @@ import { initFormHandlers } from './form-handler.js';
 // Single place to point "Log In" / member-portal links at the dashboard app.
 // Update this when the dashboard is deployed to its real production URL
 // (e.g. https://dashboard.kcaajiraclub.ke or https://kcaajiraclub.ke/dashboard).
-const DASHBOARD_URL = 'http://localhost:5174';
+const DASHBOARD_URL = 'https://kcau-ajira-dashboard.vercel.app';
 
 // Expose program content (moving long HTML content separated from modals.js)
 programDetails['skill-labs'].content = `
