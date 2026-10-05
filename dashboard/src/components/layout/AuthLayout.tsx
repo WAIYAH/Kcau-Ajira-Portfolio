@@ -8,7 +8,7 @@ const PUBLIC_SITE_URL = 'https://kcau-ajira-club.vercel.app'
 
 export default function AuthLayout({ title, subtitle, children }: { title: string; subtitle: string; children: ReactNode }) {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-bg px-4">
+    <div className="flex min-h-screen items-center justify-center bg-bg px-4 py-10">
       <div className="w-full max-w-md">
         <a
           href={PUBLIC_SITE_URL}
@@ -17,7 +17,7 @@ export default function AuthLayout({ title, subtitle, children }: { title: strin
           <span aria-hidden="true">&larr;</span> Back to Home
         </a>
 
-        <a href={PUBLIC_SITE_URL} className="mb-6 flex justify-center">
+        <a href={PUBLIC_SITE_URL} className="mb-6 flex justify-center" aria-label="KCA Ajira Club home">
           <Logo size={40} />
         </a>
 

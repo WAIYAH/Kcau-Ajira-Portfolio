@@ -14,6 +14,8 @@ interface AuthContextValue {
   signUp: (email: string, password: string, fullName: string) => Promise<{ error: string | null }>
   signOut: () => Promise<void>
   resetPassword: (email: string) => Promise<{ error: string | null }>
+  updatePassword: (password: string) => Promise<{ error: string | null }>
+  resendConfirmation: (email: string) => Promise<{ error: string | null }>
 }
 
 const AuthContext = createContext<AuthContextValue | undefined>(undefined)
@@ -63,12 +65,18 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }
 
   async function signUp(email: string, password: string, fullName: string) {
-    const { error } = await supabase.auth.signUp({
+    const { data, error } = await supabase.auth.signUp({
       email,
       password,
-      options: { data: { full_name: fullName } },
+      options: { data: { full_name: fullName }, emailRedirectTo: `${window.location.origin}/login` },
     })
-    return { error: error?.message ?? null }
+    if (error) return { error: error.message }
+    // With email confirmation on, Supabase doesn't error for an address that's
+    // already registered (to avoid leaking which emails exist) — it returns a
+    // user with no identities and sends nothing. Surface that instead of
+    // telling the person to wait for an email that will never arrive.
+    if (data.user && data.user.identities?.length === 0) return { error: 'User already registered' }
+    return { error: null }
   }
 
   async function signOut() {
@@ -76,7 +84,23 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }
 
   async function resetPassword(email: string) {
-    const { error } = await supabase.auth.resetPasswordForEmail(email)
+    const { error } = await supabase.auth.resetPasswordForEmail(email, {
+      redirectTo: `${window.location.origin}/reset-password`,
+    })
+    return { error: error?.message ?? null }
+  }
+
+  async function updatePassword(password: string) {
+    const { error } = await supabase.auth.updateUser({ password })
+    return { error: error?.message ?? null }
+  }
+
+  async function resendConfirmation(email: string) {
+    const { error } = await supabase.auth.resend({
+      type: 'signup',
+      email,
+      options: { emailRedirectTo: `${window.location.origin}/login` },
+    })
     return { error: error?.message ?? null }
   }
 
@@ -85,7 +109,20 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   return (
     <AuthContext.Provider
-      value={{ session, profile, loading, isStaff, isAdmin, refreshProfile, signIn, signUp, signOut, resetPassword }}
+      value={{
+        session,
+        profile,
+        loading,
+        isStaff,
+        isAdmin,
+        refreshProfile,
+        signIn,
+        signUp,
+        signOut,
+        resetPassword,
+        updatePassword,
+        resendConfirmation,
+      }}
     >
       {children}
     </AuthContext.Provider>
