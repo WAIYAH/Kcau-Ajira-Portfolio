@@ -2,14 +2,25 @@
    KCA Ajira Club - Custom Styles
    - All custom CSS moved from inline <style> in index.html
    - Keep Tailwind via CDN for utility classes
+   - Palette follows the KCA University identity (navy + gold),
+     sampled from the official logo. See css/tailwind-config.js
+     for the full ramps and the contrast rationale.
    ================================================== */
 
 /* ---------- CSS Variables & Base Fonts ---------- */
 :root {
-  --primary-blue: #2563eb;
-  --secondary-orange: #f97316;
-  --accent-teal: #0d9488;
-  --dark-blue: #1e40af;
+  /* Official KCA University brand marks */
+  --kca-navy: #001D51;
+  --kca-gold: #CEAA0C;
+
+  /* Working tokens (names kept so existing rules keep resolving) */
+  --primary-blue: #0C2F68;   /* interactive navy, 11:1 on white */
+  --dark-blue: #001D51;      /* official navy */
+  --secondary-orange: #CEAA0C; /* official gold */
+  --accent-teal: #A8850A;    /* deep gold — legible as text on white */
+
+  --navy-deep: #00122F;
+  --gold-soft: #E6C94F;
 }
 
 * {
@@ -22,7 +33,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* ---------- Hero & Theming ---------- */
 .hero-gradient {
-  background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+  background: linear-gradient(135deg, #0C2F68 0%, #001D51 100%);
 }
 
 /* ---------- Cards & Interactions ---------- */
@@ -57,16 +68,24 @@ h1, h2, h3, h4, h5, h6 {
 }
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.3);
+  box-shadow: 0 10px 15px -3px rgba(0, 29, 81, 0.35);
 }
 
-.btn-secondary {
-  background: linear-gradient(135deg, var(--secondary-orange) 0%, #ea580c 100%);
+/* Gold CTA. White text on brand gold is only ~2.2:1, so the gold button
+   carries NAVY text instead — the standard KCA pairing, and ~8:1.
+   Six existing buttons across the site still say `text-white` in their
+   markup; the compound selector below (0,2,0) outranks Tailwind's
+   `.text-white` (0,1,0) regardless of stylesheet order, so they are
+   corrected automatically rather than one file at a time. */
+.btn-secondary,
+.btn-secondary.text-white {
+  background: linear-gradient(135deg, var(--kca-gold) 0%, #B08F08 100%);
+  color: var(--kca-navy);
   transition: all 0.3s ease;
 }
 .btn-secondary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 10px 15px -3px rgba(249, 115, 22, 0.3);
+  box-shadow: 0 10px 15px -3px rgba(206, 170, 12, 0.4);
 }
 
 /* ---------- Navigation ---------- */
@@ -82,7 +101,7 @@ h1, h2, h3, h4, h5, h6 {
   left: 0;
   width: 100%;
   height: 2px;
-  background-color: var(--primary-blue);
+  background-color: var(--kca-gold);
 }
 
 /* ---------- Utility / Small Helpers ---------- */

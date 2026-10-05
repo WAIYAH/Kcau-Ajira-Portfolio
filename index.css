@@ -1,16 +1,25 @@
 /* ==================================================
-   index.css — Futuristic Landing Page Styles
-   KCA Ajira Club — Next-Gen Landing Experience
+   index.css — Landing Page Styles
+   KCA Ajira Club — built on the KCA University identity
+
+   Palette: KCA Navy #001D51 + KCA Gold #CEAA0C, sampled from the
+   official university logo. Gold is the accent, never the surface:
+   it marks the single most important action in any given view.
+   Ramps and contrast rationale live in css/tailwind-config.js.
    ================================================== */
 
 /* ---------- Custom Properties ---------- */
 :root {
-  --glow-blue: rgba(37, 99, 235, 0.35);
-  --glow-orange: rgba(249, 115, 22, 0.35);
-  --glow-teal: rgba(13, 148, 136, 0.3);
+  --kca-navy: #001D51;
+  --kca-navy-deep: #00122F;
+  --kca-gold: #CEAA0C;
+  --kca-gold-soft: #E6C94F;
+
+  --glow-navy: rgba(0, 29, 81, 0.35);
+  --glow-gold: rgba(206, 170, 12, 0.35);
   --glass-bg: rgba(255, 255, 255, 0.08);
   --glass-border: rgba(255, 255, 255, 0.18);
-  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+  --glass-shadow: 0 8px 32px rgba(0, 18, 47, 0.25);
   --transition-smooth: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
@@ -32,7 +41,8 @@ html, body {
 .hero-slider {
   position: relative;
   overflow: hidden;
-  min-height: 600px;
+  min-height: 660px;
+  background: var(--kca-navy-deep); /* holds the brand while photos decode */
 }
 
 .hero-slide {
@@ -54,18 +64,59 @@ html, body {
   z-index: 1;
 }
 
-/* Slide backgrounds */
+/* Slide backgrounds, with the navy brand scrim painted onto the photo itself.
+
+   WHY THE SCRIM LIVES HERE AND NOT IN A SIBLING ELEMENT
+   -----------------------------------------------------
+   .hero-slide carries a z-index, so it opens its own stacking context.
+   Everything inside it — including .slide-content at z-index 10 — is trapped
+   in that context and can never rise above a SIBLING of the slide. A
+   standalone scrim <div> therefore painted straight over the headline and
+   greyed the copy out. Nesting the scrim inside .hero-slide-bg puts it above
+   the photo but safely below the copy, which is where it belongs. */
 .hero-slide-bg {
   position: absolute;
   inset: 0;
   background-size: cover;
   background-position: center;
-  filter: brightness(0.5);
+  filter: saturate(0.85);
   transition: transform 8s linear;
+}
+
+/* Strongest on the left, where the copy sits, so headlines keep their contrast
+   on every slide regardless of the photo underneath. This also does the
+   darkening, so there is one dial to tune rather than a brightness() filter
+   fighting a gradient. */
+.hero-slide-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(100deg,
+      rgba(0, 18, 47, 0.93) 0%,
+      rgba(0, 29, 81, 0.84) 38%,
+      rgba(0, 29, 81, 0.66) 68%,
+      rgba(0, 18, 47, 0.60) 100%),
+    linear-gradient(to top, rgba(0, 18, 47, 0.72) 0%, transparent 48%);
 }
 
 .hero-slide.active .hero-slide-bg {
   transform: scale(1.08);
+}
+
+/* Gold rule along the bottom edge — the KCA signature, echoing the pair of
+   gold rules that bracket "UNIVERSITY" in the official logo. */
+.hero-brand-rule {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 4px;
+  z-index: 12;
+  background: linear-gradient(90deg,
+    var(--kca-gold) 0%,
+    var(--kca-gold-soft) 45%,
+    var(--kca-gold) 100%);
 }
 
 /* Slide content animation */
@@ -73,11 +124,186 @@ html, body {
   opacity: 0;
   transform: translateY(40px);
   transition: opacity 0.8s 0.3s var(--transition-smooth), transform 0.8s 0.3s var(--transition-smooth);
+  position: relative;
+  z-index: 10;
 }
 
 .hero-slide.active .slide-content {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* ---------- Hero Typography & Actions ---------- */
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.08);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(206, 170, 12, 0.45);
+  color: var(--kca-gold-soft);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  padding: 8px 16px 8px 10px;
+  border-radius: 999px;
+  margin-bottom: 26px;
+}
+
+/* White plate behind the logo: the university mark is navy-on-transparent
+   and would disappear against the navy scrim otherwise. */
+.hero-eyebrow-logo {
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
+  background: #fff;
+  border-radius: 50%;
+  padding: 3px;
+}
+
+.hero-eyebrow-icon {
+  color: var(--kca-gold);
+  margin-left: 6px;
+}
+
+.hero-title {
+  font-family: 'Poppins', sans-serif;
+  font-size: clamp(2.25rem, 5.4vw, 4rem);
+  font-weight: 800;
+  /* Not tighter than this: the accent underline hangs just below the em box,
+     and at 1.08 it landed on top of the next line of a multi-line headline. */
+  line-height: 1.14;
+  letter-spacing: -0.02em;
+  color: #fff;
+  margin-bottom: 22px;
+  text-shadow: 0 2px 24px rgba(0, 18, 47, 0.5);
+}
+
+.hero-title-accent {
+  color: var(--kca-gold);
+  position: relative;
+  white-space: nowrap;
+}
+
+/* Hand-drawn-ish underline that ties the accent word back to the gold rule. */
+.hero-title-accent::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  /* Sits inside the line's half-leading so it clears the following line. */
+  bottom: -0.04em;
+  height: 3px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--kca-gold), rgba(206, 170, 12, 0));
+}
+
+.hero-lede {
+  font-size: clamp(1rem, 1.6vw, 1.1875rem);
+  line-height: 1.65;
+  color: rgba(226, 234, 248, 0.92);
+  max-width: 40rem;
+  margin-bottom: 34px;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+/* Gold CTA carries navy text (~8:1). White on brand gold is only ~2.2:1. */
+.hero-cta-gold {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: linear-gradient(135deg, var(--kca-gold) 0%, #B08F08 100%);
+  color: var(--kca-navy);
+  font-weight: 700;
+  font-size: 1.0625rem;
+  padding: 14px 30px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.3s var(--transition-smooth), box-shadow 0.3s var(--transition-smooth);
+  box-shadow: 0 10px 24px rgba(206, 170, 12, 0.28);
+}
+
+.hero-cta-gold:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px rgba(206, 170, 12, 0.42);
+}
+
+.hero-cta-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.08);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.38);
+  color: #fff;
+  font-weight: 600;
+  font-size: 1.0625rem;
+  padding: 14px 30px;
+  border-radius: 10px;
+  transition: all 0.3s var(--transition-smooth);
+}
+
+.hero-cta-ghost:hover {
+  background: rgba(255, 255, 255, 0.18);
+  border-color: rgba(255, 255, 255, 0.6);
+  transform: translateY(-2px);
+}
+
+/* ---------- Hero scroll cue ---------- */
+.hero-scroll-cue {
+  position: absolute;
+  /* Clears the slider dots, which sit at bottom: 24px. */
+  bottom: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 11;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.6875rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+@media (min-width: 768px) {
+  .hero-scroll-cue { display: flex; }
+}
+
+.hero-scroll-mouse {
+  width: 22px;
+  height: 34px;
+  border: 2px solid rgba(206, 170, 12, 0.55);
+  border-radius: 999px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 5px;
+}
+
+.hero-scroll-wheel {
+  width: 4px;
+  height: 7px;
+  border-radius: 999px;
+  background: var(--kca-gold);
+  animation: scrollWheel 1.8s ease-in-out infinite;
+}
+
+@keyframes scrollWheel {
+  0%   { opacity: 0; transform: translateY(-3px); }
+  40%  { opacity: 1; }
+  100% { opacity: 0; transform: translateY(9px); }
 }
 
 /* Slider dots/indicators */
@@ -86,25 +312,25 @@ html, body {
   gap: 10px;
   justify-content: center;
   position: absolute;
-  bottom: 32px;
+  bottom: 24px;
   left: 50%;
   transform: translateX(-50%);
-  z-index: 10;
+  z-index: 12;
 }
 
 .slider-dot {
   width: 12px;
   height: 12px;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.35);
+  background: rgba(255, 255, 255, 0.3);
   border: 2px solid rgba(255, 255, 255, 0.5);
   cursor: pointer;
   transition: all 0.4s var(--transition-smooth);
 }
 
 .slider-dot.active {
-  background: #f97316;
-  border-color: #f97316;
+  background: var(--kca-gold);
+  border-color: var(--kca-gold);
   width: 36px;
 }
 
@@ -112,11 +338,14 @@ html, body {
 .hero-mesh-overlay {
   position: absolute;
   inset: 0;
+  /* Kept deliberately faint: as a sibling of .hero-slide this paints ABOVE the
+     headline (see the stacking note on .hero-slide-bg), so anything heavier
+     here would wash out the copy. The real darkening is the scrim. */
   background:
-    radial-gradient(ellipse at 20% 50%, rgba(37, 99, 235, 0.25) 0%, transparent 50%),
-    radial-gradient(ellipse at 80% 20%, rgba(249, 115, 22, 0.18) 0%, transparent 50%),
-    radial-gradient(ellipse at 50% 100%, rgba(13, 148, 136, 0.15) 0%, transparent 50%);
-  z-index: 1;
+    radial-gradient(ellipse at 18% 45%, rgba(12, 47, 104, 0.16) 0%, transparent 55%),
+    radial-gradient(ellipse at 82% 18%, rgba(206, 170, 12, 0.08) 0%, transparent 52%),
+    radial-gradient(ellipse at 55% 100%, rgba(0, 29, 81, 0.18) 0%, transparent 55%);
+  z-index: 3;
   pointer-events: none;
   animation: meshShift 12s ease-in-out infinite alternate;
 }
@@ -131,7 +360,7 @@ html, body {
 .hero-particles {
   position: absolute;
   inset: 0;
-  z-index: 1;
+  z-index: 4;
   pointer-events: none;
   overflow: hidden;
 }
@@ -141,7 +370,7 @@ html, body {
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.25);
+  background: rgba(206, 170, 12, 0.3);
   animation: particleFloat linear infinite;
 }
 
@@ -172,9 +401,9 @@ html, body {
 
 .glass-card:hover {
   background: rgba(255, 255, 255, 0.12);
-  border-color: rgba(255, 255, 255, 0.25);
+  border-color: rgba(206, 170, 12, 0.35);
   transform: translateY(-4px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 20px 40px rgba(0, 18, 47, 0.3);
 }
 
 /* ---------- Scroll Animations ---------- */
@@ -256,7 +485,7 @@ html, body {
   font-size: 2.5rem;
   font-weight: 700;
   line-height: 1;
-  background: linear-gradient(135deg, #2563eb, #0d9488);
+  background: linear-gradient(135deg, var(--kca-navy) 0%, #A8850A 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -296,12 +525,12 @@ html, body {
   overflow: hidden;
   background: white;
   transition: all 0.4s var(--transition-smooth);
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 4px 24px rgba(0, 18, 47, 0.07);
 }
 
 .event-card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 20px 40px rgba(37, 99, 235, 0.12);
+  box-shadow: 0 20px 40px rgba(0, 29, 81, 0.16);
 }
 
 .event-card-image {
@@ -327,20 +556,20 @@ html, body {
   border-radius: 12px;
   padding: 8px 14px;
   text-align: center;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 18, 47, 0.14);
 }
 
 /* ---------- Glow / Neon Effects ---------- */
 .glow-blue {
-  box-shadow: 0 0 20px var(--glow-blue), 0 0 60px rgba(37, 99, 235, 0.1);
+  box-shadow: 0 0 20px var(--glow-navy), 0 0 60px rgba(0, 29, 81, 0.12);
 }
 
 .glow-orange {
-  box-shadow: 0 0 20px var(--glow-orange), 0 0 60px rgba(249, 115, 22, 0.1);
+  box-shadow: 0 0 20px var(--glow-gold), 0 0 60px rgba(206, 170, 12, 0.12);
 }
 
 .glow-text {
-  text-shadow: 0 0 40px rgba(37, 99, 235, 0.3);
+  text-shadow: 0 0 40px rgba(0, 29, 81, 0.3);
 }
 
 /* ---------- Futuristic Stat Cards ---------- */
@@ -355,7 +584,7 @@ html, body {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, transparent 0%, rgba(37, 99, 235, 0.05) 100%);
+  background: linear-gradient(135deg, transparent 0%, rgba(0, 29, 81, 0.05) 100%);
   opacity: 0;
   transition: opacity 0.4s ease;
 }
@@ -366,7 +595,7 @@ html, body {
 
 .futuristic-stat:hover {
   transform: translateY(-6px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 20px 40px rgba(0, 18, 47, 0.1);
 }
 
 /* Animated gradient border */
@@ -381,7 +610,7 @@ html, body {
   position: absolute;
   inset: -2px;
   border-radius: 18px;
-  background: linear-gradient(135deg, #2563eb, #f97316, #0d9488, #2563eb);
+  background: linear-gradient(135deg, var(--kca-navy), var(--kca-gold), var(--kca-navy));
   background-size: 300% 300%;
   z-index: -1;
   animation: gradientRotate 4s ease infinite;
@@ -414,7 +643,7 @@ html, body {
   left: 0;
   width: 100%;
   height: 3px;
-  background: linear-gradient(90deg, var(--primary-blue), var(--secondary-orange));
+  background: linear-gradient(90deg, var(--kca-navy), var(--kca-gold));
   transform: scaleX(0);
   transform-origin: left;
   transition: transform 0.4s var(--transition-smooth);
@@ -426,7 +655,7 @@ html, body {
 
 .program-card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 20px 40px rgba(0, 18, 47, 0.12);
 }
 
 /* ---------- Section Dividers ---------- */
@@ -434,7 +663,7 @@ html, body {
   width: 60px;
   height: 4px;
   border-radius: 2px;
-  background: linear-gradient(90deg, var(--primary-blue), var(--secondary-orange));
+  background: linear-gradient(90deg, var(--kca-navy), var(--kca-gold));
   margin: 0 auto;
 }
 
@@ -458,7 +687,7 @@ html, body {
   position: absolute;
   inset: -4px;
   border-radius: inherit;
-  border: 2px solid var(--primary-blue);
+  border: 2px solid var(--kca-gold);
   animation: pulseRing 2s ease-in-out infinite;
 }
 
@@ -497,7 +726,7 @@ html, body {
 
 .skill-item:hover {
   transform: translateY(-3px) scale(1.02);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 10px 25px rgba(0, 18, 47, 0.1);
 }
 
 /* ---------- Testimonial Card V2 ---------- */
@@ -512,7 +741,7 @@ html, body {
   font-family: 'Poppins', serif;
   font-size: 6rem;
   line-height: 1;
-  color: rgba(37, 99, 235, 0.06);
+  color: rgba(0, 29, 81, 0.07);
   position: absolute;
   top: -10px;
   left: 12px;
@@ -520,13 +749,40 @@ html, body {
 
 .testimonial-v2:hover {
   transform: translateY(-4px);
-  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 16px 32px rgba(0, 18, 47, 0.1);
 }
 
 /* ---------- Responsive Tweaks ---------- */
 @media (max-width: 768px) {
   .hero-slider {
-    min-height: 520px;
+    min-height: 580px;
+  }
+  .hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .hero-cta-gold,
+  .hero-cta-ghost {
+    width: 100%;
+  }
+  /* The accent phrase can be the longest token in a headline; letting it wrap
+     prevents overflow on narrow phones. */
+  .hero-title-accent {
+    white-space: normal;
+  }
+  /* .hero-slide is a flex row, so its child keeps min-width:auto and refuses to
+     shrink below the widest unbroken headline word — which pushed copy off the
+     right edge at 390px. Cap the flex item and let long words break. */
+  .hero-slide > .container {
+    min-width: 0;
+  }
+  .hero-title,
+  .hero-lede {
+    overflow-wrap: break-word;
+    max-width: 100%;
+  }
+  .hero-title {
+    font-size: clamp(1.75rem, 7.4vw, 2.25rem);
   }
   .countdown-value {
     font-size: 1.8rem;
@@ -535,15 +791,42 @@ html, body {
     min-width: 56px;
   }
   .slider-dots {
-    bottom: 20px;
+    bottom: 18px;
   }
 }
 
 @media (max-width: 480px) {
   .hero-slider {
-    min-height: 480px;
+    min-height: 540px;
+  }
+  .hero-eyebrow {
+    font-size: 0.75rem;
   }
   .countdown-value {
     font-size: 1.4rem;
+  }
+}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .hero-slide,
+  .hero-slide-bg,
+  .hero-mesh-overlay,
+  .hero-particle,
+  .hero-scroll-wheel,
+  .btn-shimmer::after,
+  .gradient-border::before {
+    animation: none !important;
+    transition-duration: 0.01ms !important;
+  }
+  .hero-slide.active .hero-slide-bg {
+    transform: none;
+  }
+  /* Show slide copy outright rather than relying on a transition that no
+     longer runs — otherwise the headline could sit at opacity 0. */
+  .hero-slide .slide-content {
+    opacity: 1;
+    transform: none;
+    transition: none;
   }
 }

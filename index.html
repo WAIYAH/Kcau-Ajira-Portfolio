@@ -28,12 +28,14 @@
     <link rel="canonical" href="https://kcaajiraclub.ke/">
 
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="ajira-logo.png">
-    <link rel="apple-touch-icon" href="ajira-logo.png">
+    <link rel="icon" type="image/png" href="img/ajira-logo.png">
+    <link rel="apple-touch-icon" href="img/ajira-logo.png">
 
     <!-- Tailwind CSS -->
-    <script src="css/tailwind-config.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Brand palette AFTER the CDN: the Play CDN defines window.tailwind when it
+         loads, so a config set beforehand is silently discarded. -->
+    <script src="css/tailwind-config.js"></script>
 
     <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -123,8 +125,15 @@
     <!-- ========== MAIN CONTENT ========== -->
     <main id="main-content">
 
-        <!-- ===== HERO SLIDER SECTION ===== -->
+        <!-- ===== HERO SECTION =====
+             Rebuilt on the KCA University identity: a navy scrim over real
+             photography, gold reserved for the single most important action
+             on each slide. Slide structure (.hero-slide / .hero-slide-bg /
+             .slide-content / .slider-dot) is the contract js/hero-slider.js
+             drives — keep those hooks if you restyle this. -->
         <section id="home" class="hero-slider relative" aria-label="Hero carousel">
+            <!-- The navy brand scrim is painted inside .hero-slide-bg, not here:
+                 a sibling element would paint over the copy. See index.css. -->
             <!-- Mesh overlay -->
             <div class="hero-mesh-overlay"></div>
             <!-- Particles -->
@@ -132,24 +141,25 @@
 
             <!-- Slide 1 -->
             <div class="hero-slide active">
-                <div class="hero-slide-bg" style="background-image: url('img/hero1.gif');"></div>
+                <div class="hero-slide-bg" style="background-image: url('img/hero-1.jpg');"></div>
                 <div class="container mx-auto px-4 relative z-10">
                     <div class="slide-content max-w-3xl">
-                        <span class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 text-orange-300 text-sm font-semibold px-4 py-2 rounded-full mb-6">
-                            <i class="fas fa-bolt"></i> KCA University Initiative
+                        <span class="hero-eyebrow">
+                            <img src="img/kcau-logo.png" alt="" aria-hidden="true" class="hero-eyebrow-logo" width="26" height="26">
+                            A KCA University Student Club
                         </span>
-                        <h2 class="text-4xl md:text-6xl font-extrabold text-white leading-tight mb-6">
-                            From Learning to <br><span class="bg-gradient-to-r from-orange-400 to-yellow-300 bg-clip-text text-transparent">Earning</span> in the Digital Economy
+                        <h2 class="hero-title">
+                            From Learning to <span class="hero-title-accent">Earning</span><br>in the Digital Economy
                         </h2>
-                        <p class="text-lg md:text-xl text-blue-100 mb-8 max-w-2xl">
-                            Ajira Club is your launchpad to freelancing, remote work, and digital entrepreneurship. We transform students into competitive digital professionals.
+                        <p class="hero-lede">
+                            Ajira Club is your launchpad to freelancing, remote work and digital entrepreneurship — turning KCA students into competitive digital professionals.
                         </p>
-                        <div class="flex flex-col sm:flex-row gap-4">
-                            <button onclick="openJoinModal()" class="btn-secondary btn-shimmer text-white font-semibold py-3 px-8 rounded-lg text-lg">
-                                Join Free Session <i class="ml-2 fas fa-calendar-alt"></i>
+                        <div class="hero-actions">
+                            <button onclick="openJoinModal()" class="hero-cta-gold btn-shimmer">
+                                Join a Free Session <i class="fas fa-calendar-alt"></i>
                             </button>
-                            <a href="#programs" class="bg-white/10 backdrop-blur-sm border border-white/30 text-white font-semibold py-3 px-8 rounded-lg text-lg text-center hover:bg-white/20 transition-all">
-                                View Programs <i class="ml-2 fas fa-arrow-down"></i>
+                            <a href="#programs" class="hero-cta-ghost">
+                                View Programs <i class="fas fa-arrow-down"></i>
                             </a>
                         </div>
                     </div>
@@ -158,24 +168,52 @@
 
             <!-- Slide 2 -->
             <div class="hero-slide">
-                <div class="hero-slide-bg" style="background-image: url('img/hero2.gif');"></div>
+                <div class="hero-slide-bg" style="background-image: url('img/hero-2.jpg');"></div>
                 <div class="container mx-auto px-4 relative z-10">
                     <div class="slide-content max-w-3xl">
-                        <span class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 text-teal-300 text-sm font-semibold px-4 py-2 rounded-full mb-6">
-                            <i class="fas fa-users"></i> Community of 1,200+ Students
+                        <span class="hero-eyebrow">
+                            <i class="fas fa-laptop-code hero-eyebrow-icon"></i>
+                            Hands-on training every Wednesday &amp; Saturday
                         </span>
-                        <h2 class="text-4xl md:text-6xl font-extrabold text-white leading-tight mb-6">
-                            Build Your <br><span class="bg-gradient-to-r from-teal-400 to-cyan-300 bg-clip-text text-transparent">Digital Future</span> Today
+                        <h2 class="hero-title">
+                            Skills That <span class="hero-title-accent">Actually Pay</span><br>Taught by People Doing the Work
                         </h2>
-                        <p class="text-lg md:text-xl text-blue-100 mb-8 max-w-2xl">
-                            Join Kenya's premier student digital empowerment community. Master in-demand skills, land freelance gigs, and build a portfolio that stands out.
+                        <p class="hero-lede">
+                            Data entry, virtual assistance, graphic design, web development and content writing — practical training built around the gigs clients are hiring for right now.
                         </p>
-                        <div class="flex flex-col sm:flex-row gap-4">
-                            <a href="about.html" class="btn-primary btn-shimmer text-white font-semibold py-3 px-8 rounded-lg text-lg text-center">
-                                Discover Our Story <i class="ml-2 fas fa-arrow-right"></i>
+                        <div class="hero-actions">
+                            <a href="skills.html" class="hero-cta-gold btn-shimmer">
+                                Explore the Skills Tracks <i class="fas fa-arrow-right"></i>
                             </a>
-                            <a href="#events" class="bg-white/10 backdrop-blur-sm border border-white/30 text-white font-semibold py-3 px-8 rounded-lg text-lg text-center hover:bg-white/20 transition-all">
-                                Upcoming Events <i class="ml-2 fas fa-calendar"></i>
+                            <a href="#events" class="hero-cta-ghost">
+                                Upcoming Events <i class="fas fa-calendar"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 3 -->
+            <div class="hero-slide">
+                <div class="hero-slide-bg" style="background-image: url('img/hero-3.jpg');"></div>
+                <div class="container mx-auto px-4 relative z-10">
+                    <div class="slide-content max-w-3xl">
+                        <span class="hero-eyebrow">
+                            <i class="fas fa-users hero-eyebrow-icon"></i>
+                            A community of 1,200+ members
+                        </span>
+                        <h2 class="hero-title">
+                            You Don't Have to<br><span class="hero-title-accent">Figure It Out Alone</span>
+                        </h2>
+                        <p class="hero-lede">
+                            Mentorship, peer accountability and a network of students already earning online — from first client to steady freelance income.
+                        </p>
+                        <div class="hero-actions">
+                            <a href="#" data-dashboard-link="/signup" class="hero-cta-gold btn-shimmer">
+                                Become a Member <i class="fas fa-arrow-right"></i>
+                            </a>
+                            <a href="success-stories.html" class="hero-cta-ghost">
+                                Read Success Stories <i class="fas fa-quote-right"></i>
                             </a>
                         </div>
                     </div>
@@ -186,44 +224,50 @@
             <div class="slider-dots" role="tablist" aria-label="Slide indicators">
                 <button class="slider-dot active" role="tab" aria-label="Go to slide 1"></button>
                 <button class="slider-dot" role="tab" aria-label="Go to slide 2"></button>
+                <button class="slider-dot" role="tab" aria-label="Go to slide 3"></button>
             </div>
 
             <!-- Scroll indicator -->
-            <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 hidden md:flex flex-col items-center gap-2 text-white/50 text-xs" style="bottom: 60px;">
+            <div class="hero-scroll-cue" aria-hidden="true">
                 <span>Scroll</span>
-                <div class="w-5 h-8 border-2 border-white/30 rounded-full flex items-start justify-center p-1">
-                    <div class="w-1.5 h-1.5 bg-white/60 rounded-full animate-bounce"></div>
+                <div class="hero-scroll-mouse">
+                    <div class="hero-scroll-wheel"></div>
                 </div>
             </div>
+
+            <!-- Gold rule anchoring the hero to the KCA identity -->
+            <div class="hero-brand-rule" aria-hidden="true"></div>
         </section>
 
         <!-- ===== STATS SECTION ===== -->
         <section class="py-16 bg-white relative overflow-hidden">
             <!-- Subtle background pattern -->
-            <div class="absolute inset-0 opacity-[0.02]" style="background-image: radial-gradient(circle at 1px 1px, #2563eb 1px, transparent 0); background-size: 40px 40px;"></div>
+            <div class="absolute inset-0 opacity-[0.03]" style="background-image: radial-gradient(circle at 1px 1px, #001D51 1px, transparent 0); background-size: 40px 40px;"></div>
 
             <div class="container mx-auto px-4 relative z-10">
+                <!-- Icon chips alternate navy / gold so the row reads as one KCA
+                     set rather than four unrelated accent colours. -->
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-6 stagger-children reveal">
                     <!-- Stat 1 -->
                     <div class="futuristic-stat gradient-border bg-white rounded-2xl p-6 text-center">
                         <div class="w-14 h-14 mx-auto mb-4 bg-blue-50 rounded-xl flex items-center justify-center">
-                            <i class="fas fa-user-graduate text-blue-600 text-2xl"></i>
+                            <i class="fas fa-user-graduate text-blue-700 text-2xl"></i>
                         </div>
                         <p class="text-4xl md:text-5xl font-extrabold text-gray-800" data-count="1200" data-suffix="+">0</p>
                         <p class="text-gray-500 mt-1 text-sm font-medium">Club Members</p>
                     </div>
                     <!-- Stat 2 -->
                     <div class="futuristic-stat gradient-border bg-white rounded-2xl p-6 text-center">
-                        <div class="w-14 h-14 mx-auto mb-4 bg-green-50 rounded-xl flex items-center justify-center">
-                            <i class="fas fa-briefcase text-green-600 text-2xl"></i>
+                        <div class="w-14 h-14 mx-auto mb-4 bg-orange-50 rounded-xl flex items-center justify-center">
+                            <i class="fas fa-briefcase text-orange-600 text-2xl"></i>
                         </div>
                         <p class="text-4xl md:text-5xl font-extrabold text-gray-800" data-count="85" data-suffix="%">0</p>
                         <p class="text-gray-500 mt-1 text-sm font-medium">Skill Application Rate</p>
                     </div>
                     <!-- Stat 3 -->
                     <div class="futuristic-stat gradient-border bg-white rounded-2xl p-6 text-center">
-                        <div class="w-14 h-14 mx-auto mb-4 bg-purple-50 rounded-xl flex items-center justify-center">
-                            <i class="fas fa-handshake text-purple-600 text-2xl"></i>
+                        <div class="w-14 h-14 mx-auto mb-4 bg-blue-50 rounded-xl flex items-center justify-center">
+                            <i class="fas fa-handshake text-blue-700 text-2xl"></i>
                         </div>
                         <p class="text-4xl md:text-5xl font-extrabold text-gray-800" data-count="40" data-suffix="+">0</p>
                         <p class="text-gray-500 mt-1 text-sm font-medium">Industry Partners</p>
